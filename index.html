@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="dark">
+<meta name="color-scheme" content="dark light">
 <meta name="theme-color" content="#060A09">
+<script>(function(){var t='dark';try{t=localStorage.getItem('p8-theme')||(window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');}catch(e){}document.documentElement.setAttribute('data-theme',t);})();</script>
 <title>Pangea8 — Free IELTS Practice, Engineered for Band 7.5+</title>
 <meta name="description" content="92+ free IELTS practice tests in real exam format. Listening, Reading, Writing, Speaking — instant band scores, no sign-up.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2334D399' stroke-width='2.4' stroke-linecap='round'><path d='M12 2.5v5.5M12 16v5.5M2.5 12H8M16 12h5.5M5.3 5.3l3.9 3.9M14.8 14.8l3.9 3.9M18.7 5.3l-3.9 3.9M9.2 14.8l-3.9 3.9'/></svg>">
@@ -36,12 +37,61 @@
   --body:'Inter',system-ui,sans-serif;
   --r:18px;
 }
+html[data-theme="light"]{
+  --bg:#F6F8F7;
+  --bg-2:#FFFFFF;
+  --surface:rgba(15,42,33,.04);
+  --surface-2:rgba(15,42,33,.07);
+  --line:rgba(15,42,33,.12);
+  --line-2:rgba(15,42,33,.24);
+  --text:#13231C;
+  --muted:#5B6F66;
+  --em:#0D9268;
+  --em-bright:#0A8A60;
+  --teal:#0D9488;
+  --cyan:#0891B2;
+  --mint:rgba(13,146,104,.10);
+  --grad:linear-gradient(120deg,#0EA371 0%,#0D9488 50%,#0891B2 100%);
+  color-scheme:light;
+}
+html[data-theme="light"] nav{background:rgba(246,248,247,.75)}
+html[data-theme="light"] .grid-bg{background-image:linear-gradient(rgba(15,42,33,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(15,42,33,.06) 1px,transparent 1px)}
+html[data-theme="light"] .blob{opacity:.5}
+html[data-theme="light"] .btn-grad{color:#fff}
+html[data-theme="light"] .m-pill.active{color:#fff}
+html[data-theme="light"] .mock{
+  background:#FFFFFF;
+  box-shadow:0 0 0 1px rgba(13,146,104,.06),0 30px 70px -28px rgba(15,42,33,.25),0 0 70px -34px rgba(13,146,104,.25);
+}
+html[data-theme="light"] .mock::before{background:linear-gradient(135deg,rgba(13,146,104,.35),transparent 35%,transparent 65%,rgba(8,145,178,.25))}
+html[data-theme="light"] .t-card:hover{border-color:rgba(13,146,104,.45);box-shadow:0 10px 26px -12px rgba(13,146,104,.25)}
+html[data-theme="light"] .spot::before{background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(13,146,104,.09),transparent 60%)}
+html[data-theme="light"] .spot:hover{border-color:rgba(13,146,104,.4)}
+html[data-theme="light"] .icon{background:linear-gradient(135deg,rgba(13,146,104,.12),rgba(8,145,178,.08));border-color:rgba(13,146,104,.3);box-shadow:0 0 20px -10px rgba(13,146,104,.4)}
+html[data-theme="light"] .g-track{stroke:rgba(15,42,33,.10)}
+html[data-theme="light"] .g-fill{filter:drop-shadow(0 0 8px rgba(13,146,104,.35))}
+html[data-theme="light"] .t-chip{border-color:rgba(13,146,104,.3)}
+html[data-theme="light"] .m-band{border-color:rgba(13,146,104,.3)}
+html[data-theme="light"] .cta .bc{opacity:.55}
+.theme-btn{
+  width:38px;height:38px;border-radius:999px;flex:none;cursor:pointer;
+  border:1px solid var(--line);background:var(--surface);color:var(--muted);
+  display:flex;align-items:center;justify-content:center;
+  transition:border-color .2s,color .2s;
+}
+.theme-btn:hover{border-color:var(--line-2);color:var(--text)}
+.theme-btn svg{width:17px;height:17px}
+.theme-btn .sun{display:none}
+html[data-theme="light"] .theme-btn .sun{display:block}
+html[data-theme="light"] .theme-btn .moon{display:none}
+@media(max-width:420px){#authBtn span{display:none}#authBtn{padding:9px 12px}}
 @property --ga{ syntax:'<angle>'; initial-value:0deg; inherits:false; }
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;background:#060A09 !important;color-scheme:dark}
+html{scroll-behavior:smooth;background:var(--bg) !important;color-scheme:dark}
 body{
   font-family:var(--body);
-  background:#060A09 !important;
+  background:var(--bg) !important;
+  transition:background-color .35s ease,color .35s ease;
   color:var(--text);
   font-size:16px;line-height:1.65;
   overflow-x:hidden;
@@ -51,7 +101,7 @@ body{
 a{color:inherit;text-decoration:none}
 a:focus-visible,button:focus-visible{outline:2px solid var(--em-bright);outline-offset:3px;border-radius:6px}
 .wrap{max-width:1120px;margin:0 auto;padding:0 clamp(20px,5vw,40px)}
-.bgfix{position:fixed;inset:0;z-index:-2;background:#060A09;pointer-events:none}
+.bgfix{position:fixed;inset:0;z-index:-2;background:var(--bg);pointer-events:none;transition:background-color .35s ease}
 
 h1,h2,h3{font-family:var(--display);font-weight:600;letter-spacing:-.02em}
 h1{font-size:clamp(2.7rem,8vw,5.2rem);line-height:1.04}
@@ -193,14 +243,14 @@ nav .btn{padding:9px 18px;font-size:.88rem}
   flex:1;max-width:240px;margin:0 auto;
   display:flex;align-items:center;justify-content:center;gap:7px;
   font-size:.78rem;color:var(--muted);
-  background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:999px;padding:5px 12px;
+  background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:5px 12px;
 }
 .m-url svg{width:11px;height:11px}
 .m-body{padding:20px}
 .m-title{font-family:var(--display);font-weight:600;font-size:1.05rem;margin-bottom:14px}
 .m-search{
   display:flex;align-items:center;gap:10px;
-  background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:12px;
+  background:var(--surface);border:1px solid var(--line);border-radius:12px;
   padding:11px 14px;color:var(--muted);font-size:.9rem;
 }
 .m-search svg{width:15px;height:15px;flex:none}
@@ -244,7 +294,7 @@ nav .btn{padding:9px 18px;font-size:.88rem}
 @media(min-width:840px){.m-grid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:559px){.t-card:nth-child(n+4){display:none}}
 .t-card{
-  border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.03);
+  border:1px solid var(--line);border-radius:14px;background:var(--surface);
   padding:15px;display:flex;flex-direction:column;gap:11px;
   transition:border-color .25s,transform .25s,box-shadow .25s;
 }
@@ -371,7 +421,7 @@ nav .btn{padding:9px 18px;font-size:.88rem}
 /* timer tile visual */
 .timerline{
   margin-top:20px;border:1px solid var(--line);border-radius:12px;padding:14px 16px;
-  display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.03);
+  display:flex;align-items:center;gap:14px;background:var(--surface);
 }
 .t-chip{
   font-family:var(--display);font-weight:600;font-size:.85rem;color:var(--em-bright);
@@ -444,6 +494,10 @@ footer{border-top:1px solid var(--line);padding:38px 0 34px;background:var(--bg-
     <div class="links">
       <a href="#skills">Skills</a>
       <a href="#why">Why</a>
+      <button class="theme-btn" id="themeBtn" aria-label="Toggle light/dark theme">
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A8.5 8.5 0 1 1 11.2 3a6.8 6.8 0 0 0 9.8 9.8Z"/></svg>
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M4.8 4.8l1.6 1.6M17.6 17.6l1.6 1.6M19.2 4.8l-1.6 1.6M6.4 17.6l-1.6 1.6"/></svg>
+      </button>
       <a class="btn btn-ghost" id="authBtn" href="#" aria-label="Sign in with Google">
         <svg class="gicon" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
         <span>Sign in</span>
@@ -720,6 +774,31 @@ footer{border-top:1px solid var(--line);padding:38px 0 34px;background:var(--bg-
 <script>
 (function(){
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- theme: auto + manual toggle ---- */
+  var themeMeta = document.querySelector('meta[name="theme-color"]');
+  function applyTheme(t){
+    document.documentElement.setAttribute('data-theme', t);
+    if(themeMeta) themeMeta.setAttribute('content', t === 'light' ? '#F6F8F7' : '#060A09');
+  }
+  var savedTheme = null;
+  try{ savedTheme = localStorage.getItem('p8-theme'); }catch(e){}
+  var mqLight = window.matchMedia('(prefers-color-scheme: light)');
+  applyTheme(savedTheme || (mqLight.matches ? 'light' : 'dark'));
+  if(mqLight.addEventListener){
+    mqLight.addEventListener('change', function(ev){
+      if(!savedTheme) applyTheme(ev.matches ? 'light' : 'dark');
+    });
+  }
+  var themeBtn = document.getElementById('themeBtn');
+  if(themeBtn){
+    themeBtn.addEventListener('click', function(){
+      var next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      savedTheme = next;
+      try{ localStorage.setItem('p8-theme', next); }catch(e){}
+      applyTheme(next);
+    });
+  }
 
   /* ---- firebase auth + instant hub ---- */
   var HUB = 'https://maqsudjon-cell.github.io/ielts-hub/';
