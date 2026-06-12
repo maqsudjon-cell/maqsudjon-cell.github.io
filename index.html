@@ -509,12 +509,14 @@ html[data-theme="light"] .mock::after{background:conic-gradient(from var(--ga),t
   3.5%{opacity:1;transform:translate3d(-58vw,21vw,0) rotate(-20deg)}
   4%,100%{opacity:0;transform:translate3d(-58vw,21vw,0) rotate(-20deg)}
 }
-html[data-theme="light"] .meteor{display:none}
+html[data-theme="light"] .meteor{background:#0DA371;box-shadow:0 0 8px 2px rgba(13,146,104,.45)}
+html[data-theme="light"] .meteor::before{background:linear-gradient(90deg,rgba(13,146,104,.75),transparent)}
 
 /* ============ ambient extras ============ */
 .star{position:absolute;border-radius:50%;background:#BFEFE0;pointer-events:none;opacity:.2;animation:twinkle var(--td,3s) ease-in-out var(--tdel,0s) infinite}
 @keyframes twinkle{0%,100%{opacity:.12;transform:scale(.8)}50%{opacity:.9;transform:scale(1.2)}}
-html[data-theme="light"] .star{display:none}
+html[data-theme="light"] .star{background:#0DA371;animation-name:twinkleL}
+@keyframes twinkleL{0%,100%{opacity:.06;transform:scale(.7)}50%{opacity:.5;transform:scale(1.1)}}
 .gcell{position:absolute;width:54px;height:54px;pointer-events:none;opacity:0;background:radial-gradient(circle,rgba(52,211,153,.16),transparent 72%);box-shadow:inset 0 0 0 1px rgba(52,211,153,.28)}
 .gcell.go{animation:cellpulse 1.5s ease-out forwards}
 @keyframes cellpulse{0%{opacity:0;transform:scale(.55)}30%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1)}}
@@ -524,6 +526,13 @@ html[data-theme="light"] .gcell{background:radial-gradient(circle,rgba(13,146,10
 .ember{position:absolute;bottom:-6px;width:4px;height:4px;border-radius:50%;background:rgba(110,231,183,.85);pointer-events:none;animation:rise var(--ed,9s) linear var(--edel,0s) infinite}
 @keyframes rise{0%{opacity:0;transform:translate(0,0)}8%{opacity:.9}85%{opacity:.5}100%{opacity:0;transform:translate(var(--ex,20px),-46vh)}}
 html[data-theme="light"] .ember{background:rgba(13,146,104,.55)}
+.shape{position:absolute;pointer-events:none;display:none;opacity:0;animation:shfloat var(--sd,11s) ease-in-out var(--sdel,0s) infinite}
+html[data-theme="light"] .shape{display:block}
+.sh-ring{border:1.5px solid rgba(13,146,104,.35);border-radius:50%}
+.sh-plus::before,.sh-plus::after{content:"";position:absolute;background:rgba(13,146,104,.35);border-radius:2px}
+.sh-plus::before{left:50%;top:0;bottom:0;width:1.5px;transform:translateX(-50%)}
+.sh-plus::after{top:50%;left:0;right:0;height:1.5px;transform:translateY(-50%)}
+@keyframes shfloat{0%,100%{opacity:0;transform:translateY(8px) rotate(0deg)}20%,80%{opacity:1}50%{transform:translateY(-14px) rotate(12deg)}}
 
 /* ============ reveal ============ */
 
@@ -1055,6 +1064,15 @@ html[data-theme="light"] .ember{background:rgba(13,146,104,.55)}
       var sz = (Math.random() * 1.6 + .9).toFixed(1);
       st.style.cssText = 'left:' + (Math.random()*100).toFixed(2) + '%;top:' + (Math.random()*68).toFixed(2) + '%;width:' + sz + 'px;height:' + sz + 'px;--td:' + (Math.random()*3+2).toFixed(1) + 's;--tdel:' + (Math.random()*4).toFixed(1) + 's';
       hero.insertBefore(st, hero.firstChild);
+    }
+
+    var shapeTypes = ['sh-ring','sh-plus','sh-ring','sh-plus','sh-ring','sh-plus','sh-ring'];
+    for(var hi = 0; hi < shapeTypes.length; hi++){
+      var sp = document.createElement('span');
+      sp.className = 'shape ' + shapeTypes[hi];
+      var ssz = (Math.random()*16+12)|0;
+      sp.style.cssText = 'left:' + (Math.random()*92+4).toFixed(1) + '%;top:' + (Math.random()*60+5).toFixed(1) + '%;width:' + ssz + 'px;height:' + ssz + 'px;--sd:' + (Math.random()*6+9).toFixed(1) + 's;--sdel:' + (Math.random()*6).toFixed(1) + 's';
+      hero.insertBefore(sp, hero.firstChild);
     }
 
     var cells = [];
