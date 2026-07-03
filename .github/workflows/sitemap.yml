@@ -1,0 +1,61 @@
+name: Regenerate sitemap
+on:
+  schedule:
+    - cron: '30 3 * * *'   # daily 03:30 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sitemap:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build sitemap.xml from the hub's tests.json
+        run: |
+          python3 - <<'EOF'
+          import json, urllib.request, datetime
+
+          req = urllib.request.Request(
+              'https://pangea8.com/ielts-hub/tests.json',
+              headers={'User-Agent': 'pangea8-sitemap'})
+          tests = json.loads(urllib.request.urlopen(req, timeout=30).read())['tests']
+
+          # stable lastmod (newest test date) so the file only changes when tests change
+          today = max([t.get('date') or '' for t in tests] + ['2026-07-03'])
+          urls = [
+              ('https://pangea8.com/', today, 'weekly', '1.0'),
+              ('https://pangea8.com/ielts-hub/', today, 'daily', '0.9'),
+          ]
+          seen = {u[0] for u in urls}
+          for t in tests:
+              u = (t.get('url') or '').strip()
+              if not u or u in seen:
+                  continue
+              seen.add(u)
+              urls.append((u, t.get('date') or today, 'monthly', '0.7'))
+
+          out = ['<?xml version="1.0" encoding="UTF-8"?>',
+                 '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+          for loc, mod, freq, pri in urls:
+              out.append(f'  <url><loc>{loc}</loc><lastmod>{mod}</lastmod>'
+                         f'<changefreq>{freq}</changefreq><priority>{pri}</priority></url>')
+          out.append('</urlset>')
+          open('sitemap.xml', 'w').write('\n'.join(out) + '\n')
+          print('URLs:', len(urls))
+          EOF
+
+      - name: Commit if changed
+        run: |
+          # ignore lastmod-only churn on the two dynamic rows: compare URL sets too
+          if git diff --quiet sitemap.xml; then
+            echo "sitemap unchanged"
+          else
+            git config user.name "pangea8-bot"
+            git config user.email "actions@users.noreply.github.com"
+            git add sitemap.xml
+            git commit -m "Auto-update sitemap"
+            git push
+          fi
