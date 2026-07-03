@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Page not found — Pangea8</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060A09; --surface:rgba(255,255,255,.035); --line:rgba(255,255,255,.09);
+  --text:#EAF2EE; --muted:#8FA89E; --em:#10B981; --em-bright:#34D399; --teal:#2DD4BF; --cyan:#22D3EE;
+  --grad:linear-gradient(120deg,#34D399 0%,#2DD4BF 50%,#22D3EE 100%);
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{
+  background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;
+  display:flex;align-items:center;justify-content:center;padding:24px;text-align:center;
+  background-image:
+    radial-gradient(700px 400px at 20% -10%, rgba(52,211,153,.09), transparent 60%),
+    radial-gradient(700px 400px at 90% 110%, rgba(34,211,238,.07), transparent 60%);
+}
+.card{max-width:520px}
+.code{
+  font-family:'Space Grotesk',sans-serif;font-size:clamp(84px,18vw,140px);font-weight:700;line-height:1;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+  letter-spacing:-.03em;
+}
+h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(20px,4vw,28px);margin:10px 0 8px}
+p{color:var(--muted);font-size:15.5px;line-height:1.6;margin:0 0 26px}
+.btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{
+  display:inline-block;padding:13px 26px;border-radius:14px;text-decoration:none;font-weight:600;font-size:15px;
+  font-family:'Space Grotesk',sans-serif;transition:transform .15s ease, box-shadow .15s ease;
+}
+.btn-primary{background:var(--grad);color:#04110C;box-shadow:0 8px 30px rgba(45,212,191,.25)}
+.btn-ghost{border:1px solid var(--line);color:var(--text);background:var(--surface)}
+.btn:hover{transform:translateY(-2px)}
+.hint{margin-top:30px;font-size:13px;color:var(--muted)}
+.hint a{color:var(--teal);text-decoration:none}
+</style>
+</head>
+<body>
+  <main class="card">
+    <div class="code">404</div>
+    <h1>This page took the wrong test</h1>
+    <p>The page you're looking for doesn't exist or has moved. All practice tests now live on the hub — you'll find everything there.</p>
+    <div class="btns">
+      <a class="btn btn-primary" href="/ielts-hub/">Open Test Hub</a>
+      <a class="btn btn-ghost" href="/">Home</a>
+    </div>
+    <p class="hint">Think this is a mistake? The link may be outdated — search for the test by name on the <a href="/ielts-hub/">hub</a>.</p>
+  </main>
+</body>
+</html>
