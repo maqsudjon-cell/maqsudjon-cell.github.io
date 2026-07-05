@@ -980,17 +980,23 @@ html[data-theme="light"] .toast{background:#fff;box-shadow:0 10px 30px -10px rgb
     authBtn.addEventListener('click', function(e){
       e.preventDefault();
       if(!auth){ return; }
-      if(auth.currentUser){ auth.signOut(); return; }
+      if(auth.currentUser){ if(confirm('Sign out of pangea8?')) auth.signOut(); return; }
       if(inApp()){
         toast("Google sign-in doesn't work inside this app's browser. Open pangea8.com in Chrome or Safari.");
         return;
       }
       var prov = new firebase.auth.GoogleAuthProvider();
+      /* No signInWithRedirect fallback: authDomain lives on firebaseapp.com,
+         so on browsers that partition third-party storage (Chrome 115+,
+         Safari 16.1+, Firefox 109+) the redirect bounces back signed out.
+         Popup is the only flow that completes from pangea8.com. */
       auth.signInWithPopup(prov).catch(function(err){
         var c = (err && err.code) || '';
-        if(c === 'auth/popup-blocked' || c === 'auth/cancelled-popup-request' || c === 'auth/operation-not-supported-in-this-environment'){
-          auth.signInWithRedirect(prov).catch(function(e2){ toast(authErr(e2)); });
-        } else if(c !== 'auth/popup-closed-by-user'){
+        if(c === 'auth/popup-blocked'){
+          toast('Your browser blocked the sign-in window — allow pop-ups for pangea8.com and tap Sign in again.');
+        } else if(c === 'auth/operation-not-supported-in-this-environment'){
+          toast("Google sign-in doesn't work in this browser. Open pangea8.com in Chrome or Safari.");
+        } else if(c !== 'auth/popup-closed-by-user' && c !== 'auth/cancelled-popup-request'){
           toast(authErr(err));
         }
       });
@@ -1024,7 +1030,6 @@ html[data-theme="light"] .toast{background:#fff;box-shadow:0 10px 30px -10px rgb
       });
       auth = firebase.auth();
       auth.onAuthStateChanged(renderAuth);
-      auth.getRedirectResult().catch(function(err){ if(err && err.code) console.warn('redirect:', err.code); });
     }catch(err){ auth = null; }
   });
 
