@@ -924,34 +924,12 @@ html[data-theme="light"] .toast{background:#fff;box-shadow:0 10px 30px -10px rgb
   /* ---- firebase auth + instant hub ---- */
   var HUB = 'https://pangea8.com/ielts-hub/';
   var auth = null;
-  function inApp(){
-    return /Telegram|FBAN|FBAV|FB_IAB|Instagram|Line\/|WhatsApp|; wv\)/i.test(navigator.userAgent || '');
-  }
-  var toastEl = null, toastT = null;
-  function toast(msg){
-    if(!toastEl){ toastEl = document.createElement('div'); toastEl.className = 'toast'; document.body.appendChild(toastEl); }
-    toastEl.textContent = msg;
-    requestAnimationFrame(function(){ toastEl.classList.add('show'); });
-    clearTimeout(toastT);
-    toastT = setTimeout(function(){ toastEl.classList.remove('show'); }, 4500);
-  }
-  function authErr(e){
-    var c = (e && e.code) || '';
-    if(c === 'auth/unauthorized-domain') return 'Sign-in error: pangea8.com is not in Firebase authorized domains.';
-    if(c === 'auth/operation-not-allowed') return 'Sign-in error: Google provider is not enabled in Firebase Console.';
-    return 'Sign-in failed' + (c ? ': ' + c.replace('auth/', '') : '');
-  }
-
   function goHub(){ window.location.href = HUB; }
+  /* Straight to the hub — sign-in is an explicit choice on /signin.html now,
+     not a popup forced onto every "Start practising" tap. */
   function startFlow(e){
     if(e) e.preventDefault();
-    if(!auth || auth.currentUser || inApp()){ goHub(); return; }
-    auth.signInWithPopup(new firebase.auth.GoogleAuthProvider())
-      .then(goHub)
-      .catch(function(err){
-        if(err && err.code) console.warn('signin:', err.code);
-        goHub();
-      });
+    goHub();
   }
   document.querySelectorAll('.go-hub').forEach(function(a){
     a.addEventListener('click', startFlow);
@@ -979,27 +957,8 @@ html[data-theme="light"] .toast{background:#fff;box-shadow:0 10px 30px -10px rgb
   if(authBtn){
     authBtn.addEventListener('click', function(e){
       e.preventDefault();
-      if(!auth){ return; }
-      if(auth.currentUser){ if(confirm('Sign out of pangea8?')) auth.signOut(); return; }
-      if(inApp()){
-        toast("Google sign-in doesn't work inside this app's browser. Open pangea8.com in Chrome or Safari.");
-        return;
-      }
-      var prov = new firebase.auth.GoogleAuthProvider();
-      /* No signInWithRedirect fallback: authDomain lives on firebaseapp.com,
-         so on browsers that partition third-party storage (Chrome 115+,
-         Safari 16.1+, Firefox 109+) the redirect bounces back signed out.
-         Popup is the only flow that completes from pangea8.com. */
-      auth.signInWithPopup(prov).catch(function(err){
-        var c = (err && err.code) || '';
-        if(c === 'auth/popup-blocked'){
-          toast('Your browser blocked the sign-in window — allow pop-ups for pangea8.com and tap Sign in again.');
-        } else if(c === 'auth/operation-not-supported-in-this-environment'){
-          toast("Google sign-in doesn't work in this browser. Open pangea8.com in Chrome or Safari.");
-        } else if(c !== 'auth/popup-closed-by-user' && c !== 'auth/cancelled-popup-request'){
-          toast(authErr(err));
-        }
-      });
+      if(auth && auth.currentUser){ if(confirm('Sign out of pangea8?')) auth.signOut(); return; }
+      window.location.href = 'signin.html';
     });
   }
 
