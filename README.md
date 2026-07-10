@@ -1,8 +1,8 @@
-# pangea8 — Landing Page
+# Flarestamina — Landing Page
 
-Modern landing page for **[pangea8.com](https://pangea8.com)** — a free IELTS practice hub with 100+ tests.
+Modern landing page for **[flarestamina.com](https://flarestamina.com)** — a free IELTS practice hub with 100+ tests.
 
-**Live:** https://maqsudjon-cell.github.io/pangea8-landing/
+**Live:** https://flarestamina.com/pangea8-landing/
 
 ## Features
 
@@ -19,8 +19,8 @@ In [Firebase Console](https://console.firebase.google.com) → project `ieltshub
 
 1. **Authentication → Sign-in method** → enable **Google**
 2. **Authentication → Settings → Authorized domains** → add:
-   - `pangea8.com`
-   - `maqsudjon-cell.github.io`
+   - `flarestamina.com`
+   - `flarestamina.com`
 
 Without step 2, the Google popup will be blocked on those domains.
 
