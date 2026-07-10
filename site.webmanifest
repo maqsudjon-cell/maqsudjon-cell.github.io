@@ -1,0 +1,14 @@
+{
+  "name": "FLARESTAMINA",
+  "short_name": "FLARESTAMINA",
+  "description": "Free IELTS practice — one account, every tool.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "accent_color": "#FF5A1F",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
