@@ -20,10 +20,11 @@
 (function () {
   'use strict';
 
-  // ENFORCE=false: transition mode while the auth backend is being configured
-  // (Vercel env vars + Supabase table). require() will NOT redirect, so tools
-  // keep working for signed-out students. Flip to true once registration works.
-  var ENFORCE = false;
+  // ENFORCE=true: FS Account is mandatory. Signed-out students are redirected
+  // to /account/ once; after that the session lives in localStorage and every
+  // tool on flarestamina.com recognizes them. Set to false only for
+  // emergencies (tools then fall back to the old name behavior).
+  var ENFORCE = true;
 
   var KEY = 'fs_session';
   var ACCOUNT_URL = 'https://flarestamina.com/account/';
