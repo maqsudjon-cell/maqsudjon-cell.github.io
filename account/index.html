@@ -152,7 +152,32 @@
   'use strict';
   document.getElementById('yy').textContent = new Date().getFullYear();
 
-  var API = (window.FSAuth && FSAuth.API_BASE) || 'https://pangeya-ai.vercel.app';
+  // FS Account runs on Firebase Auth (project ieltshub-e2aa8) — the phone
+  // number is stored as an email alias, so no extra backend is needed.
+  // The apiKey is a public web app identifier, not a secret.
+  var FB_KEY = 'AIzaSyAqS59ek0seZ0rcSZb3RPhiwTzleIAZ-9E';
+  function aliasEmail(phone) { return phone.replace('+', '') + '@fs.flarestamina.com'; }
+  var FB_ERRORS = {
+    EMAIL_EXISTS: 'This phone number is already registered — log in instead.',
+    EMAIL_NOT_FOUND: 'Wrong phone number or password.',
+    INVALID_PASSWORD: 'Wrong phone number or password.',
+    INVALID_LOGIN_CREDENTIALS: 'Wrong phone number or password.',
+    TOO_MANY_ATTEMPTS_TRY_LATER: 'Too many attempts. Try again in a few minutes.',
+    WEAK_PASSWORD: 'Password must be at least 6 characters.'
+  };
+  function fbError(data) {
+    var code = (data && data.error && data.error.message || '').split(' ')[0].split(':')[0];
+    return FB_ERRORS[code] || 'Something went wrong. Try again.';
+  }
+  function fbCall(action, body) {
+    return fetch('https://identitytoolkit.googleapis.com/v1/accounts:' + action + '?key=' + FB_KEY, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    }).then(function (r) {
+      return r.json().then(function (d) { return { ok: r.ok, data: d }; });
+    });
+  }
 
   function returnUrl() {
     try {
@@ -196,44 +221,46 @@
     el.className = 'msg' + (text ? ' ' + kind : '');
   }
 
-  function post(path, body, btn, msgEl, onOk) {
-    btn.disabled = true;
-    setMsg(msgEl, '', '');
-    fetch(API + path, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body)
-    }).then(function (r) {
-      return r.json().then(function (d) { return { status: r.status, data: d }; });
-    }).then(function (res) {
-      if (res.status >= 200 && res.status < 300 && res.data.token) {
-        FSAuth.save(res.data.token, res.data.user);
-        onOk();
-      } else {
-        setMsg(msgEl, res.data.error || 'Something went wrong. Try again.', 'err');
-      }
-    }).catch(function () {
-      setMsg(msgEl, 'Network error — check your connection and try again.', 'err');
-    }).then(function () { btn.disabled = false; });
+  function finish(data, user, btn) {
+    FSAuth.save(data.idToken, user, data.refreshToken);
+    btn.disabled = false;
+    location.replace(returnUrl());
   }
 
   // ── login ─────────────────────────────────────────
   document.getElementById('loginForm').addEventListener('submit', function (e) {
     e.preventDefault();
     var msg = document.getElementById('loginMsg');
+    var btn = document.getElementById('loginBtn');
     var phone = normalizePhone(document.getElementById('lPhone').value);
     if (!phone) return setMsg(msg, PHONE_ERROR, 'err');
     var pass = document.getElementById('lPass').value;
     if (!pass) return setMsg(msg, 'Enter your password.', 'err');
-    post('/api/auth/login', { phone: phone, password: pass },
-      document.getElementById('loginBtn'), msg,
-      function () { location.replace(returnUrl()); });
+    btn.disabled = true;
+    setMsg(msg, '', '');
+    fbCall('signInWithPassword', { email: aliasEmail(phone), password: pass, returnSecureToken: true })
+      .then(function (res) {
+        if (!res.ok) { btn.disabled = false; return setMsg(msg, fbError(res.data), 'err'); }
+        var dn = (res.data.displayName || '').trim();
+        var sp = dn.indexOf(' ');
+        var user = {
+          first_name: sp > 0 ? dn.slice(0, sp) : dn,
+          last_name: sp > 0 ? dn.slice(sp + 1) : '',
+          phone: phone
+        };
+        finish(res.data, user, btn);
+      })
+      .catch(function () {
+        btn.disabled = false;
+        setMsg(msg, 'Network error — check your connection and try again.', 'err');
+      });
   });
 
   // ── register ──────────────────────────────────────
   document.getElementById('regForm').addEventListener('submit', function (e) {
     e.preventDefault();
     var msg = document.getElementById('regMsg');
+    var btn = document.getElementById('regBtn');
     var first = document.getElementById('rFirst').value.trim();
     var last = document.getElementById('rLast').value.trim();
     if (!first || !last) return setMsg(msg, 'Enter your first and last name.', 'err');
@@ -243,9 +270,23 @@
     var p2 = document.getElementById('rPass2').value;
     if (p1.length < 6) return setMsg(msg, 'Password must be at least 6 characters.', 'err');
     if (p1 !== p2) return setMsg(msg, 'Passwords do not match.', 'err');
-    post('/api/auth/register', { first_name: first, last_name: last, phone: phone, password: p1 },
-      document.getElementById('regBtn'), msg,
-      function () { location.replace(returnUrl()); });
+    btn.disabled = true;
+    setMsg(msg, '', '');
+    var user = { first_name: first, last_name: last, phone: phone };
+    fbCall('signUp', { email: aliasEmail(phone), password: p1, returnSecureToken: true })
+      .then(function (res) {
+        if (!res.ok) { btn.disabled = false; return setMsg(msg, fbError(res.data), 'err'); }
+        var data = res.data;
+        // store the name on the Firebase profile; even if this call hiccups,
+        // the local session already has it
+        fbCall('update', { idToken: data.idToken, displayName: (first + ' ' + last).trim(), returnSecureToken: false })
+          .then(function () { finish(data, user, btn); })
+          .catch(function () { finish(data, user, btn); });
+      })
+      .catch(function () {
+        btn.disabled = false;
+        setMsg(msg, 'Network error — check your connection and try again.', 'err');
+      });
   });
 })();
 </script>
