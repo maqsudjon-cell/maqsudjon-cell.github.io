@@ -6,8 +6,8 @@
 <meta name="color-scheme" content="dark light">
 <meta name="theme-color" content="#060A09">
 <script>(function(){var t='dark';try{t=localStorage.getItem('p8-theme')||(window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');}catch(e){}document.documentElement.setAttribute('data-theme',t);})();</script>
-<title>Sign in — pangea8</title>
-<meta name="description" content="Sign in to pangea8 to sync your IELTS practice results across devices.">
+<title>Sign in — Flarestamina</title>
+<meta name="description" content="Sign in to Flarestamina to sync your IELTS practice results across devices.">
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" href="favicon.ico" sizes="48x48">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -133,9 +133,9 @@ html[data-theme="light"] .btn-primary{color:#fff}
 </style>
 </head>
 <body>
-<a class="back" href="./">← pangea8.com</a>
+<a class="back" href="./">← flarestamina.com</a>
 
-<a class="wordmark" href="./">pangea<b>8</b></a>
+<a class="wordmark" href="./"><b>FLARE</b>STAMINA</a>
 <div class="tagline">Sign in to sync your IELTS results across devices</div>
 
 <div class="card">
@@ -221,7 +221,7 @@ html[data-theme="light"] .btn-primary{color:#fff}
       case 'auth/popup-blocked': return 'Your browser blocked the sign-in window — allow pop-ups and try again.';
       case 'auth/unauthorized-domain': return 'Sign-in error: this domain isn’t authorized in Firebase.';
       case 'auth/operation-not-supported-in-this-environment':
-        return 'Google sign-in doesn’t work in this browser — open pangea8.com in Chrome or Safari, or use email.';
+        return 'Google sign-in doesn’t work in this browser — open flarestamina.com in Chrome or Safari, or use email.';
       default: return 'Sign-in failed' + (c ? ' (' + c.replace('auth/','') + ')' : '') + '. Try again.';
     }
   }
@@ -301,7 +301,7 @@ html[data-theme="light"] .btn-primary{color:#fff}
   googleBtn.addEventListener('click', function(){
     if(!auth){ say('Sign-in is unavailable right now — reload the page.'); return; }
     clearMsg(); actionStarted = true;
-    /* Popup only — signInWithRedirect can't complete from pangea8.com because
+    /* Popup only — signInWithRedirect can't complete from flarestamina.com because
        authDomain lives on firebaseapp.com (third-party storage partitioning). */
     auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(function(){
       window.location.href = next;
