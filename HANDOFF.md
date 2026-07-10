@@ -22,42 +22,29 @@ Assets in this repo (MAIN): `/assets/logo.svg`, `/assets/mark.svg`, `favicon.svg
 
 ## FS Account (one sign-up for the whole ecosystem)
 
-- **Client:** `/assets/fs-auth.js` — `FSAuth.getUser() / getToken() / require() / logout() / save()`. Session: localStorage `fs_session = {token, user}` shared across all `flarestamina.com` paths. Client checks JWT expiry; server verifies on API calls.
-- **Pages:** `/account/` (login + register, Nothing.tech style, `?return=` bounce-back, origin-whitelisted).
-- **Backend:** repo `pangeya-ai-` (Vercel, `https://pangeya-ai.vercel.app`):
-  - `POST /api/auth/register` — `{first_name, last_name, phone, password}` → bcrypt(10) → Supabase `fs_users` → JWT + user.
-  - `POST /api/auth/login` — `{phone, password}`, 5 fails / 10 min / phone (per-instance memory), JWT + user.
-  - JWT HS256, secret `FS_JWT_SECRET`, expiry 30 d. `password_hash` never returned.
-  - Phone rules (international): strip `[space - . ( )]`; `+…` must match `^\+[1-9]\d{6,14}$`; `998…` (12 digits) → `+`; 9-digit Uzbek local → `+998`; else clear error. Same normalization on login. Canonical E.164 stored.
-  - CORS allowlist: `flarestamina.com`, `www`, plus `pangea8.com` during transition (remove later).
-  - Supabase access via PostgREST with `SUPABASE_URL` + `SUPABASE_SERVICE_KEY` env vars.
-- **SQL (run in Supabase console):** see `fs_users` table in the final report / `announcements/` sibling; canonical copy:
+**Backend = Firebase Auth, project `ieltshub-e2aa8` (owner's decision 2026-07-10: no Supabase).** The phone number is stored as an email alias `<digits>@fs.flarestamina.com`; the full name lives in the Firebase `displayName`. No server code, no env vars, no database setup — the account page talks to `identitytoolkit.googleapis.com` directly with the public web API key (same key as `signin.html`).
 
-```sql
-create table fs_users (
-  id uuid primary key default gen_random_uuid(),
-  first_name text not null,
-  last_name text not null,
-  phone text unique not null,
-  password_hash text not null,
-  created_at timestamptz default now()
-);
-alter table fs_users enable row level security;
-```
-
+- **Client:** `/assets/fs-auth.js` — `FSAuth.getUser() / getToken() / require() / logout() / save()`. Session: localStorage `fs_session = {token, user, refreshToken}` shared across all `flarestamina.com` paths. Sessions are long-lived: the user object identifies the student; the Firebase idToken (~1 h) only matters for future server-verified calls (refresh via `securetoken.googleapis.com` with the stored refreshToken).
+  - `ENFORCE` flag at the top: currently **false** (transition mode — `require()` doesn't redirect, tools fall back to the old name behavior). Flip to `true` to make FS Account mandatory everywhere; it's one commit on this repo.
+- **Pages:** `/account/` (login + register, Nothing.tech style, `?return=` bounce-back, origin-whitelisted). Register = `accounts:signUp` + `accounts:update` (displayName); login = `accounts:signInWithPassword`; errors mapped (EMAIL_EXISTS, INVALID_LOGIN_CREDENTIALS, TOO_MANY_ATTEMPTS…). Verified end-to-end 2026-07-10 (register + login + duplicate + wrong-password paths).
+- Phone rules (international): strip `[space - . ( )]`; `+…` must match `^\+[1-9]\d{6,14}$`; `998…` (12 digits) → `+`; 9-digit Uzbek local → `+998`; else clear error. Same normalization on login. Canonical E.164 kept in the session and inside the alias email.
+- Brute force: Firebase's native TOO_MANY_ATTEMPTS throttling.
+- **Deprecated, not deployed-to:** `pangeya-ai-/api/auth/*` (the earlier Supabase/JWT implementation) — code left in the repo for reference; safe to delete. No Vercel env vars are needed for auth.
 - **Integration:** `ielts-hub/js/tracker.js` (served to every test page via `test-page-auto.js`) now requires FS Account — the old “enter your name” modal is deleted; results carry `{name, phone, first_name, last_name}` to Apps Script + Firestore. Essay platform (`pangeya-essay-platform-/index-14.html`): name input hidden/auto-filled, FS gate in `<head>`, passcode gate “LIFE KEEPS GOING” untouched. Speaking lab: prompts removed, FS phone is the user id (legacy `pangea8_spk_*` localStorage keys read as fallback). Full-mock: FS gate added in `mock.js`; Google popup kept because the coin wallet is keyed by Firebase UID — records now also carry `fsPhone`.
 - **Forgot password v1:** links to https://t.me/mrbmp13. SMS OTP reset = future task.
 
 ## Pending manual steps
 
-1. **Vercel** (pangeya-ai- project): add env vars `FS_JWT_SECRET` (long random string), `SUPABASE_URL`, `SUPABASE_SERVICE_KEY` (service_role). Redeploy. Optionally add flarestamina.com to any allowed-origin config of the older AI endpoints.
-2. **Supabase**: run the `fs_users` SQL above; add `https://flarestamina.com` to Auth → URL configuration / allowed origins (Speaking Lab storage too).
-3. **Cloudflare (flarestamina.com)**: apex A/AAAA → GitHub Pages (185.199.108–111.153 / already working), `www` CNAME → `maqsudjon-cell.github.io`; SSL mode Full. Keep pangea8.com DNS pointed at GitHub Pages for the redirect repo.
-4. **GitHub Pages**: enforce HTTPS on MAIN and `pangea8-redirect` once certs are issued.
-5. **Firebase console**: add `flarestamina.com` to Authorized domains for the projects behind ielts-hub tracker (`pangea8`/hub project), full-mock, essay (`pangeya-essay`), and the 40-day app; re-check Firestore rules if domain-scoped.
-6. **Telegram**: the channel handle `t.me/pangea8` is still linked from footers — rename/create the channel and tell me; I’ll update the links (listed as documented leftovers).
-7. **Apps Script (ielts-hub/apps-script/Code.gs)**: results now include `phone`, `first_name`, `last_name` — extend the sheet mapping if you want those columns.
-8. Publish `announcements/telegram-post.md` (draft, Uzbek) to the channel when ready.
+1. **Firebase console** (the one real remaining step): add `flarestamina.com` to **Authentication → Settings → Authorized domains** in projects **`ieltshub-e2aa8`** (fixes the legacy `signin.html` error + full-mock Google popup), **`pangeya-essay`**, and **`flarestamina`** (40-day app Google sign-in). FS Account itself does NOT need this — it already works.
+2. **GitHub Pages**: enforce HTTPS on MAIN and `pangea8-redirect` once certs are issued; Cloudflare SSL mode Full.
+3. **Telegram**: the channel handle `t.me/pangea8` is still linked from footers — rename/create the channel and tell me; I’ll update the links (listed as documented leftovers).
+4. **Apps Script (ielts-hub/apps-script/Code.gs)**: results now include `phone`, `first_name`, `last_name` — extend the sheet mapping if you want those columns.
+5. Publish `announcements/telegram-post.md` (draft, Uzbek) to the channel when ready.
+6. When ready to make FS Account **mandatory**: say the word — one commit flips `ENFORCE = true` in `/assets/fs-auth.js`.
+
+## 40-Day Challenge (incident 2026-07-10, resolved)
+
+The old app URLs (`flarestamina.com/challenge/`, `/teacher/`) 404'd after the domain cutover. Fixed the same day: the app serves fully at **`flarestamina.com/flarestamina/challenge/`** (+`/teacher/`), redirect stubs on MAIN keep every old bookmark working, internal absolute paths in the app were made relative, and the challenge is listed on the hub as a Tools card. Student data was never at risk — it lives in Firestore (project `flarestamina`).
 
 ## Known intentional `pangea8` leftovers
 
