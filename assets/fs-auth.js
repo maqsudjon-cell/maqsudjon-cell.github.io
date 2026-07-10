@@ -38,22 +38,11 @@
     } catch (e) { return null; }
   }
 
-  function tokenExpired(token) {
-    try {
-      var payload = JSON.parse(atob(token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/')));
-      if (!payload.exp) return false;
-      return (payload.exp * 1000) <= Date.now();
-    } catch (e) { return true; }
-  }
-
+  // Sessions are long-lived: the user object is what identifies the student.
+  // The Firebase idToken inside expires after ~1h — that only matters for
+  // server-verified calls, so an expired token does NOT log the student out.
   function session() {
-    var s = read();
-    if (!s) return null;
-    if (tokenExpired(s.token)) {
-      try { localStorage.removeItem(KEY); } catch (e) {}
-      return null;
-    }
-    return s;
+    return read();
   }
 
   window.FSAuth = {
@@ -80,8 +69,10 @@
       return false;
     },
 
-    save: function (token, user) {
-      try { localStorage.setItem(KEY, JSON.stringify({ token: token, user: user })); } catch (e) {}
+    save: function (token, user, refreshToken) {
+      try {
+        localStorage.setItem(KEY, JSON.stringify({ token: token, user: user, refreshToken: refreshToken || null }));
+      } catch (e) {}
     },
 
     logout: function () {
