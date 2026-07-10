@@ -20,6 +20,11 @@
 (function () {
   'use strict';
 
+  // ENFORCE=false: transition mode while the auth backend is being configured
+  // (Vercel env vars + Supabase table). require() will NOT redirect, so tools
+  // keep working for signed-out students. Flip to true once registration works.
+  var ENFORCE = false;
+
   var KEY = 'fs_session';
   var ACCOUNT_URL = 'https://flarestamina.com/account/';
 
@@ -66,6 +71,10 @@
 
     require: function () {
       if (session()) return true;
+      if (!ENFORCE) {
+        try { console.info('[FSAuth] no session — enforcement is off during transition'); } catch (e) {}
+        return true;
+      }
       var ret = encodeURIComponent(location.href);
       location.replace(ACCOUNT_URL + '?return=' + ret);
       return false;
