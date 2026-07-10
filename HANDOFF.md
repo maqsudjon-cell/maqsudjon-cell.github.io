@@ -37,7 +37,7 @@ Assets in this repo (MAIN): `/assets/logo.svg`, `/assets/mark.svg`, `favicon.svg
 
 1. **Firebase console** (the one real remaining step): add `flarestamina.com` to **Authentication → Settings → Authorized domains** in projects **`ieltshub-e2aa8`** (fixes the legacy `signin.html` error + full-mock Google popup), **`pangeya-essay`**, and **`flarestamina`** (40-day app Google sign-in). FS Account itself does NOT need this — it already works.
 2. **GitHub Pages**: enforce HTTPS on MAIN and `pangea8-redirect` once certs are issued; Cloudflare SSL mode Full.
-3. **Telegram**: the channel handle `t.me/pangea8` is still linked from footers — rename/create the channel and tell me; I’ll update the links (listed as documented leftovers).
+3. ~~Telegram channel rename~~ — DONE 2026-07-11: channel is **t.me/flarestamina**; all footer CTAs, the landing link, the hub footer and both PDF footers now point at it.
 4. **Apps Script (ielts-hub/apps-script/Code.gs)**: results now include `phone`, `first_name`, `last_name` — extend the sheet mapping if you want those columns.
 5. Publish `announcements/telegram-post.md` (draft, Uzbek) to the channel when ready.
 6. When ready to make FS Account **mandatory**: say the word — one commit flips `ENFORCE = true` in `/assets/fs-auth.js`.
@@ -49,7 +49,7 @@ The old app URLs (`flarestamina.com/challenge/`, `/teacher/`) 404'd after the do
 ## Known intentional `pangea8` leftovers
 
 - Repo-name **path segments** (repos not renamed to keep Pages URLs alive): `/pangea8-landing/`, `/pangea8-donate/`, `/pangea8-speaking/`, `/pangea8-nothing/`, `/support-pangea8/`, `pangea8-redirect`.
-- `t.me/pangea8` channel links (manual rename — see above).
+- ~~`t.me/pangea8` channel links~~ — resolved: channel renamed to `t.me/flarestamina`, all links updated 2026-07-11.
 - `mp` build-log/changelog history (historic posts + RSS + `updates.json` fallback) — changelog exception.
 - CORS transition entries (`pangea8.com`) in `api/auth/_utils.js` and the account-page return whitelist — remove after transition.
 - Legacy localStorage keys `pangea8_spk_*` (Speaking) read as migration fallback.
