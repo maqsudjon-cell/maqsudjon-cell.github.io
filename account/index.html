@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FS Account — FLARESTAMINA</title>
+<meta name="description" content="One FLARESTAMINA account for every IELTS tool — sign up once, recognized everywhere.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap">
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#000000; --surface:#0A0A0A; --surface-2:#111111;
+    --border:#232323; --border-strong:#333333;
+    --text:#F5F5F5; --muted:#8A8A8A;
+    --accent:#FF5A1F; --accent-press:#E8501A; --accent-soft:rgba(255,90,31,.12);
+    --err:#FF4545; --ok:#22C55E;
+  }
+  html,body{height:100%}
+  body{
+    background:var(--bg); color:var(--text);
+    font-family:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+    display:flex; flex-direction:column; align-items:center;
+    padding:32px 16px; min-height:100vh;
+  }
+  .brand{display:flex;align-items:center;gap:12px;margin:28px 0 40px;text-decoration:none}
+  .brand svg{width:34px;height:34px}
+  .brand .word{font-size:19px;font-weight:800;letter-spacing:.06em;color:var(--text)}
+  .brand .word b{color:var(--accent)}
+  .card{
+    width:100%;max-width:420px;background:var(--surface);
+    border:1px solid var(--border);border-radius:16px;padding:32px 28px;
+  }
+  .kicker{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+  h1{font-size:22px;font-weight:700;letter-spacing:-.01em;margin-bottom:6px}
+  .sub{color:var(--muted);font-size:13px;line-height:1.6;margin-bottom:26px}
+  form{display:flex;flex-direction:column;gap:14px}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  label{display:block;font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+  input{
+    width:100%;min-height:48px;padding:12px 14px;
+    background:var(--surface-2);border:1px solid var(--border);border-radius:10px;
+    color:var(--text);font:inherit;font-size:14px;outline:none;
+    transition:border-color .15s ease;
+  }
+  input:focus{border-color:var(--accent)}
+  input::placeholder{color:#555}
+  .btn{
+    min-height:50px;margin-top:8px;border:none;border-radius:10px;cursor:pointer;
+    background:var(--accent);color:#180702;font:inherit;font-size:14px;font-weight:700;
+    letter-spacing:.04em;transition:background .15s ease,transform .05s ease;
+  }
+  .btn:hover{background:var(--accent-press)}
+  .btn:active{transform:scale(.99)}
+  .btn[disabled]{opacity:.55;cursor:wait}
+  .msg{display:none;font-size:12.5px;line-height:1.55;border-radius:10px;padding:11px 13px;margin-top:2px}
+  .msg.err{display:block;color:var(--err);background:rgba(255,69,69,.08);border:1px solid rgba(255,69,69,.25)}
+  .msg.ok{display:block;color:var(--ok);background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.25)}
+  .aux{display:flex;justify-content:space-between;align-items:center;margin-top:4px}
+  .aux a{color:var(--muted);font-size:12px;text-decoration:none;border-bottom:1px dotted var(--border-strong)}
+  .aux a:hover{color:var(--accent);border-color:var(--accent)}
+  .switch{margin-top:22px;padding-top:20px;border-top:1px solid var(--border);text-align:center;font-size:13px;color:var(--muted)}
+  .switch a{color:var(--accent);text-decoration:none;font-weight:700}
+  .hint{font-size:11px;color:#666;margin-top:5px;line-height:1.5}
+  .foot{margin-top:auto;padding:34px 0 8px;color:#555;font-size:11.5px;text-align:center;line-height:1.7}
+  .foot a{color:#777;text-decoration:none}
+  .foot a:hover{color:var(--accent)}
+  [hidden]{display:none !important}
+</style>
+</head>
+<body>
+
+<a class="brand" href="https://flarestamina.com/" aria-label="FLARESTAMINA home">
+  <svg viewBox="0 0 24 24" fill="none" stroke="#FF5A1F" stroke-width="2.6" stroke-linecap="round" aria-hidden="true">
+    <path d="M12 9.5V1.5"/><path d="M14.5 12h7"/><path d="M12 14.5V19"/><path d="M9.5 12H4"/>
+  </svg>
+  <span class="word"><b>FLARE</b>STAMINA</span>
+</a>
+
+<!-- ── LOGIN ─────────────────────────────────────────── -->
+<div class="card" id="loginCard">
+  <div class="kicker">FS Account</div>
+  <h1>Log in</h1>
+  <p class="sub">One account for every FLARESTAMINA tool — tests, mocks, speaking and writing.</p>
+  <form id="loginForm" novalidate>
+    <div>
+      <label for="lPhone">Phone number</label>
+      <input id="lPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+998 XX XXX XX XX" required>
+    </div>
+    <div>
+      <label for="lPass">Password</label>
+      <input id="lPass" type="password" autocomplete="current-password" placeholder="••••••••" required>
+    </div>
+    <div class="msg" id="loginMsg" role="alert"></div>
+    <button class="btn" id="loginBtn" type="submit">Log in</button>
+    <div class="aux">
+      <span></span>
+      <a href="https://t.me/mrbmp13" target="_blank" rel="noopener" id="forgot">Forgot password?</a>
+    </div>
+  </form>
+  <div class="switch">No account yet? <a href="#register" id="toRegister">Sign up</a></div>
+</div>
+
+<!-- ── REGISTER ──────────────────────────────────────── -->
+<div class="card" id="regCard" hidden>
+  <div class="kicker">FS Account</div>
+  <h1>Sign up</h1>
+  <p class="sub">Register once — every test and tool will know you.</p>
+  <form id="regForm" novalidate>
+    <div class="row2">
+      <div>
+        <label for="rFirst">First name</label>
+        <input id="rFirst" type="text" autocomplete="given-name" placeholder="Aziz" required>
+      </div>
+      <div>
+        <label for="rLast">Last name</label>
+        <input id="rLast" type="text" autocomplete="family-name" placeholder="Karimov" required>
+      </div>
+    </div>
+    <div>
+      <label for="rPhone">Phone number</label>
+      <input id="rPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="+998 XX XXX XX XX" required>
+      <div class="hint">Any country — include your country code (+998, +82, +1 …). Uzbek 9-digit numbers get +998 automatically.</div>
+    </div>
+    <div>
+      <label for="rPass">Password</label>
+      <input id="rPass" type="password" autocomplete="new-password" placeholder="At least 6 characters" required>
+    </div>
+    <div>
+      <label for="rPass2">Confirm password</label>
+      <input id="rPass2" type="password" autocomplete="new-password" placeholder="Repeat the password" required>
+    </div>
+    <div class="msg" id="regMsg" role="alert"></div>
+    <button class="btn" id="regBtn" type="submit">Sign up</button>
+  </form>
+  <div class="switch">Already have an account? <a href="#login" id="toLogin">Log in</a></div>
+</div>
+
+<div class="foot">
+  © <span id="yy"></span> FLARESTAMINA · <a href="https://flarestamina.com/">flarestamina.com</a><br>
+  Free IELTS practice — one account, every tool.
+</div>
+
+<script src="/assets/fs-auth.js"></script>
+<script>
+(function () {
+  'use strict';
+  document.getElementById('yy').textContent = new Date().getFullYear();
+
+  var API = (window.FSAuth && FSAuth.API_BASE) || 'https://pangeya-ai.vercel.app';
+
+  function returnUrl() {
+    try {
+      var p = new URLSearchParams(location.search).get('return');
+      if (!p) return 'https://flarestamina.com/';
+      var u = new URL(p, location.origin);
+      // only bounce back to our own ecosystem
+      if (/(^|\.)flarestamina\.com$|(^|\.)pangea8\.com$/.test(u.hostname)) return u.href;
+    } catch (e) {}
+    return 'https://flarestamina.com/';
+  }
+
+  // Already signed in? Straight back.
+  if (window.FSAuth && FSAuth.getUser()) { location.replace(returnUrl()); return; }
+
+  // ── view switching ────────────────────────────────
+  var loginCard = document.getElementById('loginCard');
+  var regCard = document.getElementById('regCard');
+  function show(view) {
+    loginCard.hidden = view !== 'login';
+    regCard.hidden = view !== 'register';
+  }
+  document.getElementById('toRegister').addEventListener('click', function (e) { e.preventDefault(); show('register'); });
+  document.getElementById('toLogin').addEventListener('click', function (e) { e.preventDefault(); show('login'); });
+  if (location.hash === '#register') show('register');
+
+  // Client-side mirror of the server's phone rules (UX only).
+  function normalizePhone(input) {
+    var raw = String(input || '').replace(/[\s\-.()]/g, '');
+    if (!raw) return null;
+    if (raw.charAt(0) === '+') return /^\+[1-9]\d{6,14}$/.test(raw) ? raw : null;
+    if (!/^\d+$/.test(raw)) return null;
+    if (raw.indexOf('998') === 0 && raw.length === 12) return '+' + raw;
+    if (raw.length === 9) return '+998' + raw;
+    return null;
+  }
+  var PHONE_ERROR = 'Include your country code, e.g. +998 90 123 45 67';
+
+  function setMsg(el, text, kind) {
+    el.textContent = text || '';
+    el.className = 'msg' + (text ? ' ' + kind : '');
+  }
+
+  function post(path, body, btn, msgEl, onOk) {
+    btn.disabled = true;
+    setMsg(msgEl, '', '');
+    fetch(API + path, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    }).then(function (r) {
+      return r.json().then(function (d) { return { status: r.status, data: d }; });
+    }).then(function (res) {
+      if (res.status >= 200 && res.status < 300 && res.data.token) {
+        FSAuth.save(res.data.token, res.data.user);
+        onOk();
+      } else {
+        setMsg(msgEl, res.data.error || 'Something went wrong. Try again.', 'err');
+      }
+    }).catch(function () {
+      setMsg(msgEl, 'Network error — check your connection and try again.', 'err');
+    }).then(function () { btn.disabled = false; });
+  }
+
+  // ── login ─────────────────────────────────────────
+  document.getElementById('loginForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var msg = document.getElementById('loginMsg');
+    var phone = normalizePhone(document.getElementById('lPhone').value);
+    if (!phone) return setMsg(msg, PHONE_ERROR, 'err');
+    var pass = document.getElementById('lPass').value;
+    if (!pass) return setMsg(msg, 'Enter your password.', 'err');
+    post('/api/auth/login', { phone: phone, password: pass },
+      document.getElementById('loginBtn'), msg,
+      function () { location.replace(returnUrl()); });
+  });
+
+  // ── register ──────────────────────────────────────
+  document.getElementById('regForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var msg = document.getElementById('regMsg');
+    var first = document.getElementById('rFirst').value.trim();
+    var last = document.getElementById('rLast').value.trim();
+    if (!first || !last) return setMsg(msg, 'Enter your first and last name.', 'err');
+    var phone = normalizePhone(document.getElementById('rPhone').value);
+    if (!phone) return setMsg(msg, PHONE_ERROR, 'err');
+    var p1 = document.getElementById('rPass').value;
+    var p2 = document.getElementById('rPass2').value;
+    if (p1.length < 6) return setMsg(msg, 'Password must be at least 6 characters.', 'err');
+    if (p1 !== p2) return setMsg(msg, 'Passwords do not match.', 'err');
+    post('/api/auth/register', { first_name: first, last_name: last, phone: phone, password: p1 },
+      document.getElementById('regBtn'), msg,
+      function () { location.replace(returnUrl()); });
+  });
+})();
+</script>
+</body>
+</html>
