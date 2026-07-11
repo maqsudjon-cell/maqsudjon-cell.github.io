@@ -141,6 +141,19 @@
   <div class="switch">Already have an account? <a href="#login" id="toLogin">Log in</a></div>
 </div>
 
+<!-- ── PROFILE (signed in, no ?return) ─────────────────── -->
+<div class="card" id="profCard" hidden>
+  <div class="kicker">FS Account</div>
+  <h1 id="pName">—</h1>
+  <p class="sub" id="pPhone">—</p>
+  <a class="btn" id="pResults" href="https://flarestamina.com/ielts-hub/results.html"
+     style="display:flex;align-items:center;justify-content:center;text-decoration:none">My results</a>
+  <div class="aux" style="margin-top:16px">
+    <a href="https://flarestamina.com/ielts-hub/">← all tests</a>
+    <a href="#" id="logoutBtn">Log out</a>
+  </div>
+</div>
+
 <div class="foot">
   © <span id="yy"></span> FLARESTAMINA · <a href="https://flarestamina.com/">flarestamina.com</a><br>
   Free IELTS practice — one account, every tool.
@@ -190,12 +203,28 @@
     return 'https://flarestamina.com/';
   }
 
-  // Already signed in? Straight back.
-  if (window.FSAuth && FSAuth.getUser()) { location.replace(returnUrl()); return; }
-
   // ── view switching ────────────────────────────────
   var loginCard = document.getElementById('loginCard');
   var regCard = document.getElementById('regCard');
+  var profCard = document.getElementById('profCard');
+
+  // Already signed in? Bounce back to the tool that sent us — or show the profile.
+  var me = window.FSAuth && FSAuth.getUser();
+  var hasReturn = false;
+  try { hasReturn = !!new URLSearchParams(location.search).get('return'); } catch (e) {}
+  if (me && hasReturn) { location.replace(returnUrl()); return; }
+  if (me) {
+    loginCard.hidden = true;
+    regCard.hidden = true;
+    profCard.hidden = false;
+    document.getElementById('pName').textContent = ((me.first_name || '') + ' ' + (me.last_name || '')).trim() || 'Student';
+    document.getElementById('pPhone').textContent = me.phone || '';
+    document.getElementById('logoutBtn').addEventListener('click', function (e) {
+      e.preventDefault();
+      FSAuth.logout();
+    });
+    return;
+  }
   function show(view) {
     loginCard.hidden = view !== 'login';
     regCard.hidden = view !== 'register';
@@ -290,5 +319,6 @@
   });
 })();
 </script>
+<script data-goatcounter="https://flarestamina.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
