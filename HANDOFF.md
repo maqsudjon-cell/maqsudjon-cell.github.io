@@ -25,7 +25,7 @@ Assets in this repo (MAIN): `/assets/logo.svg`, `/assets/mark.svg`, `favicon.svg
 **Backend = Firebase Auth, project `ieltshub-e2aa8` (owner's decision 2026-07-10: no Supabase).** The phone number is stored as an email alias `<digits>@fs.flarestamina.com`; the full name lives in the Firebase `displayName`. No server code, no env vars, no database setup — the account page talks to `identitytoolkit.googleapis.com` directly with the public web API key (same key as `signin.html`).
 
 - **Client:** `/assets/fs-auth.js` — `FSAuth.getUser() / getToken() / require() / logout() / save()`. Session: localStorage `fs_session = {token, user, refreshToken}` shared across all `flarestamina.com` paths. Sessions are long-lived: the user object identifies the student; the Firebase idToken (~1 h) only matters for future server-verified calls (refresh via `securetoken.googleapis.com` with the stored refreshToken).
-  - `ENFORCE` flag at the top: currently **false** (transition mode — `require()` doesn't redirect, tools fall back to the old name behavior). Flip to `true` to make FS Account mandatory everywhere; it's one commit on this repo.
+  - `ENFORCE` flag at the top: **true since 2026-07-11** — FS Account is mandatory everywhere (one-time redirect to `/account/`). Set to false only for emergencies (tools then fall back to the old name behavior).
 - **Pages:** `/account/` (login + register, Nothing.tech style, `?return=` bounce-back, origin-whitelisted). Register = `accounts:signUp` + `accounts:update` (displayName); login = `accounts:signInWithPassword`; errors mapped (EMAIL_EXISTS, INVALID_LOGIN_CREDENTIALS, TOO_MANY_ATTEMPTS…). Verified end-to-end 2026-07-10 (register + login + duplicate + wrong-password paths).
 - Phone rules (international): strip `[space - . ( )]`; `+…` must match `^\+[1-9]\d{6,14}$`; `998…` (12 digits) → `+`; 9-digit Uzbek local → `+998`; else clear error. Same normalization on login. Canonical E.164 kept in the session and inside the alias email.
 - Brute force: Firebase's native TOO_MANY_ATTEMPTS throttling.
@@ -40,7 +40,6 @@ Assets in this repo (MAIN): `/assets/logo.svg`, `/assets/mark.svg`, `favicon.svg
 3. ~~Telegram channel rename~~ — DONE 2026-07-11: channel is **t.me/flarestamina**; all footer CTAs, the landing link, the hub footer and both PDF footers now point at it.
 4. **Apps Script (ielts-hub/apps-script/Code.gs)**: results now include `phone`, `first_name`, `last_name` — extend the sheet mapping if you want those columns.
 5. Publish `announcements/telegram-post.md` (draft, Uzbek) to the channel when ready.
-6. When ready to make FS Account **mandatory**: say the word — one commit flips `ENFORCE = true` in `/assets/fs-auth.js`.
 
 ## 40-Day Challenge (incident 2026-07-10, resolved)
 
