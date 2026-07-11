@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy — FLARESTAMINA</title>
+<meta name="description" content="What FLARESTAMINA stores, why, and how to delete your data.">
+<meta name="theme-color" content="#000000">
+<link rel="canonical" href="https://flarestamina.com/privacy/">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#000;--border:#232323;--border-strong:#3a3a3a;--text:#F5F5F5;--muted:#8A8A8A;--faint:#555;--accent:#FF5A1F;--on-accent:#180702}
+body{background:var(--bg);color:var(--text);font-family:'JetBrains Mono',ui-monospace,Menlo,monospace;line-height:1.75;min-height:100vh;display:flex;flex-direction:column}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--accent);color:var(--on-accent)}
+.bar{border-bottom:1px solid var(--border)}
+.bar-in{max-width:760px;margin:0 auto;padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:14px;letter-spacing:.06em}
+.brand svg{width:20px;height:20px}
+.brand b{color:var(--accent)}
+.bar a.back{font-size:12px;color:var(--muted)}
+.bar a.back:hover{color:var(--accent)}
+.wrap{max-width:760px;margin:0 auto;padding:48px 24px 60px;flex:1}
+.kick{font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+h1{font-size:clamp(24px,4.5vw,32px);font-weight:800;margin-bottom:8px}
+.upd{color:var(--faint);font-size:12px;margin-bottom:34px}
+h2{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:30px 0 10px}
+p,li{color:var(--muted);font-size:14px}
+p b,li b{color:var(--text)}
+ul{list-style:none;padding-left:0}
+li{padding-left:18px;position:relative;margin-bottom:8px}
+li::before{content:'—';position:absolute;left:0;color:var(--faint)}
+a.lnk{color:var(--accent);border-bottom:1px dotted var(--border-strong)}
+footer{border-top:1px solid var(--border)}
+.foot{max-width:760px;margin:0 auto;padding:20px 24px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:11.5px;color:var(--faint)}
+.foot a{color:var(--muted);border-bottom:1px dotted var(--border-strong)}
+.foot a:hover{color:var(--accent)}
+</style>
+</head>
+<body>
+
+<nav class="bar">
+  <div class="bar-in">
+    <a class="brand" href="https://flarestamina.com/">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#FF5A1F" stroke-width="2.6" stroke-linecap="round" aria-hidden="true">
+        <path d="M12 9.5V1.5"/><path d="M14.5 12h7"/><path d="M12 14.5V19"/><path d="M9.5 12H4"/>
+      </svg>
+      <span><b>FLARE</b>STAMINA</span>
+    </a>
+    <a class="back" href="https://flarestamina.com/ielts-hub/">← all tests</a>
+  </div>
+</nav>
+
+<main class="wrap">
+  <div class="kick">Privacy</div>
+  <h1>Short and honest.</h1>
+  <p class="upd">Last updated: 11 July 2026</p>
+
+  <h2>What we store</h2>
+  <ul>
+    <li><b>Your FS Account:</b> first name, last name, phone number (this is your login ID).</li>
+    <li><b>Your practice results:</b> test name, score and date — so your progress follows you on any device.</li>
+    <li><b>What you submit yourself:</b> essays in the Writing Lab and voice recordings in the Speaking Lab, so a teacher can give feedback.</li>
+  </ul>
+
+  <h2>Where it lives</h2>
+  <ul>
+    <li>Accounts and results — <b>Google Firebase</b>; a copy of results goes to a private <b>Google Sheet</b> used for teacher tracking.</li>
+    <li>Speaking recordings — <b>Supabase Storage</b>.</li>
+    <li>Payments for the Full Mock are manual card transfers — <b>we never see or store card details</b>.</li>
+  </ul>
+
+  <h2>What we never do</h2>
+  <ul>
+    <li>No selling or sharing of your data with anyone.</li>
+    <li>No advertising, no trackers. Our statistics tool (<a class="lnk" href="https://www.goatcounter.com" target="_blank" rel="noopener">GoatCounter</a>) uses <b>no cookies</b> and stores nothing personal.</li>
+    <li>Your password is handled by Google Firebase — we can't read it.</li>
+  </ul>
+
+  <h2>Delete your data</h2>
+  <p>Message <a class="lnk" href="https://t.me/mrbmp13" target="_blank" rel="noopener">@mrbmp13</a> on Telegram from the phone number you registered with — we delete your account and every result within 48 hours.</p>
+</main>
+
+<footer>
+  <div class="foot">
+    <span>© <span id="yy"></span> FLARESTAMINA</span>
+    <span><a href="https://flarestamina.com/">home</a> · <a href="https://flarestamina.com/ielts-hub/">practice hub</a> · <a href="https://t.me/flarestamina" target="_blank" rel="noopener">@flarestamina</a></span>
+  </div>
+</footer>
+
+<script>document.getElementById('yy').textContent = new Date().getFullYear();</script>
+<script data-goatcounter="https://flarestamina.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
