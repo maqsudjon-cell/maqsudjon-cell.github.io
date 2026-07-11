@@ -61,3 +61,14 @@ The old app URLs (`flarestamina.com/challenge/`, `/teacher/`) 404'd after the do
 - Repo rename candidates (do only with redirects in place): `pangea8-speaking` → `flarestamina-speaking`, `pangea8-donate` → `flarestamina-donate`, `pangeya-essay-platform-` → `flarestamina-essay`, `pangeya-ai-` → `flarestamina-ai`; also retire `pangea8-landing` / `pangea8-nothing` / `support-pangea8` (archived/dupes).
 - Rebrand legacy Google `signin.html` (still functional, rebranded strings) or fold it into `/account/`.
 - Old sessions on pangea8.com localStorage don’t transfer (different origin) — students sign in once on the new domain.
+
+
+## Features shipped 2026-07-11 (post-rebrand wave 2)
+
+- **Cross-device results**: `ielts-hub/results.html` rebuilt in the terminal style — merges device history (`p8_results`) with Firestore `results` queried by the FS phone (REST runQuery, reads are currently public in rules; tightening = future task: add `allow read: if request.auth.token.email == resource.data.owner` after writing an owner alias field). Tiles: total / week / streak / best, 30-day CSS chart, merged history.
+- **Share loop**: tracker.js shows a "Share your result" Telegram share toast after every saved result.
+- **Analytics**: GoatCounter (`flarestamina.goatcounter.com`) injected on MAIN, hub, results, account, teachers, every test page (via test-page-auto.js) and full-mock (mock.js). OWNER TODO: register the code `flarestamina` at goatcounter.com (free) — until then hits are dropped silently.
+- **Teachers funnel**: `flarestamina.com/teachers/` pitch page + hub footer link.
+- **Hub**: START HERE strip for students with no history (points at Cambridge 21); fluid 1–4 column grid; category-aware search; canonical + JSON-LD.
+- **Account**: signed-in visit without `?return=` now shows a profile card (name, phone, My results, Log out).
+- OWNER TODO (optional): `info@flarestamina.com` via Cloudflare Email Routing; Google Search Console property + sitemap submit + request indexing (site-side SEO already done).
