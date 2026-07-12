@@ -28,6 +28,8 @@ jobs:
           urls = [
               ('https://flarestamina.com/', today, 'weekly', '1.0'),
               ('https://flarestamina.com/ielts-hub/', today, 'daily', '0.9'),
+              ('https://flarestamina.com/teachers/', today, 'monthly', '0.8'),
+              ('https://flarestamina.com/privacy/', today, 'yearly', '0.3'),
           ]
           seen = {u[0] for u in urls}
           for t in tests:
