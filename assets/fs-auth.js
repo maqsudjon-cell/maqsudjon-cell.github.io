@@ -59,6 +59,31 @@
       return s ? s.token : null;
     },
 
+    // Returns a Promise of a non-expired Firebase idToken, refreshing it with
+    // the stored refreshToken when needed. Resolves null if signed out or the
+    // refresh fails (callers should degrade gracefully).
+    getFreshToken: function () {
+      var s = session();
+      if (!s || !s.token) return Promise.resolve(null);
+      var expired = true;
+      try {
+        var payload = JSON.parse(atob(s.token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/')));
+        expired = !payload.exp || (payload.exp * 1000) <= Date.now() + 60000;
+      } catch (e) {}
+      if (!expired) return Promise.resolve(s.token);
+      if (!s.refreshToken) return Promise.resolve(null);
+      var API_KEY = 'AIzaSyAqS59ek0seZ0rcSZb3RPhiwTzleIAZ-9E'; // public web app key
+      return fetch('https://securetoken.googleapis.com/v1/token?key=' + API_KEY, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: 'grant_type=refresh_token&refresh_token=' + encodeURIComponent(s.refreshToken)
+      }).then(function (r) { return r.json(); }).then(function (d) {
+        if (!d.id_token) return null;
+        window.FSAuth.save(d.id_token, s.user, d.refresh_token || s.refreshToken);
+        return d.id_token;
+      }).catch(function () { return null; });
+    },
+
     require: function () {
       if (session()) return true;
       if (!ENFORCE) {
