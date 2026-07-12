@@ -71,3 +71,13 @@ The old app URLs (`flarestamina.com/challenge/`, `/teacher/`) 404'd after the do
 - **Hub**: START HERE strip for students with no history (points at Cambridge 21); fluid 1–4 column grid; category-aware search; canonical + JSON-LD.
 - **Account**: signed-in visit without `?return=` now shows a profile card (name, phone, My results, Log out).
 - OWNER TODO (optional): `info@flarestamina.com` via Cloudflare Email Routing; Google Search Console property + sitemap submit + request indexing (site-side SEO already done).
+
+## Security & data hardening 2026-07-11
+
+- `results.html` now reads Firestore with a Bearer idToken (`FSAuth.getFreshToken()` refreshes via securetoken API). Ready for owner-only rules.
+- **OWNER TODO — Firestore rules (project ieltshub-e2aa8):** replace ONLY the read permission of `results` and `students` (keep `create`/`write` lines untouched — anon writes power the tracker):
+  `allow read: if request.auth != null && resource.data.phone == "+" + request.auth.token.email.split("@")[0];`
+  Audit findings: `results` + `students` currently world-readable; `wallets` / `coinRequests` / `history` closed ✓; `essays` (pangeya-essay) public by product design.
+- Apps Script `Code.gs` (repo copy) now writes a Phone column (auto-migrates 4-column sheets). OWNER TODO: paste into script.google.com and Deploy → Manage deployments → Edit → New version.
+- Analytics events: `event/result-saved` (tracker), `event/fs-signup` (account) — visible in GoatCounter.
+- pangea8.com HTTPS enforced ✓; PWA manifests brand-black ✓; `/privacy/` page + footer links ✓; vanity URLs `/writing/ /speaking/ /mock/` ✓.
