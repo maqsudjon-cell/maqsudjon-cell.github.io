@@ -302,6 +302,7 @@
     btn.disabled = true;
     setMsg(msg, '', '');
     var user = { first_name: first, last_name: last, phone: phone };
+    try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: 'event/fs-signup', title: 'FS sign-up', event: true }); } catch (e) {}
     fbCall('signUp', { email: aliasEmail(phone), password: p1, returnSecureToken: true })
       .then(function (res) {
         if (!res.ok) { btn.disabled = false; return setMsg(msg, fbError(res.data), 'err'); }
