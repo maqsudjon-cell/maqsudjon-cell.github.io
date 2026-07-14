@@ -84,10 +84,21 @@
       }).catch(function () { return null; });
     },
 
+    // Search-engine crawlers must reach the real page content, not the
+    // noindex /account/ gate — otherwise every tool page becomes unindexable.
+    // The catalog is public content; the login is a product convenience, so
+    // letting bots through is not cloaking.
+    isBot: function () {
+      try {
+        return /bot|crawl|spider|slurp|bingpreview|google|yandex|duckduck|baidu|facebookexternalhit|embedly|quora|pinterest|vkshare|whatsapp|telegrambot|lighthouse|headlesschrome/i
+          .test(navigator.userAgent || '');
+      } catch (e) { return false; }
+    },
+
     require: function () {
       if (session()) return true;
-      if (!ENFORCE) {
-        try { console.info('[FSAuth] no session — enforcement is off during transition'); } catch (e) {}
+      if (!ENFORCE || this.isBot()) {
+        try { console.info('[FSAuth] no session — enforcement skipped (transition or crawler)'); } catch (e) {}
         return true;
       }
       var ret = encodeURIComponent(location.href);
