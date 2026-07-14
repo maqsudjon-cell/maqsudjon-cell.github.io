@@ -36,6 +36,8 @@ jobs:
               u = (t.get('url') or '').strip()
               if not u or u in seen:
                   continue
+              if not u.startswith('https://flarestamina.com'):
+                  continue  # skip external tools (e.g. pierics.com) — not our sitemap
               seen.add(u)
               urls.append((u, t.get('date') or today, 'monthly', '0.7'))
 
