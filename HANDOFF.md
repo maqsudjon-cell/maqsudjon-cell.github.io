@@ -81,3 +81,11 @@ The old app URLs (`flarestamina.com/challenge/`, `/teacher/`) 404'd after the do
 - Apps Script `Code.gs` (repo copy) now writes a Phone column (auto-migrates 4-column sheets). OWNER TODO: paste into script.google.com and Deploy → Manage deployments → Edit → New version.
 - Analytics events: `event/result-saved` (tracker), `event/fs-signup` (account) — visible in GoatCounter.
 - pangea8.com HTTPS enforced ✓; PWA manifests brand-black ✓; `/privacy/` page + footer links ✓; vanity URLs `/writing/ /speaking/ /mock/` ✓.
+
+## CRITICAL SEO fix 2026-07-14 — crawler bypass in the auth gate
+
+**Symptom:** Search Console refused to index `/ielts-hub/` ("blocked by noindex tag"), even though the hub HTML has no noindex.
+**Cause:** `ENFORCE=true` + `FSAuth.require()` redirects any session-less visitor (including Googlebot's renderer) to `/account/`, which IS `noindex`. So every tool page effectively inherited noindex → the whole site was becoming unindexable.
+**Fix:** `fs-auth.js` `require()` now calls `isBot()` (UA regex: google/bing/yandex/… + social preview bots) and skips the redirect for crawlers — they render the real public catalog; humans still hit the login gate. Not cloaking (catalog is public content). 
+**Search Console done 2026-07-14:** property `https://flarestamina.com/` verified (HTML file `google126cc832a594e771.html` at root — do not delete), sitemap.xml submitted (107 URLs; external pierics.com URL removed + workflow now filters non-flarestamina URLs), re-indexing requested for `/` and `/ielts-hub/`.
+**If you ever add a new gated tool:** make sure its page has no hard `noindex` and relies on this JS gate, or bots won't index it.
