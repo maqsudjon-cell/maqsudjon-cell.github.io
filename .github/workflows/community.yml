@@ -29,7 +29,37 @@ jobs:
         run: pip install --quiet pillow
 
       - name: Generate article + author pages and OG images
+        id: build
         run: python3 .github/scripts/build_community.py
+
+      - name: Tell me on Telegram when someone publishes
+        # Needs repo secrets TELEGRAM_BOT_TOKEN (from @BotFather) and
+        # TELEGRAM_CHAT_ID (your own chat, or the channel id). Skipped until set.
+        if: steps.build.outputs.new_count != '0' && steps.build.outputs.new_count != ''
+        env:
+          TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          CHAT: ${{ secrets.TELEGRAM_CHAT_ID }}
+          NEW_LIST: ${{ steps.build.outputs.new_list }}
+        run: |
+          if [ -z "$TOKEN" ] || [ -z "$CHAT" ]; then
+            echo "Telegram secrets not set — skipping notification"; exit 0
+          fi
+          while IFS= read -r line; do
+            [ -z "$line" ] && continue
+            TITLE="${line%%—*}"; REST="${line#*—}"
+            AUTHOR="${REST%%—*}"; URL="${REST#*—}"
+            TEXT="📝 Yangi maqola chiqdi
+${TITLE}
+✍️ ${AUTHOR}
+${URL}
+
+Moderatsiya: https://flarestamina.com/admin/"
+            curl -sS -X POST "https://api.telegram.org/bot${TOKEN}/sendMessage" \
+              --data-urlencode "chat_id=${CHAT}" \
+              --data-urlencode "text=${TEXT}" \
+              --data-urlencode "disable_web_page_preview=false" -o /dev/null
+            echo "notified: $TITLE"
+          done <<< "$NEW_LIST"
 
       - name: Commit if changed
         run: |

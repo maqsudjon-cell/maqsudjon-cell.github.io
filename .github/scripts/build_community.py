@@ -378,6 +378,12 @@ def author_page(author, center, link, items):
 
 # ---------------------------------------------------------------- main
 def main():
+    # what already had a page last run? anything new gets announced.
+    try:
+        prev = set(json.load(open(os.path.join(ROOT, 'news/articles-index.json')))['articles'].keys())
+    except Exception:
+        prev = set()
+
     arts = fetch_articles()
     print('articles fetched:', len(arts))
 
@@ -420,6 +426,19 @@ def main():
         json.dump({'generated': True, 'articles': index, 'authors': sorted(by_author)}, f,
                   ensure_ascii=False, indent=1)
     print('articles-index.json written:', len(index), 'articles,', len(by_author), 'authors')
+
+    # hand the freshly published articles to the workflow so it can notify Telegram
+    fresh = [e for e in entries if prev and e['a']['id'] not in prev]
+    out = os.environ.get('GITHUB_OUTPUT')
+    if out:
+        lines = []
+        for e in fresh:
+            a = e['a']
+            lines.append('%s\u2014%s\u2014%s/news/a/%s/' % (a['title'], a['author'], SITE, e['slug']))
+        with open(out, 'a', encoding='utf-8') as f:
+            f.write('new_count=%d\n' % len(fresh))
+            f.write('new_list<<EOF_LIST\n' + '\n'.join(lines) + '\nEOF_LIST\n')
+    print('new since last run:', len(fresh))
 
 
 if __name__ == '__main__':

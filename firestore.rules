@@ -1,0 +1,81 @@
+rules_version = '2';
+
+// Firestore security rules — project: pangeya-essay
+// Paste into: Firebase console -> Firestore Database -> Rules -> Publish
+//   https://console.firebase.google.com/project/pangeya-essay/firestore/rules
+//
+// Why: before these rules, anyone holding the public web API key (it ships in
+// the page JS, by design) could UPDATE or DELETE any article, idea or comment.
+// Proven on 2026-07-15: anonymous PATCH -> 200, anonymous DELETE -> 200.
+//
+// After: anyone can still publish (that is the product — no sign-up to write),
+// but only the owner can edit or delete. The owner proves it with a Google
+// idToken, which /admin now sends on every write.
+//
+// Collections in this project: essays (Writing Lab), articles, advice,
+// advice_comments (the /news community layer).
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isOwner() {
+      return request.auth != null
+             && request.auth.token.email_verified == true
+             && request.auth.token.email == 'polatovmaqsudjon1@gmail.com';
+    }
+
+    // ---- Writing Lab: unchanged, public by product design ----
+    match /essays/{id} {
+      allow read, write: if true;
+    }
+
+    // ---- Teacher articles: anyone may publish, only the owner may edit/delete ----
+    match /articles/{id} {
+      allow read: if true;
+      allow create: if request.resource.data.title is string
+                    && request.resource.data.title.size() >= 5
+                    && request.resource.data.title.size() <= 200
+                    && request.resource.data.body is string
+                    && request.resource.data.body.size() >= 200
+                    && request.resource.data.body.size() <= 40000
+                    && request.resource.data.author is string
+                    && request.resource.data.author.size() <= 80
+                    // a new post can never arrive pre-hidden
+                    && (!('hidden' in request.resource.data)
+                        || request.resource.data.hidden == false);
+      allow update, delete: if isOwner();
+    }
+
+    // ---- Ideas & advice: anyone may post; the public may only bump `likes` ----
+    match /advice/{id} {
+      allow read: if true;
+      allow create: if request.resource.data.text is string
+                    && request.resource.data.text.size() >= 10
+                    && request.resource.data.text.size() <= 2000
+                    && (!('hidden' in request.resource.data)
+                        || request.resource.data.hidden == false);
+      allow update: if isOwner()
+                    || (request.resource.data.diff(resource.data)
+                          .affectedKeys().hasOnly(['likes'])
+                        && request.resource.data.likes is int
+                        && request.resource.data.likes > resource.data.likes);
+      allow delete: if isOwner();
+    }
+
+    // ---- Comments: anyone may write one, only the owner may remove ----
+    match /advice_comments/{id} {
+      allow read: if true;
+      allow create: if request.resource.data.text is string
+                    && request.resource.data.text.size() >= 2
+                    && request.resource.data.text.size() <= 500
+                    && request.resource.data.author is string
+                    && request.resource.data.author.size() <= 80;
+      allow update, delete: if isOwner();
+    }
+
+    // ---- Everything else: closed ----
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
