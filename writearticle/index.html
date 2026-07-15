@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#050505">
+<title>Maqola yozish — ustozlar uchun | Flarestamina</title>
+<meta name="description" content="IELTS ustozlari uchun ochiq minbar: maqola yozing, o'quvchilarga tajribangizni ulashing, o'zingizni va o'quv markazingizni tanishtiring. 3 daqiqada — ro'yxatdan o'tish shart emas.">
+<link rel="canonical" href="https://flarestamina.com/writearticle/">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<meta name="robots" content="index, follow">
+<meta property="og:site_name" content="Flarestamina">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Maqola yozish — ustozlar uchun | Flarestamina">
+<meta property="og:description" content="IELTS bo'yicha maqolangizni yozing — flarestamina.com/news da chiqadi, minglab o'quvchi o'qiydi. O'zingizni va markazingizni tanishtiring.">
+<meta property="og:url" content="https://flarestamina.com/writearticle/">
+<meta property="og:image" content="https://flarestamina.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#050505;--surface:rgba(255,255,255,.04);--surface-2:rgba(255,255,255,.07);
+  --line:rgba(255,255,255,.12);--text:#ececec;--muted:#909090;--dim:#5a5a5a;
+  --flare:#FF5A1F;--flare-soft:#FF7A3D;--flare-dim:rgba(255,90,31,.12);
+  --ok:#4ade80;--mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+}
+html{background:var(--bg);color-scheme:dark}
+body{
+  font-family:var(--mono);background:var(--bg);color:var(--text);line-height:1.7;min-height:100svh;
+  background-image:radial-gradient(640px 400px at 75% -60px,rgba(255,90,31,.08),transparent 70%);
+  background-repeat:no-repeat;
+}
+.wrap{max-width:680px;margin:0 auto;padding:0 22px}
+header{position:sticky;top:0;z-index:10;background:rgba(5,5,5,.8);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+header .bar{display:flex;align-items:center;justify-content:space-between;height:56px;max-width:680px;margin:0 auto;padding:0 22px}
+a.brand{display:inline-flex;align-items:center;gap:8px;color:var(--text);text-decoration:none;font-weight:700;font-size:14px}
+a.brand .fl{color:var(--flare)}
+a.brand svg{width:16px;height:16px}
+header a.back{color:var(--muted);text-decoration:none;font-size:12.5px}
+header a.back:hover{color:var(--flare)}
+.hero{padding:44px 0 6px}
+.hero .kicker{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--flare-soft)}
+.hero h1{font-size:clamp(24px,5vw,32px);font-weight:700;letter-spacing:-.5px;line-height:1.3;margin-top:8px}
+.hero p{color:var(--muted);font-size:13.5px;margin-top:12px;max-width:56ch}
+.steps{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.steps span{font-size:11.5px;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:5px 12px;background:var(--surface)}
+.steps b{color:var(--flare-soft);font-weight:700}
+form{padding:30px 0 60px}
+.field{margin-bottom:22px}
+label{display:block;font-size:13px;font-weight:500;margin-bottom:8px}
+label .req{color:var(--flare)}
+label .hint{color:var(--dim);font-weight:400;font-size:11.5px}
+input,textarea{
+  width:100%;font-family:var(--mono);font-size:14px;color:var(--text);
+  background:var(--surface);border:1px solid var(--line);border-radius:12px;
+  padding:13px 15px;outline:none;transition:border-color .15s,background .15s;
+}
+input:focus,textarea:focus{border-color:rgba(255,90,31,.65);background:var(--surface-2)}
+textarea{min-height:320px;resize:vertical;line-height:1.75}
+.counter{font-size:11px;color:var(--dim);margin-top:6px;text-align:right}
+.counter.ok{color:var(--ok)}
+.hp{position:absolute;left:-9999px;opacity:0;height:0;overflow:hidden}
+button.submit{
+  font-family:var(--mono);font-size:15px;font-weight:700;color:#000;
+  background:var(--flare);border:none;border-radius:12px;
+  padding:15px 30px;cursor:pointer;width:100%;
+  transition:transform .12s,box-shadow .12s,opacity .12s;
+}
+button.submit:hover{transform:translateY(-1px);box-shadow:0 14px 34px -14px rgba(255,90,31,.6)}
+button.submit:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
+.note{font-size:11.5px;color:var(--dim);margin-top:14px;text-align:center}
+.err{display:none;margin:0 0 18px;border:1px solid rgba(255,107,114,.5);background:rgba(215,25,33,.12);color:#ff9ba0;font-size:13px;border-radius:12px;padding:12px 16px}
+.done{display:none;padding:60px 0 80px;text-align:center}
+.done .big{font-size:52px}
+.done h2{font-size:22px;margin-top:14px;letter-spacing:-.3px}
+.done p{color:var(--muted);font-size:13.5px;margin-top:10px}
+.done a.go{
+  display:inline-block;margin-top:26px;color:#000;background:var(--flare);
+  text-decoration:none;font-weight:700;font-size:14px;border-radius:12px;padding:14px 26px;
+}
+.done a.more{display:block;margin-top:16px;color:var(--muted);font-size:12.5px;text-decoration:none}
+.done a.more:hover{color:var(--flare-soft)}
+footer{border-top:1px solid var(--line);padding:24px 0 38px}
+footer .row{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:12px;color:var(--dim);max-width:680px;margin:0 auto;padding:0 22px}
+footer a{color:var(--muted);text-decoration:none}
+footer a:hover{color:var(--flare)}
+</style>
+</head>
+<body>
+<header>
+  <div class="bar">
+    <a class="brand" href="/">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#FF5A1F" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 9.5V1.5M14.5 12h7M12 14.5V19M9.5 12H4"/></svg>
+      <span><span class="fl">FLARE</span>STAMINA</span>
+    </a>
+    <a class="back" href="/news/">← news</a>
+  </div>
+</header>
+
+<section class="hero wrap" id="heroBlock">
+  <p class="kicker">Ustozlar uchun ochiq minbar</p>
+  <h1>Maqola yozing — minglab o'quvchi o'qisin</h1>
+  <p>IELTS bo'yicha tajribangizni ulashing. Maqolangiz <strong style="color:var(--text)">flarestamina.com/news</strong> sahifasida chiqadi — ismingiz, ijtimoiy tarmog'ingiz va o'quv markazingiz linki bilan. Ro'yxatdan o'tish shart emas.</p>
+  <div class="steps">
+    <span><b>1</b> yozasiz</span>
+    <span><b>2</b> "Yuklash"ni bosasiz</span>
+    <span><b>3</b> news'da chiqadi ✓</span>
+  </div>
+</section>
+
+<form class="wrap" id="artForm" autocomplete="off">
+  <div class="err" id="errBox"></div>
+
+  <div class="field">
+    <label for="fTitle">Maqola mavzusi <span class="req">*</span> <span class="hint">— sarlavha</span></label>
+    <input id="fTitle" maxlength="120" placeholder="Masalan: Writing Task 2 da eng ko'p uchraydigan 5 xato">
+  </div>
+
+  <div class="field">
+    <label for="fBody">Maqola matni <span class="req">*</span> <span class="hint">— kamida 200 belgi, xohlagancha uzun</span></label>
+    <textarea id="fBody" placeholder="Maqolangizni shu yerga yozing... Abzatslar uchun bo'sh qator qoldiring."></textarea>
+    <div class="counter" id="counter">0 / 200</div>
+  </div>
+
+  <div class="field">
+    <label for="fName">Ism-familiya <span class="req">*</span></label>
+    <input id="fName" maxlength="60" placeholder="Masalan: Nodir Karimov">
+  </div>
+
+  <div class="field">
+    <label for="fCenter">O'quv markazingiz <span class="hint">— ixtiyoriy</span></label>
+    <input id="fCenter" maxlength="80" placeholder="Masalan: Everest Education, Toshkent">
+  </div>
+
+  <div class="field">
+    <label for="fLink">Telegram / Instagram / YouTube yoki markaz sayti <span class="hint">— ixtiyoriy, o'zingizni tanishtiring</span></label>
+    <input id="fLink" maxlength="200" placeholder="https://t.me/username">
+  </div>
+
+  <div class="hp"><label>Leave empty<input id="fHp" tabindex="-1"></label></div>
+
+  <button class="submit" id="btnPub" type="submit">Yuklash → news'da chiqadi</button>
+  <p class="note">Yuklash bilan siz maqola o'zingizniki ekanini va ochiq chop etilishiga rozilikni tasdiqlaysiz. Matn avtomatik saqlanib boradi — sahifa yopilsa ham yo'qolmaydi.</p>
+</form>
+
+<section class="done wrap" id="doneBox">
+  <div class="big">🎉</div>
+  <h2>Maqolangiz chiqdi!</h2>
+  <p>Rahmat, ustoz! Maqolangiz endi news sahifasining <strong style="color:var(--text)">Articles</strong> bo'limida turibdi.</p>
+  <a class="go" href="/news/#articles">Maqolamni ko'rish →</a>
+  <a class="more" href="/writearticle/">+ yana maqola yozish</a>
+</section>
+
+<footer>
+  <div class="row">
+    <span>© 2026 <a href="/">Flarestamina</a></span>
+    <span><a href="https://t.me/flarestamina" rel="noopener">telegram</a> · <a href="/news/">news</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var FS='https://firestore.googleapis.com/v1/projects/pangeya-essay/databases/(default)/documents';
+  var KEY='AIzaSyBnmbg7CyLki-M1E4rxPevJ741yTykliDA';
+  var DRAFT='fs_article_draft';
+
+  var $=function(id){return document.getElementById(id)};
+  var form=$('artForm'),title=$('fTitle'),body=$('fBody'),name=$('fName'),
+      center=$('fCenter'),link=$('fLink'),hp=$('fHp'),btn=$('btnPub'),
+      err=$('errBox'),counter=$('counter');
+
+  // draft autosave
+  try{
+    var d=JSON.parse(localStorage.getItem(DRAFT)||'null');
+    if(d){title.value=d.t||'';body.value=d.b||'';name.value=d.n||'';center.value=d.c||'';link.value=d.l||'';}
+  }catch(e){}
+  function saveDraft(){
+    try{localStorage.setItem(DRAFT,JSON.stringify({t:title.value,b:body.value,n:name.value,c:center.value,l:link.value}));}catch(e){}
+  }
+  [title,body,name,center,link].forEach(function(el){el.addEventListener('input',saveDraft)});
+
+  function updCounter(){
+    var n=body.value.trim().length;
+    counter.textContent=n+' / 200';
+    counter.className='counter'+(n>=200?' ok':'');
+  }
+  body.addEventListener('input',updCounter);updCounter();
+
+  function fail(msg){err.textContent=msg;err.style.display='block';window.scrollTo({top:err.offsetTop-90,behavior:'smooth'})}
+
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    err.style.display='none';
+    if(hp.value){return}
+    var t=title.value.trim(),b=body.value.trim(),n=name.value.trim();
+    if(t.length<5){fail('Maqola mavzusini yozing (kamida 5 belgi).');return}
+    if(b.length<200){fail('Maqola matni juda qisqa — kamida 200 belgi yozing. Hozir: '+b.length);return}
+    if(n.length<3){fail('Ism-familiyangizni yozing.');return}
+    var l=link.value.trim();
+    if(l && !/^https?:\/\//i.test(l)){l='https://'+l}
+
+    btn.disabled=true;btn.textContent='Yuklanmoqda...';
+    var doc={fields:{
+      title:{stringValue:t},
+      body:{stringValue:b},
+      author:{stringValue:n},
+      center:{stringValue:center.value.trim()},
+      link:{stringValue:l},
+      date:{stringValue:new Date().toISOString()},
+      type:{stringValue:'article'},
+      ua:{stringValue:(navigator.userAgent||'').slice(0,120)}
+    }};
+    fetch(FS+'/articles?key='+KEY,{
+      method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(doc)
+    }).then(function(r){
+      if(!r.ok)throw new Error('HTTP '+r.status);
+      return r.json();
+    }).then(function(){
+      try{localStorage.removeItem(DRAFT)}catch(e){}
+      form.style.display='none';
+      $('heroBlock').style.display='none';
+      $('doneBox').style.display='block';
+      window.scrollTo(0,0);
+      if(window.goatcounter&&goatcounter.count)goatcounter.count({path:'event/article-published',event:true});
+    }).catch(function(){
+      btn.disabled=false;btn.textContent="Yuklash → news'da chiqadi";
+      fail("Xatolik yuz berdi — internetni tekshirib qayta urinib ko'ring. Matningiz saqlangan, yo'qolmaydi.");
+    });
+  });
+})();
+</script>
+<script data-goatcounter="https://flarestamina.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

@@ -89,9 +89,16 @@
 <section class="hero wrap">
   <p class="kicker">Sourced · Dated · No fluff</p>
   <h1>IELTS news <span class="fl">&amp;</span> deadlines</h1>
-  <p class="sub">Exam updates, fees and scholarship deadlines that matter for students in Uzbekistan. Every post cites its official source. New posts land on <a href="https://t.me/flarestamina" rel="noopener">t.me/flarestamina</a> first · <a href="/news/feed.xml">rss ↗</a></p>
+  <p class="sub">Exam updates, deadlines, teacher articles and community advice — for students in Uzbekistan. Every news post cites its official source. New posts land on <a href="https://t.me/flarestamina" rel="noopener">t.me/flarestamina</a> first · <a href="/news/feed.xml">rss ↗</a></p>
 </section>
 
+<div class="modes wrap" role="tablist" aria-label="Section">
+  <button class="active" data-m="news">news</button>
+  <button data-m="articles">articles</button>
+  <button data-m="ideas">ideas &amp; advice</button>
+</div>
+
+<section id="mode-news">
 <div class="filters wrap" role="tablist" aria-label="Filter by category">
   <button class="active" data-f="all">all</button>
   <button data-f="deadline">deadlines</button>
@@ -199,6 +206,37 @@
   </div>
   <p class="note">We only publish from official programme pages and verified national outlets — and every article links its source. If a date here and a date on the official page ever disagree, trust the official page and tell us on Telegram.</p>
 </section>
+</section><!-- /mode-news -->
+
+<section id="mode-articles" hidden>
+  <div class="wrap">
+    <a class="write-cta" href="/writearticle/">
+      <div>
+        <div class="t">Ustozmisiz? Maqola yozing — shu yerda chiqadi 📝</div>
+        <div class="s">Ism-familiyangiz, ijtimoiy tarmog'ingiz va o'quv markazingiz linki bilan. 3 daqiqa, ro'yxatdan o'tish shart emas.</div>
+      </div>
+      <span class="btn">Write an article</span>
+    </a>
+    <div id="articles-list"></div>
+  </div>
+</section>
+
+<section id="mode-ideas" hidden>
+  <div class="wrap">
+    <div class="composer" id="composer-in" hidden>
+      <div class="who">posting as <b id="composer-who"></b></div>
+      <textarea id="composer-text" maxlength="2000" placeholder="Share an idea, advice or your IELTS experience… (min 10 characters)"></textarea>
+      <div class="row">
+        <span class="hint">Be helpful. No spam — posts are public.</span>
+        <button id="composer-send">post</button>
+      </div>
+    </div>
+    <div class="composer" id="composer-signin">
+      <p class="c-signin"><a href="https://flarestamina.com/account/?return=https%3A%2F%2Fflarestamina.com%2Fnews%2F%23ideas">Sign in with FS Account</a> to post your idea or advice — takes 30 seconds, one account for all Flarestamina tools.</p>
+    </div>
+    <div id="advice-list"></div>
+  </div>
+</section>
 
 <footer class="site">
   <div class="row">
@@ -227,6 +265,8 @@
   });
 })();
 </script>
+<script src="/assets/fs-auth.js"></script>
+<script src="/news/community.js" defer></script>
 <script data-goatcounter="https://flarestamina.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
