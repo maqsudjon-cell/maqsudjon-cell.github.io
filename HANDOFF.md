@@ -11,7 +11,15 @@ _Last updated: 2026-07-15 — /founder + /news (News & Deadlines) shipped by Cla
 - **`/news/feed.xml`** — RSS 2.0, linked from index `<link rel="alternate">`.
 - **IMPORTANT (auth gate):** founder/news deliberately do NOT load `fs-auth.js` — they must stay public or Google can't index them (see CRITICAL SEO fix below).
 - Homepage links added: top nav "News", footer "News & Deadlines", footer founder credit → `/founder/`.
-- OWNER TODO after deploy: Search Console → URL Inspection → request indexing for `/news/` and `/founder/` (sitemap picks the rest up).
+- Search Console: indexing requested 2026-07-15 for `/news/`, `/founder/`, `/writearticle/` (done via Chrome). News articles get discovered via sitemap.
+
+## Community layer (shipped 2026-07-15, wave 2)
+
+- **Backend:** Firestore REST on project **`pangeya-essay`** (public web key `AIzaSyBnmbg7...` — same open-rules model as the essay lab; ieltshub-e2aa8 rules DENY anon writes, that's why pangeya-essay). Collections: `articles`, `advice`, `advice_comments`. ⚠️ Rules are wide open (create/read/delete) — fine for launch, tighten later + add a moderation flag.
+- **`/writearticle/`** — teacher-friendly Uzbek form (draft autosave in localStorage, honeypot, min 200 chars) → creates `articles` doc → appears in /news → Articles tab. Share this link directly with teachers.
+- **`/news/` tabs** (`news/community.js`): `news | articles | ideas & advice` (hash-routed: /news/#articles, /news/#ideas). Articles = Firestore + `news/articles-seed.json` (2 editorial seeds, repo-versioned) with overlay reader. Ideas = FS Account composer (fs-auth.js loaded WITHOUT require() — page stays public/indexable), likes (field-transform increment + localStorage one-like guard), comments, Telegram share. Welcome post seeded in `advice`.
+- **Hub card** added to `ielts-hub/tests.json` ("News, Deadlines & Community", category Tools) via GitHub API.
+- GoatCounter events: article-published, article-read, advice-post, advice-like, advice-comment.
 
 ## Brand
 
