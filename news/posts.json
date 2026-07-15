@@ -2,6 +2,38 @@
   "note": "Machine-readable index of /news/ posts. The sitemap workflow reads this file — add every new post here. Newest first.",
   "posts": [
     {
+      "slug": "ielts-dtm-maksimal-ball-2026",
+      "title": "IELTS 5.5+ gives you the maximum foreign-language score at DTM — the 2026 rules",
+      "date": "2026-07-15",
+      "category": "exam-update",
+      "summary": "A valid B2 certificate (IELTS 5.5+) replaces the foreign-language exam with the maximum score: 93.0 as first subject, 63.0 as second. New for 2026: B1 gives 75%.",
+      "source": "https://infoedu.uz/maksimal-ball-beruvchi-chet-tili-sertifikatlari-2026-yil-yangi-qoidalar-va-afzalliklar"
+    },
+    {
+      "slug": "gks-2027",
+      "title": "GKS 2027: Korea's fully funded scholarship opens in September — embassy track first",
+      "date": "2026-07-15",
+      "category": "deadline",
+      "summary": "Embassy track ~September 2026, university track ~October. Full tuition, monthly stipend, flights, 1 year of Korean.",
+      "source": "https://www.studyinkorea.go.kr/en/main.do"
+    },
+    {
+      "slug": "turkiye-burslari-2027",
+      "title": "Türkiye Bursları 2027 expected in January — one window, don't miss it",
+      "date": "2026-07-15",
+      "category": "deadline",
+      "summary": "One application period per year for all levels; the 2026 window was 10 Jan – 20 Feb. Full package including university placement.",
+      "source": "https://www.turkiyeburslari.gov.tr/calendar"
+    },
+    {
+      "slug": "erasmus-mundus-2027",
+      "title": "Erasmus Mundus 2027: fully funded master's across Europe — deadlines start this autumn",
+      "date": "2026-07-15",
+      "category": "deadline",
+      "summary": "Programmes open October–December 2026, deadlines mostly November–February. Study in 2–3 European countries, funded by the EU.",
+      "source": "https://erasmus-plus.ec.europa.eu/opportunities/opportunities-for-individuals/students/erasmus-mundus-joint-masters"
+    },
+    {
       "slug": "chevening-2027",
       "title": "Chevening 2027/28 opens in August — deadline is 6 October 2026",
       "date": "2026-07-15",
