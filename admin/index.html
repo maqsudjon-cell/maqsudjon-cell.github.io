@@ -60,6 +60,9 @@ header.top .bar{display:flex;align-items:center;justify-content:space-between;he
 .brand svg{width:16px;height:16px}
 .htools{display:flex;align-items:center;gap:8px}
 .theme-btn,.logout{font-family:var(--mono);font-size:12px;color:var(--muted);background:transparent;border:1px solid var(--line);border-radius:9px;padding:7px 12px;cursor:pointer}
+.who{font-size:11.5px;color:var(--ok)}
+#gsign.ok{display:none}
+.warn{border:1px solid rgba(255,107,114,.5);background:var(--red-dim);color:var(--red);border-radius:var(--r);padding:12px 16px;font-size:12.5px;margin:14px 0}
 .theme-btn{width:34px;height:32px;padding:0;font-size:14px}
 .theme-btn:hover,.logout:hover{color:var(--flare);border-color:var(--flare)}
 
@@ -153,6 +156,8 @@ html[data-theme="light"] .copybox button{color:#fff}
         <span><span class="fl">FLARE</span>STAMINA · admin</span>
       </a>
       <div class="htools">
+        <span class="who" id="who"></span>
+        <button class="logout" id="gsign">Sign in with Google</button>
         <button class="theme-btn" onclick="fsTheme()" aria-label="Theme" title="Light / dark">◐</button>
         <button class="logout" id="logout">Lock</button>
       </div>
@@ -205,6 +210,38 @@ html[data-theme="light"] .copybox button{color:#fff}
   </div>
 </div>
 
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script>
+/* Google sign-in for owner-only writes (Firestore rules check the email). */
+(function(){
+  var OWNER='polatovmaqsudjon1@gmail.com';
+  try{
+    firebase.initializeApp({apiKey:'AIzaSyBnmbg7CyLki-M1E4rxPevJ741yTykliDA',
+      authDomain:'pangeya-essay.firebaseapp.com', projectId:'pangeya-essay'});
+  }catch(e){}
+  var cur=null;
+  window.fsIdToken=function(){ return cur? cur.getIdToken() : null; };
+  function paint(u){
+    cur=u;
+    var who=document.getElementById('who'), btn=document.getElementById('gsign');
+    if(!who||!btn) return;
+    if(u){
+      var ok=(u.email||'').toLowerCase()===OWNER;
+      who.textContent=(ok?'✓ ':'⚠ ')+u.email;
+      who.style.color=ok?'':'#ff6b72';
+      btn.classList.add('ok');
+    } else { who.textContent=''; btn.classList.remove('ok'); }
+  }
+  firebase.auth().onAuthStateChanged(paint);
+  document.addEventListener('click',function(e){
+    if(e.target && e.target.id==='gsign'){
+      firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())
+        .catch(function(err){ alert('Google sign-in failed: '+(err&&err.message)); });
+    }
+  });
+})();
+</script>
 <script>
 (function(){
   'use strict';
@@ -247,13 +284,29 @@ html[data-theme="light"] .copybox button{color:#fff}
       body:JSON.stringify({structuredQuery:{from:[{collectionId:coll}],where:{fieldFilter:{field:{fieldPath:field},op:'EQUAL',value:{stringValue:val}}},limit:100}})})
       .then(function(r){return r.json()}).then(function(rows){return (rows||[]).filter(function(r){return r.document}).map(function(r){return r.document})});
   }
+  /* Writes are owner-only in the Firestore rules, so PATCH/DELETE must carry the
+     Google idToken. Reads stay public. */
+  function authHeaders(extra){
+    var h=extra||{};
+    return (window.fsIdToken? Promise.resolve(window.fsIdToken()) : Promise.resolve(null))
+      .then(function(t){ if(t) h['Authorization']='Bearer '+t; return h; });
+  }
+  function needSignIn(){
+    alert('Sign in with Google first (top right) — editing and deleting is restricted to the owner.');
+    throw new Error('not signed in');
+  }
   function patchDoc(coll,docId,fields){
     var mask=Object.keys(fields).map(function(k){return 'updateMask.fieldPaths='+encodeURIComponent(k)}).join('&');
-    return fetch(FS+'/'+coll+'/'+docId+'?'+mask+'&key='+KEY,{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({fields:fields})})
-      .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()});
+    return authHeaders({'Content-Type':'application/json'}).then(function(h){
+      if(!h['Authorization']) needSignIn();
+      return fetch(FS+'/'+coll+'/'+docId+'?'+mask+'&key='+KEY,{method:'PATCH',headers:h,body:JSON.stringify({fields:fields})});
+    }).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()});
   }
   function deleteDoc(coll,docId){
-    return fetch(FS+'/'+coll+'/'+docId+'?key='+KEY,{method:'DELETE'}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status)});
+    return authHeaders({}).then(function(h){
+      if(!h['Authorization']) needSignIn();
+      return fetch(FS+'/'+coll+'/'+docId+'?key='+KEY,{method:'DELETE',headers:h});
+    }).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status)});
   }
 
   /* ===== overview links ===== */
