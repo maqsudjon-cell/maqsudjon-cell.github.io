@@ -18,6 +18,11 @@
   --red-dim:rgba(215,25,33,.14);
   --amber:#FFC46B;
   --amber-dim:rgba(255,164,92,.12);
+  --prose:#d2d2d2;
+  --blue:#7cc0ff;
+  --blue-2:#9dceff;
+  --blue-dim:rgba(94,178,255,.14);
+  --hair:rgba(255,255,255,.05);
   --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
   --r:16px;
 }
@@ -39,6 +44,11 @@ html[data-theme="light"]{
   --red-dim:rgba(194,50,31,.1);
   --amber:#B45309;
   --amber-dim:rgba(180,83,9,.1);
+  --prose:#2f3d37;
+  --blue:#1565a8;
+  --blue-2:#0f4f85;
+  --blue-dim:rgba(21,101,168,.1);
+  --hair:rgba(15,42,33,.07);
   color-scheme:light;
 }
 html{background:var(--bg);color-scheme:dark;scroll-behavior:smooth}
@@ -107,7 +117,7 @@ header.site nav a:hover,header.site nav a[aria-current]{color:var(--flare)}
   transition:color .15s,border-color .15s,background .15s;
 }
 .filters button:hover{color:var(--text);border-color:var(--line-2)}
-.filters button.active{color:#fff;background:var(--flare-dim);border-color:rgba(255,90,31,.6)}
+.filters button.active{color:var(--flare);background:var(--flare-dim);border-color:rgba(255,90,31,.6)}
 .filters .count{color:var(--dim);font-size:11px;margin-left:auto}
 
 /* ============ featured card ============ */
@@ -208,9 +218,9 @@ article.post h1{font-size:clamp(23px,4.6vw,32px);font-weight:700;letter-spacing:
 .post-meta{display:flex;align-items:center;gap:12px;margin-top:16px;font-size:12px;color:var(--muted);flex-wrap:wrap}
 .post-meta a{color:var(--muted)}
 .body{margin-top:32px;font-size:14.5px}
-.body p{margin:0 0 18px;color:#d2d2d2}
+.body p{margin:0 0 18px;color:var(--prose)}
 .body h2{font-size:17px;margin:30px 0 12px;letter-spacing:-.2px}
-.body ul,.body ol{margin:0 0 18px 20px;color:#d2d2d2}
+.body ul,.body ol{margin:0 0 18px 20px;color:var(--prose)}
 .body li{margin-bottom:8px}
 .body a{color:var(--flare-soft);text-decoration:none}
 .body a:hover{text-decoration:underline}
@@ -262,7 +272,7 @@ footer.site a:hover{color:var(--flare)}
 }
 .modes button:hover{color:var(--text);border-color:var(--line-2)}
 .modes button.active{color:#000;background:var(--flare);border-color:var(--flare)}
-.chip.article{background:rgba(94,178,255,.14);color:#7cc0ff}
+.chip.article{background:var(--blue-dim);color:var(--blue)}
 
 /* write CTA strip */
 .write-cta{
@@ -284,7 +294,7 @@ footer.site a:hover{color:var(--flare)}
 .a-card:hover{border-color:rgba(124,192,255,.55);background:var(--surface-2);transform:translateY(-2px)}
 .a-card .meta{display:flex;align-items:center;gap:10px;font-size:11px;color:var(--muted)}
 .a-card h2{font-size:15.5px;font-weight:500;margin-top:10px;line-height:1.5}
-.a-card:hover h2{color:#9dceff}
+.a-card:hover h2{color:var(--blue-2)}
 .a-card p.sum{color:var(--muted);font-size:12.5px;margin-top:8px;flex:1}
 .a-author{display:flex;align-items:center;gap:10px;margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);font-size:12px}
 .a-author b{color:var(--text);font-weight:500;display:block;line-height:1.3}
@@ -294,7 +304,7 @@ footer.site a:hover{color:var(--flare)}
   flex-shrink:0;width:30px;height:30px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;
   background:linear-gradient(140deg,var(--flare),#b33705);color:#fff;font-size:13px;font-weight:700;
 }
-.a-read-btn{margin-top:12px;color:#7cc0ff;font-size:12px;font-weight:500}
+.a-read-btn{margin-top:12px;color:var(--blue);font-size:12px;font-weight:500}
 .c-loading{color:var(--dim);font-size:13px;padding:26px 4px}
 .c-loading a{color:var(--flare-soft)}
 .lang-badge{font-size:9.5px;font-weight:700;letter-spacing:.6px;color:var(--muted);border:1px solid var(--line);border-radius:5px;padding:1.5px 6px}
@@ -302,6 +312,13 @@ footer.site a:hover{color:var(--flare)}
 .a-lang button{font-family:var(--mono);font-size:12px;color:var(--muted);background:transparent;border:none;border-radius:7px;padding:6px 14px;cursor:pointer}
 .a-lang button.on{color:#000;background:var(--flare)}
 html[data-theme="light"] .a-lang button.on{color:#fff}
+/* on light theme --flare is a darker orange: flip on-flare text to white */
+html[data-theme="light"] .featured .star,
+html[data-theme="light"] .tg-banner .btn,
+html[data-theme="light"] .modes button.active,
+html[data-theme="light"] .write-cta .btn,
+html[data-theme="light"] .composer button,
+html[data-theme="light"] .c-compose button{color:#fff}
 
 /* article overlay reader */
 .a-overlay{
@@ -317,7 +334,7 @@ html[data-theme="light"] .a-lang button.on{color:#fff}
 .a-modal h1{font-size:clamp(20px,3.6vw,27px);font-weight:700;letter-spacing:-.4px;line-height:1.35;margin-top:12px}
 .a-modal .a-author.big{border:none;padding:14px 0 0;margin-top:6px}
 .a-modal .a-body{margin-top:18px;font-size:14px}
-.a-modal .a-body p{margin:0 0 16px;color:#d2d2d2}
+.a-modal .a-body p{margin:0 0 16px;color:var(--prose)}
 .a-modal .a-foot{font-size:12px;color:var(--dim);margin-top:8px}
 .a-modal .a-foot a{color:var(--flare-soft);text-decoration:none;word-break:break-all}
 .a-modal .a-share{margin-top:18px;padding-top:16px;border-top:1px dashed var(--line)}
@@ -354,7 +371,7 @@ html[data-theme="light"] .a-lang button.on{color:#fff}
 .adv-head b{color:var(--text);font-weight:500}
 .adv-head time{color:var(--dim);font-size:11px;margin-left:auto}
 .adv-text{margin-top:10px;font-size:13.5px}
-.adv-text p{margin:0 0 10px;color:#d2d2d2}
+.adv-text p{margin:0 0 10px;color:var(--prose)}
 .adv-text p:last-child{margin-bottom:0}
 .adv-actions{display:flex;align-items:center;gap:14px;margin-top:12px;padding-top:12px;border-top:1px dashed var(--line)}
 .adv-actions button,.adv-actions a{
@@ -364,9 +381,9 @@ html[data-theme="light"] .a-lang button.on{color:#fff}
 .adv-actions button:hover,.adv-actions a:hover{color:var(--flare-soft)}
 .adv-actions .like.on{color:var(--red)}
 .adv-comments{margin-top:12px;border-top:1px dashed var(--line);padding-top:6px}
-.cmt{font-size:12.5px;padding:8px 2px;border-bottom:1px dashed rgba(255,255,255,.05)}
+.cmt{font-size:12.5px;padding:8px 2px;border-bottom:1px dashed var(--hair)}
 .cmt b{color:var(--flare-soft);font-weight:500}
-.cmt span{color:#c9c9c9}
+.cmt span{color:var(--prose)}
 .cmt time{color:var(--dim);font-size:10.5px;margin-left:8px}
 .c-compose{display:flex;gap:8px;margin-top:12px}
 .c-compose input{
