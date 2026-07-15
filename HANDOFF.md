@@ -21,6 +21,15 @@ _Last updated: 2026-07-15 — /founder + /news (News & Deadlines) shipped by Cla
 - **Hub card** added to `ielts-hub/tests.json` ("News, Deadlines & Community", category Tools) via GitHub API.
 - GoatCounter events: article-published, article-read, advice-post, advice-like, advice-comment.
 
+## Admin panel + bilingual + theme (shipped 2026-07-15, wave 3)
+
+- **`/admin/`** — passcode-gated control panel (noindex + robots Disallow). Passcode SHA-256 stored as `PASS_HASH` in the page (plaintext = `Flare$Maqsud-2026!admin`; change by replacing the hash with `printf '%s' 'NEW' | shasum -a 256`). sessionStorage unlock. Tabs: Overview (site page links + mgmt tools: Search Console, GoatCounter, both Firebase consoles, GitHub repos, sitemap/robots/RSS), Articles (list/hide/show/edit-incl-UZ/delete Firestore `articles`), Ideas & Advice (list/hide/show/delete `advice` + delete `advice_comments`), Promote (ready TG/Twitter copy), Settings (security notes). Uses Firestore REST PATCH (updateMask) + DELETE on project pangeya-essay.
+- **Hidden flag:** admin sets `hidden:true`; community.js filters hidden articles/advice from public /news. `fv()` now decodes booleanValue.
+- **Bilingual articles:** Firestore articles may carry `title_uz`/`body_uz`/`lang`. community.js reader shows an EN/Oʻzbekcha toggle when both exist; card shows EN + "EN·UZ" badge. The 2 editorial articles now live in Firestore (owner:true), bilingual — the old "my students" framing was corrected. articles-seed.json is now empty (fallback only).
+- **`/writearticle`:** full UZ/EN interface toggle (localStorage `fs_lang`) for foreign teachers + an article-language selector (writes `lang`).
+- **Theme:** all `/news/*` pages + `/writearticle` + `/admin` now use the hub palette (warm-black `#0A0605` dark / `#F6F8F7` light) and a ◐ toggle that shares the hub's `p8-theme` localStorage key, so theme carries across the whole site.
+- ⚠️ Firestore rules still open (create/read/update/delete) — hardening (restrict update/delete to owner) is the recommended next step; noted in /admin Settings tab.
+
 ## Brand
 
 | Token | Value |
