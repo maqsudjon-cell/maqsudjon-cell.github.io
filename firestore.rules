@@ -4,16 +4,23 @@ rules_version = '2';
 // Paste into: Firebase console -> Firestore Database -> Rules -> Publish
 //   https://console.firebase.google.com/project/pangeya-essay/firestore/rules
 //
-// Why: before these rules, anyone holding the public web API key (it ships in
-// the page JS, by design) could UPDATE or DELETE any article, idea or comment.
-// Proven on 2026-07-15: anonymous PATCH -> 200, anonymous DELETE -> 200.
-//
+// WHY THESE EXIST
+// Before this, anyone holding the public web API key (it ships in the page JS,
+// by design) could UPDATE or DELETE any article, idea or comment.
+// Proven 2026-07-15: anonymous PATCH -> 200, anonymous DELETE -> 200, and an
+// invalid article (title "ab", no body) was accepted.
 // After: anyone can still publish (that is the product — no sign-up to write),
-// but only the owner can edit or delete. The owner proves it with a Google
-// idToken, which /admin now sends on every write.
+// but only the owner can edit or delete.
 //
-// Collections in this project: essays (Writing Lab), articles, advice,
-// advice_comments (the /news community layer).
+// EVERY COLLECTION IN THIS PROJECT IS LISTED BELOW — audited 2026-07-15 by
+// grepping every app that points at project `pangeya-essay`:
+//   Writing Lab (pangeya-essay-platform-): essays, giftMessages
+//     ...older archived builds also touch: vocab, comments
+//   Speaking Lab (pangea8-speaking):       speakingQuestions, speakingAnswers
+//   News community (this repo):            articles, advice, advice_comments
+// The three community collections get locked down; every pre-existing app
+// collection keeps exactly the access it has today, so the Writing Lab and
+// Speaking Lab keep working untouched.
 
 service cloud.firestore {
   match /databases/{database}/documents {
@@ -24,12 +31,20 @@ service cloud.firestore {
              && request.auth.token.email == 'polatovmaqsudjon1@gmail.com';
     }
 
-    // ---- Writing Lab: unchanged, public by product design ----
-    match /essays/{id} {
-      allow read, write: if true;
-    }
+    // ================= existing apps — UNCHANGED (public by product design) =====
+    // Writing Lab
+    match /essays/{id}       { allow read, write: if true; }
+    match /giftMessages/{id} { allow read, write: if true; }
+    // Speaking Lab
+    match /speakingQuestions/{id} { allow read, write: if true; }
+    match /speakingAnswers/{id}   { allow read, write: if true; }
+    // legacy collections still referenced by older Writing Lab builds
+    match /vocab/{id}    { allow read, write: if true; }
+    match /comments/{id} { allow read, write: if true; }
 
-    // ---- Teacher articles: anyone may publish, only the owner may edit/delete ----
+    // ================= news community — LOCKED DOWN ============================
+
+    // Teacher articles: anyone may publish, only the owner may edit/delete.
     match /articles/{id} {
       allow read: if true;
       allow create: if request.resource.data.title is string
@@ -46,7 +61,7 @@ service cloud.firestore {
       allow update, delete: if isOwner();
     }
 
-    // ---- Ideas & advice: anyone may post; the public may only bump `likes` ----
+    // Ideas & advice: anyone may post; the public may only bump `likes`.
     match /advice/{id} {
       allow read: if true;
       allow create: if request.resource.data.text is string
@@ -62,7 +77,7 @@ service cloud.firestore {
       allow delete: if isOwner();
     }
 
-    // ---- Comments: anyone may write one, only the owner may remove ----
+    // Comments: anyone may write one, only the owner may remove.
     match /advice_comments/{id} {
       allow read: if true;
       allow create: if request.resource.data.text is string
@@ -73,7 +88,7 @@ service cloud.firestore {
       allow update, delete: if isOwner();
     }
 
-    // ---- Everything else: closed ----
+    // ================= anything new: closed by default =========================
     match /{document=**} {
       allow read, write: if false;
     }
