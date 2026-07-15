@@ -1,0 +1,45 @@
+{
+  "note": "Machine-readable index of /news/ posts. The sitemap workflow reads this file — add every new post here. Newest first.",
+  "posts": [
+    {
+      "slug": "chevening-2027",
+      "title": "Chevening 2027/28 opens in August — deadline is 6 October 2026",
+      "date": "2026-07-15",
+      "category": "deadline",
+      "summary": "The UK's fully funded master's scholarship returns. Uzbekistan is eligible. Timeline and preparation checklist.",
+      "source": "https://www.chevening.org/scholarships/application-timeline/"
+    },
+    {
+      "slug": "ielts-one-skill-retake-uzbekistan",
+      "title": "IELTS One Skill Retake is live in Uzbekistan — retake one skill, keep the rest",
+      "date": "2026-07-15",
+      "category": "exam-update",
+      "summary": "Retake only Listening, Reading, Writing or Speaking within 60 days — without redoing the whole exam.",
+      "source": "https://ielts.idp.com/uzbekistan/about/ielts-one-skill-retake"
+    },
+    {
+      "slug": "stipendium-hungaricum-2027",
+      "title": "Stipendium Hungaricum 2027/28 opens around November — prepare now",
+      "date": "2026-07-15",
+      "category": "deadline",
+      "summary": "Hungary's fully funded scholarship opens mid-November and closes mid-January, every year. Uzbekistan is eligible.",
+      "source": "https://stipendiumhungaricum.hu/apply/"
+    },
+    {
+      "slug": "el-yurt-umidi-2026",
+      "title": "El-Yurt Umidi 2026: 500 quotas in the first call — how to be ready for the next one",
+      "date": "2026-07-15",
+      "category": "deadline",
+      "summary": "The first 2026 open call closed in April with 500 quotas. What to prepare before the next call.",
+      "source": "https://eyuf.uz/site/view?id=1327"
+    },
+    {
+      "slug": "ielts-fee-uzbekistan-2026",
+      "title": "How much does IELTS cost in Uzbekistan in 2026?",
+      "date": "2026-07-15",
+      "category": "fees",
+      "summary": "Current test fees at IDP and the British Council, what the price includes, how to pay.",
+      "source": "https://ielts.idp.com/uzbekistan/news-ielts-test-fee"
+    }
+  ]
+}

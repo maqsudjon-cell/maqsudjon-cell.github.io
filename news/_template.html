@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<!--
+  NEW POST CHECKLIST (copy this file to /news/<slug>/index.html):
+  1. Replace every SLUG, TITLE, DESCRIPTION, DATE (YYYY-MM-DD), CATEGORY below.
+     CATEGORY chip classes: "chip deadline" | "chip" (exam update) | "chip fees"
+  2. Write the body: facts box → paragraphs → 🇺🇿 Qisqacha → source link → CTA.
+  3. Add the post to /news/posts.json (top of the list) — the sitemap picks it up from there.
+  4. Add a .post-card to /news/index.html (top of the list).
+  5. Add an <item> to /news/feed.xml (top).
+  6. git add + commit + push. Then share on t.me/flarestamina.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#000000">
+<title>TITLE | Flarestamina News</title>
+<meta name="description" content="DESCRIPTION (max ~155 chars, include the key date/number).">
+<link rel="canonical" href="https://flarestamina.com/news/SLUG/">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="alternate" type="application/rss+xml" title="Flarestamina IELTS News" href="/news/feed.xml">
+<meta name="author" content="Maqsudjon Polatov">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta property="og:site_name" content="Flarestamina">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TITLE">
+<meta property="og:description" content="DESCRIPTION">
+<meta property="og:url" content="https://flarestamina.com/news/SLUG/">
+<meta property="og:image" content="https://flarestamina.com/og-image.png">
+<meta property="article:published_time" content="DATE">
+<meta property="article:author" content="Maqsudjon Polatov">
+<meta property="article:section" content="CATEGORY">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="TITLE">
+<meta name="twitter:image" content="https://flarestamina.com/og-image.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "NewsArticle",
+      "@id": "https://flarestamina.com/news/SLUG/#article",
+      "headline": "TITLE",
+      "description": "DESCRIPTION",
+      "datePublished": "DATE",
+      "dateModified": "DATE",
+      "inLanguage": "en",
+      "mainEntityOfPage": "https://flarestamina.com/news/SLUG/",
+      "image": "https://flarestamina.com/og-image.png",
+      "author": { "@type": "Person", "@id": "https://flarestamina.com/founder/#person", "name": "Maqsudjon Polatov", "url": "https://flarestamina.com/founder/" },
+      "publisher": { "@id": "https://flarestamina.com/#org" },
+      "isBasedOn": "SOURCE_URL",
+      "citation": "SOURCE_URL"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Flarestamina", "item": "https://flarestamina.com/" },
+        { "@type": "ListItem", "position": 2, "name": "News", "item": "https://flarestamina.com/news/" },
+        { "@type": "ListItem", "position": 3, "name": "SHORT TITLE", "item": "https://flarestamina.com/news/SLUG/" }
+      ]
+    }
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/news/news.css">
+</head>
+<body>
+<header class="site">
+  <div class="wrap bar">
+    <a class="brand" href="/">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#FF5A1F" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 9.5V1.5M14.5 12h7M12 14.5V19M9.5 12H4"/></svg>
+      <span><span class="fl">FLARE</span>STAMINA</span>
+    </a>
+    <nav aria-label="Site">
+      <a href="/ielts-hub/">practice</a>
+      <a href="/news/" aria-current="page">news</a>
+      <a href="/founder/">founder</a>
+    </nav>
+  </div>
+</header>
+
+<article class="post wrap">
+  <p class="crumbs"><a href="/news/">← news</a></p>
+  <h1>TITLE</h1>
+  <div class="post-meta">
+    <span class="chip deadline">CATEGORY</span>
+    <time datetime="DATE">DATE HUMAN</time>
+    <span>· by <a href="/founder/">Maqsudjon Polatov</a></span>
+  </div>
+
+  <div class="body">
+    <div class="facts">
+      <h2>Key facts</h2>
+      <ul>
+        <li>FACT with a <strong>date or number</strong></li>
+        <li>FACT</li>
+      </ul>
+    </div>
+
+    <p>Opening paragraph — the news itself, one date + one number in bold.</p>
+
+    <h2>Section heading</h2>
+    <p>Details, action steps.</p>
+
+    <div class="uz" lang="uz">
+      <h2>🇺🇿 Qisqacha</h2>
+      <p>Uzbek summary — 2-4 sentences, key dates in bold.</p>
+    </div>
+
+    <p class="source">Source / Manba: <a href="SOURCE_URL" rel="noopener nofollow">SOURCE NAME</a></p>
+
+    <a class="cta" href="/ielts-hub/">
+      <div class="t">CTA line <span class="fl">→</span></div>
+      <div class="s">100+ free IELTS mock tests with instant band scores</div>
+    </a>
+
+    <p class="more"><a href="/news/">← All IELTS news &amp; deadlines</a></p>
+  </div>
+</article>
+
+<footer class="site">
+  <div class="wrap row">
+    <span>© 2026 <a href="/">Flarestamina</a> · built by <a href="/founder/">Maqsudjon Polatov</a></span>
+    <span><a href="https://t.me/flarestamina" rel="noopener">telegram</a> · <a href="/news/feed.xml">rss</a></span>
+  </div>
+</footer>
+<script data-goatcounter="https://flarestamina.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

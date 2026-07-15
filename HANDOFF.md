@@ -1,6 +1,17 @@
 # HANDOFF — FLARESTAMINA (formerly pangea8)
 
-_Last updated: 2026-07-10 — full rebrand + FS Account rollout executed by Claude Code._
+_Last updated: 2026-07-15 — /founder + /news (News & Deadlines) shipped by Claude Code._
+
+## /founder + /news (shipped 2026-07-15)
+
+- **`/founder/`** — t3.gg-style minimal profile of Maqsudjon Polatov (JetBrains Mono, black, flare orange). Person + ProfilePage JSON-LD; the Person `@id` `https://flarestamina.com/founder/#person` is referenced as `author` by every news article (E-E-A-T link).
+- **`/news/`** — "IELTS News & Deadlines": static index + one static dir per post (`/news/<slug>/index.html`). Shared CSS `/news/news.css`. Every post has: NewsArticle JSON-LD (+ FAQPage where useful), key-facts box, 🇺🇿 Qisqacha Uzbek summary (bilingual SEO), small "Source / Manba" attribution link (`rel="noopener nofollow"`), CTA into the hub, GoatCounter.
+- **Adding a post:** copy `/news/_template.html` → follow the checklist comment at the top (template → posts.json → index card → feed.xml → push).
+- **`/news/posts.json`** — machine-readable post index; **the sitemap workflow reads it** (`.github/workflows/sitemap.yml` now merges tests.json URLs + news posts + /founder/).
+- **`/news/feed.xml`** — RSS 2.0, linked from index `<link rel="alternate">`.
+- **IMPORTANT (auth gate):** founder/news deliberately do NOT load `fs-auth.js` — they must stay public or Google can't index them (see CRITICAL SEO fix below).
+- Homepage links added: top nav "News", footer "News & Deadlines", footer founder credit → `/founder/`.
+- OWNER TODO after deploy: Search Console → URL Inspection → request indexing for `/news/` and `/founder/` (sitemap picks the rest up).
 
 ## Brand
 

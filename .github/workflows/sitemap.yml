@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build sitemap.xml from the hub's tests.json
+      - name: Build sitemap.xml from the hub's tests.json + news posts.json
         run: |
           python3 - <<'EOF'
           import json, urllib.request, datetime
@@ -23,15 +23,27 @@ jobs:
               headers={'User-Agent': 'Flarestamina-sitemap'})
           tests = json.loads(urllib.request.urlopen(req, timeout=30).read())['tests']
 
+          # news posts live in the repo itself
+          posts = json.load(open('news/posts.json'))['posts']
+
           # stable lastmod (newest test date) so the file only changes when tests change
           today = max([t.get('date') or '' for t in tests] + ['2026-07-03'])
+          news_mod = max([p['date'] for p in posts] + ['2026-07-15'])
           urls = [
               ('https://flarestamina.com/', today, 'weekly', '1.0'),
               ('https://flarestamina.com/ielts-hub/', today, 'daily', '0.9'),
+              ('https://flarestamina.com/news/', news_mod, 'daily', '0.9'),
+              ('https://flarestamina.com/founder/', '2026-07-15', 'monthly', '0.6'),
               ('https://flarestamina.com/teachers/', today, 'monthly', '0.8'),
               ('https://flarestamina.com/privacy/', today, 'yearly', '0.3'),
           ]
           seen = {u[0] for u in urls}
+          for p in posts:
+              u = f"https://flarestamina.com/news/{p['slug']}/"
+              if u in seen:
+                  continue
+              seen.add(u)
+              urls.append((u, p['date'], 'monthly', '0.8'))
           for t in tests:
               u = (t.get('url') or '').strip()
               if not u or u in seen:
