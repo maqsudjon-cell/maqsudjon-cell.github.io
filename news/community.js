@@ -49,17 +49,16 @@
   }
   function docId(doc) { var p = (doc.name || '').split('/'); return p[p.length - 1]; }
 
+  // orderField null => no orderBy (avoids composite-index requirement when combined with a where filter)
   function runQuery(collection, orderField, limit, where) {
-    var q = { structuredQuery: {
-      from: [{ collectionId: collection }],
-      orderBy: [{ field: { fieldPath: orderField }, direction: 'DESCENDING' }],
-      limit: limit
-    } };
-    if (where) q.structuredQuery.where = where;
+    var sq = { from: [{ collectionId: collection }], limit: limit };
+    if (orderField) sq.orderBy = [{ field: { fieldPath: orderField }, direction: 'DESCENDING' }];
+    if (where) sq.where = where;
     return fetch(FS + ':runQuery?key=' + KEY, {
-      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(q)
+      method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ structuredQuery: sq })
     }).then(function (r) { return r.json(); }).then(function (rows) {
-      return (rows || []).filter(function (r) { return r.document; }).map(function (r) { return r.document; });
+      if (!Array.isArray(rows)) return [];
+      return rows.filter(function (r) { return r.document; }).map(function (r) { return r.document; });
     });
   }
   function createDoc(collection, fields) {
@@ -260,10 +259,10 @@
   }
   function loadComments(postId, cbox) {
     cbox.innerHTML = '<p class="c-loading">loading…</p>';
-    runQuery('advice_comments', 'date', 50, {
+    runQuery('advice_comments', null, 50, {
       fieldFilter: { field: { fieldPath: 'postId' }, op: 'EQUAL', value: { stringValue: postId } }
     }).then(function (docs) {
-      docs.reverse(); // oldest first in thread
+      docs.sort(function (a, b) { return (fv(a, 'date') || '').localeCompare(fv(b, 'date') || ''); }); // oldest first
       var u = userName();
       var composer = u
         ? '<div class="c-compose"><input maxlength="500" placeholder="Write a comment…"><button>send</button></div>'
@@ -286,6 +285,8 @@
         snd.addEventListener('click', send);
         inp.addEventListener('keydown', function (e) { if (e.key === 'Enter') send(); });
       }
+    }).catch(function () {
+      cbox.innerHTML = '<p class="c-signin">Could not load comments — please refresh the page.</p>';
     });
   }
 
