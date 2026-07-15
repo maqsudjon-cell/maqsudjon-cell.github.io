@@ -48,12 +48,7 @@ jobs:
             [ -z "$line" ] && continue
             TITLE="${line%%—*}"; REST="${line#*—}"
             AUTHOR="${REST%%—*}"; URL="${REST#*—}"
-            TEXT="📝 Yangi maqola chiqdi
-${TITLE}
-✍️ ${AUTHOR}
-${URL}
-
-Moderatsiya: https://flarestamina.com/admin/"
+            TEXT=$(printf '📝 Yangi maqola chiqdi\n\n%s\n✍️ %s\n%s\n\nModeratsiya: https://flarestamina.com/admin/' "$TITLE" "$AUTHOR" "$URL")
             curl -sS -X POST "https://api.telegram.org/bot${TOKEN}/sendMessage" \
               --data-urlencode "chat_id=${CHAT}" \
               --data-urlencode "text=${TEXT}" \
