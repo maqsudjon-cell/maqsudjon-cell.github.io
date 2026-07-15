@@ -1,0 +1,45 @@
+name: Build community pages
+
+# Turns Firestore articles into static, indexable pages (news/a/<slug>/),
+# author pages (news/t/<author>/) and per-article OG images (news/og/).
+# Runs often so a teacher's article gets its own URL within a couple of hours.
+on:
+  schedule:
+    - cron: '15 */3 * * *'   # every 3 hours
+  workflow_dispatch:          # "Run workflow" button for an instant rebuild
+
+permissions:
+  contents: write
+
+concurrency:
+  group: community-pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install Pillow (OG image rendering)
+        run: pip install --quiet pillow
+
+      - name: Generate article + author pages and OG images
+        run: python3 .github/scripts/build_community.py
+
+      - name: Commit if changed
+        run: |
+          if git diff --quiet -- news/a news/t news/og news/articles-index.json; then
+            echo "no community changes"
+          else
+            git config user.name "Flarestamina-bot"
+            git config user.email "actions@users.noreply.github.com"
+            git add news/a news/t news/og news/articles-index.json
+            git commit -m "Auto-build community pages"
+            git pull --rebase --autostash origin main || true
+            git push
+          fi

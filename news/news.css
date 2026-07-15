@@ -289,6 +289,7 @@ footer.site a:hover{color:var(--flare)}
 .a-card{
   display:flex;flex-direction:column;border:1px solid var(--line);border-radius:var(--r);
   padding:20px 22px 18px;background:var(--surface);cursor:pointer;
+  text-decoration:none;color:var(--text);
   transition:border-color .15s,background .15s,transform .15s;
 }
 .a-card:hover{border-color:rgba(124,192,255,.55);background:var(--surface-2);transform:translateY(-2px)}

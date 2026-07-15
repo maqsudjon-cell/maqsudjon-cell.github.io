@@ -108,18 +108,26 @@
   function articleCard(a) {
     var l = pickLang(a);
     var title = aTitle(a, l), body = aBody(a, l);
-    var links = '';
-    if (a.link) links = '<a class="a-link" href="' + esc(a.link) + '" target="_blank" rel="noopener nofollow ugc">' + esc(a.link.replace(/^https?:\/\//, '').replace(/\/$/, '')) + '</a>';
+    var linkText = a.link ? esc(a.link.replace(/^https?:\/\//i, '').replace(/\/$/, '')) : '';
+    // The whole card becomes an <a> once the article has its own page — and an <a>
+    // may not contain another <a>, so the author link renders as plain text there.
+    var links = !a.link ? ''
+      : a.slug ? '<span class="a-link">' + linkText + '</span>'
+               : '<a class="a-link" href="' + esc(a.link) + '" target="_blank" rel="noopener nofollow ugc">' + linkText + '</a>';
     var badge = isBoth(a) ? '<span class="lang-badge">EN · UZ</span>'
                           : '<span class="lang-badge">' + (l === 'uz' ? 'UZ' : 'EN') + '</span>';
-    return '<article class="a-card" data-aid="' + esc(a.id) + '">' +
+    var inner =
       '<div class="meta"><span class="chip article">article</span>' + badge + '<time>' + esc(fmtDate(a.date)) + '</time></div>' +
       '<h2>' + esc(title) + '</h2>' +
       '<p class="sum">' + esc(body.slice(0, 180)) + (body.length > 180 ? '…' : '') + '</p>' +
       '<div class="a-author"><span class="a-ava">' + esc((a.author || '?').charAt(0).toUpperCase()) + '</span>' +
       '<div><b>' + esc(a.author) + '</b>' +
       (a.center ? '<i>' + esc(a.center) + '</i>' : '') + '</div>' + links + '</div>' +
-      '<span class="a-read-btn">read article →</span></article>';
+      '<span class="a-read-btn">read article →</span>';
+    // Once the generator has built the article its own page, link straight to it:
+    // a real crawlable URL the author can share. Until then, fall back to the modal.
+    if (a.slug) return '<a class="a-card" href="/news/a/' + esc(a.slug) + '/">' + inner + '</a>';
+    return '<article class="a-card" data-aid="' + esc(a.id) + '">' + inner + '</article>';
   }
 
   function openArticle(a) {
@@ -167,6 +175,9 @@
     var all = [];
     var seedReq = fetch('/news/articles-seed.json').then(function (r) { return r.json(); })
       .then(function (j) { return (j.articles || []); }).catch(function () { return []; });
+    // id -> slug map produced by .github/scripts/build_community.py
+    var idxReq = fetch('/news/articles-index.json').then(function (r) { return r.json(); })
+      .then(function (j) { return (j.articles || {}); }).catch(function () { return {}; });
     var fsReq = runQuery('articles', 'date', 60).then(function (docs) {
       return docs.map(function (d) {
         return { id: docId(d), title: fv(d, 'title'), body: fv(d, 'body'),
@@ -175,12 +186,15 @@
                  date: fv(d, 'date'), hidden: fv(d, 'hidden') === true };
       }).filter(function (a) { return a.title && a.body && a.title !== '__test__' && !a.hidden; });
     }).catch(function () { return []; });
-    Promise.all([seedReq, fsReq]).then(function (res) {
+    Promise.all([seedReq, fsReq, idxReq]).then(function (res) {
+      var idx = res[2] || {};
       all = res[1].concat(res[0]);
+      all.forEach(function (a) { if (idx[a.id]) a.slug = idx[a.id].slug; });
       all.sort(function (a, b) { return (b.date || '').localeCompare(a.date || ''); });
       if (!all.length) { box.innerHTML = '<p class="c-loading">No articles yet — be the first: <a href="/writearticle/">write one</a></p>'; return; }
       box.innerHTML = all.map(articleCard).join('');
-      $$('.a-card', box).forEach(function (el) {
+      // only the not-yet-generated cards need the modal fallback
+      $$('article.a-card[data-aid]', box).forEach(function (el) {
         el.addEventListener('click', function (e) {
           if (e.target.closest('.a-link')) return;
           var a = all.filter(function (x) { return String(x.id) === el.getAttribute('data-aid'); })[0];
