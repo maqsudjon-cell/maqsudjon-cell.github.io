@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark light">
+<script>(function(){var t="dark";try{t=localStorage.getItem("p8-theme")||"dark";}catch(e){}document.documentElement.setAttribute("data-theme",t);})();function fsTheme(){var d=document.documentElement,n=d.getAttribute("data-theme")==="light"?"dark":"light";d.setAttribute("data-theme",n);try{localStorage.setItem("p8-theme",n);}catch(e){}}</script>
+<meta name="theme-color" content="#0A0605">
+<title>Flarestamina — Admin</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0A0605;--panel:#0f0b0a;--header-bg:rgba(10,6,5,.85);
+  --surface:rgba(255,255,255,.04);--surface-2:rgba(255,255,255,.07);
+  --line:rgba(255,255,255,.11);--line-2:rgba(255,255,255,.2);
+  --text:#EAF2EE;--muted:#8FA89E;--dim:#5a6560;
+  --flare:#FF5A1F;--flare-soft:#FF7A3D;--flare-dim:rgba(255,90,31,.12);
+  --ok:#4ade80;--ok-dim:rgba(74,222,128,.12);--red:#ff6b72;--red-dim:rgba(215,25,33,.14);
+  --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;--r:14px;
+}
+html[data-theme="light"]{
+  --bg:#F6F8F7;--panel:#FFFFFF;--header-bg:rgba(246,248,247,.85);
+  --surface:rgba(15,42,33,.04);--surface-2:rgba(15,42,33,.07);
+  --line:rgba(15,42,33,.12);--line-2:rgba(15,42,33,.22);
+  --text:#13231C;--muted:#5B6F66;--dim:#8a9a92;
+  --flare:#D9480F;--flare-soft:#C2410C;--flare-dim:rgba(217,72,15,.1);
+  --ok:#15803d;--ok-dim:rgba(21,128,61,.1);--red:#c2321f;--red-dim:rgba(194,50,31,.1);
+  color-scheme:light;
+}
+html{background:var(--bg);color-scheme:dark}
+body{font-family:var(--mono);background:var(--bg);color:var(--text);line-height:1.6;min-height:100svh}
+a{color:var(--flare-soft)}
+.wrap{max-width:1000px;margin:0 auto;padding:0 22px}
+
+/* ---- gate ---- */
+#gate{min-height:100svh;display:flex;align-items:center;justify-content:center;padding:24px}
+.gate-card{width:100%;max-width:380px;text-align:center}
+.gate-card .lock{font-size:40px}
+.gate-card h1{font-size:20px;margin-top:12px;letter-spacing:-.3px}
+.gate-card p{color:var(--muted);font-size:12.5px;margin-top:8px}
+.gate-card input{width:100%;font-family:var(--mono);font-size:15px;color:var(--text);text-align:center;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;margin-top:22px;outline:none}
+.gate-card input:focus{border-color:var(--flare)}
+.gate-card button{width:100%;font-family:var(--mono);font-size:14px;font-weight:700;color:#000;background:var(--flare);border:none;border-radius:12px;padding:14px;margin-top:10px;cursor:pointer}
+html[data-theme="light"] .gate-card button{color:#fff}
+.gate-err{color:var(--red);font-size:12.5px;margin-top:12px;min-height:16px}
+.gate-note{color:var(--dim);font-size:11px;margin-top:20px;line-height:1.6}
+
+/* ---- app ---- */
+#app{display:none}
+header.top{position:sticky;top:0;z-index:20;background:var(--header-bg);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+header.top .bar{display:flex;align-items:center;justify-content:space-between;height:56px;max-width:1000px;margin:0 auto;padding:0 22px;gap:12px}
+.brand{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:14px;color:var(--text);text-decoration:none}
+.brand .fl{color:var(--flare)}
+.brand svg{width:16px;height:16px}
+.htools{display:flex;align-items:center;gap:8px}
+.theme-btn,.logout{font-family:var(--mono);font-size:12px;color:var(--muted);background:transparent;border:1px solid var(--line);border-radius:9px;padding:7px 12px;cursor:pointer}
+.theme-btn{width:34px;height:32px;padding:0;font-size:14px}
+.theme-btn:hover,.logout:hover{color:var(--flare);border-color:var(--flare)}
+
+nav.tabs{display:flex;gap:6px;flex-wrap:wrap;padding:20px 0 6px}
+nav.tabs button{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--muted);background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:10px 18px;cursor:pointer}
+nav.tabs button.active{color:#000;background:var(--flare);border-color:var(--flare)}
+html[data-theme="light"] nav.tabs button.active{color:#fff}
+section.tab{display:none;padding:14px 0 60px}
+section.tab.active{display:block}
+h2.sec{font-size:12px;letter-spacing:1.6px;text-transform:uppercase;color:var(--dim);margin:22px 0 12px}
+
+/* link grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.lcard{display:block;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);padding:16px 18px;text-decoration:none;color:var(--text);transition:border-color .15s,transform .15s,background .15s}
+.lcard:hover{border-color:var(--flare);transform:translateY(-2px);background:var(--surface-2)}
+.lcard .t{font-size:14px;font-weight:500}
+.lcard .t .em{color:var(--flare)}
+.lcard .u{color:var(--muted);font-size:11px;margin-top:4px;word-break:break-all}
+.lcard .badge{display:inline-block;font-size:9.5px;letter-spacing:.5px;text-transform:uppercase;color:var(--flare-soft);border:1px solid var(--line);border-radius:5px;padding:1px 6px;margin-top:8px}
+
+/* moderation list */
+.mrow{border:1px solid var(--line);border-radius:var(--r);background:var(--surface);padding:16px 18px;margin-bottom:10px}
+.mrow.hid{opacity:.55}
+.mrow .mhead{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:11.5px;color:var(--muted)}
+.mrow .mtitle{font-size:15px;font-weight:500;margin-top:8px;color:var(--text)}
+.mrow .mprev{font-size:12.5px;color:var(--muted);margin-top:6px;white-space:pre-wrap}
+.mrow .mby{font-size:11.5px;color:var(--dim);margin-top:8px}
+.mrow .mby b{color:var(--muted);font-weight:500}
+.tag{font-size:9.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;border-radius:5px;padding:2px 7px}
+.tag.on{background:var(--ok-dim);color:var(--ok)} .tag.off{background:var(--red-dim);color:var(--red)}
+.tag.lang{background:var(--flare-dim);color:var(--flare-soft)}
+.acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.acts button{font-family:var(--mono);font-size:12px;color:var(--text);background:var(--surface-2);border:1px solid var(--line);border-radius:9px;padding:8px 14px;cursor:pointer;transition:border-color .15s,color .15s}
+.acts button:hover{border-color:var(--flare);color:var(--flare)}
+.acts button.danger:hover{border-color:var(--red);color:var(--red)}
+.cmts{margin-top:12px;border-top:1px dashed var(--line);padding-top:8px}
+.cmt{display:flex;justify-content:space-between;gap:10px;font-size:12px;padding:6px 0;border-bottom:1px dashed rgba(255,255,255,.05)}
+.cmt b{color:var(--flare-soft)}
+.cmt button{font-family:var(--mono);font-size:11px;color:var(--muted);background:transparent;border:none;cursor:pointer}
+.cmt button:hover{color:var(--red)}
+.loading{color:var(--dim);font-size:13px;padding:20px 2px}
+.count-pill{font-size:11px;color:var(--dim)}
+.refresh{font-family:var(--mono);font-size:12px;color:var(--muted);background:transparent;border:1px solid var(--line);border-radius:9px;padding:6px 12px;cursor:pointer;margin-left:10px}
+
+/* edit modal */
+.ov{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.72);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);display:flex;align-items:flex-start;justify-content:center;overflow-y:auto;padding:4vh 16px}
+.modal{position:relative;width:100%;max-width:640px;background:var(--panel);border:1px solid var(--line-2);border-radius:18px;padding:26px 26px 22px}
+.modal h3{font-size:16px;margin-bottom:14px}
+.modal label{display:block;font-size:12px;color:var(--muted);margin:12px 0 6px}
+.modal input,.modal textarea{width:100%;font-family:var(--mono);font-size:13px;color:var(--text);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;outline:none}
+.modal input:focus,.modal textarea:focus{border-color:var(--flare)}
+.modal textarea{min-height:150px;resize:vertical;line-height:1.6}
+.modal .mbtns{display:flex;gap:10px;margin-top:18px}
+.modal .save{font-family:var(--mono);font-size:13px;font-weight:700;color:#000;background:var(--flare);border:none;border-radius:10px;padding:11px 22px;cursor:pointer}
+html[data-theme="light"] .modal .save{color:#fff}
+.modal .cancel{font-family:var(--mono);font-size:13px;color:var(--muted);background:transparent;border:1px solid var(--line);border-radius:10px;padding:11px 20px;cursor:pointer}
+.mclose{position:absolute;top:12px;right:12px;width:32px;height:32px;border-radius:50%;color:var(--muted);background:var(--surface-2);border:1px solid var(--line);cursor:pointer}
+.note-box{border:1px solid var(--line);border-radius:var(--r);background:var(--surface);padding:14px 16px;font-size:12px;color:var(--muted);margin-top:14px;line-height:1.7}
+.note-box b{color:var(--text)}
+.copybox{border:1px solid var(--line);border-radius:var(--r);background:var(--surface);padding:16px 18px;margin-bottom:12px}
+.copybox .ch{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.copybox .ct{font-size:13px;font-weight:500}
+.copybox pre{white-space:pre-wrap;font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:10px;line-height:1.65}
+.copybox button{font-family:var(--mono);font-size:11.5px;font-weight:700;color:#000;background:var(--flare);border:none;border-radius:8px;padding:7px 14px;cursor:pointer}
+html[data-theme="light"] .copybox button{color:#fff}
+</style>
+</head>
+<body>
+
+<!-- ================= PASSCODE GATE ================= -->
+<div id="gate">
+  <div class="gate-card">
+    <div class="lock">🔐</div>
+    <h1>Flarestamina Admin</h1>
+    <p>Enter the admin passcode to continue.</p>
+    <form id="gateForm">
+      <input id="pass" type="password" placeholder="passcode" autocomplete="off" autofocus>
+      <button type="submit">Unlock</button>
+    </form>
+    <div class="gate-err" id="gateErr"></div>
+    <p class="gate-note">Private area · only the owner. This gate is client-side; the real data lock lives in Firestore rules.</p>
+  </div>
+</div>
+
+<!-- ================= APP ================= -->
+<div id="app">
+  <header class="top">
+    <div class="bar">
+      <a class="brand" href="/">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#FF5A1F" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 9.5V1.5M14.5 12h7M12 14.5V19M9.5 12H4"/></svg>
+        <span><span class="fl">FLARE</span>STAMINA · admin</span>
+      </a>
+      <div class="htools">
+        <button class="theme-btn" onclick="fsTheme()" aria-label="Theme" title="Light / dark">◐</button>
+        <button class="logout" id="logout">Lock</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <nav class="tabs">
+      <button class="active" data-tab="overview">Overview</button>
+      <button data-tab="articles">Articles</button>
+      <button data-tab="ideas">Ideas &amp; Advice</button>
+      <button data-tab="promote">Promote</button>
+      <button data-tab="settings">Settings</button>
+    </nav>
+
+    <!-- OVERVIEW -->
+    <section class="tab active" id="tab-overview">
+      <h2 class="sec">Site pages</h2>
+      <div class="grid" id="grid-pages"></div>
+      <h2 class="sec">Management &amp; tools</h2>
+      <div class="grid" id="grid-tools"></div>
+    </section>
+
+    <!-- ARTICLES -->
+    <section class="tab" id="tab-articles">
+      <h2 class="sec">Articles <span class="count-pill" id="art-count"></span>
+        <button class="refresh" id="art-refresh">↻ refresh</button>
+        <a class="refresh" href="/writearticle/" style="text-decoration:none">+ write new</a></h2>
+      <div id="art-list"><p class="loading">loading…</p></div>
+    </section>
+
+    <!-- IDEAS -->
+    <section class="tab" id="tab-ideas">
+      <h2 class="sec">Ideas &amp; Advice <span class="count-pill" id="adv-count"></span>
+        <button class="refresh" id="adv-refresh">↻ refresh</button></h2>
+      <div id="adv-list"><p class="loading">loading…</p></div>
+    </section>
+
+    <!-- PROMOTE -->
+    <section class="tab" id="tab-promote">
+      <h2 class="sec">Ready-to-post copy</h2>
+      <div id="promote"></div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section class="tab" id="tab-settings">
+      <h2 class="sec">Notes &amp; security</h2>
+      <div class="note-box" id="settings-box"></div>
+    </section>
+  </div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  /* ===== config ===== */
+  var PASS_HASH='54b351156ea55cc9091a445f7ae0728f1dcac281a4ac5ab96ec25b916acc7af8';
+  var FS='https://firestore.googleapis.com/v1/projects/pangeya-essay/databases/(default)/documents';
+  var KEY='AIzaSyBnmbg7CyLki-M1E4rxPevJ741yTykliDA';
+  var SESS='fs_admin_ok';
+
+  var $=function(s,r){return (r||document).querySelector(s)};
+  var $$=function(s,r){return [].slice.call((r||document).querySelectorAll(s))};
+  function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+  function fv(d,f){var v=d.fields&&d.fields[f];if(!v)return '';return v.stringValue!=null?v.stringValue:v.integerValue!=null?parseInt(v.integerValue,10):v.booleanValue!=null?v.booleanValue:v.doubleValue!=null?v.doubleValue:''}
+  function id(d){var p=(d.name||'').split('/');return p[p.length-1]}
+  function fdate(iso){try{var d=new Date(iso);return d.toISOString().slice(0,10)}catch(e){return ''}}
+
+  /* ===== gate ===== */
+  async function sha256(s){
+    var buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));
+    return [].map.call(new Uint8Array(buf),function(b){return b.toString(16).padStart(2,'0')}).join('');
+  }
+  function unlock(){ $('#gate').style.display='none'; $('#app').style.display='block'; boot(); }
+  try{ if(sessionStorage.getItem(SESS)==='1') unlock(); }catch(e){}
+  $('#gateForm').addEventListener('submit',async function(e){
+    e.preventDefault();
+    var h=await sha256($('#pass').value);
+    if(h===PASS_HASH){ try{sessionStorage.setItem(SESS,'1')}catch(e){} unlock(); }
+    else { $('#gateErr').textContent='Wrong passcode.'; $('#pass').value=''; }
+  });
+  $('#logout').addEventListener('click',function(){ try{sessionStorage.removeItem(SESS)}catch(e){} location.reload(); });
+
+  /* ===== firestore helpers ===== */
+  function runQuery(coll,order,limit){
+    return fetch(FS+':runQuery?key='+KEY,{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({structuredQuery:{from:[{collectionId:coll}],orderBy:[{field:{fieldPath:order},direction:'DESCENDING'}],limit:limit}})})
+      .then(function(r){return r.json()}).then(function(rows){return (rows||[]).filter(function(r){return r.document}).map(function(r){return r.document})});
+  }
+  function queryWhere(coll,field,val){
+    return fetch(FS+':runQuery?key='+KEY,{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({structuredQuery:{from:[{collectionId:coll}],where:{fieldFilter:{field:{fieldPath:field},op:'EQUAL',value:{stringValue:val}}},limit:100}})})
+      .then(function(r){return r.json()}).then(function(rows){return (rows||[]).filter(function(r){return r.document}).map(function(r){return r.document})});
+  }
+  function patchDoc(coll,docId,fields){
+    var mask=Object.keys(fields).map(function(k){return 'updateMask.fieldPaths='+encodeURIComponent(k)}).join('&');
+    return fetch(FS+'/'+coll+'/'+docId+'?'+mask+'&key='+KEY,{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({fields:fields})})
+      .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()});
+  }
+  function deleteDoc(coll,docId){
+    return fetch(FS+'/'+coll+'/'+docId+'?key='+KEY,{method:'DELETE'}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status)});
+  }
+
+  /* ===== overview links ===== */
+  var PAGES=[
+    ['Homepage','em','/'],['IELTS Hub','','/ielts-hub/'],['News &amp; Community','em','/news/'],
+    ['Founder','','/founder/'],['Write Article (teachers)','em','/writearticle/'],
+    ['Writing Lab','','/writing/'],['Speaking Lab','','/speaking/'],['Full Mock','','/mock/'],
+    ['40-day Challenge','','/flarestamina/challenge/'],['Teachers funnel','','/teachers/'],
+    ['FS Account','','/account/'],['Privacy','','/privacy/']
+  ];
+  var TOOLS=[
+    ['Google Search Console','Indexing, sitemaps, requests','https://search.google.com/search-console?resource_id=https%3A%2F%2Fflarestamina.com%2F'],
+    ['GoatCounter analytics','Live traffic + events','https://flarestamina.goatcounter.com'],
+    ['Firebase — pangeya-essay','articles / advice / comments data','https://console.firebase.google.com/project/pangeya-essay/firestore'],
+    ['Firebase — ieltshub-e2aa8','FS Account, results, students','https://console.firebase.google.com/project/ieltshub-e2aa8/firestore'],
+    ['GitHub — site repo','maqsudjon-cell.github.io','https://github.com/maqsudjon-cell/maqsudjon-cell.github.io'],
+    ['GitHub — hub repo','ielts-hub (tests.json)','https://github.com/maqsudjon-cell/ielts-hub'],
+    ['sitemap.xml','','https://flarestamina.com/sitemap.xml'],
+    ['robots.txt','','https://flarestamina.com/robots.txt'],
+    ['News RSS feed','','https://flarestamina.com/news/feed.xml'],
+    ['Telegram channel','t.me/flarestamina','https://t.me/flarestamina']
+  ];
+  function pageCard(p){return '<a class="lcard" href="'+p[2]+'" target="_blank" rel="noopener"><div class="t">'+p[0]+'</div><div class="u">flarestamina.com'+p[2]+'</div></a>'}
+  function toolCard(t){return '<a class="lcard" href="'+t[2]+'" target="_blank" rel="noopener"><div class="t">'+t[0]+'</div>'+(t[1]?'<div class="u">'+t[1]+'</div>':'')+'</a>'}
+
+  /* ===== ARTICLES manager ===== */
+  function articleRow(d){
+    var i=id(d),hidden=fv(d,'hidden')===true,lang=fv(d,'lang')||'en';
+    var both=fv(d,'title_uz')&&fv(d,'body_uz');
+    return '<div class="mrow'+(hidden?' hid':'')+'" data-id="'+i+'">'+
+      '<div class="mhead"><span class="tag '+(hidden?'off':'on')+'">'+(hidden?'hidden':'live')+'</span>'+
+      '<span class="tag lang">'+(both?'EN·UZ':esc(lang.toUpperCase()))+'</span>'+
+      '<time>'+esc(fdate(fv(d,'date')))+'</time></div>'+
+      '<div class="mtitle">'+esc(fv(d,'title')||'(no title)')+'</div>'+
+      '<div class="mby">by <b>'+esc(fv(d,'author')||'?')+'</b>'+(fv(d,'center')?' · '+esc(fv(d,'center')):'')+(fv(d,'link')?' · <a href="'+esc(fv(d,'link'))+'" target="_blank" rel="noopener">link</a>':'')+'</div>'+
+      '<div class="acts">'+
+      '<button data-a="toggle">'+(hidden?'Show':'Hide')+'</button>'+
+      '<button data-a="edit">Edit</button>'+
+      '<button data-a="del" class="danger">Delete</button>'+
+      '</div></div>';
+  }
+  var artDocs=[];
+  function loadArticles(){
+    var box=$('#art-list');box.innerHTML='<p class="loading">loading…</p>';
+    runQuery('articles','date',100).then(function(docs){
+      artDocs=docs.filter(function(d){return fv(d,'title')&&fv(d,'title')!=='__test__'});
+      $('#art-count').textContent='('+artDocs.length+')';
+      if(!artDocs.length){box.innerHTML='<p class="loading">No articles yet.</p>';return}
+      box.innerHTML=artDocs.map(articleRow).join('');
+      $$('.mrow',box).forEach(function(row){
+        var i=row.getAttribute('data-id');
+        var d=artDocs.filter(function(x){return id(x)===i})[0];
+        $('[data-a=toggle]',row).addEventListener('click',function(){
+          var cur=fv(d,'hidden')===true;
+          patchDoc('articles',i,{hidden:{booleanValue:!cur}}).then(loadArticles).catch(function(){alert('Failed')});
+        });
+        $('[data-a=edit]',row).addEventListener('click',function(){openEdit(d)});
+        $('[data-a=del]',row).addEventListener('click',function(){
+          if(confirm('Delete this article permanently?')) deleteDoc('articles',i).then(loadArticles).catch(function(){alert('Failed')});
+        });
+      });
+    }).catch(function(){box.innerHTML='<p class="loading">Could not load.</p>'});
+  }
+
+  function openEdit(d){
+    var i=id(d);
+    var ov=document.createElement('div');ov.className='ov';
+    ov.innerHTML='<div class="modal"><button class="mclose">✕</button><h3>Edit article</h3>'+
+      '<label>Title (EN)</label><input id="e_title" value="'+esc(fv(d,"title"))+'">'+
+      '<label>Body (EN)</label><textarea id="e_body">'+esc(fv(d,"body"))+'</textarea>'+
+      '<label>Title (UZ) — optional</label><input id="e_tuz" value="'+esc(fv(d,"title_uz"))+'">'+
+      '<label>Body (UZ) — optional</label><textarea id="e_buz">'+esc(fv(d,"body_uz"))+'</textarea>'+
+      '<label>Author</label><input id="e_author" value="'+esc(fv(d,"author"))+'">'+
+      '<label>Centre</label><input id="e_center" value="'+esc(fv(d,"center"))+'">'+
+      '<label>Link</label><input id="e_link" value="'+esc(fv(d,"link"))+'">'+
+      '<div class="mbtns"><button class="save">Save changes</button><button class="cancel">Cancel</button></div></div>';
+    function close(){document.body.removeChild(ov);document.body.style.overflow=''}
+    ov.addEventListener('click',function(e){if(e.target===ov)close()});
+    $('.mclose',ov).addEventListener('click',close);
+    $('.cancel',ov).addEventListener('click',close);
+    $('.save',ov).addEventListener('click',function(){
+      var f={
+        title:{stringValue:$('#e_title',ov).value.trim()},
+        body:{stringValue:$('#e_body',ov).value.trim()},
+        author:{stringValue:$('#e_author',ov).value.trim()},
+        center:{stringValue:$('#e_center',ov).value.trim()},
+        link:{stringValue:$('#e_link',ov).value.trim()},
+        title_uz:{stringValue:$('#e_tuz',ov).value.trim()},
+        body_uz:{stringValue:$('#e_buz',ov).value.trim()}
+      };
+      var hasUz=f.title_uz.stringValue&&f.body_uz.stringValue;
+      f.lang={stringValue:hasUz?'both':(fv(d,'lang')||'en')};
+      $('.save',ov).textContent='Saving…';$('.save',ov).disabled=true;
+      patchDoc('articles',i,f).then(function(){close();loadArticles()}).catch(function(){alert('Save failed');$('.save',ov).disabled=false;$('.save',ov).textContent='Save changes'});
+    });
+    document.body.appendChild(ov);document.body.style.overflow='hidden';
+  }
+
+  /* ===== ADVICE manager ===== */
+  function advRow(d){
+    var i=id(d),hidden=fv(d,'hidden')===true;
+    return '<div class="mrow'+(hidden?' hid':'')+'" data-id="'+i+'">'+
+      '<div class="mhead"><span class="tag '+(hidden?'off':'on')+'">'+(hidden?'hidden':'live')+'</span>'+
+      '<span class="count-pill">♥ '+(fv(d,'likes')||0)+'</span><time>'+esc(fdate(fv(d,'date')))+'</time></div>'+
+      '<div class="mprev">'+esc(fv(d,'text'))+'</div>'+
+      '<div class="mby">by <b>'+esc(fv(d,'author')||'Student')+'</b></div>'+
+      '<div class="acts">'+
+      '<button data-a="toggle">'+(hidden?'Show':'Hide')+'</button>'+
+      '<button data-a="cmts">Comments</button>'+
+      '<button data-a="del" class="danger">Delete</button>'+
+      '</div><div class="cmts" hidden></div></div>';
+  }
+  var advDocs=[];
+  function loadAdvice(){
+    var box=$('#adv-list');box.innerHTML='<p class="loading">loading…</p>';
+    runQuery('advice','date',100).then(function(docs){
+      advDocs=docs.filter(function(d){return fv(d,'text')});
+      $('#adv-count').textContent='('+advDocs.length+')';
+      if(!advDocs.length){box.innerHTML='<p class="loading">No posts yet.</p>';return}
+      box.innerHTML=advDocs.map(advRow).join('');
+      $$('.mrow',box).forEach(function(row){
+        var i=row.getAttribute('data-id');
+        var d=advDocs.filter(function(x){return id(x)===i})[0];
+        $('[data-a=toggle]',row).addEventListener('click',function(){
+          var cur=fv(d,'hidden')===true;
+          patchDoc('advice',i,{hidden:{booleanValue:!cur}}).then(loadAdvice).catch(function(){alert('Failed')});
+        });
+        $('[data-a=del]',row).addEventListener('click',function(){
+          if(confirm('Delete this post permanently?')) deleteDoc('advice',i).then(loadAdvice).catch(function(){alert('Failed')});
+        });
+        $('[data-a=cmts]',row).addEventListener('click',function(){
+          var cb=$('.cmts',row);
+          if(!cb.hidden){cb.hidden=true;return}
+          cb.hidden=false;loadCmts(i,cb);
+        });
+      });
+    }).catch(function(){box.innerHTML='<p class="loading">Could not load.</p>'});
+  }
+  function loadCmts(postId,cb){
+    cb.innerHTML='<p class="loading">loading…</p>';
+    queryWhere('advice_comments','postId',postId).then(function(docs){
+      if(!docs.length){cb.innerHTML='<p class="loading">no comments</p>';return}
+      cb.innerHTML=docs.map(function(d){var ci=id(d);return '<div class="cmt" data-id="'+ci+'"><span><b>'+esc(fv(d,'author'))+'</b> '+esc(fv(d,'text'))+'</span><button>delete</button></div>'}).join('');
+      $$('.cmt',cb).forEach(function(c){
+        $('button',c).addEventListener('click',function(){
+          if(confirm('Delete comment?')) deleteDoc('advice_comments',c.getAttribute('data-id')).then(function(){loadCmts(postId,cb)}).catch(function(){alert('Failed')});
+        });
+      });
+    });
+  }
+
+  /* ===== PROMOTE (copy templates) ===== */
+  var PROMO=[
+    ['Telegram — announce News section',
+'📢 Yangilik! flarestamina.com ga NEWS bo’limi qo’shildi.\n\n📰 IELTS yangiliklari va stipendiya deadlinelari (Chevening, GKS, El-Yurt Umidi, Stipendium Hungaricum, Türkiye Bursları, Erasmus Mundus) — har biri rasmiy manba bilan.\n📝 Ustozlar maqolalari\n💬 G’oya va maslahat yozadigan community — like, comment, share bilan\n\n👉 flarestamina.com/news'],
+    ['Telegram — invite teachers to write',
+'👨‍🏫 Ustozlar uchun!\n\nIELTS bo’yicha maqola yozib, minglab o’quvchiga yetkazing. Ism-familiyangiz, ijtimoiy tarmog’ingiz va o’quv markazingiz linki bilan chiqadi. 3 daqiqa, ro’yxatdan o’tish shart emas.\n\n✍️ flarestamina.com/writearticle'],
+    ['Twitter/X — thread (3 tweets)',
+'1/ We just shipped a News & Community hub on Flarestamina — free IELTS news, scholarship deadlines, teacher articles, and a place to share ideas.\n\nflarestamina.com/news\n\n2/ Every deadline post (Chevening, GKS, El-Yurt Umidi, Stipendium Hungaricum, Türkiye Bursları, Erasmus Mundus) cites its official source. No fluff, just dates that matter.\n\n3/ Teachers: publish your own article in 3 minutes, no sign-up — your name, socials and centre included. Students: sign in and share advice, like & comment.\n\nStart here → flarestamina.com/news'],
+    ['Twitter/X — single tweet for teachers',
+'IELTS teachers 🇺🇿🌍 — write one article, reach thousands of students for free. Your name, socials & centre link included. 3 minutes, no sign-up:\n\nflarestamina.com/writearticle']
+  ];
+  function promoCard(p,idx){
+    return '<div class="copybox"><div class="ch"><div class="ct">'+esc(p[0])+'</div><button data-c="'+idx+'">Copy</button></div><pre>'+esc(p[1])+'</pre></div>';
+  }
+
+  /* ===== SETTINGS text ===== */
+  var SETTINGS='<b>Admin access.</b> This page is gated by a passcode (SHA-256 hash stored in the page source; the plaintext is not). It keeps casual users out. Because the site is static (GitHub Pages), this is UI-level protection.<br><br>'+
+    '<b>Change the passcode:</b> ask Claude to update the <code>PASS_HASH</code> value in <code>/admin/index.html</code> with the SHA-256 of your new passcode, or run <code>printf \'%s\' \'NEWPASS\' | shasum -a 256</code> and replace the hash.<br><br>'+
+    '<b>Real data lock (recommended next):</b> the <code>articles</code>, <code>advice</code>, <code>advice_comments</code> collections in Firestore project <b>pangeya-essay</b> currently allow open create/read/update/delete (needed so anyone can post without a server). To harden: in the Firebase console add rules that allow <i>create</i> for anyone but restrict <i>update/delete</i> to your account, and hide docs where <code>hidden==true</code> from public reads.<br><br>'+
+    '<b>Moderation:</b> Hide keeps a post but removes it from the public /news view (reversible). Delete is permanent.';
+
+  /* ===== boot ===== */
+  var booted=false;
+  function boot(){
+    if(booted)return;booted=true;
+    $('#grid-pages').innerHTML=PAGES.map(pageCard).join('');
+    $('#grid-tools').innerHTML=TOOLS.map(toolCard).join('');
+    $('#promote').innerHTML=PROMO.map(promoCard).join('');
+    $('#settings-box').innerHTML=SETTINGS;
+    $$('#promote [data-c]').forEach(function(b){
+      b.addEventListener('click',function(){
+        navigator.clipboard.writeText(PROMO[+b.getAttribute('data-c')][1]).then(function(){b.textContent='Copied ✓';setTimeout(function(){b.textContent='Copy'},1500)});
+      });
+    });
+    $$('nav.tabs button').forEach(function(b){
+      b.addEventListener('click',function(){
+        $$('nav.tabs button').forEach(function(x){x.classList.remove('active')});
+        $$('section.tab').forEach(function(x){x.classList.remove('active')});
+        b.classList.add('active');
+        var t=b.getAttribute('data-tab');
+        $('#tab-'+t).classList.add('active');
+        if(t==='articles')loadArticles();
+        if(t==='ideas')loadAdvice();
+      });
+    });
+    $('#art-refresh').addEventListener('click',loadArticles);
+    $('#adv-refresh').addEventListener('click',loadAdvice);
+  }
+})();
+</script>
+</body>
+</html>

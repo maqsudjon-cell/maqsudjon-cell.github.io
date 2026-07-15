@@ -44,7 +44,8 @@
     if (!v) return '';
     return v.stringValue != null ? v.stringValue :
            v.integerValue != null ? parseInt(v.integerValue, 10) :
-           v.doubleValue != null ? v.doubleValue : '';
+           v.doubleValue != null ? v.doubleValue :
+           v.booleanValue != null ? v.booleanValue : '';
   }
   function docId(doc) { var p = (doc.name || '').split('/'); return p[p.length - 1]; }
 
@@ -99,38 +100,66 @@
 
   /* ---------- ARTICLES ---------- */
   var articlesLoaded = false;
+  function isBoth(a) { return !!(a.title_uz && a.body_uz); }
+  // which language to show first: bilingual -> EN; else the article's own language
+  function pickLang(a) { return isBoth(a) ? 'en' : (a.lang === 'uz' ? 'uz' : 'en'); }
+  function aTitle(a, l) { return (l === 'uz' && a.title_uz) ? a.title_uz : a.title; }
+  function aBody(a, l) { return (l === 'uz' && a.body_uz) ? a.body_uz : a.body; }
+
   function articleCard(a) {
+    var l = pickLang(a);
+    var title = aTitle(a, l), body = aBody(a, l);
     var links = '';
     if (a.link) links = '<a class="a-link" href="' + esc(a.link) + '" target="_blank" rel="noopener nofollow ugc">' + esc(a.link.replace(/^https?:\/\//, '').replace(/\/$/, '')) + '</a>';
+    var badge = isBoth(a) ? '<span class="lang-badge">EN · UZ</span>'
+                          : '<span class="lang-badge">' + (l === 'uz' ? 'UZ' : 'EN') + '</span>';
     return '<article class="a-card" data-aid="' + esc(a.id) + '">' +
-      '<div class="meta"><span class="chip article">article</span><time>' + esc(fmtDate(a.date)) + '</time></div>' +
-      '<h2>' + esc(a.title) + '</h2>' +
-      '<p class="sum">' + esc(a.body.slice(0, 180)) + (a.body.length > 180 ? '…' : '') + '</p>' +
+      '<div class="meta"><span class="chip article">article</span>' + badge + '<time>' + esc(fmtDate(a.date)) + '</time></div>' +
+      '<h2>' + esc(title) + '</h2>' +
+      '<p class="sum">' + esc(body.slice(0, 180)) + (body.length > 180 ? '…' : '') + '</p>' +
       '<div class="a-author"><span class="a-ava">' + esc((a.author || '?').charAt(0).toUpperCase()) + '</span>' +
       '<div><b>' + esc(a.author) + '</b>' +
       (a.center ? '<i>' + esc(a.center) + '</i>' : '') + '</div>' + links + '</div>' +
       '<span class="a-read-btn">read article →</span></article>';
   }
+
   function openArticle(a) {
+    var l = pickLang(a);
     var links = a.link ? '<a href="' + esc(a.link) + '" target="_blank" rel="noopener nofollow ugc">' + esc(a.link) + '</a>' : '';
     var ov = document.createElement('div');
     ov.className = 'a-overlay';
-    ov.innerHTML = '<div class="a-modal"><button class="a-close" aria-label="Close">✕</button>' +
-      '<div class="meta"><span class="chip article">article</span><time>' + esc(fmtDate(a.date)) + '</time></div>' +
-      '<h1>' + esc(a.title) + '</h1>' +
-      '<div class="a-author big"><span class="a-ava">' + esc((a.author || '?').charAt(0).toUpperCase()) + '</span>' +
-      '<div><b>' + esc(a.author) + '</b>' + (a.center ? '<i>' + esc(a.center) + '</i>' : '') + '</div></div>' +
-      '<div class="a-body">' + paras(a.body) + '</div>' +
-      (links ? '<p class="a-foot">Author link: ' + links + '</p>' : '') +
-      '<div class="a-share"><a href="https://t.me/share/url?url=' + encodeURIComponent('https://flarestamina.com/news/#articles') + '&text=' + encodeURIComponent('"' + a.title + '" — ' + a.author + ' (Flarestamina News)') + '" target="_blank" rel="noopener">↗ share on telegram</a></div>' +
-      '</div>';
+    var toggle = isBoth(a)
+      ? '<div class="a-lang"><button data-l="en" class="on">English</button><button data-l="uz">Oʻzbekcha</button></div>'
+      : '';
+    function render() {
+      return '<div class="meta"><span class="chip article">article</span><time>' + esc(fmtDate(a.date)) + '</time></div>' +
+        toggle +
+        '<h1 class="a-h">' + esc(aTitle(a, l)) + '</h1>' +
+        '<div class="a-author big"><span class="a-ava">' + esc((a.author || '?').charAt(0).toUpperCase()) + '</span>' +
+        '<div><b>' + esc(a.author) + '</b>' + (a.center ? '<i>' + esc(a.center) + '</i>' : '') + '</div></div>' +
+        '<div class="a-body a-b">' + paras(aBody(a, l)) + '</div>' +
+        (links ? '<p class="a-foot">Author link: ' + links + '</p>' : '') +
+        '<div class="a-share"><a href="https://t.me/share/url?url=' + encodeURIComponent('https://flarestamina.com/news/#articles') + '&text=' + encodeURIComponent('"' + aTitle(a, l) + '" — ' + a.author + ' (Flarestamina News)') + '" target="_blank" rel="noopener">↗ share on telegram</a></div>';
+    }
+    ov.innerHTML = '<div class="a-modal"><button class="a-close" aria-label="Close">✕</button><div class="a-inner">' + render() + '</div></div>';
     function close() { document.body.removeChild(ov); document.body.style.overflow = ''; }
+    function bind() {
+      $$('.a-lang button', ov).forEach(function (b) {
+        b.addEventListener('click', function () {
+          l = b.getAttribute('data-l');
+          $('.a-inner', ov).innerHTML = render();
+          bind();
+        });
+      });
+    }
     ov.addEventListener('click', function (e) { if (e.target === ov) close(); });
     $('.a-close', ov).addEventListener('click', close);
+    bind();
     document.body.appendChild(ov);
     document.body.style.overflow = 'hidden';
     track('article-read');
   }
+
   function loadArticles() {
     if (articlesLoaded) return;
     articlesLoaded = true;
@@ -141,12 +170,14 @@
       .then(function (j) { return (j.articles || []); }).catch(function () { return []; });
     var fsReq = runQuery('articles', 'date', 60).then(function (docs) {
       return docs.map(function (d) {
-        return { id: docId(d), title: fv(d, 'title'), body: fv(d, 'body'), author: fv(d, 'author'),
-                 center: fv(d, 'center'), link: safeUrl(fv(d, 'link')), date: fv(d, 'date') };
-      }).filter(function (a) { return a.title && a.body && a.title !== '__test__'; });
+        return { id: docId(d), title: fv(d, 'title'), body: fv(d, 'body'),
+                 title_uz: fv(d, 'title_uz'), body_uz: fv(d, 'body_uz'), lang: fv(d, 'lang'),
+                 author: fv(d, 'author'), center: fv(d, 'center'), link: safeUrl(fv(d, 'link')),
+                 date: fv(d, 'date'), hidden: fv(d, 'hidden') === true };
+      }).filter(function (a) { return a.title && a.body && a.title !== '__test__' && !a.hidden; });
     }).catch(function () { return []; });
     Promise.all([seedReq, fsReq]).then(function (res) {
-      all = res[1].concat(res[0]); // community first (newer on top after sort anyway)
+      all = res[1].concat(res[0]);
       all.sort(function (a, b) { return (b.date || '').localeCompare(a.date || ''); });
       if (!all.length) { box.innerHTML = '<p class="c-loading">No articles yet — be the first: <a href="/writearticle/">write one</a></p>'; return; }
       box.innerHTML = all.map(articleCard).join('');
@@ -186,7 +217,7 @@
     var box = $('#advice-list');
     box.innerHTML = '<p class="c-loading">loading…</p>';
     runQuery('advice', 'date', 100).then(function (docs) {
-      docs = docs.filter(function (d) { return fv(d, 'text'); });
+      docs = docs.filter(function (d) { return fv(d, 'text') && fv(d, 'hidden') !== true; });
       if (!docs.length) { box.innerHTML = '<p class="c-loading">No posts yet — write the first idea 👇</p>'; return; }
       box.innerHTML = docs.map(adviceItem).join('');
       bindAdvice(box);

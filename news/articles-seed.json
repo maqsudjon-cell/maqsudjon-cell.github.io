@@ -1,25 +1,4 @@
 {
-  "note": "Editorial seed articles shown in /news Articles tab, merged with Firestore community articles. Newest date first wins.",
-  "articles": [
-    {
-      "id": "seed-90-day-plan",
-      "title": "5.5 dan 7.0 gacha 90 kunda: har bir o'quvchimga beradigan rejam",
-      "author": "Maqsudjon Polatov",
-      "role": "Founder, Flarestamina",
-      "center": "flarestamina.com",
-      "link": "https://flarestamina.com/founder/",
-      "date": "2026-07-15",
-      "body": "Ko'pchilik IELTS'ga \"umumiy ingliz tili\"ni oshirish deb qaraydi. Bu eng katta xato. IELTS — format imtihoni: siz tilni bilishingiz YETARLI bo'lgan holda ham, formatni bilmasangiz 1.0 ball yo'qotasiz.\n\n1-oy — diagnostika va poydevor. Birinchi haftada to'liq mock test topshiring (bepul, flarestamina.com da). Natija sizga qaysi bo'lim eng zaifligini aytadi. Keyin 3 hafta faqat shu bo'limga: har kuni 1 soat, faqat o'sha section turlari. Listening'da xato qilgan joyingizni qayta eshiting — javobni ko'rib emas, nima uchun eshitmaganingizni topib.\n\n2-oy — hajm. Endi har kuni bitta to'liq section + haftada 1 marta to'liq mock. Writing uchun: haftada 3 ta Task 2 essay, lekin uchtasi ham BIR XIL mavzu turida (masalan, opinion). Bir turni to'liq o'zlashtirmay ikkinchisiga o'tmang. Speaking uchun: telefonda o'zingizni yozib oling, keyin eshiting — bu og'riqli, lekin eng tez ishlaydigan usul.\n\n3-oy — imtihon rejimi. Har mock testni REAL vaqtda, tanaffussiz, telefonsiz topshiring. Maqsad: mock'larda barqaror 7.0-7.5 ko'rish. Imtihonga mock'ingiz target'dan 0.5 baland bo'lganda boring — imtihon kuni stress o'rtacha 0.5 ball yeydi.\n\nEng muhimi: 90 kun davomida HAR KUNI kamida 45 daqiqa. Haftada 1 marta 6 soat o'qigan odam, har kuni 1 soat o'qigan odamdan doim yutqazadi. Til — bu odat, sprint emas."
-    },
-    {
-      "id": "seed-famous-advice",
-      "title": "7 things famous IELTS teachers keep repeating",
-      "author": "Flarestamina Editorial",
-      "role": "Curated advice with sources",
-      "center": "flarestamina.com",
-      "link": "https://flarestamina.com/news/",
-      "date": "2026-07-15",
-      "body": "We read the blogs and channels of the most-followed IELTS educators — ex-examiners and band 9 teachers — and the same advice keeps appearing. Here are the seven points they all agree on.\n\n1. Answer the question, not the topic. Simon (ex-examiner, ielts-simon.com) built his whole method on this: Task 2 essays lose bands not for grammar, but for drifting off the exact question asked.\n\n2. In Writing, ideas beat vocabulary. Examiners reward a clear, well-developed argument written in simple English over a weak argument dressed in memorized \"academic\" phrases. Memorized templates are easy to spot and score poorly.\n\n3. In Speaking, fluency beats accuracy. Hesitating to find the perfect word costs more than a small grammar slip. Keep talking; self-correct naturally.\n\n4. In Listening, predict before you hear. Read the questions in the preparation time and guess what type of word fits each gap (a number? a name? a noun?). This single habit is worth half a band.\n\n5. In Reading, the answers come in order (mostly). For most question types, answer locations follow the passage order — use this to stop re-reading from the top.\n\n6. Do full tests under real timing. Every serious teacher says the same: untimed practice builds knowledge, timed practice builds the score.\n\n7. Review mistakes deeper than you practice. One test fully analysed — why each wrong answer was wrong — is worth three tests done and forgotten.\n\nAll seven work only with volume: real, full-format practice. That's exactly what Flarestamina gives you for free — 100+ tests in the real exam format."
-    }
-  ]
+  "note": "Optional editorial fallback articles for /news Articles tab, merged with Firestore. Normally EMPTY — all articles (owner + teachers) now live in Firestore (project pangeya-essay, collection 'articles') and are edited from /admin. Add an object here only to hard-pin an article that must survive even if Firestore is unavailable.",
+  "articles": []
 }

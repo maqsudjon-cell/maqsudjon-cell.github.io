@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="dark">
+<meta name="color-scheme" content="dark light">
+<script>(function(){var t="dark";try{t=localStorage.getItem("p8-theme")||"dark";}catch(e){}document.documentElement.setAttribute("data-theme",t);})();function fsTheme(){var d=document.documentElement,n=d.getAttribute("data-theme")==="light"?"dark":"light";d.setAttribute("data-theme",n);try{localStorage.setItem("p8-theme",n);}catch(e){}}</script>
 <meta name="theme-color" content="#000000">
 <title>IELTS One Skill Retake in Uzbekistan — Retake One Skill Within 60 Days | Flarestamina News</title>
 <meta name="description" content="IELTS One Skill Retake is available in Uzbekistan: retake only Listening, Reading, Writing or Speaking within 60 days of your test. Rules, booking and who accepts it.">
@@ -95,6 +96,7 @@
       <a href="/ielts-hub/">practice</a>
       <a href="/news/" aria-current="page">news</a>
       <a href="/founder/">founder</a>
+      <button class="theme-btn" onclick="fsTheme()" aria-label="Toggle theme" title="Light / dark">◐</button>
     </nav>
   </div>
 </header>

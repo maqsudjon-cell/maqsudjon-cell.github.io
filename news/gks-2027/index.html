@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="dark">
+<meta name="color-scheme" content="dark light">
+<script>(function(){var t="dark";try{t=localStorage.getItem("p8-theme")||"dark";}catch(e){}document.documentElement.setAttribute("data-theme",t);})();function fsTheme(){var d=document.documentElement,n=d.getAttribute("data-theme")==="light"?"dark":"light";d.setAttribute("data-theme",n);try{localStorage.setItem("p8-theme",n);}catch(e){}}</script>
 <meta name="theme-color" content="#000000">
 <title>GKS 2027: Korea's Fully Funded Scholarship Opens in September | Flarestamina News</title>
 <meta name="description" content="Global Korea Scholarship (GKS-U) 2027: embassy track opens around September 2026, university track in October. Full tuition, ₩1M+ monthly stipend, flights, 1 year of Korean.">
@@ -75,6 +76,7 @@
       <a href="/ielts-hub/">practice</a>
       <a href="/news/" aria-current="page">news</a>
       <a href="/founder/">founder</a>
+      <button class="theme-btn" onclick="fsTheme()" aria-label="Toggle theme" title="Light / dark">◐</button>
     </nav>
   </div>
 </header>

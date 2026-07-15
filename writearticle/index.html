@@ -3,10 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="dark">
-<meta name="theme-color" content="#050505">
-<title>Maqola yozish — ustozlar uchun | Flarestamina</title>
-<meta name="description" content="IELTS ustozlari uchun ochiq minbar: maqola yozing, o'quvchilarga tajribangizni ulashing, o'zingizni va o'quv markazingizni tanishtiring. 3 daqiqada — ro'yxatdan o'tish shart emas.">
+<meta name="color-scheme" content="dark light">
+<script>(function(){var t="dark";try{t=localStorage.getItem("p8-theme")||"dark";}catch(e){}document.documentElement.setAttribute("data-theme",t);})();function fsTheme(){var d=document.documentElement,n=d.getAttribute("data-theme")==="light"?"dark":"light";d.setAttribute("data-theme",n);try{localStorage.setItem("p8-theme",n);}catch(e){}}</script>
+<meta name="theme-color" content="#0A0605">
+<title>Write an IELTS article — for teachers | Flarestamina</title>
+<meta name="description" content="For IELTS teachers: write an article, share your experience with thousands of students, introduce yourself and your learning centre. 3 minutes — no sign-up. Uzbek & English.">
 <link rel="canonical" href="https://flarestamina.com/writearticle/">
 <link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -14,8 +15,8 @@
 <meta name="robots" content="index, follow">
 <meta property="og:site_name" content="Flarestamina">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Maqola yozish — ustozlar uchun | Flarestamina">
-<meta property="og:description" content="IELTS bo'yicha maqolangizni yozing — flarestamina.com/news da chiqadi, minglab o'quvchi o'qiydi. O'zingizni va markazingizni tanishtiring.">
+<meta property="og:title" content="Write an IELTS article — for teachers | Flarestamina">
+<meta property="og:description" content="Write your article — it appears on flarestamina.com/news for thousands of students. Introduce yourself and your centre. Uzbek & English.">
 <meta property="og:url" content="https://flarestamina.com/writearticle/">
 <meta property="og:image" content="https://flarestamina.com/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -25,10 +26,18 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#050505;--surface:rgba(255,255,255,.04);--surface-2:rgba(255,255,255,.07);
-  --line:rgba(255,255,255,.12);--text:#ececec;--muted:#909090;--dim:#5a5a5a;
+  --bg:#0A0605;--header-bg:rgba(10,6,5,.8);
+  --surface:rgba(255,255,255,.04);--surface-2:rgba(255,255,255,.07);
+  --line:rgba(255,255,255,.12);--text:#EAF2EE;--muted:#8FA89E;--dim:#5a6560;
   --flare:#FF5A1F;--flare-soft:#FF7A3D;--flare-dim:rgba(255,90,31,.12);
   --ok:#4ade80;--mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+}
+html[data-theme="light"]{
+  --bg:#F6F8F7;--header-bg:rgba(246,248,247,.82);
+  --surface:rgba(15,42,33,.04);--surface-2:rgba(15,42,33,.07);
+  --line:rgba(15,42,33,.12);--text:#13231C;--muted:#5B6F66;--dim:#8a9a92;
+  --flare:#D9480F;--flare-soft:#C2410C;--flare-dim:rgba(217,72,15,.1);
+  --ok:#15803d;color-scheme:light;
 }
 html{background:var(--bg);color-scheme:dark}
 body{
@@ -36,18 +45,27 @@ body{
   background-image:radial-gradient(640px 400px at 75% -60px,rgba(255,90,31,.08),transparent 70%);
   background-repeat:no-repeat;
 }
+html[data-theme="light"] body{background-image:radial-gradient(640px 400px at 75% -60px,rgba(217,72,15,.08),transparent 70%)}
 .wrap{max-width:680px;margin:0 auto;padding:0 22px}
-header{position:sticky;top:0;z-index:10;background:rgba(5,5,5,.8);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+header{position:sticky;top:0;z-index:10;background:var(--header-bg);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
 header .bar{display:flex;align-items:center;justify-content:space-between;height:56px;max-width:680px;margin:0 auto;padding:0 22px}
 a.brand{display:inline-flex;align-items:center;gap:8px;color:var(--text);text-decoration:none;font-weight:700;font-size:14px}
 a.brand .fl{color:var(--flare)}
 a.brand svg{width:16px;height:16px}
+.htools{display:flex;align-items:center;gap:10px}
 header a.back{color:var(--muted);text-decoration:none;font-size:12.5px}
 header a.back:hover{color:var(--flare)}
+.uilang{display:inline-flex;gap:2px;border:1px solid var(--line);border-radius:8px;padding:2px;background:var(--surface)}
+.uilang button{font-family:var(--mono);font-size:11px;color:var(--muted);background:transparent;border:none;border-radius:6px;padding:5px 9px;cursor:pointer}
+.uilang button.on{color:#000;background:var(--flare)}
+html[data-theme="light"] .uilang button.on{color:#fff}
+.theme-btn{font-family:var(--mono);font-size:14px;line-height:1;color:var(--muted);background:transparent;border:1px solid var(--line);border-radius:8px;width:32px;height:30px;cursor:pointer}
+.theme-btn:hover{color:var(--flare);border-color:var(--flare)}
 .hero{padding:44px 0 6px}
 .hero .kicker{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--flare-soft)}
 .hero h1{font-size:clamp(24px,5vw,32px);font-weight:700;letter-spacing:-.5px;line-height:1.3;margin-top:8px}
 .hero p{color:var(--muted);font-size:13.5px;margin-top:12px;max-width:56ch}
+.hero p b{color:var(--text)}
 .steps{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
 .steps span{font-size:11.5px;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:5px 12px;background:var(--surface)}
 .steps b{color:var(--flare-soft);font-weight:700}
@@ -65,6 +83,11 @@ input:focus,textarea:focus{border-color:rgba(255,90,31,.65);background:var(--sur
 textarea{min-height:320px;resize:vertical;line-height:1.75}
 .counter{font-size:11px;color:var(--dim);margin-top:6px;text-align:right}
 .counter.ok{color:var(--ok)}
+.artlang{display:inline-flex;gap:6px}
+.artlang label{margin:0;cursor:pointer}
+.artlang input{width:auto;margin-right:6px}
+.artlang .opt{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:10px;padding:9px 14px;font-size:13px;background:var(--surface);cursor:pointer}
+.artlang .opt.on{border-color:var(--flare);color:var(--flare)}
 .hp{position:absolute;left:-9999px;opacity:0;height:0;overflow:hidden}
 button.submit{
   font-family:var(--mono);font-size:15px;font-weight:700;color:#000;
@@ -72,18 +95,18 @@ button.submit{
   padding:15px 30px;cursor:pointer;width:100%;
   transition:transform .12s,box-shadow .12s,opacity .12s;
 }
+html[data-theme="light"] button.submit{color:#fff}
 button.submit:hover{transform:translateY(-1px);box-shadow:0 14px 34px -14px rgba(255,90,31,.6)}
 button.submit:disabled{opacity:.45;cursor:not-allowed;transform:none;box-shadow:none}
 .note{font-size:11.5px;color:var(--dim);margin-top:14px;text-align:center}
 .err{display:none;margin:0 0 18px;border:1px solid rgba(255,107,114,.5);background:rgba(215,25,33,.12);color:#ff9ba0;font-size:13px;border-radius:12px;padding:12px 16px}
+html[data-theme="light"] .err{color:#b3261e}
 .done{display:none;padding:60px 0 80px;text-align:center}
 .done .big{font-size:52px}
 .done h2{font-size:22px;margin-top:14px;letter-spacing:-.3px}
 .done p{color:var(--muted);font-size:13.5px;margin-top:10px}
-.done a.go{
-  display:inline-block;margin-top:26px;color:#000;background:var(--flare);
-  text-decoration:none;font-weight:700;font-size:14px;border-radius:12px;padding:14px 26px;
-}
+.done a.go{display:inline-block;margin-top:26px;color:#000;background:var(--flare);text-decoration:none;font-weight:700;font-size:14px;border-radius:12px;padding:14px 26px}
+html[data-theme="light"] .done a.go{color:#fff}
 .done a.more{display:block;margin-top:16px;color:var(--muted);font-size:12.5px;text-decoration:none}
 .done a.more:hover{color:var(--flare-soft)}
 footer{border-top:1px solid var(--line);padding:24px 0 38px}
@@ -99,18 +122,25 @@ footer a:hover{color:var(--flare)}
       <svg viewBox="0 0 24 24" fill="none" stroke="#FF5A1F" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 9.5V1.5M14.5 12h7M12 14.5V19M9.5 12H4"/></svg>
       <span><span class="fl">FLARE</span>STAMINA</span>
     </a>
-    <a class="back" href="/news/">← news</a>
+    <div class="htools">
+      <div class="uilang" role="tablist" aria-label="Interface language">
+        <button data-ui="uz" class="on">UZ</button>
+        <button data-ui="en">EN</button>
+      </div>
+      <button class="theme-btn" onclick="fsTheme()" aria-label="Toggle theme" title="Light / dark">◐</button>
+      <a class="back" href="/news/#articles" data-k="back">← news</a>
+    </div>
   </div>
 </header>
 
 <section class="hero wrap" id="heroBlock">
-  <p class="kicker">Ustozlar uchun ochiq minbar</p>
-  <h1>Maqola yozing — minglab o'quvchi o'qisin</h1>
-  <p>IELTS bo'yicha tajribangizni ulashing. Maqolangiz <strong style="color:var(--text)">flarestamina.com/news</strong> sahifasida chiqadi — ismingiz, ijtimoiy tarmog'ingiz va o'quv markazingiz linki bilan. Ro'yxatdan o'tish shart emas.</p>
+  <p class="kicker" data-k="kicker">Ustozlar uchun ochiq minbar</p>
+  <h1 data-k="h1">Maqola yozing — minglab o'quvchi o'qisin</h1>
+  <p data-k="lead">IELTS bo'yicha tajribangizni ulashing. Maqolangiz <b>flarestamina.com/news</b> sahifasida chiqadi — ismingiz, ijtimoiy tarmog'ingiz va o'quv markazingiz linki bilan. Ro'yxatdan o'tish shart emas.</p>
   <div class="steps">
-    <span><b>1</b> yozasiz</span>
-    <span><b>2</b> "Yuklash"ni bosasiz</span>
-    <span><b>3</b> news'da chiqadi ✓</span>
+    <span><b>1</b> <span data-k="s1">yozasiz</span></span>
+    <span><b>2</b> <span data-k="s2">"Yuklash"ni bosasiz</span></span>
+    <span><b>3</b> <span data-k="s3">news'da chiqadi ✓</span></span>
   </div>
 </section>
 
@@ -118,43 +148,51 @@ footer a:hover{color:var(--flare)}
   <div class="err" id="errBox"></div>
 
   <div class="field">
-    <label for="fTitle">Maqola mavzusi <span class="req">*</span> <span class="hint">— sarlavha</span></label>
-    <input id="fTitle" maxlength="120" placeholder="Masalan: Writing Task 2 da eng ko'p uchraydigan 5 xato">
+    <label data-k="lblArtLang">Maqola tili <span class="hint" data-k="hintArtLang">— qaysi tilda yozasiz</span></label>
+    <div class="artlang" id="artLang">
+      <span class="opt on" data-l="uz">🇺🇿 O'zbekcha</span>
+      <span class="opt" data-l="en">🇬🇧 English</span>
+    </div>
   </div>
 
   <div class="field">
-    <label for="fBody">Maqola matni <span class="req">*</span> <span class="hint">— kamida 200 belgi, xohlagancha uzun</span></label>
-    <textarea id="fBody" placeholder="Maqolangizni shu yerga yozing... Abzatslar uchun bo'sh qator qoldiring."></textarea>
+    <label for="fTitle" data-k="lblTitle">Maqola mavzusi <span class="req">*</span> <span class="hint" data-k="hintTitle">— sarlavha</span></label>
+    <input id="fTitle" maxlength="120" data-kp="phTitle" placeholder="Masalan: Writing Task 2 da eng ko'p uchraydigan 5 xato">
+  </div>
+
+  <div class="field">
+    <label for="fBody" data-k="lblBody">Maqola matni <span class="req">*</span> <span class="hint" data-k="hintBody">— kamida 200 belgi, xohlagancha uzun</span></label>
+    <textarea id="fBody" data-kp="phBody" placeholder="Maqolangizni shu yerga yozing... Abzatslar uchun bo'sh qator qoldiring."></textarea>
     <div class="counter" id="counter">0 / 200</div>
   </div>
 
   <div class="field">
-    <label for="fName">Ism-familiya <span class="req">*</span></label>
-    <input id="fName" maxlength="60" placeholder="Masalan: Nodir Karimov">
+    <label for="fName" data-k="lblName">Ism-familiya <span class="req">*</span></label>
+    <input id="fName" maxlength="60" data-kp="phName" placeholder="Masalan: Nodir Karimov">
   </div>
 
   <div class="field">
-    <label for="fCenter">O'quv markazingiz <span class="hint">— ixtiyoriy</span></label>
-    <input id="fCenter" maxlength="80" placeholder="Masalan: Everest Education, Toshkent">
+    <label for="fCenter" data-k="lblCenter">O'quv markazingiz <span class="hint" data-k="hintOpt">— ixtiyoriy</span></label>
+    <input id="fCenter" maxlength="80" data-kp="phCenter" placeholder="Masalan: Everest Education, Toshkent">
   </div>
 
   <div class="field">
-    <label for="fLink">Telegram / Instagram / YouTube yoki markaz sayti <span class="hint">— ixtiyoriy, o'zingizni tanishtiring</span></label>
+    <label for="fLink" data-k="lblLink">Telegram / Instagram / YouTube yoki markaz sayti <span class="hint" data-k="hintLink">— ixtiyoriy, o'zingizni tanishtiring</span></label>
     <input id="fLink" maxlength="200" placeholder="https://t.me/username">
   </div>
 
   <div class="hp"><label>Leave empty<input id="fHp" tabindex="-1"></label></div>
 
-  <button class="submit" id="btnPub" type="submit">Yuklash → news'da chiqadi</button>
-  <p class="note">Yuklash bilan siz maqola o'zingizniki ekanini va ochiq chop etilishiga rozilikni tasdiqlaysiz. Matn avtomatik saqlanib boradi — sahifa yopilsa ham yo'qolmaydi.</p>
+  <button class="submit" id="btnPub" type="submit" data-k="submit">Yuklash → news'da chiqadi</button>
+  <p class="note" data-k="note">Yuklash bilan siz maqola o'zingizniki ekanini va ochiq chop etilishiga rozilikni tasdiqlaysiz. Matn avtomatik saqlanib boradi — sahifa yopilsa ham yo'qolmaydi.</p>
 </form>
 
 <section class="done wrap" id="doneBox">
   <div class="big">🎉</div>
-  <h2>Maqolangiz chiqdi!</h2>
-  <p>Rahmat, ustoz! Maqolangiz endi news sahifasining <strong style="color:var(--text)">Articles</strong> bo'limida turibdi.</p>
-  <a class="go" href="/news/#articles">Maqolamni ko'rish →</a>
-  <a class="more" href="/writearticle/">+ yana maqola yozish</a>
+  <h2 data-k="doneH">Maqolangiz chiqdi!</h2>
+  <p data-k="doneP">Rahmat, ustoz! Maqolangiz endi news sahifasining <b>Articles</b> bo'limida turibdi.</p>
+  <a class="go" href="/news/#articles" data-k="doneView">Maqolamni ko'rish →</a>
+  <a class="more" href="/writearticle/" data-k="doneMore">+ yana maqola yozish</a>
 </section>
 
 <footer>
@@ -171,15 +209,105 @@ footer a:hover{color:var(--flare)}
   var KEY='AIzaSyBnmbg7CyLki-M1E4rxPevJ741yTykliDA';
   var DRAFT='fs_article_draft';
 
+  /* ---------- i18n ---------- */
+  var T={
+    uz:{
+      back:'← news',
+      kicker:'Ustozlar uchun ochiq minbar',
+      h1:"Maqola yozing — minglab o'quvchi o'qisin",
+      lead:'IELTS bo’yicha tajribangizni ulashing. Maqolangiz <b>flarestamina.com/news</b> sahifasida chiqadi — ismingiz, ijtimoiy tarmog’ingiz va o’quv markazingiz linki bilan. Ro’yxatdan o’tish shart emas.',
+      s1:'yozasiz', s2:'"Yuklash"ni bosasiz', s3:"news'da chiqadi ✓",
+      lblArtLang:'Maqola tili', hintArtLang:'— qaysi tilda yozasiz',
+      lblTitle:'Maqola mavzusi', hintTitle:'— sarlavha',
+      phTitle:"Masalan: Writing Task 2 da eng ko'p uchraydigan 5 xato",
+      lblBody:'Maqola matni', hintBody:'— kamida 200 belgi, xohlagancha uzun',
+      phBody:"Maqolangizni shu yerga yozing... Abzatslar uchun bo'sh qator qoldiring.",
+      lblName:'Ism-familiya',
+      phName:'Masalan: Nodir Karimov',
+      lblCenter:"O'quv markazingiz", hintOpt:'— ixtiyoriy',
+      phCenter:'Masalan: Everest Education, Toshkent',
+      lblLink:'Telegram / Instagram / YouTube yoki markaz sayti', hintLink:'— ixtiyoriy, o’zingizni tanishtiring',
+      submit:"Yuklash → news'da chiqadi",
+      note:'Yuklash bilan siz maqola o’zingizniki ekanini va ochiq chop etilishiga rozilikni tasdiqlaysiz. Matn avtomatik saqlanib boradi — sahifa yopilsa ham yo’qolmaydi.',
+      doneH:'Maqolangiz chiqdi!',
+      doneP:'Rahmat, ustoz! Maqolangiz endi news sahifasining <b>Articles</b> bo’limida turibdi.',
+      doneView:"Maqolamni ko'rish →", doneMore:'+ yana maqola yozish',
+      errTitle:'Maqola mavzusini yozing (kamida 5 belgi).',
+      errBody:'Maqola matni juda qisqa — kamida 200 belgi yozing. Hozir: ',
+      errName:'Ism-familiyangizni yozing.',
+      errNet:"Xatolik yuz berdi — internetni tekshirib qayta urinib ko'ring. Matningiz saqlangan, yo'qolmaydi.",
+      posting:'Yuklanmoqda...'
+    },
+    en:{
+      back:'← news',
+      kicker:'Open stage for teachers',
+      h1:'Write an article — reach thousands of students',
+      lead:'Share your IELTS experience. Your article appears on <b>flarestamina.com/news</b> — with your name, social link and learning-centre link. No sign-up needed.',
+      s1:'you write', s2:'you tap "Publish"', s3:'it appears on news ✓',
+      lblArtLang:'Article language', hintArtLang:'— which language you write in',
+      lblTitle:'Article title', hintTitle:'— headline',
+      phTitle:'e.g. The 5 most common mistakes in Writing Task 2',
+      lblBody:'Article text', hintBody:'— at least 200 characters, as long as you like',
+      phBody:'Write your article here... Leave a blank line between paragraphs.',
+      lblName:'Full name',
+      phName:'e.g. Nodir Karimov',
+      lblCenter:'Your learning centre', hintOpt:'— optional',
+      phCenter:'e.g. Everest Education, Tashkent',
+      lblLink:'Telegram / Instagram / YouTube or centre website', hintLink:'— optional, introduce yourself',
+      submit:'Publish → appears on news',
+      note:'By publishing you confirm the article is yours and agree to it being published publicly. Your text is auto-saved — it won’t be lost if the page closes.',
+      doneH:'Your article is live!',
+      doneP:'Thank you! Your article is now in the <b>Articles</b> tab on the news page.',
+      doneView:'View my article →', doneMore:'+ write another article',
+      errTitle:'Please write an article title (at least 5 characters).',
+      errBody:'The article text is too short — write at least 200 characters. Now: ',
+      errName:'Please write your name.',
+      errNet:'Something went wrong — check your connection and try again. Your text is saved, it won’t be lost.',
+      posting:'Publishing...'
+    }
+  };
+  var ui='uz';
+  try{ ui=localStorage.getItem('fs_lang')||'uz'; }catch(e){}
+
   var $=function(id){return document.getElementById(id)};
+  function applyUI(){
+    var d=T[ui];
+    document.querySelectorAll('[data-k]').forEach(function(el){
+      var k=el.getAttribute('data-k'); if(d[k]!=null) el.innerHTML=d[k];
+    });
+    document.querySelectorAll('[data-kp]').forEach(function(el){
+      var k=el.getAttribute('data-kp'); if(d[k]!=null) el.setAttribute('placeholder',d[k]);
+    });
+    document.querySelectorAll('.uilang button').forEach(function(b){
+      b.classList.toggle('on', b.getAttribute('data-ui')===ui);
+    });
+    document.documentElement.setAttribute('lang', ui);
+    updCounter();
+  }
+  document.querySelectorAll('.uilang button').forEach(function(b){
+    b.addEventListener('click',function(){
+      ui=b.getAttribute('data-ui'); try{localStorage.setItem('fs_lang',ui);}catch(e){}
+      applyUI();
+    });
+  });
+
+  /* ---------- article language selector ---------- */
+  var artLang='uz';
+  document.querySelectorAll('#artLang .opt').forEach(function(o){
+    o.addEventListener('click',function(){
+      document.querySelectorAll('#artLang .opt').forEach(function(x){x.classList.remove('on')});
+      o.classList.add('on'); artLang=o.getAttribute('data-l');
+    });
+  });
+
+  /* ---------- form ---------- */
   var form=$('artForm'),title=$('fTitle'),body=$('fBody'),name=$('fName'),
       center=$('fCenter'),link=$('fLink'),hp=$('fHp'),btn=$('btnPub'),
       err=$('errBox'),counter=$('counter');
 
-  // draft autosave
   try{
-    var d=JSON.parse(localStorage.getItem(DRAFT)||'null');
-    if(d){title.value=d.t||'';body.value=d.b||'';name.value=d.n||'';center.value=d.c||'';link.value=d.l||'';}
+    var dr=JSON.parse(localStorage.getItem(DRAFT)||'null');
+    if(dr){title.value=dr.t||'';body.value=dr.b||'';name.value=dr.n||'';center.value=dr.c||'';link.value=dr.l||'';}
   }catch(e){}
   function saveDraft(){
     try{localStorage.setItem(DRAFT,JSON.stringify({t:title.value,b:body.value,n:name.value,c:center.value,l:link.value}));}catch(e){}
@@ -191,28 +319,31 @@ footer a:hover{color:var(--flare)}
     counter.textContent=n+' / 200';
     counter.className='counter'+(n>=200?' ok':'');
   }
-  body.addEventListener('input',updCounter);updCounter();
+  body.addEventListener('input',updCounter);
 
   function fail(msg){err.textContent=msg;err.style.display='block';window.scrollTo({top:err.offsetTop-90,behavior:'smooth'})}
 
   form.addEventListener('submit',function(e){
     e.preventDefault();
     err.style.display='none';
+    var d=T[ui];
     if(hp.value){return}
     var t=title.value.trim(),b=body.value.trim(),n=name.value.trim();
-    if(t.length<5){fail('Maqola mavzusini yozing (kamida 5 belgi).');return}
-    if(b.length<200){fail('Maqola matni juda qisqa — kamida 200 belgi yozing. Hozir: '+b.length);return}
-    if(n.length<3){fail('Ism-familiyangizni yozing.');return}
+    if(t.length<5){fail(d.errTitle);return}
+    if(b.length<200){fail(d.errBody+b.length);return}
+    if(n.length<3){fail(d.errName);return}
     var l=link.value.trim();
     if(l && !/^https?:\/\//i.test(l)){l='https://'+l}
 
-    btn.disabled=true;btn.textContent='Yuklanmoqda...';
+    btn.disabled=true;btn.textContent=d.posting;
     var doc={fields:{
       title:{stringValue:t},
       body:{stringValue:b},
       author:{stringValue:n},
       center:{stringValue:center.value.trim()},
       link:{stringValue:l},
+      lang:{stringValue:artLang},
+      hidden:{booleanValue:false},
       date:{stringValue:new Date().toISOString()},
       type:{stringValue:'article'},
       ua:{stringValue:(navigator.userAgent||'').slice(0,120)}
@@ -230,10 +361,12 @@ footer a:hover{color:var(--flare)}
       window.scrollTo(0,0);
       if(window.goatcounter&&goatcounter.count)goatcounter.count({path:'event/article-published',event:true});
     }).catch(function(){
-      btn.disabled=false;btn.textContent="Yuklash → news'da chiqadi";
-      fail("Xatolik yuz berdi — internetni tekshirib qayta urinib ko'ring. Matningiz saqlangan, yo'qolmaydi.");
+      btn.disabled=false;btn.textContent=d.submit;
+      fail(d.errNet);
     });
   });
+
+  applyUI();
 })();
 </script>
 <script data-goatcounter="https://flarestamina.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
