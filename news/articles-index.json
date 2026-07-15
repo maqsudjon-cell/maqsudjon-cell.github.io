@@ -1,6 +1,11 @@
 {
  "generated": true,
  "articles": {
+  "BLGKroFyNUnGumJxpg1c": {
+   "slug": "test-o-chiriladi-rules-check",
+   "author_slug": "claude-test",
+   "date": "2026-07-15"
+  },
   "B1BBA6NDMxwzrhBaCjmQ": {
    "slug": "10-common-ielts-writing-mistakes-and-how-to-avoid-them",
    "author_slug": "flare",
@@ -18,6 +23,7 @@
   }
  },
  "authors": [
+  "claude-test",
   "flare",
   "flarestamina-editorial",
   "maqsudjon-polatov"
