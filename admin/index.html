@@ -156,8 +156,6 @@ html[data-theme="light"] .copybox button{color:#fff}
         <span><span class="fl">FLARE</span>STAMINA · admin</span>
       </a>
       <div class="htools">
-        <span class="who" id="who"></span>
-        <button class="logout" id="gsign">Sign in with Google</button>
         <button class="theme-btn" onclick="fsTheme()" aria-label="Theme" title="Light / dark">◐</button>
         <button class="logout" id="logout">Lock</button>
       </div>
@@ -210,38 +208,6 @@ html[data-theme="light"] .copybox button{color:#fff}
   </div>
 </div>
 
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-<script>
-/* Google sign-in for owner-only writes (Firestore rules check the email). */
-(function(){
-  var OWNER='polatovmaqsudjon1@gmail.com';
-  try{
-    firebase.initializeApp({apiKey:'AIzaSyBnmbg7CyLki-M1E4rxPevJ741yTykliDA',
-      authDomain:'pangeya-essay.firebaseapp.com', projectId:'pangeya-essay'});
-  }catch(e){}
-  var cur=null;
-  window.fsIdToken=function(){ return cur? cur.getIdToken() : null; };
-  function paint(u){
-    cur=u;
-    var who=document.getElementById('who'), btn=document.getElementById('gsign');
-    if(!who||!btn) return;
-    if(u){
-      var ok=(u.email||'').toLowerCase()===OWNER;
-      who.textContent=(ok?'✓ ':'⚠ ')+u.email;
-      who.style.color=ok?'':'#ff6b72';
-      btn.classList.add('ok');
-    } else { who.textContent=''; btn.classList.remove('ok'); }
-  }
-  firebase.auth().onAuthStateChanged(paint);
-  document.addEventListener('click',function(e){
-    if(e.target && e.target.id==='gsign'){
-      firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())
-        .catch(function(err){ alert('Google sign-in failed: '+(err&&err.message)); });
-    }
-  });
-})();
-</script>
 <script>
 (function(){
   'use strict';
@@ -284,29 +250,10 @@ html[data-theme="light"] .copybox button{color:#fff}
       body:JSON.stringify({structuredQuery:{from:[{collectionId:coll}],where:{fieldFilter:{field:{fieldPath:field},op:'EQUAL',value:{stringValue:val}}},limit:100}})})
       .then(function(r){return r.json()}).then(function(rows){return (rows||[]).filter(function(r){return r.document}).map(function(r){return r.document})});
   }
-  /* Writes are owner-only in the Firestore rules, so PATCH/DELETE must carry the
-     Google idToken. Reads stay public. */
-  function authHeaders(extra){
-    var h=extra||{};
-    return (window.fsIdToken? Promise.resolve(window.fsIdToken()) : Promise.resolve(null))
-      .then(function(t){ if(t) h['Authorization']='Bearer '+t; return h; });
-  }
-  function needSignIn(){
-    alert('Sign in with Google first (top right) — editing and deleting is restricted to the owner.');
-    throw new Error('not signed in');
-  }
   function patchDoc(coll,docId,fields){
     var mask=Object.keys(fields).map(function(k){return 'updateMask.fieldPaths='+encodeURIComponent(k)}).join('&');
-    return authHeaders({'Content-Type':'application/json'}).then(function(h){
-      if(!h['Authorization']) needSignIn();
-      return fetch(FS+'/'+coll+'/'+docId+'?'+mask+'&key='+KEY,{method:'PATCH',headers:h,body:JSON.stringify({fields:fields})});
-    }).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()});
-  }
-  function deleteDoc(coll,docId){
-    return authHeaders({}).then(function(h){
-      if(!h['Authorization']) needSignIn();
-      return fetch(FS+'/'+coll+'/'+docId+'?key='+KEY,{method:'DELETE',headers:h});
-    }).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status)});
+    return fetch(FS+'/'+coll+'/'+docId+'?'+mask+'&key='+KEY,{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({fields:fields})})
+      .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json()});
   }
 
   /* ===== overview links ===== */
@@ -349,8 +296,6 @@ html[data-theme="light"] .copybox button{color:#fff}
       '<div class="mby">by <b>'+esc(fv(d,'author')||'?')+'</b>'+(fv(d,'center')?' · '+esc(fv(d,'center')):'')+(fv(d,'link')?' · <a href="'+esc(fv(d,'link'))+'" target="_blank" rel="noopener">link</a>':'')+'</div>'+
       '<div class="acts">'+
       '<button data-a="toggle">'+(hidden?'Show':'Hide')+'</button>'+
-      '<button data-a="edit">Edit</button>'+
-      '<button data-a="del" class="danger">Delete</button>'+
       '</div></div>';
   }
   var artDocs=[];
@@ -367,10 +312,6 @@ html[data-theme="light"] .copybox button{color:#fff}
         $('[data-a=toggle]',row).addEventListener('click',function(){
           var cur=fv(d,'hidden')===true;
           patchDoc('articles',i,{hidden:{booleanValue:!cur}}).then(loadArticles).catch(function(){alert('Failed')});
-        });
-        $('[data-a=edit]',row).addEventListener('click',function(){openEdit(d)});
-        $('[data-a=del]',row).addEventListener('click',function(){
-          if(confirm('Delete this article permanently?')) deleteDoc('articles',i).then(loadArticles).catch(function(){alert('Failed')});
         });
       });
     }).catch(function(){box.innerHTML='<p class="loading">Could not load.</p>'});
@@ -421,7 +362,6 @@ html[data-theme="light"] .copybox button{color:#fff}
       '<div class="acts">'+
       '<button data-a="toggle">'+(hidden?'Show':'Hide')+'</button>'+
       '<button data-a="cmts">Comments</button>'+
-      '<button data-a="del" class="danger">Delete</button>'+
       '</div><div class="cmts" hidden></div></div>';
   }
   var advDocs=[];
@@ -439,9 +379,6 @@ html[data-theme="light"] .copybox button{color:#fff}
           var cur=fv(d,'hidden')===true;
           patchDoc('advice',i,{hidden:{booleanValue:!cur}}).then(loadAdvice).catch(function(){alert('Failed')});
         });
-        $('[data-a=del]',row).addEventListener('click',function(){
-          if(confirm('Delete this post permanently?')) deleteDoc('advice',i).then(loadAdvice).catch(function(){alert('Failed')});
-        });
         $('[data-a=cmts]',row).addEventListener('click',function(){
           var cb=$('.cmts',row);
           if(!cb.hidden){cb.hidden=true;return}
@@ -454,10 +391,12 @@ html[data-theme="light"] .copybox button{color:#fff}
     cb.innerHTML='<p class="loading">loading…</p>';
     queryWhere('advice_comments','postId',postId).then(function(docs){
       if(!docs.length){cb.innerHTML='<p class="loading">no comments</p>';return}
-      cb.innerHTML=docs.map(function(d){var ci=id(d);return '<div class="cmt" data-id="'+ci+'"><span><b>'+esc(fv(d,'author'))+'</b> '+esc(fv(d,'text'))+'</span><button>delete</button></div>'}).join('');
+      cb.innerHTML=docs.map(function(d){var ci=id(d);var h=fv(d,'hidden')===true;return '<div class="cmt" data-id="'+ci+'"'+(h?' style="opacity:.5"':'')+'><span><b>'+esc(fv(d,'author'))+'</b> '+esc(fv(d,'text'))+'</span><button>'+(h?'show':'hide')+'</button></div>'}).join('');
       $$('.cmt',cb).forEach(function(c){
         $('button',c).addEventListener('click',function(){
-          if(confirm('Delete comment?')) deleteDoc('advice_comments',c.getAttribute('data-id')).then(function(){loadCmts(postId,cb)}).catch(function(){alert('Failed')});
+          var ci=c.getAttribute('data-id');
+          var cur=c.getAttribute('style')!==null;
+          patchDoc('advice_comments',ci,{hidden:{booleanValue:!cur}}).then(function(){loadCmts(postId,cb)}).catch(function(){alert('Failed')});
         });
       });
     });
@@ -479,10 +418,10 @@ html[data-theme="light"] .copybox button{color:#fff}
   }
 
   /* ===== SETTINGS text ===== */
-  var SETTINGS='<b>Admin access.</b> This page is gated by a passcode (SHA-256 hash stored in the page source; the plaintext is not). It keeps casual users out. Because the site is static (GitHub Pages), this is UI-level protection.<br><br>'+
-    '<b>Change the passcode:</b> ask Claude to update the <code>PASS_HASH</code> value in <code>/admin/index.html</code> with the SHA-256 of your new passcode, or run <code>printf \'%s\' \'NEWPASS\' | shasum -a 256</code> and replace the hash.<br><br>'+
-    '<b>Real data lock (recommended next):</b> the <code>articles</code>, <code>advice</code>, <code>advice_comments</code> collections in Firestore project <b>pangeya-essay</b> currently allow open create/read/update/delete (needed so anyone can post without a server). To harden: in the Firebase console add rules that allow <i>create</i> for anyone but restrict <i>update/delete</i> to your account, and hide docs where <code>hidden==true</code> from public reads.<br><br>'+
-    '<b>Moderation:</b> Hide keeps a post but removes it from the public /news view (reversible). Delete is permanent.';
+  var SETTINGS='<b>Admin access.</b> This page is gated by a passcode (SHA-256 in the page source). '+
+  '<b>Moderation model (v2, no sign-in):</b> the project API key cannot call Firebase Auth (restricted key), so the Firestore rules use hidden-only moderation instead: anyone may publish, the Hide/Show buttons here flip a reversible <code>hidden</code> flag, and <b>nobody</b> — not even this panel — can edit or delete existing content. Vandalism is impossible to make permanent; hiding is always reversible.<br><br>'+
+  '<b>To re-enable owner-only edit/delete later:</b> in Google Cloud Console (project pangeya-essay) allow the Identity Toolkit API on the web API key, then ask Claude to restore the Google sign-in + owner rules.<br><br>'+
+  '<b>Change the passcode:</b> replace PASS_HASH in /admin/index.html with sha-256 of the new passcode.';
 
   /* ===== boot ===== */
   var booted=false;

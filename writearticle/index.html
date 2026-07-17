@@ -69,6 +69,11 @@ html[data-theme="light"] .uilang button.on{color:#fff}
 .steps{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
 .steps span{font-size:11.5px;color:var(--muted);border:1px solid var(--line);border-radius:99px;padding:5px 12px;background:var(--surface)}
 .steps b{color:var(--flare-soft);font-weight:700}
+.tips{
+  margin-top:18px;border:1px dashed rgba(255,90,31,.45);border-radius:12px;
+  background:var(--flare-dim);padding:13px 16px;font-size:12px;color:var(--muted);line-height:1.7;
+}
+.tips b{color:var(--text);display:block;margin-bottom:3px;font-size:12.5px}
 form{padding:30px 0 60px}
 .field{margin-bottom:22px}
 label{display:block;font-size:13px;font-weight:500;margin-bottom:8px}
@@ -141,6 +146,10 @@ footer a:hover{color:var(--flare)}
     <span><b>1</b> <span data-k="s1">yozasiz</span></span>
     <span><b>2</b> <span data-k="s2">"Yuklash"ni bosasiz</span></span>
     <span><b>3</b> <span data-k="s3">news'da chiqadi ✓</span></span>
+  </div>
+  <div class="tips">
+    <b data-k="tipsH">Yaxshi maqola formulasi:</b>
+    <span data-k="tipsB">aniq sarlavha · 3–6 qisqa abzats (abzatslar orasida bo'sh qator) · o'z tajribangizdan 1 ta misol · oxirida amaliy xulosa. Maqolangiz bir necha soat ichida o'z sahifasi va linkiga ega bo'ladi — uni o'quvchilaringizga ulashishingiz mumkin.</span>
   </div>
 </section>
 
@@ -217,6 +226,8 @@ footer a:hover{color:var(--flare)}
       h1:"Maqola yozing — minglab o'quvchi o'qisin",
       lead:'IELTS bo’yicha tajribangizni ulashing. Maqolangiz <b>flarestamina.com/news</b> sahifasida chiqadi — ismingiz, ijtimoiy tarmog’ingiz va o’quv markazingiz linki bilan. Ro’yxatdan o’tish shart emas.',
       s1:'yozasiz', s2:'"Yuklash"ni bosasiz', s3:"news'da chiqadi ✓",
+      tipsH:'Yaxshi maqola formulasi:',
+      tipsB:"aniq sarlavha · 3–6 qisqa abzats (abzatslar orasida bo'sh qator) · o'z tajribangizdan 1 ta misol · oxirida amaliy xulosa. Maqolangiz bir necha soat ichida o'z sahifasi va linkiga ega bo'ladi — uni o'quvchilaringizga ulashishingiz mumkin.",
       lblArtLang:'Maqola tili', hintArtLang:'— qaysi tilda yozasiz',
       lblTitle:'Maqola mavzusi', hintTitle:'— sarlavha',
       phTitle:"Masalan: Writing Task 2 da eng ko'p uchraydigan 5 xato",
@@ -230,7 +241,7 @@ footer a:hover{color:var(--flare)}
       submit:"Yuklash → news'da chiqadi",
       note:'Yuklash bilan siz maqola o’zingizniki ekanini va ochiq chop etilishiga rozilikni tasdiqlaysiz. Matn avtomatik saqlanib boradi — sahifa yopilsa ham yo’qolmaydi.',
       doneH:'Maqolangiz chiqdi!',
-      doneP:'Rahmat, ustoz! Maqolangiz endi news sahifasining <b>Articles</b> bo’limida turibdi.',
+      doneP:'Rahmat, ustoz! Maqolangiz endi news sahifasining <b>Articles</b> bo’limida turibdi. Bir necha soat ichida u o’z sahifasi va linkiga ham ega bo’ladi — Google topadigan, ulashsa bo’ladigan.',
       doneView:"Maqolamni ko'rish →", doneMore:'+ yana maqola yozish',
       errTitle:'Maqola mavzusini yozing (kamida 5 belgi).',
       errBody:'Maqola matni juda qisqa — kamida 200 belgi yozing. Hozir: ',
@@ -244,6 +255,8 @@ footer a:hover{color:var(--flare)}
       h1:'Write an article — reach thousands of students',
       lead:'Share your IELTS experience. Your article appears on <b>flarestamina.com/news</b> — with your name, social link and learning-centre link. No sign-up needed.',
       s1:'you write', s2:'you tap "Publish"', s3:'it appears on news ✓',
+      tipsH:'The good-article formula:',
+      tipsB:'a clear title · 3–6 short paragraphs (blank line between them) · one example from your own teaching · a practical takeaway at the end. Within a few hours your article gets its own page and link — share it with your students.',
       lblArtLang:'Article language', hintArtLang:'— which language you write in',
       lblTitle:'Article title', hintTitle:'— headline',
       phTitle:'e.g. The 5 most common mistakes in Writing Task 2',
@@ -257,7 +270,7 @@ footer a:hover{color:var(--flare)}
       submit:'Publish → appears on news',
       note:'By publishing you confirm the article is yours and agree to it being published publicly. Your text is auto-saved — it won’t be lost if the page closes.',
       doneH:'Your article is live!',
-      doneP:'Thank you! Your article is now in the <b>Articles</b> tab on the news page.',
+      doneP:'Thank you! Your article is now in the <b>Articles</b> tab on the news page. Within a few hours it also gets its own page and shareable link — indexed by Google.',
       doneView:'View my article →', doneMore:'+ write another article',
       errTitle:'Please write an article title (at least 5 characters).',
       errBody:'The article text is too short — write at least 200 characters. Now: ',
@@ -320,6 +333,9 @@ footer a:hover{color:var(--flare)}
     counter.className='counter'+(n>=200?' ok':'');
   }
   body.addEventListener('input',updCounter);
+  /* textarea grows with the text — teachers never scroll inside a tiny box */
+  function autosize(){ body.style.height='auto'; body.style.height=Math.max(320, body.scrollHeight+4)+'px'; }
+  body.addEventListener('input',autosize); setTimeout(autosize,50);
 
   function fail(msg){err.textContent=msg;err.style.display='block';window.scrollTo({top:err.offsetTop-90,behavior:'smooth'})}
 

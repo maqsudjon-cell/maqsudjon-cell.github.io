@@ -1,77 +1,165 @@
 {
-  "note": "Machine-readable index of /news/ posts. The sitemap workflow reads this file — add every new post here. Newest first.",
-  "posts": [
-    {
-      "slug": "ielts-dtm-maksimal-ball-2026",
-      "title": "IELTS 5.5+ gives you the maximum foreign-language score at DTM — the 2026 rules",
-      "date": "2026-07-15",
-      "category": "exam-update",
-      "summary": "A valid B2 certificate (IELTS 5.5+) replaces the foreign-language exam with the maximum score: 93.0 as first subject, 63.0 as second. New for 2026: B1 gives 75%.",
-      "source": "https://infoedu.uz/maksimal-ball-beruvchi-chet-tili-sertifikatlari-2026-yil-yangi-qoidalar-va-afzalliklar"
-    },
-    {
-      "slug": "gks-2027",
-      "title": "GKS 2027: Korea's fully funded scholarship opens in September — embassy track first",
-      "date": "2026-07-15",
-      "category": "deadline",
-      "summary": "Embassy track ~September 2026, university track ~October. Full tuition, monthly stipend, flights, 1 year of Korean.",
-      "source": "https://www.studyinkorea.go.kr/en/main.do"
-    },
-    {
-      "slug": "turkiye-burslari-2027",
-      "title": "Türkiye Bursları 2027 expected in January — one window, don't miss it",
-      "date": "2026-07-15",
-      "category": "deadline",
-      "summary": "One application period per year for all levels; the 2026 window was 10 Jan – 20 Feb. Full package including university placement.",
-      "source": "https://www.turkiyeburslari.gov.tr/calendar"
-    },
-    {
-      "slug": "erasmus-mundus-2027",
-      "title": "Erasmus Mundus 2027: fully funded master's across Europe — deadlines start this autumn",
-      "date": "2026-07-15",
-      "category": "deadline",
-      "summary": "Programmes open October–December 2026, deadlines mostly November–February. Study in 2–3 European countries, funded by the EU.",
-      "source": "https://erasmus-plus.ec.europa.eu/opportunities/opportunities-for-individuals/students/erasmus-mundus-joint-masters"
-    },
-    {
-      "slug": "chevening-2027",
-      "title": "Chevening 2027/28 opens in August — deadline is 6 October 2026",
-      "date": "2026-07-15",
-      "category": "deadline",
-      "summary": "The UK's fully funded master's scholarship returns. Uzbekistan is eligible. Timeline and preparation checklist.",
-      "source": "https://www.chevening.org/scholarships/application-timeline/"
-    },
-    {
-      "slug": "ielts-one-skill-retake-uzbekistan",
-      "title": "IELTS One Skill Retake is live in Uzbekistan — retake one skill, keep the rest",
-      "date": "2026-07-15",
-      "category": "exam-update",
-      "summary": "Retake only Listening, Reading, Writing or Speaking within 60 days — without redoing the whole exam.",
-      "source": "https://ielts.idp.com/uzbekistan/about/ielts-one-skill-retake"
-    },
-    {
-      "slug": "stipendium-hungaricum-2027",
-      "title": "Stipendium Hungaricum 2027/28 opens around November — prepare now",
-      "date": "2026-07-15",
-      "category": "deadline",
-      "summary": "Hungary's fully funded scholarship opens mid-November and closes mid-January, every year. Uzbekistan is eligible.",
-      "source": "https://stipendiumhungaricum.hu/apply/"
-    },
-    {
-      "slug": "el-yurt-umidi-2026",
-      "title": "El-Yurt Umidi 2026: 500 quotas in the first call — how to be ready for the next one",
-      "date": "2026-07-15",
-      "category": "deadline",
-      "summary": "The first 2026 open call closed in April with 500 quotas. What to prepare before the next call.",
-      "source": "https://eyuf.uz/site/view?id=1327"
-    },
-    {
-      "slug": "ielts-fee-uzbekistan-2026",
-      "title": "How much does IELTS cost in Uzbekistan in 2026?",
-      "date": "2026-07-15",
-      "category": "fees",
-      "summary": "Current test fees at IDP and the British Council, what the price includes, how to pay.",
-      "source": "https://ielts.idp.com/uzbekistan/news-ielts-test-fee"
-    }
-  ]
+ "note": "Machine-readable index of /news/ posts. The sitemap workflow reads this file — add every new post here. Newest first.",
+ "posts": [
+  {
+   "slug": "multilevel-cefr-2026",
+   "title": "Multilevel (CEFR): the national exam that equals IELTS at DTM — and costs far less",
+   "date": "2026-07-16",
+   "category": "exam-update",
+   "summary": "Uzbekistan's national Multilevel exam issues CEFR-level certificates (B1/B2/C1). At DTM a Multilevel B2 has the same power as IELTS 5.5+: the maximum foreign-language score.",
+   "source": "https://uzbmb.uz"
+  },
+  {
+   "slug": "qs-2027-rankings-el-yurt-umidi",
+   "title": "QS 2027 rankings are out — check your university before the next El-Yurt Umidi call",
+   "date": "2026-07-16",
+   "category": "deadline",
+   "summary": "The QS World University Rankings 2027 edition was released in June. El-Yurt Umidi funds top-ranked universities, so your target's new position decides your eligibility.",
+   "source": "https://www.topuniversities.com/world-university-rankings"
+  },
+  {
+   "slug": "ielts-speaking-topics-september-rotation",
+   "title": "IELTS Speaking topics rotate in September — use the current bank while it lasts",
+   "date": "2026-07-16",
+   "category": "exam-update",
+   "summary": "The IELTS Speaking question pool partially refreshes roughly every four months — January, May and September. What that means if your exam is in August vs October.",
+   "source": "https://ielts.idp.com/prepare/article-ielts-speaking-test"
+  },
+  {
+   "slug": "computer-vs-paper-ielts-results",
+   "title": "Computer IELTS results arrive in 1–5 days — paper takes about 13",
+   "date": "2026-07-16",
+   "category": "exam-update",
+   "summary": "Official timelines: computer-delivered IELTS results are released in 1–5 days, paper-based in about 13 days. Why that gap decides which format deadline-chasers should book.",
+   "source": "https://ielts.idp.com/uzbekistan/results"
+  },
+  {
+   "slug": "ielts-ukvi-vs-academic",
+   "title": "IELTS UKVI vs Academic — the expensive mix-up UK applicants keep making",
+   "date": "2026-07-16",
+   "category": "exam-update",
+   "summary": "IELTS for UKVI is the same test with extra government approval — but booking the wrong one can cost you a full retake. Who actually needs UKVI and who doesn't.",
+   "source": "https://www.gov.uk/guidance/prove-your-english-language-abilities-with-a-secure-english-language-test-selt"
+  },
+  {
+   "slug": "daad-2027-germany",
+   "title": "DAAD 2027: Germany's funded master's — most EPOS deadlines fall between August and December",
+   "date": "2026-07-16",
+   "category": "deadline",
+   "summary": "DAAD's EPOS scholarships fund development-related master's degrees in Germany: monthly stipend, insurance, travel. Each programme sets its own deadline — most land Aug–Dec 2026 for a 2027 start.",
+   "source": "https://www.daad.de/en/studying-in-germany/scholarships/daad-funding-programmes/epos/"
+  },
+  {
+   "slug": "csc-china-2027",
+   "title": "Chinese Government Scholarship 2027 — the window usually opens in winter",
+   "date": "2026-07-16",
+   "category": "deadline",
+   "summary": "The CSC scholarship covers tuition, dormitory and a monthly stipend at Chinese universities. Applications for the 2027 intake typically run from late 2026 to spring 2027.",
+   "source": "https://www.campuschina.org"
+  },
+  {
+   "slug": "duolingo-english-test-2026",
+   "title": "Duolingo English Test: 5,500+ institutions accept it — but know its limits",
+   "date": "2026-07-16",
+   "category": "exam-update",
+   "summary": "The DET costs a fraction of IELTS, takes about an hour and is taken at home. Thousands of universities accept it — but UK visa routes and many scholarships still want IELTS.",
+   "source": "https://englishtest.duolingo.com/institutions"
+  },
+  {
+   "slug": "educationusa-tashkent-free",
+   "title": "EducationUSA Tashkent: free, official help for US university applications",
+   "date": "2026-07-16",
+   "category": "exam-update",
+   "summary": "The US State Department's advising network has a Tashkent office: free advising sessions, application guidance, and the Opportunity Funds programme for high-potential, low-income students.",
+   "source": "https://educationusa.state.gov"
+  },
+  {
+   "slug": "free-official-ielts-prep",
+   "title": "Free official IELTS prep — straight from the test makers",
+   "date": "2026-07-16",
+   "category": "exam-update",
+   "summary": "Before paying for another course: the British Council and IDP publish serious free preparation — structured courses, sample papers and band-scored writing answers.",
+   "source": "https://learnenglish.britishcouncil.org/skills/ielts"
+  },
+  {
+   "slug": "ielts-validity-2-years",
+   "title": "Your IELTS expires in 2 years — plan backwards from the application, not the exam",
+   "date": "2026-07-16",
+   "category": "exam-update",
+   "summary": "An IELTS Test Report Form is valid for two years. Take it too early and it dies before your application; too late and results won't arrive. The backwards-planning method.",
+   "source": "https://ielts.org/take-a-test/your-results"
+  },
+  {
+   "slug": "ielts-dtm-maksimal-ball-2026",
+   "title": "IELTS 5.5+ gives you the maximum foreign-language score at DTM — the 2026 rules",
+   "date": "2026-07-15",
+   "category": "exam-update",
+   "summary": "A valid B2 certificate (IELTS 5.5+) replaces the foreign-language exam with the maximum score: 93.0 as first subject, 63.0 as second. New for 2026: B1 gives 75%.",
+   "source": "https://infoedu.uz/maksimal-ball-beruvchi-chet-tili-sertifikatlari-2026-yil-yangi-qoidalar-va-afzalliklar"
+  },
+  {
+   "slug": "gks-2027",
+   "title": "GKS 2027: Korea's fully funded scholarship opens in September — embassy track first",
+   "date": "2026-07-15",
+   "category": "deadline",
+   "summary": "Embassy track ~September 2026, university track ~October. Full tuition, monthly stipend, flights, 1 year of Korean.",
+   "source": "https://www.studyinkorea.go.kr/en/main.do"
+  },
+  {
+   "slug": "turkiye-burslari-2027",
+   "title": "Türkiye Bursları 2027 expected in January — one window, don't miss it",
+   "date": "2026-07-15",
+   "category": "deadline",
+   "summary": "One application period per year for all levels; the 2026 window was 10 Jan – 20 Feb. Full package including university placement.",
+   "source": "https://www.turkiyeburslari.gov.tr/calendar"
+  },
+  {
+   "slug": "erasmus-mundus-2027",
+   "title": "Erasmus Mundus 2027: fully funded master's across Europe — deadlines start this autumn",
+   "date": "2026-07-15",
+   "category": "deadline",
+   "summary": "Programmes open October–December 2026, deadlines mostly November–February. Study in 2–3 European countries, funded by the EU.",
+   "source": "https://erasmus-plus.ec.europa.eu/opportunities/opportunities-for-individuals/students/erasmus-mundus-joint-masters"
+  },
+  {
+   "slug": "chevening-2027",
+   "title": "Chevening 2027/28 opens in August — deadline is 6 October 2026",
+   "date": "2026-07-15",
+   "category": "deadline",
+   "summary": "The UK's fully funded master's scholarship returns. Uzbekistan is eligible. Timeline and preparation checklist.",
+   "source": "https://www.chevening.org/scholarships/application-timeline/"
+  },
+  {
+   "slug": "ielts-one-skill-retake-uzbekistan",
+   "title": "IELTS One Skill Retake is live in Uzbekistan — retake one skill, keep the rest",
+   "date": "2026-07-15",
+   "category": "exam-update",
+   "summary": "Retake only Listening, Reading, Writing or Speaking within 60 days — without redoing the whole exam.",
+   "source": "https://ielts.idp.com/uzbekistan/about/ielts-one-skill-retake"
+  },
+  {
+   "slug": "stipendium-hungaricum-2027",
+   "title": "Stipendium Hungaricum 2027/28 opens around November — prepare now",
+   "date": "2026-07-15",
+   "category": "deadline",
+   "summary": "Hungary's fully funded scholarship opens mid-November and closes mid-January, every year. Uzbekistan is eligible.",
+   "source": "https://stipendiumhungaricum.hu/apply/"
+  },
+  {
+   "slug": "el-yurt-umidi-2026",
+   "title": "El-Yurt Umidi 2026: 500 quotas in the first call — how to be ready for the next one",
+   "date": "2026-07-15",
+   "category": "deadline",
+   "summary": "The first 2026 open call closed in April with 500 quotas. What to prepare before the next call.",
+   "source": "https://eyuf.uz/site/view?id=1327"
+  },
+  {
+   "slug": "ielts-fee-uzbekistan-2026",
+   "title": "How much does IELTS cost in Uzbekistan in 2026?",
+   "date": "2026-07-15",
+   "category": "fees",
+   "summary": "Current test fees at IDP and the British Council, what the price includes, how to pay.",
+   "source": "https://ielts.idp.com/uzbekistan/news-ielts-test-fee"
+  }
+ ]
 }

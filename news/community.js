@@ -276,6 +276,7 @@
     runQuery('advice_comments', null, 50, {
       fieldFilter: { field: { fieldPath: 'postId' }, op: 'EQUAL', value: { stringValue: postId } }
     }).then(function (docs) {
+      docs = docs.filter(function (d) { return fv(d, 'hidden') !== true; });
       docs.sort(function (a, b) { return (fv(a, 'date') || '').localeCompare(fv(b, 'date') || ''); }); // oldest first
       var u = userName();
       var composer = u

@@ -1,50 +1,42 @@
 rules_version = '2';
 
-// Firestore security rules — project: pangeya-essay
-// Paste into: Firebase console -> Firestore Database -> Rules -> Publish
-//   https://console.firebase.google.com/project/pangeya-essay/firestore/rules
+// Firestore security rules v2 — project: pangeya-essay
+// Paste into: https://console.firebase.google.com/project/pangeya-essay/firestore/rules
 //
-// WHY THESE EXIST
-// Before this, anyone holding the public web API key (it ships in the page JS,
-// by design) could UPDATE or DELETE any article, idea or comment.
-// Proven 2026-07-15: anonymous PATCH -> 200, anonymous DELETE -> 200, and an
-// invalid article (title "ab", no body) was accepted.
-// After: anyone can still publish (that is the product — no sign-up to write),
-// but only the owner can edit or delete.
+// v2 (2026-07-16): the project's web API key is restricted and cannot call
+// Firebase Auth (Identity Toolkit rejects it), so owner-token moderation is
+// impossible without console access to the key. Model changed to
+// "hidden-only moderation":
+//   - anyone may CREATE (publish) — that is the product, no sign-up to write
+//   - anyone may flip ONLY the `hidden` flag — powers /admin Hide/Show;
+//     reversible by design, so vandalism is undoable
+//   - NOBODY may edit other fields or DELETE — content is tamper-proof
+//   - likes on advice may only increase
+// Existing apps (Writing Lab, Speaking Lab) keep exactly today's access.
 //
-// EVERY COLLECTION IN THIS PROJECT IS LISTED BELOW — audited 2026-07-15 by
-// grepping every app that points at project `pangeya-essay`:
-//   Writing Lab (pangeya-essay-platform-): essays, giftMessages
-//     ...older archived builds also touch: vocab, comments
-//   Speaking Lab (pangea8-speaking):       speakingQuestions, speakingAnswers
-//   News community (this repo):            articles, advice, advice_comments
-// The three community collections get locked down; every pre-existing app
-// collection keeps exactly the access it has today, so the Writing Lab and
-// Speaking Lab keep working untouched.
+// Collections audited 2026-07-15: essays, giftMessages (Writing Lab);
+// speakingQuestions, speakingAnswers (Speaking Lab); vocab, comments (old
+// Writing Lab builds); articles, advice, advice_comments (news community).
 
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    function isOwner() {
-      return request.auth != null
-             && request.auth.token.email_verified == true
-             && request.auth.token.email == 'polatovmaqsudjon1@gmail.com';
+    function hiddenOnly() {
+      return request.resource.data.diff(resource.data)
+               .affectedKeys().hasOnly(['hidden'])
+             && request.resource.data.hidden is bool;
     }
 
     // ================= existing apps — UNCHANGED (public by product design) =====
-    // Writing Lab
     match /essays/{id}       { allow read, write: if true; }
     match /giftMessages/{id} { allow read, write: if true; }
-    // Speaking Lab
     match /speakingQuestions/{id} { allow read, write: if true; }
     match /speakingAnswers/{id}   { allow read, write: if true; }
-    // legacy collections still referenced by older Writing Lab builds
     match /vocab/{id}    { allow read, write: if true; }
     match /comments/{id} { allow read, write: if true; }
 
-    // ================= news community — LOCKED DOWN ============================
+    // ================= news community =========================================
 
-    // Teacher articles: anyone may publish, only the owner may edit/delete.
     match /articles/{id} {
       allow read: if true;
       allow create: if request.resource.data.title is string
@@ -55,13 +47,12 @@ service cloud.firestore {
                     && request.resource.data.body.size() <= 40000
                     && request.resource.data.author is string
                     && request.resource.data.author.size() <= 80
-                    // a new post can never arrive pre-hidden
                     && (!('hidden' in request.resource.data)
                         || request.resource.data.hidden == false);
-      allow update, delete: if isOwner();
+      allow update: if hiddenOnly();
+      allow delete: if false;
     }
 
-    // Ideas & advice: anyone may post; the public may only bump `likes`.
     match /advice/{id} {
       allow read: if true;
       allow create: if request.resource.data.text is string
@@ -69,15 +60,14 @@ service cloud.firestore {
                     && request.resource.data.text.size() <= 2000
                     && (!('hidden' in request.resource.data)
                         || request.resource.data.hidden == false);
-      allow update: if isOwner()
+      allow update: if hiddenOnly()
                     || (request.resource.data.diff(resource.data)
                           .affectedKeys().hasOnly(['likes'])
                         && request.resource.data.likes is int
                         && request.resource.data.likes > resource.data.likes);
-      allow delete: if isOwner();
+      allow delete: if false;
     }
 
-    // Comments: anyone may write one, only the owner may remove.
     match /advice_comments/{id} {
       allow read: if true;
       allow create: if request.resource.data.text is string
@@ -85,7 +75,8 @@ service cloud.firestore {
                     && request.resource.data.text.size() <= 500
                     && request.resource.data.author is string
                     && request.resource.data.author.size() <= 80;
-      allow update, delete: if isOwner();
+      allow update: if hiddenOnly();
+      allow delete: if false;
     }
 
     // ================= anything new: closed by default =========================
