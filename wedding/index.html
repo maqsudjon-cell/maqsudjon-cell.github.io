@@ -93,6 +93,9 @@ body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--ink);-
 .c-family{font-family:'Playfair Display',serif;font-style:italic;font-size:20px;margin-top:26px;opacity:.9}
 .c-msg{font-size:17px;margin-top:13px;opacity:.85;max-width:500px;line-height:1.55}
 .c-wm{position:absolute;bottom:38px;left:0;right:0;font-size:12px;letter-spacing:.18em;opacity:.4}
+.c-qr{margin-top:24px;display:flex;flex-direction:column;align-items:center;gap:7px}
+.c-qr img{width:112px;height:112px;background:#fff;border:5px solid #fff;border-radius:6px}
+.c-qr span{font-size:12.5px;opacity:.78;letter-spacing:.04em}
 .dc{position:absolute;pointer-events:none}
 
 /* 1 · gold */
@@ -277,6 +280,7 @@ body[data-vt=minimal]{--v-bg:#f2f2ef;--v-panel:#fff;--v-tx:#232323;--v-title:#8b
       <div class="field"><label>To‘yxona nomi</label><input data-k="v" maxlength="60" value="Navro‘z to‘yxonasi"></div>
       <div class="field"><label>Manzil</label><input data-k="a" maxlength="90" value="Toshkent shahri, Chilonzor tumani"></div>
       <div class="field"><label>Lokatsiya — Yandex/Google xaritadan havola yoki koordinata (ixtiyoriy)</label><input data-k="loc" maxlength="280" placeholder="https://yandex.uz/maps/... yoki 41.311081, 69.240562"></div>
+      <div class="field"><label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" id="qrChk" checked style="width:auto"> Kartada QR kod — PNG/PDF/videoda ham lokatsiya ishlashi uchun</label></div>
       <div class="field"><label>Taklif qiluvchi (masalan: Ahmadjonovlar oilasi)</label><input data-k="f" maxlength="60" value="Ahmadjonovlar oilasi"></div>
       <div class="field"><label>Qo‘shimcha matn (ixtiyoriy)</label><textarea data-k="m" rows="2" maxlength="160"></textarea></div>
 
@@ -315,6 +319,7 @@ body[data-vt=minimal]{--v-bg:#f2f2ef;--v-panel:#fff;--v-tx:#232323;--v-title:#8b
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
 <script>
 'use strict';
 const $=s=>document.querySelector(s);
@@ -328,7 +333,8 @@ const T={
      wd:['yakshanba','dushanba','seshanba','chorshanba','payshanba','juma','shanba'],
      date:(d,m,y)=>`${d}-${m}, ${y}-yil`,
      cdTitle:'To‘ygacha qoldi',units:['kun','soat','daqiqa','soniya'],over:'Bugun to‘y kuni! 🎉',
-     map:'📍 Xaritada ko‘rish',share:'💌 Ulashish',cta:'Siz ham shunday taklifnoma yarating — bepul'},
+     map:'📍 Xaritada ko‘rish',share:'💌 Ulashish',cta:'Siz ham shunday taklifnoma yarating — bepul',
+     qr:'Skanerlang — lokatsiya va batafsil'},
  ru:{head:'ПРИГЛАШЕНИЕ',salut:'Дорогие гости!',
      invite:'Приглашаем Вас разделить с нами радость нашего торжества — свадьбы!',
      amp:'и',time:h=>`в ${h}`,respect:'С уважением,',
@@ -336,7 +342,8 @@ const T={
      wd:['воскресенье','понедельник','вторник','среда','четверг','пятница','суббота'],
      date:(d,m,y)=>`${d} ${m} ${y} г.`,
      cdTitle:'До свадьбы осталось',units:['дней','часов','минут','секунд'],over:'Сегодня день свадьбы! 🎉',
-     map:'📍 Открыть на карте',share:'💌 Поделиться',cta:'Создайте своё приглашение — бесплатно'},
+     map:'📍 Открыть на карте',share:'💌 Поделиться',cta:'Создайте своё приглашение — бесплатно',
+     qr:'Сканируйте — локация и детали'},
  en:{head:'WEDDING INVITATION',salut:'Dear guests,',
      invite:'together with our families, we joyfully invite you to celebrate our wedding!',
      amp:'&',time:h=>`at ${h}`,respect:'With love,',
@@ -344,7 +351,8 @@ const T={
      wd:['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
      date:(d,m,y)=>`${m} ${d}, ${y}`,
      cdTitle:'Counting down to the big day',units:['days','hours','min','sec'],over:'Today is the day! 🎉',
-     map:'📍 Open in Maps',share:'💌 Share',cta:'Create your own invitation — free'}
+     map:'📍 Open in Maps',share:'💌 Share',cta:'Create your own invitation — free',
+     qr:'Scan for location & details'}
 };
 
 /* ---------- templates ---------- */
@@ -383,9 +391,9 @@ const FX={
  minimal:null
 };
 
-const KEYS=['t','l','g','b','d','h','v','a','f','m','loc'];
+const KEYS=['t','l','g','b','d','h','v','a','f','m','loc','q'];
 const state={t:'gold',l:'uz',g:'Azizbek',b:'Madinabonu',d:'2026-08-05',h:'18:00',
-             v:'Navro‘z to‘yxonasi',a:'Toshkent shahri, Chilonzor tumani',f:'Ahmadjonovlar oilasi',m:'',loc:''};
+             v:'Navro‘z to‘yxonasi',a:'Toshkent shahri, Chilonzor tumani',f:'Ahmadjonovlar oilasi',m:'',loc:'',q:''};
 
 /* ---------- helpers ---------- */
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -404,6 +412,14 @@ function fmtDate(l,iso){
 const ini=s=>((s||'').trim()[0]||'').toUpperCase();
 
 /* ---------- card render ---------- */
+function qrBlock(t){
+  try{
+    if(typeof qrcode==='undefined')return'';
+    const qr=window.qrcode(0,'L');
+    qr.addData(makeLink());qr.make();
+    return `<div class="c-qr"><img src="${qr.createDataURL(4,2)}" alt="QR"><span>${t.qr}</span></div>`;
+  }catch(e){return'';}
+}
 function cardHTML(s){
   const t=T[s.l],cfg=TPLS[s.t];
   return `${DECO[s.t]||''}
@@ -419,6 +435,7 @@ function cardHTML(s){
   ${s.a?`<div class="c-addr">${esc(s.a)}</div>`:''}
   ${s.f?`<div class="c-family">${t.respect} ${esc(s.f)}</div>`:''}
   ${s.m?`<div class="c-msg">${esc(s.m)}</div>`:''}
+  ${s.q==='0'?'':qrBlock(t)}
   <div class="c-wm">flarestamina.com</div>`;
 }
 function renderCard(){
@@ -460,6 +477,7 @@ document.querySelectorAll('#langs button').forEach(el=>el.onclick=()=>{
 document.querySelectorAll('[data-k]').forEach(el=>el.addEventListener('input',()=>{
   state[el.dataset.k]=el.value.trim();renderCard();hideLink();
 }));
+$('#qrChk').onchange=e=>{state.q=e.target.checked?'':'0';renderCard();hideLink();};
 
 /* ---------- export ---------- */
 async function makeCanvas(){
@@ -489,6 +507,13 @@ $('#bPdf').onclick=()=>withBusy($('#bPdf'),async()=>{
   const canvas=await makeCanvas();
   const pdf=new window.jspdf.jsPDF({orientation:'portrait',unit:'mm',format:[148,222]});
   pdf.addImage(canvas.toDataURL('image/jpeg',0.95),'JPEG',0,0,148,222);
+  // PDF ichida bosiladigan havolalar: QR bloki → jonli sahifa, manzil → Yandex
+  const card=$('#card'),cr=card.getBoundingClientRect(),k=148/cr.width;
+  const ann=(sel,url)=>{const el=card.querySelector(sel);if(!el||!url)return;
+    const r=el.getBoundingClientRect();
+    pdf.link((r.left-cr.left)*k,(r.top-cr.top)*k,r.width*k,r.height*k,{url});};
+  ann('.c-qr',makeLink());
+  const ml=mapLinks();ann('.c-venue',ml.yUrl);ann('.c-addr',ml.yUrl);
   pdf.save(`taklifnoma-${state.g}-${state.b}.pdf`);toast('PDF tayyor ✓');
 });
 
