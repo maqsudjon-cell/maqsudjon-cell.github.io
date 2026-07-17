@@ -45,6 +45,7 @@ jobs:
               ('https://flarestamina.com/writearticle/', '2026-07-15', 'monthly', '0.6'),
               ('https://flarestamina.com/teachers/', today, 'monthly', '0.8'),
               ('https://flarestamina.com/privacy/', today, 'yearly', '0.3'),
+              ('https://flarestamina.com/wedding/', '2026-07-16', 'monthly', '0.7'),
           ]
           seen = {u[0] for u in urls}
           for p in posts:

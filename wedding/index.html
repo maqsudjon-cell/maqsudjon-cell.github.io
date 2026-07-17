@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>To‘y taklifnomasi yaratish — Flarestamina Wedding</title>
+<meta name="description" content="Bepul onlayn to‘y taklifnomasi yarating — 10 ta professional shablon, o‘zbek, rus va ingliz tillarida. PNG, PDF yoki jonli link ko‘rinishida yuboring.">
+<meta property="og:title" content="To‘y taklifnomasi 💍">
+<meta property="og:description" content="Sizni to‘yga taklif qilamiz! Taklifnomani ochish uchun bosing.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,500&family=Great+Vibes&family=Marck+Script&family=Montserrat:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Dancing+Script:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#b08d3e; --ink:#33302a; --bg:#f6f3ec; --line:#e2dccc; --card-w:720px; --card-h:1080px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+
+/* ---------- BUILDER LAYOUT ---------- */
+#builder header{padding:18px 22px;border-bottom:1px solid var(--line);display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;background:#fff}
+#builder header h1{font-family:'Playfair Display',serif;font-size:22px;font-weight:600}
+#builder header h1 em{color:var(--gold);font-style:normal}
+#builder header span{font-size:12px;color:#8a8574}
+.layout{display:grid;grid-template-columns:400px 1fr;gap:0;min-height:calc(100vh - 62px)}
+@media(max-width:900px){.layout{grid-template-columns:1fr}}
+.panel{padding:22px;background:#fff;border-right:1px solid var(--line)}
+.panel h2{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#8a8574;margin:20px 0 10px}
+.panel h2:first-child{margin-top:0}
+
+.tpls{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.tpl{cursor:pointer;border:2px solid transparent;border-radius:10px;padding:4px;text-align:center;transition:.15s}
+.tpl.on{border-color:var(--gold);background:#faf6ec}
+.tpl .sw{width:100%;aspect-ratio:.68;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:13px;overflow:hidden}
+.tpl small{display:block;margin-top:4px;font-size:9.5px;color:#6b6659;line-height:1.2}
+.sw-gold{background:#f8f3e9;box-shadow:inset 0 0 0 1px #c9ac59,inset 0 0 0 3px #f8f3e9,inset 0 0 0 4px #c9ac59;color:#a8842f;font-family:'Great Vibes',cursive;font-size:16px!important}
+.sw-royal{background:radial-gradient(ellipse at 50% 0%,#2a2417,#0c0b09);box-shadow:inset 0 0 0 1px #b89a4e;color:#e9cf8a;font-family:'Great Vibes',cursive;font-size:16px!important}
+.sw-milliy{background:#16305f;box-shadow:inset 0 0 0 1px #d8b45a;color:#e9c877;font-size:15px!important}
+.sw-deco{background:linear-gradient(180deg,#123830,#0b211d);box-shadow:inset 0 0 0 1px #d3b873;color:#d3b873;font-size:13px!important}
+.sw-sharob{background:linear-gradient(160deg,#5a1830,#2e0a15);box-shadow:inset 0 0 0 1px #f0cf9e;color:#f0cf9e;font-family:'Great Vibes',cursive;font-size:16px!important}
+.sw-gulbarg{background:radial-gradient(circle at 20% 15%,rgba(233,180,184,.6),transparent 50%),radial-gradient(circle at 85% 85%,rgba(226,161,168,.55),transparent 55%),#fdf4f2;box-shadow:inset 0 0 0 1px #dca8ad;color:#b56a76;font-size:15px!important}
+.sw-bog{background:#fbfcf9;box-shadow:inset 0 0 0 1px #9db392;color:#64805c;font-size:15px!important}
+.sw-yulduz{background:linear-gradient(180deg,#0a0f2e,#23356f);box-shadow:inset 0 0 0 1px rgba(185,196,255,.5);color:#f0e3b2;font-size:15px!important}
+.sw-marmar{background:#f7f6f2;box-shadow:inset 0 0 0 1px #b3924c;color:#3d3a34;font-family:'Playfair Display',serif;font-size:12px!important}
+.sw-minimal{background:#fff;box-shadow:inset 0 0 0 1px #232323;color:#232323;font-family:'Playfair Display',serif;font-style:italic;font-size:14px!important}
+
+.langs{display:flex;gap:8px}
+.langs button{flex:1;padding:9px 0;border:1px solid var(--line);background:#fff;border-radius:8px;cursor:pointer;font-size:13px;font-weight:500;color:#6b6659}
+.langs button.on{background:var(--gold);border-color:var(--gold);color:#fff}
+
+.field{margin-bottom:11px}
+.field label{display:block;font-size:12px;font-weight:500;color:#6b6659;margin-bottom:4px}
+.field input,.field textarea{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:8px;font:inherit;font-size:14px;background:#fdfcf9}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--gold)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+.acts{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:16px}
+.acts button{padding:12px 8px;border:none;border-radius:9px;cursor:pointer;font:inherit;font-size:13.5px;font-weight:600;transition:.15s}
+.acts button:disabled{opacity:.55;cursor:wait}
+.b-png{background:var(--gold);color:#fff}
+.b-pdf{background:#43402f;color:#fff}
+.b-link{background:#eef3fb;color:#2b56a3;border:1px solid #cdd9ee!important}
+.b-tg{background:#e8f4fb;color:#1c7ab8;border:1px solid #c7e2f2!important}
+.b-vid{background:#5b3d8f;color:#fff;grid-column:1/-1}
+
+#linkbox{display:none;margin-top:12px}
+#linkbox input{width:100%;padding:9px 11px;border:1px dashed var(--gold);border-radius:8px;font-size:12px;background:#fffbef;color:#6b5a26}
+#linkbox small{display:block;margin-top:5px;font-size:11.5px;color:#8a8574;line-height:1.5}
+
+.preview{display:flex;align-items:flex-start;justify-content:center;padding:26px 14px;overflow:hidden;position:relative}
+#fxprev{position:absolute;top:0;left:0;right:0;bottom:0;overflow:hidden;pointer-events:none;z-index:5}
+.fitbox{position:relative}
+.scaler{transform-origin:top left}
+
+#toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(80px);background:#33302a;color:#fff;padding:11px 20px;border-radius:30px;font-size:13.5px;transition:.25s;z-index:99;opacity:0;pointer-events:none}
+#toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+
+/* ---------- CARD (720×1080) ---------- */
+.card{width:var(--card-w);height:var(--card-h);position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:96px 76px;overflow:hidden}
+.c-mono{width:88px;height:88px;border:1px solid currentColor;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:30px;letter-spacing:.06em;margin-bottom:28px}
+.c-mono i{font-style:normal;opacity:.6;margin:0 4px;font-size:20px}
+.c-head{font-size:20px;letter-spacing:.42em;text-indent:.42em;margin-bottom:30px}
+.c-salut{font-size:22px;margin-bottom:26px}
+.c-name{font-family:'Great Vibes','Marck Script',cursive;font-size:74px;line-height:1.18}
+.c-amp{font-family:'Playfair Display',serif;font-style:italic;font-size:26px;margin:5px 0;opacity:.75}
+.c-invite{font-size:21px;line-height:1.6;margin-top:28px;max-width:520px}
+.c-orn{font-size:22px;margin:26px 0;letter-spacing:.5em;text-indent:.5em;opacity:.85}
+.c-date{font-family:'Playfair Display',serif;font-size:34px;font-weight:600}
+.c-time{font-size:22px;margin-top:9px}
+.c-venue{font-size:24px;font-weight:500;margin-top:24px}
+.c-addr{font-size:18px;margin-top:6px;opacity:.8}
+.c-family{font-family:'Playfair Display',serif;font-style:italic;font-size:20px;margin-top:26px;opacity:.9}
+.c-msg{font-size:17px;margin-top:13px;opacity:.85;max-width:500px;line-height:1.55}
+.c-wm{position:absolute;bottom:38px;left:0;right:0;font-size:12px;letter-spacing:.18em;opacity:.4}
+.dc{position:absolute;pointer-events:none}
+
+/* 1 · gold */
+.tpl-gold{background:#f8f3e9;color:#43402f;font-family:'Playfair Display',serif}
+.tpl-gold::before{content:'';position:absolute;top:26px;left:26px;right:26px;bottom:26px;border:1px solid #c9ac59;pointer-events:none}
+.tpl-gold::after{content:'';position:absolute;top:34px;left:34px;right:34px;bottom:34px;border:2px solid #c9ac59;pointer-events:none}
+.tpl-gold .c-head,.tpl-gold .c-name,.tpl-gold .c-orn,.tpl-gold .c-date,.tpl-gold .c-wm{color:#a8842f}
+
+/* 2 · royal (qora-oltin) */
+.tpl-royal{background:radial-gradient(ellipse at 50% 0%,#2b2517 0%,#151310 55%,#0c0b09 100%);color:#e8dcc0;font-family:'Cormorant Garamond',serif}
+.tpl-royal .c-head{color:#d4b96a;font-family:'Montserrat',sans-serif;font-size:17px;font-weight:400}
+.tpl-royal .c-mono{color:#d4b96a}
+.tpl-royal .c-name{color:#e9cf8a;text-shadow:0 0 24px rgba(212,185,106,.35)}
+.tpl-royal .c-orn,.tpl-royal .c-date{color:#e9cf8a}
+.tpl-royal .c-salut,.tpl-royal .c-invite{font-size:23px}
+.tpl-royal .c-wm{color:#d4b96a}
+.dc-c{width:76px;height:76px}
+.dc-tl{top:38px;left:38px}.dc-tr{top:38px;right:38px;transform:rotate(90deg)}
+.dc-br{bottom:38px;right:38px;transform:rotate(180deg)}.dc-bl{bottom:38px;left:38px;transform:rotate(270deg)}
+
+/* 3 · milliy */
+.tpl-milliy{background-color:#16305f;color:#f3efe4;font-family:'Playfair Display',serif;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='.08'%3E%3Crect x='27' y='27' width='36' height='36'/%3E%3Crect x='27' y='27' width='36' height='36' transform='rotate(45 45 45)'/%3E%3C/g%3E%3C/svg%3E")}
+.tpl-milliy::before{content:'';position:absolute;top:26px;left:26px;right:26px;bottom:26px;border:1px solid #d8b45a;pointer-events:none}
+.tpl-milliy::after{content:'';position:absolute;top:33px;left:33px;right:33px;bottom:33px;border:1px solid rgba(216,180,90,.45);pointer-events:none}
+.tpl-milliy .c-head,.tpl-milliy .c-name,.tpl-milliy .c-date,.tpl-milliy .c-wm{color:#e9c877}
+.tpl-milliy .c-orn{color:#58c5c0}
+
+/* 4 · deco */
+.tpl-deco{background:linear-gradient(180deg,#123830 0%,#0d2b26 55%,#0b211d 100%);color:#e6d9b8;font-family:'Montserrat',sans-serif;font-weight:300}
+.tpl-deco::before{content:'';position:absolute;top:28px;left:28px;right:28px;bottom:28px;border:1px solid #d3b873;pointer-events:none}
+.tpl-deco::after{content:'';position:absolute;top:36px;left:36px;right:36px;bottom:36px;border:1px solid rgba(211,184,115,.35);pointer-events:none}
+.tpl-deco .c-head{color:#d3b873;font-weight:500;font-size:17px}
+.tpl-deco .c-mono{color:#d3b873;border-width:2px}
+.tpl-deco .c-name{font-family:'Playfair Display',serif;font-size:52px;letter-spacing:.13em;text-transform:uppercase;color:#e3c479}
+.tpl-deco .c-amp{color:#d3b873}
+.tpl-deco .c-orn{color:#d3b873;letter-spacing:.3em;text-indent:.3em}
+.tpl-deco .c-date{color:#e3c479;font-weight:400}
+.tpl-deco .c-wm{color:#d3b873}
+.dc-fan{left:50%;transform:translateX(-50%);width:150px}
+.dc-fan-t{top:44px}.dc-fan-b{bottom:44px;transform:translateX(-50%) rotate(180deg)}
+
+/* 5 · sharob (burgundy) */
+.tpl-sharob{background:linear-gradient(160deg,#5a1830 0%,#40101f 60%,#2e0a15 100%);color:#f3e2d0;font-family:'Cormorant Garamond',serif}
+.tpl-sharob::before{content:'';position:absolute;top:26px;left:26px;right:26px;bottom:26px;border:1px solid #f0cf9e;pointer-events:none}
+.tpl-sharob::after{content:'';position:absolute;top:33px;left:33px;right:33px;bottom:33px;border:1px solid rgba(240,207,158,.4);pointer-events:none}
+.tpl-sharob .c-head{color:#f0cf9e;font-family:'Montserrat',sans-serif;font-size:17px}
+.tpl-sharob .c-name{color:#f0cf9e}
+.tpl-sharob .c-orn{color:#d9a9b4}
+.tpl-sharob .c-date{color:#f0cf9e}
+.tpl-sharob .c-salut,.tpl-sharob .c-invite{font-size:23px}
+.tpl-sharob .c-wm{color:#f0cf9e}
+
+/* 6 · gulbarg (blush) */
+.tpl-gulbarg{color:#7c5052;font-family:'Cormorant Garamond',serif;
+background:radial-gradient(circle at 14% 10%,rgba(233,180,184,.5),transparent 42%),radial-gradient(circle at 88% 90%,rgba(226,161,168,.45),transparent 46%),radial-gradient(circle at 86% 12%,rgba(240,205,196,.4),transparent 38%),radial-gradient(circle at 10% 88%,rgba(240,205,196,.35),transparent 40%),#fdf4f2}
+.tpl-gulbarg::before{content:'';position:absolute;top:28px;left:28px;right:28px;bottom:28px;border:1px solid #dca8ad;pointer-events:none}
+.tpl-gulbarg .c-head{color:#b56a76;font-family:'Montserrat',sans-serif;font-size:16px}
+.tpl-gulbarg .c-name{font-family:'Dancing Script','Marck Script',cursive;color:#b56a76;font-size:78px}
+.tpl-gulbarg .c-orn{color:#dca8ad}
+.tpl-gulbarg .c-date{color:#a05a66;font-weight:500}
+.tpl-gulbarg .c-salut,.tpl-gulbarg .c-invite{font-size:23px}
+.tpl-gulbarg .c-wm{color:#b56a76}
+
+/* 7 · bog (botanika) */
+.tpl-bog{background:#fbfcf9;color:#4d5c48;font-family:'Cormorant Garamond',serif}
+.tpl-bog::before{content:'';position:absolute;top:28px;left:28px;right:28px;bottom:28px;border:1px solid #9db392;pointer-events:none}
+.tpl-bog .c-head{color:#64805c;font-family:'Montserrat',sans-serif;font-size:16px}
+.tpl-bog .c-name{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;font-size:64px;color:#55704d}
+.tpl-bog .c-orn{color:#9db392}
+.tpl-bog .c-date{color:#4d5c48;font-weight:600}
+.tpl-bog .c-salut,.tpl-bog .c-invite{font-size:23px}
+.dc-branch{width:200px;height:200px}
+.dc-branch.dc-tl{top:16px;left:16px}
+.dc-branch.dc-br{bottom:16px;right:16px;transform:rotate(180deg)}
+
+/* 8 · yulduz (celestial) */
+.tpl-yulduz{color:#dfe4ff;font-family:'Playfair Display',serif;
+background-color:#0a0f2e;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cg fill='%23ffffff'%3E%3Ccircle cx='12' cy='22' r='1.3' fill-opacity='.8'/%3E%3Ccircle cx='48' cy='8' r='1' fill-opacity='.5'/%3E%3Ccircle cx='86' cy='30' r='1.6' fill-opacity='.9'/%3E%3Ccircle cx='120' cy='12' r='1' fill-opacity='.45'/%3E%3Ccircle cx='24' cy='72' r='1' fill-opacity='.5'/%3E%3Ccircle cx='64' cy='58' r='1.2' fill-opacity='.7'/%3E%3Ccircle cx='104' cy='76' r='1' fill-opacity='.5'/%3E%3Ccircle cx='134' cy='58' r='1.4' fill-opacity='.8'/%3E%3Ccircle cx='16' cy='112' r='1.5' fill-opacity='.85'/%3E%3Ccircle cx='52' cy='128' r='1' fill-opacity='.5'/%3E%3Ccircle cx='90' cy='108' r='1.2' fill-opacity='.65'/%3E%3Ccircle cx='126' cy='130' r='1' fill-opacity='.5'/%3E%3C/g%3E%3C/svg%3E"),linear-gradient(180deg,#0a0f2e 0%,#16255e 60%,#23356f 100%)}
+.tpl-yulduz::before{content:'';position:absolute;top:28px;left:28px;right:28px;bottom:28px;border:1px solid rgba(185,196,255,.45);pointer-events:none}
+.tpl-yulduz .c-head{color:#aebafd;font-family:'Montserrat',sans-serif;font-size:16px}
+.tpl-yulduz .c-name{color:#ffffff;text-shadow:0 0 26px rgba(160,180,255,.5)}
+.tpl-yulduz .c-orn{color:#b9c4ff}
+.tpl-yulduz .c-date{color:#f0e3b2}
+.tpl-yulduz .c-wm{color:#aebafd}
+.dc-moon{top:52px;left:50%;transform:translateX(-50%);font-size:54px;line-height:1;color:#f0e3b2;text-shadow:0 0 20px rgba(240,227,178,.55)}
+
+/* 9 · marmar */
+.tpl-marmar{color:#3d3a34;font-family:'Playfair Display',serif;
+background-color:#f7f6f2;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cg fill='none'%3E%3Cpath d='M-20 40 C 60 10 120 90 280 50' stroke='%23dcd8cf' stroke-width='1.4' stroke-opacity='.7'/%3E%3Cpath d='M-30 150 C 80 120 160 200 290 160' stroke='%23d5d1c8' stroke-width='1.2' stroke-opacity='.7'/%3E%3Cpath d='M-10 230 C 90 200 180 260 280 220' stroke='%23d0b26a' stroke-width='1' stroke-opacity='.45'/%3E%3Cpath d='M-20 95 C 70 75 150 130 285 100' stroke='%23e2ded6' stroke-width='1' stroke-opacity='.6'/%3E%3C/g%3E%3C/svg%3E")}
+.tpl-marmar::before{content:'';position:absolute;top:28px;left:28px;right:28px;bottom:28px;border:1px solid #b3924c;pointer-events:none}
+.tpl-marmar .c-head{color:#b3924c;font-family:'Montserrat',sans-serif;font-size:16px}
+.tpl-marmar .c-mono{color:#b3924c}
+.tpl-marmar .c-name{font-family:'Playfair Display',serif;font-style:italic;font-size:62px;color:#2f2c27}
+.tpl-marmar .c-orn,.tpl-marmar .c-date{color:#b3924c}
+.tpl-marmar .c-wm{color:#b3924c}
+
+/* 10 · minimal */
+.tpl-minimal{background:#ffffff;color:#232323;font-family:'Montserrat',sans-serif;font-weight:300}
+.tpl-minimal::before{content:'';position:absolute;top:30px;left:30px;right:30px;bottom:30px;border:1px solid #232323;pointer-events:none}
+.tpl-minimal .c-head{font-weight:500}
+.tpl-minimal .c-name{font-family:'Playfair Display',serif;font-style:italic;font-size:64px}
+.tpl-minimal .c-orn,.tpl-minimal .c-time{color:#b5806b}
+.tpl-minimal .c-date{font-weight:400}
+.tpl-minimal .c-venue{font-weight:500}
+
+/* ---------- VIEW MODE ---------- */
+#view{display:none;min-height:100vh;padding:26px 12px 40px;flex-direction:column;align-items:center;position:relative}
+body.viewing{background:var(--v-bg,#efe9da);transition:background .4s}
+body[data-vt=gold]{--v-bg:#efe9da;--v-panel:#fff;--v-tx:#33302a;--v-title:#8a8574;--v-btn:#33302a;--v-btx:#fff}
+body[data-vt=royal]{--v-bg:#17140f;--v-panel:#262013;--v-tx:#e8dcc0;--v-title:#b7a77e;--v-btn:#d4b96a;--v-btx:#1a150d}
+body[data-vt=milliy]{--v-bg:#0e2148;--v-panel:#1a3a74;--v-tx:#fff;--v-title:#bfcbe8;--v-btn:#e9c877;--v-btx:#16305f}
+body[data-vt=deco]{--v-bg:#0a201c;--v-panel:#143129;--v-tx:#e6d9b8;--v-title:#9fb8ac;--v-btn:#d3b873;--v-btx:#0e2b26}
+body[data-vt=sharob]{--v-bg:#31091a;--v-panel:#4a1228;--v-tx:#f3e2d0;--v-title:#d9a9b4;--v-btn:#f0cf9e;--v-btx:#40101f}
+body[data-vt=gulbarg]{--v-bg:#f9edec;--v-panel:#fff;--v-tx:#7c5052;--v-title:#b98d92;--v-btn:#b56a76;--v-btx:#fff}
+body[data-vt=bog]{--v-bg:#f2f5ee;--v-panel:#fff;--v-tx:#4d5c48;--v-title:#8aa07f;--v-btn:#64805c;--v-btx:#fff}
+body[data-vt=yulduz]{--v-bg:#070c26;--v-panel:#141c47;--v-tx:#dfe4ff;--v-title:#8f9cd8;--v-btn:#b9c4ff;--v-btx:#0a0f2e}
+body[data-vt=marmar]{--v-bg:#efede7;--v-panel:#fff;--v-tx:#3d3a34;--v-title:#9a937f;--v-btn:#b3924c;--v-btx:#fff}
+body[data-vt=minimal]{--v-bg:#f2f2ef;--v-panel:#fff;--v-tx:#232323;--v-title:#8b8b85;--v-btn:#232323;--v-btx:#fff}
+
+#view .fitbox{animation:rise .9s ease both;box-shadow:0 18px 60px rgba(0,0,0,.22);z-index:3}
+@keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+.card.animate>*{opacity:0;animation:vin .75s ease forwards;animation-delay:calc(.15s + var(--i,0)*.12s)}
+@keyframes vin{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.vpanel{margin-top:26px;text-align:center;animation:rise .9s .35s ease both;max-width:560px;width:100%;z-index:3}
+.vpanel .cd-title{font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:var(--v-title,#8a8574);margin-bottom:12px}
+.cd{display:flex;gap:10px;justify-content:center}
+.cd div{background:var(--v-panel,#fff);color:var(--v-tx,#33302a);border-radius:12px;padding:12px 0;width:86px;box-shadow:0 2px 10px rgba(0,0,0,.12)}
+.cd b{display:block;font-size:28px;font-family:'Playfair Display',serif}
+.cd b.pop{animation:pop .4s ease}
+@keyframes pop{from{transform:scale(1.25)}to{transform:scale(1)}}
+.cd span{font-size:11px;text-transform:uppercase;letter-spacing:.08em;opacity:.65}
+.cd-over{font-size:20px;font-family:'Playfair Display',serif;color:var(--v-btn,#a8842f)}
+.vbtns{margin-top:22px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.vbtns a{display:inline-block;padding:12px 22px;border-radius:30px;text-decoration:none;font-size:14px;font-weight:600;cursor:pointer}
+.v-map{background:var(--v-btn,#33302a);color:var(--v-btx,#fff)}
+.v-share{background:transparent;color:var(--v-tx,#33302a);border:1px solid var(--v-title,#8a8574)}
+.v-cta{margin-top:34px;font-size:12.5px;color:var(--v-title,#8a8574);text-decoration:none;border-bottom:1px dotted var(--v-title,#8a8574);animation:rise .9s .55s ease both;z-index:3}
+
+/* falling particles */
+.fx{position:fixed;top:-7vh;pointer-events:none;z-index:6;animation:fxFall linear forwards;will-change:transform,opacity}
+.fx.inbox{position:absolute;top:-40px}
+@keyframes fxFall{0%{transform:translate3d(0,0,0) rotate(0);opacity:0}6%{opacity:var(--o,.7)}86%{opacity:var(--o,.7)}100%{transform:translate3d(var(--dx,0),var(--fall,114vh),0) rotate(var(--rot,180deg));opacity:0}}
+.fx-petal{border-radius:62% 38% 55% 45%/55% 45% 62% 38%;background:radial-gradient(circle at 30% 30%,#f6c9ce,#e39aa4)}
+.fx-leaf{border-radius:50% 6% 50% 6%;background:linear-gradient(135deg,#a9bf9e,#7d9b76)}
+.fx-bokeh{border-radius:50%;filter:blur(2px)}
+@media (prefers-reduced-motion:reduce){.fx{display:none}.card.animate>*{animation:none!important;opacity:1}}
+
+#exportHolder{position:fixed;left:-9999px;top:0;width:720px}
+</style>
+</head>
+<body>
+
+<div id="builder">
+  <header>
+    <h1>Flarestamina <em>Wedding</em></h1>
+    <span>To‘y taklifnomasi yaratish — 10 ta shablon, bepul</span>
+  </header>
+  <div class="layout">
+    <section class="panel">
+      <h2>1 · Shablon</h2>
+      <div class="tpls" id="tpls"></div>
+
+      <h2>2 · Til</h2>
+      <div class="langs" id="langs">
+        <button class="on" data-l="uz">O‘zbekcha</button>
+        <button data-l="ru">Русский</button>
+        <button data-l="en">English</button>
+      </div>
+
+      <h2>3 · Ma’lumotlar</h2>
+      <div class="two">
+        <div class="field"><label>Kuyov ismi</label><input data-k="g" maxlength="40" value="Azizbek"></div>
+        <div class="field"><label>Kelin ismi</label><input data-k="b" maxlength="40" value="Madinabonu"></div>
+      </div>
+      <div class="two">
+        <div class="field"><label>To‘y sanasi</label><input data-k="d" type="date" value="2026-08-05"></div>
+        <div class="field"><label>Boshlanish vaqti</label><input data-k="h" type="time" value="18:00"></div>
+      </div>
+      <div class="field"><label>To‘yxona nomi</label><input data-k="v" maxlength="60" value="Navro‘z to‘yxonasi"></div>
+      <div class="field"><label>Manzil</label><input data-k="a" maxlength="90" value="Toshkent shahri, Chilonzor tumani"></div>
+      <div class="field"><label>Taklif qiluvchi (masalan: Ahmadjonovlar oilasi)</label><input data-k="f" maxlength="60" value="Ahmadjonovlar oilasi"></div>
+      <div class="field"><label>Qo‘shimcha matn (ixtiyoriy)</label><textarea data-k="m" rows="2" maxlength="160"></textarea></div>
+
+      <div class="acts">
+        <button class="b-png" id="bPng">🖼 PNG yuklab olish</button>
+        <button class="b-pdf" id="bPdf">📄 PDF yuklab olish</button>
+        <button class="b-link" id="bLink">🔗 Jonli link olish</button>
+        <button class="b-tg" id="bTg">✈️ Telegramda ulashish</button>
+        <button class="b-vid" id="bVid">🎬 Animatsiyali video yuklab olish</button>
+      </div>
+      <div id="linkbox">
+        <input id="linkInp" readonly>
+        <small>Link nusxalandi ✓ — uni mehmonlarga yuborsangiz, ular animatsiyali sahifada taklifnoma, xarita va to‘ygacha sanoqni ko‘radi.</small>
+      </div>
+    </section>
+
+    <section class="preview">
+      <div id="fxprev"></div>
+      <div class="fitbox" id="fitB"><div class="scaler" id="scalB"><div class="card tpl-gold" id="card"></div></div></div>
+    </section>
+  </div>
+</div>
+
+<div id="view">
+  <div class="fitbox" id="fitV"><div class="scaler" id="scalV"></div></div>
+  <div class="vpanel">
+    <div class="cd-title" id="cdTitle"></div>
+    <div class="cd" id="cd"></div>
+    <div class="vbtns"><a class="v-map" id="vMap" target="_blank" rel="noopener"></a><a class="v-share" id="vShare"></a></div>
+  </div>
+  <a class="v-cta" id="vCta"></a>
+</div>
+
+<div id="exportHolder"></div>
+<div id="toast"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+'use strict';
+const $=s=>document.querySelector(s);
+
+/* ---------- i18n ---------- */
+const T={
+ uz:{head:'TAKLIFNOMA',salut:'Assalomu alaykum, aziz mehmonlar!',
+     invite:'Sizni nikoh to‘yimizga bag‘ishlangan tantanali marosimga taklif etamiz!',
+     amp:'va',time:h=>`Soat ${h} da`,respect:'Hurmat bilan,',
+     months:['yanvar','fevral','mart','aprel','may','iyun','iyul','avgust','sentabr','oktabr','noyabr','dekabr'],
+     wd:['yakshanba','dushanba','seshanba','chorshanba','payshanba','juma','shanba'],
+     date:(d,m,y)=>`${d}-${m}, ${y}-yil`,
+     cdTitle:'To‘ygacha qoldi',units:['kun','soat','daqiqa','soniya'],over:'Bugun to‘y kuni! 🎉',
+     map:'📍 Xaritada ko‘rish',share:'💌 Ulashish',cta:'Siz ham shunday taklifnoma yarating — bepul'},
+ ru:{head:'ПРИГЛАШЕНИЕ',salut:'Дорогие гости!',
+     invite:'Приглашаем Вас разделить с нами радость нашего торжества — свадьбы!',
+     amp:'и',time:h=>`в ${h}`,respect:'С уважением,',
+     months:['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'],
+     wd:['воскресенье','понедельник','вторник','среда','четверг','пятница','суббота'],
+     date:(d,m,y)=>`${d} ${m} ${y} г.`,
+     cdTitle:'До свадьбы осталось',units:['дней','часов','минут','секунд'],over:'Сегодня день свадьбы! 🎉',
+     map:'📍 Открыть на карте',share:'💌 Поделиться',cta:'Создайте своё приглашение — бесплатно'},
+ en:{head:'WEDDING INVITATION',salut:'Dear guests,',
+     invite:'together with our families, we joyfully invite you to celebrate our wedding!',
+     amp:'&',time:h=>`at ${h}`,respect:'With love,',
+     months:['January','February','March','April','May','June','July','August','September','October','November','December'],
+     wd:['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
+     date:(d,m,y)=>`${m} ${d}, ${y}`,
+     cdTitle:'Counting down to the big day',units:['days','hours','min','sec'],over:'Today is the day! 🎉',
+     map:'📍 Open in Maps',share:'💌 Share',cta:'Create your own invitation — free'}
+};
+
+/* ---------- templates ---------- */
+const TPLS={
+ gold:   {name:'Klassik oltin', orn:'❦',      sw:'A&M', mono:false},
+ royal:  {name:'Qora oltin',    orn:'◆',      sw:'A&M', mono:true},
+ milliy: {name:'Milliy',        orn:'✦ ✧ ✦', sw:'✦',   mono:false},
+ deco:   {name:'Art Deco',      orn:'─ ◆ ─', sw:'◆',   mono:true},
+ sharob: {name:'Burgundy',      orn:'❧',      sw:'A&M', mono:false},
+ gulbarg:{name:'Pushti gul',    orn:'✿',      sw:'✿',   mono:false},
+ bog:    {name:'Botanika',      orn:'❦',      sw:'🌿',  mono:false},
+ yulduz: {name:'Yulduzli tun',  orn:'✦ ⋆ ✦', sw:'☾',   mono:false},
+ marmar: {name:'Marmar',        orn:'◆',      sw:'A·M', mono:true},
+ minimal:{name:'Minimal',       orn:'· · ·',  sw:'A&M', mono:false}
+};
+
+const DECO={
+ royal:['tl','tr','br','bl'].map(p=>`<svg class="dc dc-c dc-${p}" viewBox="0 0 80 80" aria-hidden="true"><path d="M4 44 V4 H44" fill="none" stroke="#b89a4e" stroke-width="2"/><path d="M14 54 V14 H54" fill="none" stroke="rgba(184,154,78,.5)" stroke-width="1.5"/><circle cx="4" cy="4" r="3" fill="#b89a4e"/></svg>`).join(''),
+ deco:`<svg class="dc dc-fan dc-fan-t" viewBox="0 0 160 70" aria-hidden="true"><g stroke="#d3b873" stroke-width="2" fill="none"><path d="M80 66 V8"/><path d="M80 66 L46 12"/><path d="M80 66 L114 12"/><path d="M80 66 L20 28"/><path d="M80 66 L140 28"/><path d="M80 66 L8 50"/><path d="M80 66 L152 50"/></g><circle cx="80" cy="66" r="5" fill="#d3b873"/></svg>
+ <svg class="dc dc-fan dc-fan-b" viewBox="0 0 160 70" aria-hidden="true"><g stroke="#d3b873" stroke-width="2" fill="none"><path d="M80 66 V8"/><path d="M80 66 L46 12"/><path d="M80 66 L114 12"/><path d="M80 66 L20 28"/><path d="M80 66 L140 28"/><path d="M80 66 L8 50"/><path d="M80 66 L152 50"/></g><circle cx="80" cy="66" r="5" fill="#d3b873"/></svg>`,
+ bog:['tl','br'].map(p=>`<svg class="dc dc-branch dc-${p}" viewBox="0 0 220 220" aria-hidden="true"><path d="M14 14 C 70 44 116 96 138 178" fill="none" stroke="#8aa680" stroke-width="2.5"/><g fill="#a9bf9e"><ellipse rx="19" ry="8" transform="translate(42,34) rotate(24)"/><ellipse rx="19" ry="8" transform="translate(58,58) rotate(60)" fill="#93ad88"/><ellipse rx="20" ry="8" transform="translate(84,72) rotate(30)"/><ellipse rx="20" ry="8" transform="translate(96,100) rotate(68)" fill="#93ad88"/><ellipse rx="21" ry="8" transform="translate(118,116) rotate(36)"/><ellipse rx="21" ry="8" transform="translate(126,148) rotate(74)" fill="#93ad88"/><ellipse rx="18" ry="7" transform="translate(140,164) rotate(42)"/></g></svg>`).join(''),
+ yulduz:`<span class="dc dc-moon" aria-hidden="true">☾</span>`
+};
+
+/* falling particles per template (view mode only) */
+const FX={
+ gold:   {kind:'char',ch:'✦',cs:['#cdb06a','#e6cf8f'],sz:[9,17],dur:[9,15],op:[.35,.75]},
+ royal:  {kind:'char',ch:'✦',cs:['#d4b96a','#f0e0ad'],sz:[9,18],dur:[8,14],op:[.4,.85]},
+ milliy: {kind:'char',ch:'✧',cs:['#7fd6d1','#e9c877'],sz:[10,18],dur:[9,15],op:[.4,.8]},
+ deco:   {kind:'char',ch:'◆',cs:['#d3b873'],sz:[7,13],dur:[8,13],op:[.35,.7]},
+ sharob: {kind:'bokeh',cs:['rgba(240,207,158,.55)','rgba(217,169,180,.45)'],sz:[10,26],dur:[10,16],op:[.35,.65]},
+ gulbarg:{kind:'petal',sz:[12,22],dur:[8,14],op:[.5,.9]},
+ bog:    {kind:'leaf',sz:[14,24],dur:[9,15],op:[.5,.85]},
+ yulduz: {kind:'char',ch:'✦',cs:['#ffffff','#b9c4ff','#e8ecff'],sz:[6,12],dur:[10,17],op:[.4,.9]},
+ marmar: {kind:'char',ch:'•',cs:['#c9b075'],sz:[5,9],dur:[11,17],op:[.25,.5]},
+ minimal:null
+};
+
+const KEYS=['t','l','g','b','d','h','v','a','f','m'];
+const state={t:'gold',l:'uz',g:'Azizbek',b:'Madinabonu',d:'2026-08-05',h:'18:00',
+             v:'Navro‘z to‘yxonasi',a:'Toshkent shahri, Chilonzor tumani',f:'Ahmadjonovlar oilasi',m:''};
+
+/* ---------- helpers ---------- */
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const b64e=s=>btoa(unescape(encodeURIComponent(s))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+const b64d=s=>decodeURIComponent(escape(atob(s.replace(/-/g,'+').replace(/_/g,'/'))));
+const rnd=(a,b)=>a+Math.random()*(b-a);
+function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('show'),2600);}
+
+function fmtDate(l,iso){
+  if(!iso)return'';
+  const p=iso.split('-').map(Number);if(p.length<3||!p[0])return esc(iso);
+  const dt=new Date(p[0],p[1]-1,p[2]),t=T[l];
+  const main=l==='en'?`${t.months[p[1]-1]} ${p[2]}, ${p[0]}`:t.date(p[2],t.months[p[1]-1],p[0]);
+  return `${main}<br><span style="font-size:.62em;opacity:.75">${t.wd[dt.getDay()]}</span>`;
+}
+const ini=s=>((s||'').trim()[0]||'').toUpperCase();
+
+/* ---------- card render ---------- */
+function cardHTML(s){
+  const t=T[s.l],cfg=TPLS[s.t];
+  return `${DECO[s.t]||''}
+  ${cfg.mono?`<div class="c-mono">${esc(ini(s.g))}<i>·</i>${esc(ini(s.b))}</div>`:''}
+  <div class="c-head">${t.head}</div>
+  <div class="c-salut">${t.salut}</div>
+  <div class="c-names"><div class="c-name">${esc(s.g)}</div><div class="c-amp">${t.amp}</div><div class="c-name">${esc(s.b)}</div></div>
+  <div class="c-invite">${t.invite}</div>
+  <div class="c-orn">${cfg.orn}</div>
+  <div class="c-date">${fmtDate(s.l,s.d)}</div>
+  ${s.h?`<div class="c-time">${t.time(esc(s.h))}</div>`:''}
+  ${s.v?`<div class="c-venue">${esc(s.v)}</div>`:''}
+  ${s.a?`<div class="c-addr">${esc(s.a)}</div>`:''}
+  ${s.f?`<div class="c-family">${t.respect} ${esc(s.f)}</div>`:''}
+  ${s.m?`<div class="c-msg">${esc(s.m)}</div>`:''}
+  <div class="c-wm">flarestamina.com</div>`;
+}
+function renderCard(){
+  const c=$('#card');
+  c.className='card tpl-'+state.t+' animate';
+  c.innerHTML=cardHTML(state);
+  [...c.children].forEach((el,i)=>el.style.setProperty('--i',i));
+}
+
+/* ---------- fit/scale ---------- */
+function fit(fitbox,scaler){
+  const avail=Math.min(fitbox.parentElement.clientWidth-8,520);
+  const s=Math.min(avail/720,1);
+  scaler.style.transform=`scale(${s})`;
+  fitbox.style.width=720*s+'px';
+  fitbox.style.height=1080*s+'px';
+}
+function refit(){
+  if(document.body.classList.contains('viewing'))fit($('#fitV'),$('#scalV'));
+  else fit($('#fitB'),$('#scalB'));
+}
+window.addEventListener('resize',refit);
+
+/* ---------- builder UI ---------- */
+function hideLink(){$('#linkbox').style.display='none';}
+const tplBar=$('#tpls');
+Object.entries(TPLS).forEach(([id,cfg])=>{
+  const d=document.createElement('div');
+  d.className='tpl'+(id===state.t?' on':'');d.dataset.t=id;
+  d.innerHTML=`<div class="sw sw-${id}">${cfg.sw}</div><small>${cfg.name}</small>`;
+  d.onclick=()=>{document.querySelectorAll('#tpls .tpl').forEach(x=>x.classList.remove('on'));
+    d.classList.add('on');state.t=id;renderCard();hideLink();startFxB();};
+  tplBar.appendChild(d);
+});
+document.querySelectorAll('#langs button').forEach(el=>el.onclick=()=>{
+  document.querySelectorAll('#langs button').forEach(x=>x.classList.remove('on'));
+  el.classList.add('on');state.l=el.dataset.l;renderCard();hideLink();
+});
+document.querySelectorAll('[data-k]').forEach(el=>el.addEventListener('input',()=>{
+  state[el.dataset.k]=el.value.trim();renderCard();hideLink();
+}));
+
+/* ---------- export ---------- */
+async function makeCanvas(){
+  await document.fonts.ready;
+  const holder=$('#exportHolder');
+  holder.innerHTML='';
+  const clone=$('#card').cloneNode(true);
+  clone.classList.remove('animate');
+  holder.appendChild(clone);
+  const canvas=await html2canvas(clone,{scale:1.5,useCORS:true,backgroundColor:'#ffffff'});
+  holder.innerHTML='';
+  return canvas;
+}
+async function withBusy(btn,fn){
+  btn.disabled=true;const old=btn.textContent;btn.textContent='⏳ Tayyorlanmoqda…';
+  try{await fn();}catch(e){console.error(e);toast('Xatolik yuz berdi 😕 qayta urinib ko‘ring');}
+  btn.disabled=false;btn.textContent=old;
+}
+$('#bPng').onclick=()=>withBusy($('#bPng'),async()=>{
+  const canvas=await makeCanvas();
+  const a=document.createElement('a');
+  a.download=`taklifnoma-${state.g}-${state.b}.png`;
+  a.href=canvas.toDataURL('image/png');
+  a.click();toast('PNG tayyor ✓');
+});
+$('#bPdf').onclick=()=>withBusy($('#bPdf'),async()=>{
+  const canvas=await makeCanvas();
+  const pdf=new window.jspdf.jsPDF({orientation:'portrait',unit:'mm',format:[148,222]});
+  pdf.addImage(canvas.toDataURL('image/jpeg',0.95),'JPEG',0,0,148,222);
+  pdf.save(`taklifnoma-${state.g}-${state.b}.pdf`);toast('PDF tayyor ✓');
+});
+
+/* ---------- animated video export ---------- */
+const VBG={gold:'#efe9da',royal:'#17140f',milliy:'#0e2148',deco:'#0a201c',sharob:'#31091a',
+           gulbarg:'#f9edec',bog:'#f2f5ee',yulduz:'#070c26',marmar:'#efede7',minimal:'#f2f2ef'};
+const easeOut=t=>1-Math.pow(1-t,3);
+$('#bVid').onclick=()=>withBusy($('#bVid'),async()=>{
+  if(typeof MediaRecorder==='undefined'||!HTMLCanvasElement.prototype.captureStream){
+    toast('Bu brauzer video yozishni qo‘llamaydi 😕');return;
+  }
+  const cardCv=await makeCanvas();
+  const W=720,H=1080,DUR=8;
+  const cfg=FX[state.t];
+
+  async function recordOnce(mime){
+    const rc=document.createElement('canvas');rc.width=W;rc.height=H;
+    const ctx=rc.getContext('2d');
+    let stream=rc.captureStream(0),track=stream.getVideoTracks()[0];
+    if(!track||typeof track.requestFrame!=='function'){stream=rc.captureStream(30);track=null;}
+    const rec=new MediaRecorder(stream,mime?{mimeType:mime,videoBitsPerSecond:6e6}:undefined);
+    const chunks=[];rec.ondataavailable=e=>{if(e.data.size)chunks.push(e.data);};
+    const stopped=new Promise(r=>rec.onstop=r);
+    const ps=[];
+    if(cfg)for(let i=0;i<24;i++)ps.push({
+      x:Math.random()*W,y:-40-Math.random()*H,v:H/rnd(cfg.dur[0],cfg.dur[1]),
+      dx:rnd(-12,12),sz:rnd(cfg.sz[0],cfg.sz[1]),o:rnd(cfg.op[0],cfg.op[1]),
+      rot:rnd(0,6.28),vr:rnd(-1.2,1.2),
+      c:cfg.cs?cfg.cs[Math.floor(Math.random()*cfg.cs.length)]:''});
+    function drawP(p,dt,fade){
+      p.y+=p.v*dt;p.x+=p.dx*dt;p.rot+=p.vr*dt;
+      if(p.y>H+40){p.y=-40;p.x=Math.random()*W;}
+      ctx.save();ctx.globalAlpha=p.o*fade;ctx.translate(p.x,p.y);ctx.rotate(p.rot);
+      if(cfg.kind==='char'){ctx.fillStyle=p.c;ctx.font=p.sz+'px serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(cfg.ch,0,0);}
+      else if(cfg.kind==='bokeh'){ctx.fillStyle=p.c;ctx.shadowColor=p.c;ctx.shadowBlur=8;ctx.beginPath();ctx.arc(0,0,p.sz/2,0,7);ctx.fill();}
+      else{ctx.fillStyle=cfg.kind==='petal'?'#eeadb6':'#93ad88';ctx.beginPath();ctx.ellipse(0,0,p.sz/2,p.sz*(cfg.kind==='petal'?.31:.24),0,0,7);ctx.fill();}
+      ctx.restore();
+    }
+    rec.start(200);
+    let last=performance.now();const t0=last;
+    await new Promise(res=>{
+      const iv=setInterval(()=>{
+        const now=performance.now();
+        const t=(now-t0)/1000,dt=Math.min(.05,(now-last)/1000);last=now;
+        ctx.globalAlpha=1;ctx.shadowBlur=0;
+        ctx.fillStyle=VBG[state.t]||'#efe9da';ctx.fillRect(0,0,W,H);
+        const e=easeOut(Math.min(1,Math.max(0,(t-.25)/1.3)));
+        const s=(.955+.045*e)*(1+.012*t/DUR);
+        const w=W*s,h=H*s;
+        ctx.globalAlpha=e;
+        ctx.drawImage(cardCv,(W-w)/2,(H-h)/2+(1-e)*46,w,h);
+        ctx.globalAlpha=1;
+        if(cfg){const fade=Math.min(1,Math.max(0,(t-.9)/.8));if(fade>0)ps.forEach(p=>drawP(p,dt,fade));}
+        if(track)track.requestFrame();
+        if(t>=DUR){clearInterval(iv);try{rec.stop();}catch(err){}res();}
+      },33);
+    });
+    await stopped;
+    return new Blob(chunks,{type:rec.mimeType||mime||'video/webm'});
+  }
+
+  const mimes=['video/mp4','video/webm;codecs=vp9','video/webm'].filter(m=>MediaRecorder.isTypeSupported(m));
+  let blob=await recordOnce(mimes[0]);
+  if(!blob.size){
+    const alt=mimes.find(m=>m!==mimes[0]);
+    if(alt)blob=await recordOnce(alt);
+  }
+  if(!blob.size){toast('Video yozib bo‘lmadi 😕');return;}
+  const ext=blob.type.includes('mp4')?'mp4':'webm';
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download=`taklifnoma-${state.g}-${state.b}.${ext}`;
+  a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),8000);
+  toast('Animatsiyali video tayyor ✓');
+});
+
+/* ---------- live link ---------- */
+function baseURL(){
+  if(location.protocol==='file:')return'https://flarestamina.com/wedding/';
+  return location.origin+location.pathname;
+}
+function makeLink(){return baseURL()+'?d='+b64e(JSON.stringify(state));}
+$('#bLink').onclick=async()=>{
+  const url=makeLink();
+  const box=$('#linkbox'),inp=$('#linkInp');
+  inp.value=url;box.style.display='block';
+  try{await navigator.clipboard.writeText(url);}catch(e){inp.focus();inp.select();}
+  toast('Jonli link nusxalandi ✓');
+};
+$('#bTg').onclick=()=>{
+  const url=makeLink();
+  window.open('https://t.me/share/url?url='+encodeURIComponent(url)+'&text='+encodeURIComponent('To‘y taklifnomasi 💍'),'_blank');
+};
+
+/* ---------- particles ---------- */
+let fxTimer=null,fxbTimer=null;
+function spawnFx(cfg,pre,host){
+  if(document.querySelectorAll('.fx').length>26)return;
+  const isChar=cfg.kind==='char';
+  const e=document.createElement(isChar?'span':'i');
+  e.className='fx'+(isChar?'':' fx-'+cfg.kind)+(host?' inbox':'');
+  const sz=rnd(cfg.sz[0],cfg.sz[1]);
+  if(isChar){e.textContent=cfg.ch;e.style.fontSize=sz+'px';e.style.color=cfg.cs[Math.floor(Math.random()*cfg.cs.length)];}
+  else if(cfg.kind==='bokeh'){e.style.width=e.style.height=sz+'px';e.style.background=cfg.cs[Math.floor(Math.random()*cfg.cs.length)];}
+  else if(cfg.kind==='petal'){e.style.width=sz+'px';e.style.height=sz*.62+'px';}
+  else if(cfg.kind==='leaf'){e.style.width=sz*1.1+'px';e.style.height=sz*.48+'px';}
+  e.style.left=Math.random()*100+(host?'%':'vw');
+  if(host)e.style.setProperty('--fall',host.clientHeight+90+'px');
+  e.style.setProperty('--dx',rnd(-90,90)+'px');
+  e.style.setProperty('--rot',rnd(-300,300)+'deg');
+  e.style.setProperty('--o',rnd(cfg.op[0],cfg.op[1]));
+  e.style.animationDuration=rnd(cfg.dur[0],cfg.dur[1])+'s';
+  if(pre)e.style.animationDelay=-rnd(0,6)+'s';
+  e.addEventListener('animationend',()=>e.remove());
+  (host||document.body).appendChild(e);
+}
+function startFx(){
+  const cfg=FX[state.t];if(!cfg)return;
+  for(let i=0;i<7;i++)spawnFx(cfg,true);
+  fxTimer=setInterval(()=>spawnFx(cfg),650);
+}
+function startFxB(){
+  clearInterval(fxbTimer);
+  const host=$('#fxprev');if(!host)return;
+  host.innerHTML='';
+  const cfg=FX[state.t];if(!cfg)return;
+  for(let i=0;i<5;i++)spawnFx(cfg,true,host);
+  fxbTimer=setInterval(()=>spawnFx(cfg,false,host),800);
+}
+
+/* ---------- view mode ---------- */
+let cdTimer=null;
+function enterView(){
+  clearInterval(fxbTimer);
+  document.body.classList.add('viewing');
+  document.body.dataset.vt=state.t;
+  $('#builder').style.display='none';
+  $('#view').style.display='flex';
+  $('#scalV').appendChild($('#card'));
+  renderCard();
+  const t=T[state.l];
+  $('#cdTitle').textContent=t.cdTitle;
+  const map=$('#vMap');
+  if(state.v||state.a){
+    map.textContent=t.map;
+    map.href='https://maps.google.com/?q='+encodeURIComponent([state.v,state.a].filter(Boolean).join(', '));
+  }else map.style.display='none';
+  const sh=$('#vShare');sh.textContent=t.share;
+  sh.onclick=async ev=>{ev.preventDefault();
+    const url=location.href;
+    if(navigator.share){try{await navigator.share({title:'💍',url});}catch(e){}}
+    else{try{await navigator.clipboard.writeText(url);toast('Link nusxalandi ✓');}catch(e){}}
+  };
+  const cta=$('#vCta');cta.textContent=t.cta;cta.href=baseURL();
+  startCountdown();startFx();refit();
+}
+function startCountdown(){
+  const t=T[state.l],cd=$('#cd');
+  const target=new Date(state.d+'T'+(state.h||'00:00')+':00').getTime();
+  if(isNaN(target)){$('#cdTitle').style.display='none';cd.style.display='none';return;}
+  cd.innerHTML=t.units.map(u=>`<div><b>–</b><span>${u}</span></div>`).join('');
+  const cells=[...cd.querySelectorAll('b')];
+  function tick(){
+    let ms=target-Date.now();
+    if(ms<=0){cd.innerHTML=`<div class="cd-over" style="width:auto;background:none;box-shadow:none">${t.over}</div>`;clearInterval(cdTimer);return;}
+    const vals=[Math.floor(ms/864e5),Math.floor(ms%864e5/36e5),Math.floor(ms%36e5/6e4),Math.floor(ms%6e4/1e3)];
+    vals.forEach((n,i)=>{const el=cells[i];if(el.textContent!==String(n)){el.textContent=n;el.classList.remove('pop');void el.offsetWidth;el.classList.add('pop');}});
+  }
+  tick();cdTimer=setInterval(tick,1000);
+}
+
+/* ---------- init ---------- */
+(function init(){
+  const q=new URLSearchParams(location.search);
+  const enc=q.get('d');
+  if(enc){
+    try{
+      const data=JSON.parse(b64d(enc));
+      KEYS.forEach(k=>{if(typeof data[k]==='string')state[k]=data[k].slice(0,300);});
+      if(!T[state.l])state.l='uz';
+      if(!TPLS[state.t])state.t='gold';
+      renderCard();enterView();return;
+    }catch(e){console.warn('bad link data',e);}
+  }
+  renderCard();refit();startFxB();
+})();
+</script>
+</body>
+</html>
