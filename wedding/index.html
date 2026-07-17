@@ -276,6 +276,7 @@ body[data-vt=minimal]{--v-bg:#f2f2ef;--v-panel:#fff;--v-tx:#232323;--v-title:#8b
       </div>
       <div class="field"><label>To‘yxona nomi</label><input data-k="v" maxlength="60" value="Navro‘z to‘yxonasi"></div>
       <div class="field"><label>Manzil</label><input data-k="a" maxlength="90" value="Toshkent shahri, Chilonzor tumani"></div>
+      <div class="field"><label>Lokatsiya — Yandex/Google xaritadan havola yoki koordinata (ixtiyoriy)</label><input data-k="loc" maxlength="280" placeholder="https://yandex.uz/maps/... yoki 41.311081, 69.240562"></div>
       <div class="field"><label>Taklif qiluvchi (masalan: Ahmadjonovlar oilasi)</label><input data-k="f" maxlength="60" value="Ahmadjonovlar oilasi"></div>
       <div class="field"><label>Qo‘shimcha matn (ixtiyoriy)</label><textarea data-k="m" rows="2" maxlength="160"></textarea></div>
 
@@ -304,7 +305,7 @@ body[data-vt=minimal]{--v-bg:#f2f2ef;--v-panel:#fff;--v-tx:#232323;--v-title:#8b
   <div class="vpanel">
     <div class="cd-title" id="cdTitle"></div>
     <div class="cd" id="cd"></div>
-    <div class="vbtns"><a class="v-map" id="vMap" target="_blank" rel="noopener"></a><a class="v-share" id="vShare"></a></div>
+    <div class="vbtns"><a class="v-map" id="vYmap" target="_blank" rel="noopener"></a><a class="v-map" id="vGmap" target="_blank" rel="noopener"></a><a class="v-share" id="vShare"></a></div>
   </div>
   <a class="v-cta" id="vCta"></a>
 </div>
@@ -382,9 +383,9 @@ const FX={
  minimal:null
 };
 
-const KEYS=['t','l','g','b','d','h','v','a','f','m'];
+const KEYS=['t','l','g','b','d','h','v','a','f','m','loc'];
 const state={t:'gold',l:'uz',g:'Azizbek',b:'Madinabonu',d:'2026-08-05',h:'18:00',
-             v:'Navro‘z to‘yxonasi',a:'Toshkent shahri, Chilonzor tumani',f:'Ahmadjonovlar oilasi',m:''};
+             v:'Navro‘z to‘yxonasi',a:'Toshkent shahri, Chilonzor tumani',f:'Ahmadjonovlar oilasi',m:'',loc:''};
 
 /* ---------- helpers ---------- */
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -619,6 +620,32 @@ function startFxB(){
   fxbTimer=setInterval(()=>spawnFx(cfg,false,host),800);
 }
 
+/* ---------- map links (Yandex + Google) ---------- */
+function mapLinks(){
+  const raw=(state.loc||'').trim();
+  const q=[state.v,state.a].filter(Boolean).join(', ');
+  let lat=null,lon=null,gUrl=null,yUrl=null,m;
+  if(raw){
+    if(/yandex/i.test(raw)&&(m=raw.match(/[?&](?:ll|pt)=(-?[\d.]+)(?:%2C|,)(-?[\d.]+)/i))){lon=+m[1];lat=+m[2];}
+    else if(m=raw.match(/(-?\d{1,3}\.\d{3,})\s*(?:,|%2C)\s*(-?\d{1,3}\.\d{3,})/i)){lat=+m[1];lon=+m[2];}
+    if(lat!=null&&Math.abs(lat)>90){const t=lat;lat=lon;lon=t;}
+    // O'zbekiston uchun lat/lon o'rni adashgan bo'lsa to'g'irlash
+    if(lat!=null&&lon!=null&&lat>=55&&lat<=74&&lon>=37&&lon<=46){const t=lat;lat=lon;lon=t;}
+    if(/^https?:\/\//i.test(raw)){
+      if(/yandex/i.test(raw))yUrl=raw;
+      else if(/google|goo\.gl|maps\.app/i.test(raw))gUrl=raw;
+    }
+  }
+  if(lat!=null&&lon!=null){
+    if(!gUrl)gUrl=`https://maps.google.com/?q=${lat},${lon}`;
+    yUrl=`https://yandex.uz/maps/?pt=${lon},${lat}&z=17&l=map`;
+  }else if(q){
+    if(!gUrl)gUrl='https://maps.google.com/?q='+encodeURIComponent(q);
+    if(!yUrl)yUrl='https://yandex.uz/maps/?text='+encodeURIComponent(q);
+  }
+  return{gUrl,yUrl};
+}
+
 /* ---------- view mode ---------- */
 let cdTimer=null;
 function enterView(){
@@ -631,11 +658,10 @@ function enterView(){
   renderCard();
   const t=T[state.l];
   $('#cdTitle').textContent=t.cdTitle;
-  const map=$('#vMap');
-  if(state.v||state.a){
-    map.textContent=t.map;
-    map.href='https://maps.google.com/?q='+encodeURIComponent([state.v,state.a].filter(Boolean).join(', '));
-  }else map.style.display='none';
+  const{gUrl,yUrl}=mapLinks();
+  const ym=$('#vYmap'),gm=$('#vGmap');
+  if(yUrl){ym.textContent='📍 Yandex Maps';ym.href=yUrl;}else ym.style.display='none';
+  if(gUrl){gm.textContent='📍 Google Maps';gm.href=gUrl;}else gm.style.display='none';
   const sh=$('#vShare');sh.textContent=t.share;
   sh.onclick=async ev=>{ev.preventDefault();
     const url=location.href;
