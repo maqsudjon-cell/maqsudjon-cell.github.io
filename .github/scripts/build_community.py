@@ -307,12 +307,20 @@ def article_page(a, slug, author_slug):
            share_enc=urllib.parse.quote('"%s" — %s (Flarestamina)' % (a['title'], a['author']), safe=''))
 
 
-def author_page(author, center, link, items):
+def load_featured():
+    try:
+        return set(json.load(open(os.path.join(ROOT, 'news/featured.json')))['authors'])
+    except Exception:
+        return set()
+
+
+def author_page(author, center, link, items, featured=False):
     slug = slugify(author)
     url = '%s/news/t/%s/' % (SITE, slug)
     link = safe_url(link)
     desc = 'IELTS articles by %s%s on Flarestamina — free IELTS practice for students in Uzbekistan.' % (
         author, (' (' + center + ')') if center else '')
+    star = ' <span style="font-size:11px;color:#000;background:#FF5A1F;border-radius:5px;padding:2px 8px;vertical-align:middle">★ FEATURED</span>' if featured else ''
     cards = ''
     for it in items:
         cards += ('<a class="post-card" href="/news/a/%s/">'
@@ -349,7 +357,7 @@ def author_page(author, center, link, items):
   <p class="crumbs"><a href="/news/">← news</a> / <a href="/news/#articles">articles</a></p>
   <div class="a-author big" style="border:none;padding-top:6px">
     <span class="a-ava" style="width:46px;height:46px;font-size:19px">{ava}</span>
-    <div><b style="font-size:20px">{author}</b>{center}</div>
+    <div><b style="font-size:20px">{author}</b>{star}{center}</div>
   </div>
   <p class="sub">{n} article{s} on Flarestamina.{linkline}</p>
 </section>
@@ -368,6 +376,7 @@ def author_page(author, center, link, items):
 </html>
 '''.format(head=HEAD_COMMON, author=escape(author), desc=escape(desc), url=url, site=SITE,
            ld=json.dumps(ld, ensure_ascii=False), header=HEADER, footer=FOOTER,
+           star=star,
            ava=escape(author[:1].upper()),
            center=('<i>%s</i>' % escape(center)) if center else '',
            n=len(items), s='' if len(items) == 1 else 's',
@@ -414,12 +423,13 @@ def main():
     by_author = {}
     for e in entries:
         by_author.setdefault(e['author_slug'], []).append(e)
+    featured = load_featured()
     for aslug, items in by_author.items():
         a0 = items[0]['a']
         out = os.path.join(ROOT, 'news/t', aslug)
         os.makedirs(out, exist_ok=True)
         with open(os.path.join(out, 'index.html'), 'w', encoding='utf-8') as f:
-            f.write(author_page(a0['author'], a0['center'], a0['link'], items))
+            f.write(author_page(a0['author'], a0['center'], a0['link'], items, aslug in featured))
         print('  author:', aslug, '(%d)' % len(items))
 
     with open(os.path.join(ROOT, 'news/articles-index.json'), 'w', encoding='utf-8') as f:

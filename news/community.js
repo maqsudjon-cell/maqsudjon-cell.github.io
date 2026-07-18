@@ -116,6 +116,7 @@
                : '<a class="a-link" href="' + esc(a.link) + '" target="_blank" rel="noopener nofollow ugc">' + linkText + '</a>';
     var badge = isBoth(a) ? '<span class="lang-badge">EN · UZ</span>'
                           : '<span class="lang-badge">' + (l === 'uz' ? 'UZ' : 'EN') + '</span>';
+    if (a.featured) badge = '<span class="feat-badge">★ featured</span>' + badge;
     var inner =
       '<div class="meta"><span class="chip article">article</span>' + badge + '<time>' + esc(fmtDate(a.date)) + '</time></div>' +
       '<h2>' + esc(title) + '</h2>' +
@@ -178,6 +179,9 @@
     // id -> slug map produced by .github/scripts/build_community.py
     var idxReq = fetch('/news/articles-index.json').then(function (r) { return r.json(); })
       .then(function (j) { return (j.articles || {}); }).catch(function () { return {}; });
+    // paid "featured teacher" slots — author slugs listed in featured.json get pinned + starred
+    var featReq = fetch('/news/featured.json').then(function (r) { return r.json(); })
+      .then(function (j) { return (j.authors || []); }).catch(function () { return []; });
     var fsReq = runQuery('articles', 'date', 60).then(function (docs) {
       return docs.map(function (d) {
         return { id: docId(d), title: fv(d, 'title'), body: fv(d, 'body'),
@@ -186,11 +190,17 @@
                  date: fv(d, 'date'), hidden: fv(d, 'hidden') === true };
       }).filter(function (a) { return a.title && a.body && a.title !== '__test__' && !a.hidden; });
     }).catch(function () { return []; });
-    Promise.all([seedReq, fsReq, idxReq]).then(function (res) {
-      var idx = res[2] || {};
+    Promise.all([seedReq, fsReq, idxReq, featReq]).then(function (res) {
+      var idx = res[2] || {}, feat = res[3] || [];
       all = res[1].concat(res[0]);
-      all.forEach(function (a) { if (idx[a.id]) a.slug = idx[a.id].slug; });
-      all.sort(function (a, b) { return (b.date || '').localeCompare(a.date || ''); });
+      all.forEach(function (a) {
+        if (idx[a.id]) { a.slug = idx[a.id].slug; a.author_slug = idx[a.id].author_slug; }
+        a.featured = feat.indexOf(a.author_slug) >= 0;
+      });
+      all.sort(function (a, b) {
+        if (a.featured !== b.featured) return a.featured ? -1 : 1;
+        return (b.date || '').localeCompare(a.date || '');
+      });
       if (!all.length) { box.innerHTML = '<p class="c-loading">No articles yet — be the first: <a href="/writearticle/">write one</a></p>'; return; }
       box.innerHTML = all.map(articleCard).join('');
       // only the not-yet-generated cards need the modal fallback
