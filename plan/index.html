@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark light">
+<script>(function(){var t="dark";try{t=localStorage.getItem("p8-theme")||"dark";}catch(e){}document.documentElement.setAttribute("data-theme",t);})();function fsTheme(){var d=document.documentElement,n=d.getAttribute("data-theme")==="light"?"dark":"light";d.setAttribute("data-theme",n);try{localStorage.setItem("p8-theme",n);}catch(e){}}</script>
+<meta name="theme-color" content="#0A0605">
+<title>IELTS Study Plan Generator — shaxsiy o'quv reja | Flarestamina</title>
+<meta name="description" content="Bepul IELTS o'quv reja generatori: hozirgi balingiz, maqsadingiz va imtihongacha qolgan vaqtni tanlang — haftama-hafta shaxsiy reja tayyor. Halol baho: vaqt yetadimi yoki yo'qmi. Chop etish va ulashish mumkin.">
+<link rel="canonical" href="https://flarestamina.com/plan/">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="keywords" content="IELTS study plan, IELTS o'quv reja, IELTS 90 kunlik reja, IELTS preparation plan, IELTS reja tuzish, study plan generator, IELTS tayyorlanish rejasi">
+<meta property="og:site_name" content="Flarestamina">
+<meta property="og:type" content="website">
+<meta property="og:title" content="IELTS Study Plan Generator — shaxsiy o'quv reja">
+<meta property="og:description" content="Band + maqsad + vaqt → haftama-hafta shaxsiy reja. Halol baho va bepul mock testlar bilan.">
+<meta property="og:url" content="https://flarestamina.com/plan/">
+<meta property="og:image" content="https://flarestamina.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="IELTS Study Plan Generator">
+<meta name="twitter:image" content="https://flarestamina.com/og-image.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://flarestamina.com/plan/#app",
+      "name": "IELTS Study Plan Generator",
+      "url": "https://flarestamina.com/plan/",
+      "applicationCategory": "EducationApplication",
+      "operatingSystem": "Web",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "description": "Free personal IELTS study plan generator: pick your current band, target band and weeks until the exam — get an honest week-by-week plan.",
+      "publisher": { "@id": "https://flarestamina.com/#org" },
+      "inLanguage": ["uz", "en"]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "IELTS'da 0.5 ball ko'tarish qancha vaqt oladi?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Har kuni 45–60 daqiqa jiddiy mashq bilan 0.5 band odatda 6–8 hafta oladi. 1.0 band — taxminan 3 oy. Haftada bir marta uzoq o'tirish kunlik odatning o'rnini bosa olmaydi." } },
+        { "@type": "Question", "name": "IELTS'ga necha oy oldin tayyorgarlikni boshlash kerak?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Maqsad hozirgi darajadan 1.0 band yuqori bo'lsa — kamida 3 oy. Imtihonni mock natijalaringiz maqsaddan 0.5 yuqori bo'lganda band qiling: imtihon kuni stress odatda 0.5 ballni yeydi." } }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Flarestamina", "item": "https://flarestamina.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Study Plan", "item": "https://flarestamina.com/plan/" }
+      ]
+    }
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/news/news.css">
+<style>
+.pl-wrap{max-width:760px;margin:0 auto;padding:0 24px}
+.uilang{display:inline-flex;gap:2px;border:1px solid var(--line);border-radius:8px;padding:2px;background:var(--surface)}
+.uilang button{font-family:var(--mono);font-size:11px;color:var(--muted);background:transparent;border:none;border-radius:6px;padding:5px 9px;cursor:pointer}
+.uilang button.on{color:#000;background:var(--flare)}
+html[data-theme="light"] .uilang button.on{color:#fff}
+.pl-hero{padding:46px 0 8px}
+.pl-hero .kicker{font-size:11px;letter-spacing:2.2px;text-transform:uppercase;color:var(--flare-soft);font-weight:500}
+.pl-hero h1{font-size:clamp(24px,4.6vw,34px);font-weight:700;letter-spacing:-.6px;line-height:1.25;margin-top:10px}
+.pl-hero h1 .fl{color:var(--flare)}
+.pl-hero p{color:var(--muted);font-size:13.5px;margin-top:10px;max-width:60ch}
+.qs{margin-top:26px;display:flex;flex-direction:column;gap:18px}
+.q label{display:block;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:var(--dim);margin-bottom:9px;font-weight:500}
+.opts{display:flex;gap:6px;flex-wrap:wrap}
+.opts button{
+  font-family:var(--mono);font-size:13.5px;font-weight:700;color:var(--muted);
+  background:var(--surface);border:1px solid var(--line);border-radius:11px;
+  min-width:54px;padding:10px 14px;cursor:pointer;transition:all .15s;
+}
+.opts button:hover{border-color:var(--flare);color:var(--text)}
+.opts button.on{color:#000;background:var(--flare);border-color:var(--flare)}
+html[data-theme="light"] .opts button.on{color:#fff}
+.gen{
+  font-family:var(--mono);font-size:15px;font-weight:700;color:#000;background:var(--flare);
+  border:none;border-radius:12px;padding:15px 30px;cursor:pointer;margin-top:8px;width:100%;
+  transition:transform .12s,box-shadow .12s;
+}
+html[data-theme="light"] .gen{color:#fff}
+.gen:hover{transform:translateY(-1px);box-shadow:0 14px 34px -14px rgba(255,90,31,.6)}
+#result{margin-top:34px}
+.verdict{border-radius:var(--r);padding:18px 22px;font-size:13.5px;line-height:1.7;border:1px solid}
+.verdict.ok{border-color:rgba(74,222,128,.45);background:rgba(74,222,128,.08)}
+.verdict.tight{border-color:rgba(255,164,92,.5);background:var(--amber-dim)}
+.verdict.hard{border-color:rgba(215,25,33,.5);background:var(--red-dim)}
+.verdict b{display:block;font-size:15px;margin-bottom:4px}
+.phase{margin-top:18px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);padding:18px 22px}
+.phase h3{font-size:14px;letter-spacing:-.2px}
+.phase .ph-meta{font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--flare-soft);margin-bottom:8px;font-weight:700}
+.phase ul{margin:10px 0 0 18px;font-size:13px;color:var(--prose)}
+.phase li{margin-bottom:7px;line-height:1.6}
+.phase a{color:var(--flare-soft);text-decoration:none}
+.phase a:hover{text-decoration:underline}
+.pr-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.pr-actions button,.pr-actions a{
+  font-family:var(--mono);font-size:12.5px;font-weight:700;color:var(--text);text-decoration:none;
+  background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:11px 18px;cursor:pointer;
+}
+.pr-actions button:hover,.pr-actions a:hover{border-color:var(--flare);color:var(--flare)}
+@media print{
+  header.site,.pl-hero p,.qs,.gen,.pr-actions,footer.site,.uilang,.theme-btn,.cta,.more{display:none!important}
+  body{background:#fff!important;color:#000!important}
+  .phase,.verdict{border-color:#ccc!important;background:#fff!important;color:#000!important;break-inside:avoid}
+  .phase ul{color:#222!important}
+}
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="wrap bar">
+    <a class="brand" href="/">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#FF5A1F" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 9.5V1.5M14.5 12h7M12 14.5V19M9.5 12H4"/></svg>
+      <span><span class="fl">FLARE</span>STAMINA</span>
+    </a>
+    <nav aria-label="Site">
+      <a href="/ielts-hub/">practice</a>
+      <a href="/news/">news</a>
+      <div class="uilang" role="tablist" aria-label="Language"><button data-ui="uz" class="on">UZ</button><button data-ui="en">EN</button></div>
+      <button class="theme-btn" onclick="fsTheme()" aria-label="Toggle theme" title="Light / dark">◐</button>
+    </nav>
+  </div>
+</header>
+
+<section class="pl-hero pl-wrap">
+  <p class="kicker" data-k="kicker">Bepul · 30 soniya · Chop etsa bo'ladi</p>
+  <h1 data-k="h1">Shaxsiy IELTS <span class="fl">o'quv reja</span> generatori</h1>
+  <p data-k="lead">Uchta savolga javob bering — haftama-hafta reja va halol baho oling: vaqtingiz yetadimi yoki imtihonni surish kerakmi.</p>
+</section>
+
+<div class="pl-wrap">
+  <div class="qs">
+    <div class="q"><label data-k="q1">1 · Hozirgi balingiz (mock natijasi)</label>
+      <div class="opts" id="qCur"></div></div>
+    <div class="q"><label data-k="q2">2 · Maqsad band</label>
+      <div class="opts" id="qTgt"></div></div>
+    <div class="q"><label data-k="q3">3 · Imtihongacha necha hafta bor?</label>
+      <div class="opts" id="qWk">
+        <button data-v="4">4</button><button data-v="8" class="on">8</button><button data-v="12">12</button><button data-v="16">16</button><button data-v="24">24+</button>
+      </div></div>
+    <div class="q"><label data-k="q4">4 · Eng kuchsiz bo'limingiz</label>
+      <div class="opts" id="qWeak">
+        <button data-v="listening">Listening</button><button data-v="reading">Reading</button>
+        <button data-v="writing" class="on">Writing</button><button data-v="speaking">Speaking</button>
+      </div></div>
+    <button class="gen" id="go" data-k="gen">Rejani tuzish →</button>
+  </div>
+
+  <div id="result" hidden></div>
+
+  <a class="cta" href="/ielts-hub/" style="margin-top:34px">
+    <div class="t" data-k="ctaT">Reja mock testsiz ishlamaydi <span class="fl">→</span></div>
+    <div class="s" data-k="ctaS">100+ bepul IELTS mock — real formatda, bir zumda band ball</div>
+  </a>
+  <p class="more" style="margin:26px 0 0"><a href="/deadlines/" data-k="l1">Grant muddatlari →</a> · <a href="/convert/" data-k="l2">Ball konvertori →</a> · <a href="/speaking-topics/" data-k="l3">Speaking mavzular →</a></p>
+</div>
+
+<footer class="site" style="margin-top:56px">
+  <div class="wrap row">
+    <span>© 2026 <a href="/">Flarestamina</a> · built by <a href="/founder/">Maqsudjon Polatov</a></span>
+    <span><a href="https://t.me/flarestamina" rel="noopener">telegram</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+'use strict';
+var T={
+ uz:{kicker:"Bepul · 30 soniya · Chop etsa bo'ladi",
+  h1:'Shaxsiy IELTS <span class="fl">o\'quv reja</span> generatori',
+  lead:"Uchta savolga javob bering — haftama-hafta reja va halol baho oling: vaqtingiz yetadimi yoki imtihonni surish kerakmi.",
+  q1:"1 · Hozirgi balingiz (mock natijasi)", q2:"2 · Maqsad band", q3:"3 · Imtihongacha necha hafta bor?", q4:"4 · Eng kuchsiz bo'limingiz",
+  gen:"Rejani tuzish →", ctaT:"Reja mock testsiz ishlamaydi", ctaS:"100+ bepul IELTS mock — real formatda, bir zumda band ball",
+  l1:"Grant muddatlari →", l2:"Ball konvertori →", l3:"Speaking mavzular →",
+  vOkT:"✅ Real maqsad", vOk:"Bu masofa uchun vaqtingiz yetarli. Quyidagi rejaga har kuni 45–60 daqiqa bering — mock'laringiz {t} ga chiqqanda imtihonni band qiling.",
+  vTightT:"⚠️ Tig'iz, lekin mumkin", vTight:"Qoida: 0.5 band ≈ 6–8 hafta kunlik mashq. Sizning masofangiz uchun vaqt tig'iz — reja har kuni bajarilsagina yetadi. Bitta ehtiyot varianti: {osr} dan xabardor bo'ling.",
+  vHardT:"❌ Halol gap: vaqt yetmaydi", vHard:"{d} band ko'tarish uchun {need}+ hafta kerak, sizda {w} hafta bor. Ikki yo'l: imtihon sanasini suring, yoki maqsadni bosqichlab oling (avval {mid}). Baribir reja quyida — maksimal foyda uchun.",
+  osr:"One Skill Retake (bitta bo'limni qayta topshirish)",
+  ph1:"1-bosqich — Diagnostika va poydevor", ph2:"2-bosqich — Hajm", ph3:"3-bosqich — Imtihon rejimi",
+  wk:"hafta", perday:"har kuni 45–60 daq",
+  print:"🖨 Chop etish / PDF", share:"↗ Telegram'da ulashish", redo:"↺ Qayta tuzish",
+  p1:["To'liq mock bilan boshlang — <a href='/ielts-hub/'>bepul, hub'da</a>: real boshlang'ich nuqtangizni biling.",
+      "Har kuni faqat <b>{weak}</b> ustida ishlang: bitta section, keyin har xatoning SABABI tahlili.",
+      "Xatolar daftari yuriting — 10 sessiondan keyin naqsh chiqadi.",
+      "Haftada 2 marta: <a href='/speaking-topics/'>Speaking mavzular</a>dan 2 ta hikoya tayyorlang."],
+  p2:["Kuniga bitta to'liq section (aralash) + kuchsiz bo'limga qo'shimcha 20 daq.",
+      "Har hafta 1 ta <a href='/mock/'>to'liq mock</a> — real vaqtda, tanaffussiz.",
+      "Writing: haftada 3 essay, bir xil turda — <a href='/writing/'>Writing lab</a>da tekshiring.",
+      "Speaking: o'zingizni yozib oling va qayta eshiting — <a href='/speaking/'>Speaking lab</a>."],
+  p3:["Har mock — imtihon simulyatsiyasi: telefonsiz, real taymer bilan.",
+      "Faqat xato TURLARINGIZNI qaytaring: yangi material yo'q, mustahkamlash bor.",
+      "Mock'lar barqaror maqsad+0.5 ko'rsatsa — tayyorsiz. <a href='/band-calculator/'>Band kalkulyator</a> bilan tekshiring.",
+      "Oxirgi 3 kun: yengil takror, uyqu, va <a href='/news/computer-vs-paper-ielts-results/'>natija muddatlari</a>ni bilib qo'ying."]},
+ en:{kicker:"Free · 30 seconds · Printable",
+  h1:'Personal IELTS <span class="fl">study plan</span> generator',
+  lead:"Answer three questions — get a week-by-week plan and an honest verdict: is your timeline enough, or should you move the exam?",
+  q1:"1 · Current band (mock result)", q2:"2 · Target band", q3:"3 · Weeks until the exam", q4:"4 · Weakest skill",
+  gen:"Build my plan →", ctaT:"A plan doesn't work without mocks", ctaS:"100+ free IELTS mocks — real format, instant band scores",
+  l1:"Deadlines →", l2:"Score converter →", l3:"Speaking topics →",
+  vOkT:"✅ Realistic goal", vOk:"Your timeline fits this distance. Give the plan 45–60 minutes daily — book the exam once your mocks hit {t}.",
+  vTightT:"⚠️ Tight, but possible", vTight:"Rule of thumb: 0.5 band ≈ 6–8 weeks of daily work. Your window is tight — the plan only works if you do it every day. Keep {osr} in mind as a safety net.",
+  vHardT:"❌ Honest verdict: not enough time", vHard:"Raising {d} band needs {need}+ weeks; you have {w}. Two options: move the exam date, or stage the goal (reach {mid} first). The plan below still maximises what you can gain.",
+  osr:"One Skill Retake",
+  ph1:"Phase 1 — Diagnose & foundation", ph2:"Phase 2 — Volume", ph3:"Phase 3 — Exam mode",
+  wk:"weeks", perday:"45–60 min daily",
+  print:"🖨 Print / PDF", share:"↗ Share on Telegram", redo:"↺ Rebuild",
+  p1:["Start with one full mock — <a href='/ielts-hub/'>free, on the hub</a>: know your true baseline.",
+      "Work only on <b>{weak}</b> daily: one section, then analyse WHY each miss happened.",
+      "Keep a mistake journal — a pattern appears after ~10 sessions.",
+      "Twice a week: prepare 2 flexible stories from <a href='/speaking-topics/'>Speaking topics</a>."],
+  p2:["One full section daily (mixed skills) + 20 extra minutes on your weak skill.",
+      "One <a href='/mock/'>full mock</a> every week — real timing, no breaks.",
+      "Writing: 3 essays a week, same task type — check them in the <a href='/writing/'>Writing lab</a>.",
+      "Speaking: record yourself and listen back — <a href='/speaking/'>Speaking lab</a>."],
+  p3:["Every mock is a full dress rehearsal: no phone, real timers.",
+      "Revisit only your mistake TYPES — no new material, just consolidation.",
+      "When mocks sit steadily at target+0.5 — you're ready. Verify with the <a href='/band-calculator/'>band calculator</a>.",
+      "Final 3 days: light review, sleep, and check <a href='/news/computer-vs-paper-ielts-results/'>result timelines</a>."]}
+};
+var ui='uz'; try{ui=localStorage.getItem('fs_lang')||'uz';}catch(e){}
+var $=function(s){return document.querySelector(s)};
+var BANDS=['4.0','4.5','5.0','5.5','6.0','6.5','7.0','7.5'];
+var TGT=['5.5','6.0','6.5','7.0','7.5','8.0'];
+function pills(box,vals,def){
+  box.innerHTML=vals.map(function(v){return '<button data-v="'+v+'"'+(v===def?' class="on"':'')+'>'+v+'</button>'}).join('');
+}
+pills($('#qCur'),BANDS,'5.5'); pills($('#qTgt'),TGT,'6.5');
+document.querySelectorAll('.opts').forEach(function(g){
+  g.addEventListener('click',function(e){
+    var b=e.target.closest('button'); if(!b)return;
+    g.querySelectorAll('button').forEach(function(x){x.classList.remove('on')});
+    b.classList.add('on');
+  });
+});
+function val(id){var b=document.querySelector(id+' button.on');return b?b.getAttribute('data-v'):null}
+function applyUI(){
+  var d=T[ui];
+  document.querySelectorAll('[data-k]').forEach(function(el){var k=el.getAttribute('data-k');if(d[k]!=null)el.innerHTML=d[k]});
+  document.querySelectorAll('.uilang button').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-ui')===ui)});
+  document.documentElement.setAttribute('lang',ui);
+  if(!$('#result').hidden) build();
+}
+document.querySelectorAll('.uilang button').forEach(function(b){
+  b.addEventListener('click',function(){ui=b.getAttribute('data-ui');try{localStorage.setItem('fs_lang',ui)}catch(e){}applyUI();});
+});
+function build(){
+  var d=T[ui];
+  var cur=parseFloat(val('#qCur')), tgt=parseFloat(val('#qTgt'));
+  var w=parseInt(val('#qWk'),10), weak=val('#qWeak');
+  if(tgt<=cur) tgt=cur+0.5;
+  var dist=Math.round((tgt-cur)*2)/2;
+  var need=Math.round(dist*2*7);            // ~7 weeks per 0.5 band
+  var cls,vt,vb;
+  if(w>=need){cls='ok';vt=d.vOkT;vb=d.vOk.replace('{t}',(tgt+0.0).toFixed(1));}
+  else if(w>=need*0.6){cls='tight';vt=d.vTightT;vb=d.vTight.replace('{osr}',"<a href='/news/ielts-one-skill-retake-uzbekistan/'>"+d.osr+"</a>");}
+  else{cls='hard';vt=d.vHardT;vb=d.vHard.replace('{d}',dist.toFixed(1)).replace('{need}',need).replace('{w}',w).replace('{mid}',(cur+0.5).toFixed(1));}
+  var w1=Math.max(1,Math.round(w*0.3)), w3=Math.max(1,Math.round(w*0.25)), w2=Math.max(1,w-w1-w3);
+  var weakName={listening:'Listening',reading:'Reading',writing:'Writing',speaking:'Speaking'}[weak];
+  function phase(title,weeks,items){
+    return '<div class="phase"><div class="ph-meta">'+weeks+' '+d.wk+' · '+d.perday+'</div><h3>'+title+'</h3><ul>'+
+      items.map(function(i){return '<li>'+i.replace('{weak}',weakName)+'</li>'}).join('')+'</ul></div>';
+  }
+  var h='<div class="verdict '+cls+'"><b>'+vt+'</b>'+vb+'</div>'+
+    phase(d.ph1,w1,d.p1)+phase(d.ph2,w2,d.p2)+phase(d.ph3,w3,d.p3)+
+    '<div class="pr-actions">'+
+    '<button onclick="window.print()">'+d.print+'</button>'+
+    '<a href="https://t.me/share/url?url='+encodeURIComponent('https://flarestamina.com/plan/')+'&text='+encodeURIComponent((ui==='uz'?'IELTS uchun shaxsiy o\'quv reja tuzdim — ':'I built my IELTS study plan — ')+cur.toFixed(1)+' → '+tgt.toFixed(1)+' ('+w+' '+d.wk+')')+'" target="_blank" rel="noopener">'+d.share+'</a>'+
+    '<button onclick="document.getElementById(\'result\').hidden=true;window.scrollTo({top:0,behavior:\'smooth\'})">'+d.redo+'</button></div>';
+  var r=$('#result'); r.innerHTML=h; r.hidden=false;
+  r.scrollIntoView({behavior:'smooth',block:'start'});
+  if(window.goatcounter&&goatcounter.count)goatcounter.count({path:'event/plan-built',event:true});
+}
+$('#go').addEventListener('click',build);
+applyUI();
+})();
+</script>
+<script data-goatcounter="https://flarestamina.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

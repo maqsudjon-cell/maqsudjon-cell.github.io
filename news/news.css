@@ -104,7 +104,7 @@ header.site nav a:hover,header.site nav a[aria-current]{color:var(--flare)}
 .hero .sub a:hover{text-decoration:underline}
 
 /* ============ tools strip ============ */
-.tools-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding-top:24px}
+.tools-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px;padding-top:24px}
 .tools-strip a{
   display:block;border:1px solid var(--line);border-radius:14px;background:var(--surface);
   padding:13px 16px;text-decoration:none;transition:border-color .15s,transform .15s;
