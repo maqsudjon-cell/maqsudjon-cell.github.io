@@ -68,6 +68,14 @@ body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--ink);-
 #linkbox input{width:100%;padding:9px 11px;border:1px dashed var(--gold);border-radius:8px;font-size:12px;background:#fffbef;color:#6b5a26}
 #linkbox small{display:block;margin-top:5px;font-size:11.5px;color:#8a8574;line-height:1.5}
 
+#resbox{display:none;margin-top:12px;padding:12px;border:1px solid #cfe3cf;background:#f3faf3;border-radius:10px}
+#resbox .res-row{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+#resName{font-size:12.5px;color:#3c6b3c;font-weight:600;flex:1;min-width:120px;word-break:break-all}
+.res-btn{display:inline-block;padding:10px 16px;border-radius:8px;font-size:13.5px;font-weight:600;text-decoration:none;cursor:pointer;border:none;font-family:inherit}
+#resSave{background:#2e7d32;color:#fff}
+#resShare{background:#fff;color:#2e7d32;border:1px solid #9cc79c}
+#resbox small{display:block;margin-top:8px;font-size:11.5px;color:#5d7a5d;line-height:1.5}
+
 .preview{display:flex;align-items:flex-start;justify-content:center;padding:26px 14px;overflow:hidden;position:relative}
 #fxprev{position:absolute;top:0;left:0;right:0;bottom:0;overflow:hidden;pointer-events:none;z-index:5}
 .fitbox{position:relative}
@@ -295,6 +303,14 @@ body[data-vt=minimal]{--v-bg:#f2f2ef;--v-panel:#fff;--v-tx:#232323;--v-title:#8b
         <input id="linkInp" readonly>
         <small>Link nusxalandi ✓ — uni mehmonlarga yuborsangiz, ular animatsiyali sahifada taklifnoma, xarita va to‘ygacha sanoqni ko‘radi.</small>
       </div>
+      <div id="resbox">
+        <div class="res-row">
+          <span id="resName"></span>
+          <a class="res-btn" id="resSave">📥 Saqlash</a>
+          <button class="res-btn" id="resShare">📤 Ulashish</button>
+        </div>
+        <small>Fayl tayyor! Avtomatik yuklanmagan bo‘lsa — <b>Saqlash</b>ni bosing. Telefonda <b>Ulashish</b> orqali Galereyaga saqlash yoki to‘g‘ridan-to‘g‘ri Telegramga yuborish mumkin.</small>
+      </div>
     </section>
 
     <section class="preview">
@@ -460,7 +476,28 @@ function refit(){
 window.addEventListener('resize',refit);
 
 /* ---------- builder UI ---------- */
-function hideLink(){$('#linkbox').style.display='none';}
+function hideLink(){$('#linkbox').style.display='none';$('#resbox').style.display='none';}
+
+/* tayyor faylni taklif qilish — telefonlarda avtomatik yuklash bloklanishi mumkin,
+   shuning uchun doim "Saqlash" havolasi + native "Ulashish" ham ko'rsatiladi */
+let lastRes=null;
+function offerResult(blob,name){
+  if(lastRes)URL.revokeObjectURL(lastRes.url);
+  const url=URL.createObjectURL(blob);
+  lastRes={blob,name,url};
+  $('#resName').textContent=name+' · '+(blob.size>1048576?(blob.size/1048576).toFixed(1)+' MB':Math.round(blob.size/1024)+' KB');
+  const a=$('#resSave');a.href=url;a.download=name;
+  let canSh=false;
+  try{canSh=!!(navigator.canShare&&navigator.canShare({files:[new File([blob],name,{type:blob.type})]}));}catch(e){}
+  $('#resShare').style.display=canSh?'':'none';
+  $('#resbox').style.display='block';
+  const tmp=document.createElement('a');tmp.href=url;tmp.download=name;
+  document.body.appendChild(tmp);tmp.click();tmp.remove();
+}
+$('#resShare').onclick=async()=>{
+  if(!lastRes)return;
+  try{await navigator.share({files:[new File([lastRes.blob],lastRes.name,{type:lastRes.blob.type})]});}catch(e){}
+};
 const tplBar=$('#tpls');
 Object.entries(TPLS).forEach(([id,cfg])=>{
   const d=document.createElement('div');
@@ -498,10 +535,10 @@ async function withBusy(btn,fn){
 }
 $('#bPng').onclick=()=>withBusy($('#bPng'),async()=>{
   const canvas=await makeCanvas();
-  const a=document.createElement('a');
-  a.download=`taklifnoma-${state.g}-${state.b}.png`;
-  a.href=canvas.toDataURL('image/png');
-  a.click();toast('PNG tayyor ✓');
+  const blob=await new Promise(r=>canvas.toBlob(r,'image/png'));
+  if(!blob)throw new Error('toBlob failed');
+  offerResult(blob,`taklifnoma-${state.g}-${state.b}.png`);
+  toast('PNG tayyor ✓');
 });
 $('#bPdf').onclick=()=>withBusy($('#bPdf'),async()=>{
   const canvas=await makeCanvas();
@@ -514,7 +551,8 @@ $('#bPdf').onclick=()=>withBusy($('#bPdf'),async()=>{
     pdf.link((r.left-cr.left)*k,(r.top-cr.top)*k,r.width*k,r.height*k,{url});};
   ann('.c-qr',makeLink());
   const ml=mapLinks();ann('.c-venue',ml.yUrl);ann('.c-addr',ml.yUrl);
-  pdf.save(`taklifnoma-${state.g}-${state.b}.pdf`);toast('PDF tayyor ✓');
+  offerResult(pdf.output('blob'),`taklifnoma-${state.g}-${state.b}.pdf`);
+  toast('PDF tayyor ✓');
 });
 
 /* ---------- animated video export ---------- */
@@ -583,11 +621,7 @@ $('#bVid').onclick=()=>withBusy($('#bVid'),async()=>{
   }
   if(!blob.size){toast('Video yozib bo‘lmadi 😕');return;}
   const ext=blob.type.includes('mp4')?'mp4':'webm';
-  const a=document.createElement('a');
-  a.href=URL.createObjectURL(blob);
-  a.download=`taklifnoma-${state.g}-${state.b}.${ext}`;
-  a.click();
-  setTimeout(()=>URL.revokeObjectURL(a.href),8000);
+  offerResult(blob,`taklifnoma-${state.g}-${state.b}.${ext}`);
   toast('Animatsiyali video tayyor ✓');
 });
 
