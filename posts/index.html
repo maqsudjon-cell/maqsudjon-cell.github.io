@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flarestamina — Content Studio</title>
+<meta name="description" content="Create on-brand Flarestamina posts in seconds. Live preview, one-tap download, 30-day content plan.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0A0605; --panel:#120C0A; --panel2:#160F0C; --ink:#F5F0EC; --mute:#8B817B;
+  --dim:#5C544F; --faint:#2A211C; --line:#1C1511; --flare:#FF5A1F; --flareDim:#3a1c10;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:'JetBrains Mono',ui-monospace,monospace;
+  background-image:radial-gradient(var(--faint) 1px, transparent 1px);
+  background-size:34px 34px; min-height:100vh;
+}
+a{color:var(--flare);text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+
+/* header */
+header{position:sticky;top:0;z-index:20;background:rgba(10,6,5,.86);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.hbar{display:flex;align-items:center;justify-content:space-between;height:62px}
+.brand{display:flex;align-items:center;gap:12px;font-weight:700;letter-spacing:3px;font-size:16px}
+.brand .sq{width:14px;height:14px;background:var(--flare)}
+.tabs{display:flex;gap:6px}
+.tab{font-family:inherit;font-size:12px;letter-spacing:2px;font-weight:600;color:var(--mute);background:transparent;border:1px solid var(--line);padding:9px 16px;cursor:pointer;transition:.15s;text-transform:uppercase}
+.tab:hover{color:var(--ink);border-color:var(--faint)}
+.tab.on{color:var(--bg);background:var(--flare);border-color:var(--flare)}
+
+/* studio grid */
+.studio{display:grid;grid-template-columns:400px 1fr;gap:28px;padding:26px 0 60px;align-items:start}
+@media(max-width:900px){.studio{grid-template-columns:1fr;gap:20px}}
+
+.eyebrow{font-size:11px;letter-spacing:3px;color:var(--dim);text-transform:uppercase;margin:0 0 12px}
+.panel{background:var(--panel);border:1px solid var(--line);padding:18px}
+
+/* template picker */
+.picker{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
+.chip{font-family:inherit;font-size:11px;letter-spacing:1px;font-weight:600;color:var(--mute);background:var(--panel);border:1px solid var(--line);padding:8px 12px;cursor:pointer;transition:.15s;text-transform:uppercase}
+.chip:hover{color:var(--ink);border-color:var(--faint)}
+.chip.on{color:var(--flare);border-color:var(--flare);background:var(--flareDim)}
+
+/* form */
+.field{margin-bottom:14px}
+.field label{display:block;font-size:10px;letter-spacing:2px;color:var(--mute);text-transform:uppercase;margin-bottom:6px}
+.field .hint{color:var(--dim);text-transform:none;letter-spacing:0}
+.field input,.field textarea{
+  width:100%;font-family:inherit;font-size:14px;color:var(--ink);background:var(--panel2);
+  border:1px solid var(--faint);padding:10px 12px;border-radius:0;transition:.15s;line-height:1.5;resize:vertical
+}
+.field textarea{min-height:64px}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--flare);background:#1b1310}
+.row{display:flex;gap:10px}
+.row .field{flex:1}
+
+.settings{display:flex;align-items:center;gap:14px;margin-bottom:16px;flex-wrap:wrap}
+.acc{display:flex;align-items:center;gap:8px;font-size:11px;letter-spacing:1px;color:var(--mute)}
+.acc input[type=color]{width:34px;height:26px;border:1px solid var(--faint);background:none;padding:0;cursor:pointer}
+
+/* preview */
+.stage{position:sticky;top:86px}
+.canvas-frame{background:#000;border:1px solid var(--faint);padding:0;line-height:0;box-shadow:0 24px 60px rgba(0,0,0,.55)}
+canvas{width:100%;height:auto;display:block}
+.stage-bar{display:flex;align-items:center;justify-content:space-between;margin-top:14px;gap:12px;flex-wrap:wrap}
+.res{font-size:11px;letter-spacing:2px;color:var(--dim)}
+.btn{font-family:inherit;font-size:12px;letter-spacing:2px;font-weight:700;padding:12px 20px;cursor:pointer;border:1px solid var(--faint);background:transparent;color:var(--ink);transition:.15s;text-transform:uppercase}
+.btn:hover{border-color:var(--mute)}
+.btn-primary{background:var(--flare);color:var(--bg);border-color:var(--flare)}
+.btn-primary:hover{filter:brightness(1.08)}
+
+/* caption */
+.cap{margin-top:16px}
+.cap textarea{width:100%;min-height:120px;font-family:inherit;font-size:13px;color:var(--ink);background:var(--panel2);border:1px solid var(--faint);padding:12px;line-height:1.6}
+.cap .capbar{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+.note{font-size:11px;color:var(--dim);letter-spacing:.3px;line-height:1.5;margin-top:2px}
+
+/* plan */
+.plan{padding:26px 0 70px}
+.plan .lead{max-width:620px;color:var(--mute);font-size:13px;line-height:1.7;margin:0 0 24px}
+.week{margin-bottom:26px}
+.week h3{font-size:12px;letter-spacing:3px;color:var(--flare);text-transform:uppercase;margin:0 0 4px}
+.week .wk-sub{font-size:11px;color:var(--dim);letter-spacing:1px;margin:0 0 14px}
+.days{display:grid;grid-template-columns:repeat(7,1fr);gap:10px}
+@media(max-width:1100px){.days{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:760px){.days{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:440px){.days{grid-template-columns:1fr}}
+.day{background:var(--panel);border:1px solid var(--line);padding:13px;display:flex;flex-direction:column;gap:8px;min-height:150px;transition:.15s}
+.day:hover{border-color:var(--faint)}
+.day .top{display:flex;justify-content:space-between;align-items:center}
+.day .dn{font-weight:800;font-size:15px}
+.day .dow{font-size:9px;letter-spacing:2px;color:var(--dim)}
+.pill{align-self:flex-start;font-size:9px;letter-spacing:1px;font-weight:600;text-transform:uppercase;padding:3px 7px;border:1px solid var(--flareDim);color:var(--flare)}
+.day .fmt{font-size:10px;color:var(--mute);letter-spacing:.5px}
+.day .hook{font-size:12px;line-height:1.45;color:var(--ink);flex:1}
+.day .mk{font-family:inherit;font-size:10px;letter-spacing:1px;font-weight:700;color:var(--flare);background:transparent;border:1px solid var(--flareDim);padding:7px;cursor:pointer;text-transform:uppercase;transition:.15s}
+.day .mk:hover{background:var(--flare);color:var(--bg);border-color:var(--flare)}
+.setup{background:var(--panel2);border:1px dashed var(--faint);padding:16px 18px;margin-bottom:24px}
+.setup h4{margin:0 0 10px;font-size:12px;letter-spacing:2px;color:var(--flare);text-transform:uppercase}
+.setup ul{margin:0;padding-left:18px;color:var(--mute);font-size:12px;line-height:1.9}
+footer{border-top:1px solid var(--line);padding:22px 0;color:var(--dim);font-size:11px;letter-spacing:1px}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<header><div class="wrap hbar">
+  <div class="brand"><span class="sq"></span>FLARESTAMINA</div>
+  <div class="tabs">
+    <button class="tab on" id="tabStudio">Studio</button>
+    <button class="tab" id="tabPlan">Plan</button>
+  </div>
+</div></header>
+
+<!-- STUDIO -->
+<div class="wrap studio" id="studioView">
+  <div>
+    <p class="eyebrow">01 — Template</p>
+    <div class="picker" id="picker"></div>
+    <div class="panel">
+      <div class="settings">
+        <span class="acc">ACCENT <input type="color" id="accent" value="#FF5A1F"></span>
+        <span class="acc">TIP: wrap a word in **stars** to make it orange</span>
+      </div>
+      <p class="eyebrow" style="margin-bottom:10px">02 — Content</p>
+      <div id="form"></div>
+    </div>
+    <div class="cap panel">
+      <p class="eyebrow" style="margin-bottom:8px">03 — Caption (copy for the post)</p>
+      <textarea id="caption" placeholder="Your caption / hook goes here…"></textarea>
+      <div class="capbar">
+        <span class="note">Post captions in Uzbek for reach — English is the subject, Uzbek is the conversation.</span>
+        <button class="btn" id="copyCap">Copy</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="canvas-frame"><canvas id="cv" width="1080" height="1350"></canvas></div>
+    <div class="stage-bar">
+      <span class="res">1080 × 1350 · PNG · Instagram 4:5</span>
+      <button class="btn btn-primary" id="dl">↓ Download PNG</button>
+    </div>
+    <p class="note" style="margin-top:12px">Works for Instagram feed, Telegram, X and as YouTube thumbnails / Shorts B-roll. Same image, four placements.</p>
+  </div>
+</div>
+
+<!-- PLAN -->
+<div class="wrap plan hidden" id="planView">
+  <p class="eyebrow">30-day content plan</p>
+  <p class="lead">A daily presence built from templates — so each post is minutes, not hours. Each week focuses on one skill. Hit <b style="color:var(--flare)">Create</b> on any day to load that post in the Studio, ready to tweak and download.</p>
+  <div class="setup">
+    <h4>Day 0 — set up first</h4>
+    <ul>
+      <li>Grab <b>@flarestamina</b> on Instagram, YouTube and X (match your Telegram).</li>
+      <li>Bio + link on all four → flarestamina.com.</li>
+      <li>Fix the site counters + the dead "Sign in" link; add a student-count for proof.</li>
+      <li>Pin the launch post as "start here."</li>
+    </ul>
+  </div>
+  <div id="weeks"></div>
+</div>
+
+<footer><div class="wrap">FLARESTAMINA · Content Studio · built for Maqsudjon Polatov · Tashkent</div></footer>
+
+<script>
+/* ============================ ENGINE ============================ */
+const W=1080,H=1350,M=96,CW=W-2*M;
+const C={bg:'#0A0605',ink:'#F5F0EC',mute:'#8B817B',dim:'#5C544F',faint:'#2A211C',
+         line:'#1C1511',dot:'#201813',flareD:'#963A1A'};
+let FLARE='#FF5A1F';
+const cv=document.getElementById('cv'), ctx=cv.getContext('2d');
+const pad2=n=>String(n).padStart(2,'0');
+const font=(w,s)=>`${w} ${s}px 'JetBrains Mono', ui-monospace, monospace`;
+const tw=(s)=>ctx.measureText(s).width;
+const lh=(s,m=1)=>Math.round(s*1.32*m);
+
+function drawTracked(x,y,s,{w=600,size=24,fill=C.ink,tr=0,align='left'}={}){
+  ctx.font=font(w,size);ctx.textBaseline='top';
+  let total=0;for(const c of s)total+=tw(c)+tr; if(s.length)total-=tr;
+  if(align==='center')x-=total/2; else if(align==='right')x-=total;
+  ctx.fillStyle=fill; for(const c of s){ctx.fillText(c,x,y);x+=tw(c)+tr;}
+  return total;
+}
+function wrap(s,mw,w,size){ctx.font=font(w,size);const out=[];let cur='';
+  for(const wd of String(s).split(' ')){const t=cur?cur+' '+wd:wd; if(tw(t)<=mw)cur=t; else{if(cur)out.push(cur);cur=wd;}}
+  if(cur)out.push(cur); return out;}
+/* paragraph with **highlight** + wrapping */
+function richPara(x,y,text,{w=500,size=32,fill=C.ink,accent=FLARE,mw=CW,lead=1.34}={}){
+  ctx.font=font(w,size);ctx.textBaseline='top';
+  const toks=[]; String(text).split(/(\*\*[^*]+\*\*)/g).forEach(seg=>{
+    if(!seg)return; const hl=seg.startsWith('**')&&seg.endsWith('**'); const s=hl?seg.slice(2,-2):seg;
+    s.split(' ').forEach(word=>{ if(word!=='') toks.push({word,hl}); });
+  });
+  let cx=x,cy=y; const sp=tw(' '); let start=true;
+  for(const t of toks){ const ww=tw(t.word);
+    if(!start && cx+sp+ww>x+mw){cy+=lh(size,lead);cx=x;start=true;}
+    if(!start)cx+=sp;
+    ctx.fillStyle=t.hl?accent:fill; ctx.fillText(t.word,cx,cy); cx+=ww; start=false;
+  }
+  return cy+lh(size,lead);
+}
+/* single-line rich (no wrap) */
+function drawRich(x,y,text,{w=800,size=100,fill=C.ink,accent=FLARE}={}){
+  ctx.font=font(w,size);ctx.textBaseline='top';
+  String(text).split(/(\*\*[^*]+\*\*)/g).forEach(p=>{ if(!p)return;
+    const hl=p.startsWith('**')&&p.endsWith('**'); const s=hl?p.slice(2,-2):p;
+    ctx.fillStyle=hl?accent:fill; ctx.fillText(s,x,y); x+=tw(s);
+  });
+  return x;
+}
+function hair(x1,y,x2,col=C.faint,t=1){ctx.fillStyle=col;ctx.fillRect(x1,y,x2-x1,t);}
+function dots(){ctx.fillStyle=C.dot;for(let y=60;y<H-60;y+=34)for(let x=60;x<W-60;x+=34){ctx.beginPath();ctx.arc(x,y,1.1,0,7);ctx.fill();}}
+function ticks(m=54,L=26){ctx.fillStyle=FLARE;
+  ctx.fillRect(m,m,L,2);ctx.fillRect(m,m,2,L);
+  ctx.fillRect(W-m-L,m,L,2);ctx.fillRect(W-m-2,m,2,L);
+  ctx.fillRect(m,H-m-2,L,2);ctx.fillRect(m,H-m-L,2,L);
+  ctx.fillRect(W-m-L,H-m-2,L,2);ctx.fillRect(W-m-2,H-m-L,2,L);}
+function frame(topRight,idx){
+  ctx.fillStyle=C.bg;ctx.fillRect(0,0,W,H); dots(); ticks();
+  const yt=108; ctx.fillStyle=FLARE;ctx.fillRect(M,yt+2,15,15);
+  drawTracked(M+28,yt-2,'FLARESTAMINA',{w:700,size:25,fill:C.ink,tr:4});
+  drawTracked(W-M,yt,topRight,{w:500,size:21,fill:C.dim,tr:3,align:'right'});
+  hair(M,yt+52,W-M,C.faint);
+  const yb=H-116; ctx.fillStyle=FLARE;ctx.fillRect(M,yb+3,13,13);
+  drawTracked(M+26,yb,'flarestamina.com',{w:500,size:21,fill:C.mute,tr:2});
+  drawTracked(W-M,yb,'@flarestamina',{w:500,size:21,fill:C.mute,tr:2,align:'right'});
+  if(idx)drawTracked(W-M,yb+32,idx,{w:600,size:20,fill:C.dim,tr:3,align:'right'});
+  hair(M,yb-22,W-M,C.faint);
+}
+function chip(x,y,label,col){col=col||FLARE;ctx.font=font(700,20);
+  let cw=0;for(const c of label)cw+=tw(c)+3; cw-=3;
+  ctx.strokeStyle=col;ctx.lineWidth=2;ctx.strokeRect(x+1,y+1,cw+28,40);
+  drawTracked(x+14,y+10,label,{w:700,size:20,fill:col,tr:3}); return x+cw+28;}
+function boxed(y,text,outline,txtCol,size=34,p=32){
+  const lines=wrap(text,CW-p*2,500,size); const bh=lines.length*lh(size,1.3)+p*2-8;
+  ctx.strokeStyle=outline;ctx.lineWidth=2;ctx.strokeRect(M+1,y+1,CW-2,bh-2);
+  let yy=y+p-4; ctx.fillStyle=txtCol; for(const ln of lines){ctx.font=font(500,size);ctx.fillText(ln,M+p,yy);yy+=lh(size,1.3);} return y+bh;}
+function pill(x,y,url){ctx.font=font(700,30);const a='→  ';let uw=0;for(const c of url)uw+=tw(c)+1;uw-=1;
+  const tot=tw(a)+uw; ctx.fillStyle=FLARE;ctx.fillRect(x,y,tot+60,74);
+  let xx=x+30;ctx.fillStyle=C.bg;ctx.textBaseline='top';ctx.font=font(700,30);ctx.fillText(a,xx,y+18);xx+=tw(a);
+  drawTracked(xx,y+18,url,{w:700,size:30,fill:C.bg,tr:1});}
+
+/* ============================ TEMPLATES ============================ */
+function dHero(d){
+  frame('IELTS TOOLS',d.idx);
+  drawTracked(M,356,d.eyebrow,{w:500,size:27,fill:FLARE,tr:3});
+  let y=426;const L=lh(156,0.92);ctx.textBaseline='top';ctx.fillStyle=C.ink;
+  ctx.font=font(800,156);ctx.fillText(d.line1,M-6,y);y+=L;ctx.fillText(d.line2,M-6,y);
+  let yr=y+L+20;hair(M,yr,M+120,FLARE,4);
+  let ys=richPara(M,yr+48,d.sub,{w:500,size:34,fill:C.ink,mw:CW,lead:1.28});
+  let ysk=ys+30;const sk=(d.skills||'').split(',').map(s=>s.trim()).filter(Boolean);
+  let x=M;sk.forEach((it,i)=>{x+=drawTracked(x,ysk,it,{w:600,size:23,fill:C.mute,tr:2});
+    if(i<sk.length-1){ctx.font=font(600,23);ctx.fillStyle=C.flareD;ctx.fillText('—',x+16,ysk-2);x+=tw('—')+32;}});
+}
+function dCover(d){
+  frame('LISTENING',d.idx||'01 / 06');
+  drawTracked(M,356,d.eyebrow,{w:500,size:27,fill:FLARE,tr:3});
+  let y=430;const L=lh(112,0.96);
+  (d.big||'').split('\n').forEach(ln=>{drawRich(M-4,y,ln,{w:800,size:112,fill:C.ink,accent:FLARE});y+=L;});
+  let yr=y+4;hair(M,yr,M+120,FLARE,4);
+  richPara(M,yr+40,d.sub,{w:500,size:31,fill:C.mute});
+  const yy=H-176;let w=drawTracked(M,yy,'SWIPE',{w:600,size:22,fill:FLARE,tr:4});
+  ctx.font=font(700,26);ctx.fillStyle=FLARE;ctx.fillText('→',M+w+14,yy-2);
+}
+function dTip(d){
+  const total=+d.total||6,n=+d.num||1;
+  frame('MISTAKE '+pad2(n),pad2(n+1)+' / '+pad2(total));
+  ctx.font=font(800,140);ctx.fillStyle=FLARE;ctx.textBaseline='top';ctx.fillText(pad2(n),M-6,196);
+  let y=384;y=richPara(M,y,d.title,{w:700,size:50,fill:C.ink,lead:1.06});y+=24;
+  y=richPara(M,y,d.body,{w:500,size:31,fill:C.mute,lead:1.36});y+=30;
+  hair(M,y,W-M,C.faint);y+=40; chip(M,y,'THE FIX',FLARE);y+=70;
+  richPara(M,y,d.fix,{w:500,size:30,fill:C.ink,lead:1.34});
+}
+function dWord(d){
+  frame('WORD LAB',d.tag||'VOCAB');
+  drawTracked(M,340,d.eyebrow,{w:500,size:26,fill:FLARE,tr:3});
+  let y=410;ctx.font=font(800,96);ctx.textBaseline='top';ctx.fillStyle=C.ink;ctx.fillText('Delete ',M-4,y);
+  let hx=M-4+tw('Delete ');ctx.fillStyle=FLARE;ctx.fillText(d.killWord,hx,y);
+  y+=lh(96,1.02)+30;
+  const pairs=(d.pairs||'').split('\n').map(l=>l.split(/=>|->/)).filter(a=>a.length===2).map(a=>[a[0].trim(),a[1].trim()]);
+  ctx.font=font(500,42);let aw=0;pairs.forEach(([wk])=>aw=Math.max(aw,tw(wk)));
+  const arrowX=M+aw+44,strongX=arrowX+58;
+  pairs.forEach(([wk,st])=>{
+    ctx.font=font(500,42);ctx.fillStyle=C.mute;ctx.fillText(wk,M,y);
+    const wkw=tw(wk),midy=y+Math.round(42*0.62);ctx.fillStyle=C.flareD;ctx.fillRect(M-2,midy,wkw+4,3);
+    ctx.font=font(700,40);ctx.fillStyle=FLARE;ctx.fillText('→',arrowX,y);
+    ctx.font=font(600,42);ctx.fillStyle=C.ink;ctx.fillText(st,strongX,y);
+    y+=lh(42,1.62);
+  });
+  y+=8;hair(M,y,W-M,C.faint);y+=34;
+  richPara(M,y,d.sub,{w:500,size:29,fill:C.mute});
+}
+function dStatement(d){
+  frame(d.topRight||'IELTS TIP',d.idx||d.topRight||'TIP');
+  drawTracked(M,352,d.eyebrow,{w:500,size:27,fill:FLARE,tr:3});
+  let y=430;const L=lh(100,0.99);
+  (d.big||'').split('\n').forEach(ln=>{drawRich(M-6,y,ln,{w:800,size:100,fill:C.ink,accent:FLARE});y+=L;});
+  let yr=y+6;hair(M,yr,M+120,FLARE,4);y=yr+44;
+  y=richPara(M,y,d.sub,{w:500,size:33,fill:C.ink,lead:1.4});
+  if(d.box&&d.box.trim()){y+=40;ctx.font=font(500,34);const lns=wrap(d.box,CW-72,500,34);
+    const bh=lns.length*lh(34,1.32)+56;ctx.strokeStyle=FLARE;ctx.lineWidth=2;ctx.strokeRect(M+1,y+1,CW-2,bh-2);
+    let yy=y+28;ctx.fillStyle=C.ink;lns.forEach(l=>{ctx.font=font(500,34);ctx.fillText(l,M+36,yy);yy+=lh(34,1.32);});y+=bh;}
+  if(d.url&&d.url.trim()){y+=44;pill(M,y,d.url.trim());}
+}
+function dCta(d){
+  frame('PRACTICE',d.idx||'06 / 06');
+  drawTracked(M,356,d.eyebrow,{w:500,size:27,fill:FLARE,tr:3});
+  let y=428;const L=lh(132,0.98);ctx.textBaseline='top';
+  ctx.font=font(800,132);ctx.fillStyle=C.ink;ctx.fillText(d.line1,M-6,y);y+=L;
+  ctx.fillStyle=FLARE;ctx.fillText(d.line2,M-6,y);
+  let yr=y+L+6;hair(M,yr,M+120,FLARE,4);
+  y=richPara(M,yr+42,d.body,{w:500,size:33,fill:C.ink,lead:1.4});y+=46;
+  pill(M,y,(d.url||'flarestamina.com').trim());
+}
+function dPain(d){
+  frame('RELATABLE','IELTS PAIN');
+  drawTracked(M,352,'IELTS PAIN  #'+pad2(+d.num||1),{w:500,size:27,fill:FLARE,tr:3});
+  let y=richPara(M,446,d.line,{w:800,size:82,fill:C.ink,lead:1.08});
+  let yr=y+10;hair(M,yr,M+120,FLARE,4);
+  richPara(M,yr+40,d.prompt||'',{w:500,size:30,fill:C.mute});
+}
+function dRoast(d){
+  frame('ROAST MY SENTENCE','WRITING');
+  drawTracked(M,336,'BAND 5  →  BAND 7.5',{w:500,size:26,fill:FLARE,tr:3});
+  let y=richPara(M,398,d.verdict,{w:800,size:76,fill:C.ink,lead:1.04});y+=26;
+  chip(M,y,'THE CRINGE',C.dim);y+=54; y=boxed(y,d.cringe,C.faint,C.mute,34,26);y+=32;
+  chip(M,y,'THE FIX',FLARE);y+=54; boxed(y,d.fix,FLARE,C.ink,34,26);
+}
+function dBin(d){
+  frame('BAND OR BIN?','VOTE');
+  drawTracked(M,352,'BAND OR BIN?',{w:500,size:27,fill:FLARE,tr:3});
+  let y=richPara(M,452,'“'+d.item+'”',{w:800,size:92,fill:C.ink,lead:1.04});
+  let yr=y+8;hair(M,yr,M+120,FLARE,4);
+  y=richPara(M,yr+40,d.sub,{w:500,size:33,fill:C.ink});y+=54;
+  let x=M;x+=drawTracked(x,y,'VOTE   ',{w:700,size:34,fill:C.dim,tr:1});
+  x+=drawTracked(x,y,'BAND',{w:700,size:34,fill:FLARE,tr:1});
+  x+=drawTracked(x,y,'   /   ',{w:700,size:34,fill:C.dim,tr:1});
+  drawTracked(x,y,'BIN',{w:700,size:34,fill:C.mute,tr:1});
+}
+function dDialogue(d){
+  frame('SPEAKING · PART 1','YOUR TURN');
+  drawTracked(M,338,'WHEN THE EXAMINER ASKS…',{w:500,size:26,fill:FLARE,tr:3});
+  let y=404;drawTracked(M,y,'EXAMINER',{w:700,size:24,fill:FLARE,tr:3});y+=44;
+  y=richPara(M,y,d.q,{w:500,size:42,fill:C.ink,lead:1.2});y+=40;
+  drawTracked(M,y,'YOU',{w:700,size:24,fill:FLARE,tr:3});y+=44;
+  y=richPara(M,y,d.a,{w:500,size:42,fill:C.mute,lead:1.2});y+=36;
+  hair(M,y,W-M,C.faint);y+=40;chip(M,y,'THE FIX',FLARE);y+=64;
+  richPara(M,y,d.note,{w:500,size:30,fill:C.ink,lead:1.34});
+}
+
+/* ============================ REGISTRY ============================ */
+const A=(k,label,t,ph,hint)=>({k,label,t,ph,hint});
+const TPL={
+  hero:{name:'Launch / Hero',draw:dHero,fields:[
+    A('eyebrow','Eyebrow','text'),A('line1','Headline line 1','text'),A('line2','Headline line 2','text'),
+    A('sub','Subtext','area',null,'use **word** to highlight'),A('skills','Skills row','text',null,'comma separated'),
+    A('idx','Corner tag','text')],
+    def:{eyebrow:'FREE  ·  100+ TESTS  ·  REAL EXAM FORMAT',line1:'MASTER',line2:'IELTS.',
+      sub:'100+ real-format mock tests with instant band scores. **Free** for every student — forever.',
+      skills:'LISTENING, READING, WRITING, SPEAKING',idx:'ENGINEERED IN TASHKENT'}},
+  cover:{name:'Carousel Cover',draw:dCover,fields:[
+    A('eyebrow','Eyebrow','text'),A('big','Headline','area',null,'one line per row · **word** = orange'),
+    A('sub','Subtext','area'),A('idx','Slide index','text')],
+    def:{eyebrow:'IELTS  ·  LISTENING SKILL',big:'**5** Listening\nmistakes\ncosting you\na band.',
+      sub:'Small slips, real score loss. Fix these before exam day.',idx:'01 / 06'}},
+  tip:{name:'Tip (numbered)',draw:dTip,fields:[
+    A('num','Number','text'),A('total','Total slides','text'),A('title','Title','area'),
+    A('body','Body','area'),A('fix','The fix','area')],
+    def:{num:'1',total:'6',title:'The word was right — the spelling wasn\'t.',
+      body:'You hear “accommodation” and write it with one m. The sheet gives no partial credit, so one slip is a full mark gone.',
+      fix:'Bank 10 seconds at each section break to check plurals and the words you always misspell.'}},
+  word:{name:'Word Lab',draw:dWord,fields:[
+    A('eyebrow','Eyebrow','text'),A('killWord','Word to delete','text'),
+    A('pairs','Swaps','area',null,'one per line:  weak => strong'),A('sub','Subtext','area'),A('tag','Corner tag','text')],
+    def:{eyebrow:'SPEAKING & WRITING · LEXICAL RESOURCE',killWord:'“very”',
+      pairs:'very big => huge / immense\nvery small => tiny\nvery good => excellent\nvery bad => dreadful\nvery tired => exhausted\nvery happy => delighted',
+      sub:'One precise word beats \'very + adjective\'. Range and accuracy are half your Lexical Resource score.',tag:'VOCAB'}},
+  statement:{name:'Statement / Tip',draw:dStatement,fields:[
+    A('topRight','Corner label','text'),A('eyebrow','Eyebrow','text'),A('big','Headline','area',null,'one line per row · **word** = orange'),
+    A('sub','Subtext','area'),A('box','Callout box','area',null,'optional — great for polls/quotes'),
+    A('url','Button URL','text',null,'optional'),A('idx','Corner tag','text')],
+    def:{topRight:'LISTENING · QUICK FIX',eyebrow:'THE 30-SECOND RULE',big:'Read the\nquestions\nbefore the\n**audio** plays.',
+      sub:'You get 30 free seconds before each section. Spend them reading ahead and predicting answer types.',
+      box:'',url:'',idx:'QUICK FIX'}},
+  cta:{name:'CTA',draw:dCta,fields:[
+    A('eyebrow','Eyebrow','text'),A('line1','Big line 1','text'),A('line2','Big line 2 (orange)','text'),
+    A('body','Body','area'),A('url','Button URL','text'),A('idx','Corner tag','text')],
+    def:{eyebrow:'THERE IS ONLY ONE REAL FIX',line1:'Do the',line2:'reps.',
+      body:'80 free Listening tests — authentic accents, exam-exact timing, instant band scores. No paywall, no ads, ever.',
+      url:'flarestamina.com/ielts-hub',idx:'06 / 06'}},
+  pain:{name:'IELTS Pain',draw:dPain,fields:[
+    A('num','Number','text'),A('line','The pain','area',null,'deadpan, relatable, one sentence'),A('prompt','Prompt','text')],
+    def:{num:'7',line:'The Part 2 topic loads and your entire personality leaves the room.',
+      prompt:'— tag someone who knows the feeling.'}},
+  roast:{name:'Roast My Sentence',draw:dRoast,fields:[
+    A('verdict','The roast (headline)','area'),A('cringe','The cringe sentence','area'),A('fix','The fix','area')],
+    def:{verdict:'This says nothing. Twice.',
+      cringe:'In this modern era of today\'s society, nowadays technology plays a very important role.',
+      fix:'Technology now shapes daily life — from how we work to how we rest.'}},
+  bin:{name:'Band or Bin',draw:dBin,fields:[
+    A('item','The phrase','text'),A('sub','Subtext','area')],
+    def:{item:'It is a well-known fact that…',
+      sub:'Timeless academic opener, or empty filler examiners are tired of? Vote and defend it below.'}},
+  dialogue:{name:'Examiner / You',draw:dDialogue,fields:[
+    A('q','Examiner asks','area'),A('a','You answer','area'),A('note','The fix','area')],
+    def:{q:'So, do you have any hobbies?',a:'Yes. I enjoy… spending quality time… with my family.',
+      note:'Part 1 rewards specific, natural detail — not safe robot answers. Walk in with two real hobbies you can talk about for 20 seconds.'}}
+};
+const ORDER=['hero','cover','tip','word','statement','cta','pain','roast','bin','dialogue'];
+
+/* ============================ STATE + UI ============================ */
+let cur='hero';
+const store={}; ORDER.forEach(k=>store[k]={...TPL[k].def});
+const $=id=>document.getElementById(id);
+
+function render(){ try{ TPL[cur].draw(store[cur]); }catch(e){ console.error(e);} }
+
+function buildPicker(){
+  const p=$('picker'); p.innerHTML='';
+  ORDER.forEach(k=>{ const b=document.createElement('button');
+    b.className='chip'+(k===cur?' on':''); b.textContent=TPL[k].name;
+    b.onclick=()=>{cur=k;buildPicker();buildForm();render();};
+    p.appendChild(b); });
+}
+function buildForm(){
+  const f=$('form'); f.innerHTML='';
+  TPL[cur].fields.forEach(fl=>{
+    const wrapEl=document.createElement('div'); wrapEl.className='field';
+    const lab=document.createElement('label');
+    lab.innerHTML=fl.label+(fl.hint?` <span class="hint">— ${fl.hint}</span>`:'');
+    const inp=fl.t==='area'?document.createElement('textarea'):document.createElement('input');
+    inp.value=store[cur][fl.k]||''; if(fl.ph)inp.placeholder=fl.ph;
+    inp.addEventListener('input',()=>{store[cur][fl.k]=inp.value;render();});
+    wrapEl.appendChild(lab); wrapEl.appendChild(inp); f.appendChild(wrapEl);
+  });
+}
+
+/* ============================ 30-DAY PLAN ============================ */
+const P=(d,dow,pillar,fmt,hook,tpl,data,cap)=>({d,dow,pillar,fmt,hook,tpl,data,cap});
+const PLAN=[
+ {label:'Week 1 — Listening',sub:'Your biggest test bank. Lead with strength.',days:[
+  P(1,'MON','Launch','Hero post','Serious IELTS prep isn\'t cheap. Flarestamina is free.','hero',{},
+    'Serious IELTS prep here isn\'t cheap. Flarestamina is free.\n\n100+ mock tests, real format, instant band from the official tables. No paywall, no ads. Start free → link in bio.'),
+  P(2,'TUE','Word Lab','Vocab tile','Delete “very” — precise-word upgrades.','word',{},
+    'Delete “very.” Your Lexical Resource score will thank you. Save it, use one tomorrow. 👇'),
+  P(3,'WED','The Tool','Reel / demo','Finish a test → band in 2 seconds.','statement',
+    {topRight:'THE TOOL',eyebrow:'FINISH → SEE YOUR BAND',big:'Your band.\nIn **2** seconds.',
+     sub:'Finish any section and your band appears instantly — from the official conversion tables, not vibes.',box:'',url:'flarestamina.com/ielts-hub',idx:'INSTANT'},
+    'No more guessing your level. Finish → instant band, from the official tables. Try it free 👇'),
+  P(4,'THU','Engage','Poll (story+tile)','Which skill makes you want to cry?','bin',
+    {item:'Listening',sub:'Which IELTS skill breaks you the most? Vote — Listening, or bin it and tell me yours below.'},
+    'Be honest — which skill makes you want to cry? 👇 Tell me below, I\'ll make next week about the worst one.'),
+  P(5,'FRI','Skill Fix','Single tile','The 30-second rule that saves your Listening.','statement',{},
+    'The 30 seconds before each section decide your score. Here\'s how to spend them. Save this.'),
+  P(6,'SAT','Proof','Screenshot+tile','Join 2,000+ students practising free.','statement',
+    {topRight:'THE COMMUNITY',eyebrow:'YOU\'RE NOT DOING THIS ALONE',big:'**2,000+**\nstudents.\nZero paywall.',
+     sub:'Thousands are prepping on Flarestamina right now — every test, every skill, completely free.',box:'',url:'flarestamina.com',idx:'FREE'},
+    'Swap the exact number for your real Telegram / user count. Proof beats promises.'),
+  P(7,'SUN','Story','Founder note','I built 100+ IELTS tests. Here\'s why they\'re free.','statement',
+    {topRight:'THE STORY',eyebrow:'FROM TASHKENT',big:'Why it\'s\n**free.**',
+     sub:'Good prep shouldn\'t depend on your budget. I build these tests so any student here gets a fair shot — that\'s the whole point.',box:'',url:'',idx:'FOUNDER'},
+    'Tell the real story in the caption — why free, who it\'s for. This is your strongest post. Write it in Uzbek.'),
+ ]},
+ {label:'Week 2 — Reading',sub:'',days:[
+  P(8,'MON','Skill Fix','Carousel','How to beat True / False / Not Given.','cover',
+    {eyebrow:'IELTS · READING SKILL',big:'Beat\n**True/False**\n/Not Given.',sub:'The 3-question method that kills the guesswork. Swipe →',idx:'01 / 06'},
+    'True / False / Not Given ruins more scores than hard vocabulary. Here\'s the method. Save it 👇'),
+  P(9,'TUE','Word Lab','Vocab tile','Weak linkers → strong linkers.','word',
+    {eyebrow:'WRITING · COHESION',killWord:'weak linkers',
+     pairs:'Also, => Moreover,\nSo, => Consequently,\nBut, => Nevertheless,\nFor example => To illustrate,\nIn conclusion => To conclude,',
+     sub:'Cohesive devices signal Band 7+ — but only if they fit. Forced linkers get penalised.',tag:'COHESION'},
+    'Upgrade your linking words — but only where they fit. Forced ones cost you. Save this.'),
+  P(10,'WED','The Tool','Reel / demo','Reading with the real 60-minute clock.','statement',
+    {topRight:'THE TOOL',eyebrow:'REAL EXAM TIMING',big:'The real\n**60-min**\nclock.',
+     sub:'Practice Reading with the exact clock the real test uses. Pressure included, free of charge.',box:'',url:'flarestamina.com/ielts-hub',idx:'TIMED'},
+    'Exam pressure is a skill. Train it with the real clock 👇'),
+  P(11,'THU','Engage','Poll tile','Guess the band.','statement',{topRight:'READING · YOUR TURN',eyebrow:'GUESS THE BAND',
+     big:'Guess the\n**band.**',sub:'One sentence. One error. What band does this writing show?',
+     box:'“Despite of the rain, the event were a big success.”',url:'',idx:'COMMENT'},
+    'Band 5, 6 or 7? Drop your answer 👇 (there are two errors — spot both?)'),
+  P(12,'FRI','Skill Fix','Single tile','Skimming vs scanning — you\'re doing both wrong.','statement',
+    {topRight:'READING · QUICK FIX',eyebrow:'SKIM ≠ SCAN',big:'Skim, then\n**scan.**\nNot both\nat once.',
+     sub:'Skim once for the shape of the passage. Scan only when you\'re hunting a specific answer. Mixing them wastes minutes.',box:'',url:'',idx:'QUICK FIX'},
+    'Skimming and scanning are two different jobs. Doing both at once is why you run out of time. Save this.'),
+  P(13,'SAT','Proof','Screenshot+tile','A message that made my week.','statement',
+    {topRight:'PROOF',eyebrow:'STUDENT WIN',big:'“I finally\nhit **7.**”',
+     sub:'Real messages from real students. This could be your screenshot next month.',box:'',url:'',idx:'REAL'},
+    'Drop a real (blurred) student message here. Nothing sells like proof.'),
+  P(14,'SUN','Story','BTS','How I make one mock test.','statement',
+    {topRight:'BUILD IN PUBLIC',eyebrow:'BEHIND THE SCENES',big:'How one\ntest gets\n**built.**',
+     sub:'Every mock is hand-checked for real exam format — timing, question types, traps. Here\'s the process.',box:'',url:'',idx:'BTS'},
+    'Show your process in the caption — people follow builders, not just brands.'),
+ ]},
+ {label:'Week 3 — Writing',sub:'',days:[
+  P(15,'MON','Skill Fix','Carousel','The Band 7.5 Task 2 structure examiners reward.','cover',
+    {eyebrow:'IELTS · WRITING SKILL',big:'The **7.5**\nTask 2\nstructure.',sub:'The exact skeleton examiners reward. Swipe →',idx:'01 / 06'},
+    'The Task 2 structure that quietly separates Band 6 from Band 7.5. Save it before your next essay 👇'),
+  P(16,'TUE','Word Lab','Vocab tile','Academic phrases to describe any graph.','word',
+    {eyebrow:'WRITING · TASK 1',killWord:'“goes up”',
+     pairs:'goes up => rises / climbs\ngoes down => declines / falls\nstays same => remains stable\nbig increase => a sharp rise\nsmall change => a slight shift',
+     sub:'Task 1 rewards precise movement verbs. Swap vague words for the ones examiners expect.',tag:'TASK 1'},
+    'Describe any graph like a Band 7+. Steal these movement verbs 👇'),
+  P(17,'WED','The Tool','Reel / demo','Paste your essay → get band feedback.','statement',
+    {topRight:'WRITING LAB',eyebrow:'FEEDBACK AT 2AM',big:'Paste it.\nGet your\n**band.**',
+     sub:'Drop your essay into the Writing Lab and get band feedback — any time, no teacher required.',box:'',url:'flarestamina.com/writing/',idx:'LAB'},
+    'Studying at 2am with no one to check your essay? The Writing Lab has you 👇'),
+  P(18,'THU','Engage','Poll tile','Rate this intro paragraph.','bin',
+    {item:'In this essay I will discuss…',sub:'Strong Task 2 opener, or an instant Band-6 cap? Vote and fix it below.'},
+    'Band or bin this opener? 👇 (spoiler: it caps you at 6 — can you rewrite it?)'),
+  P(19,'FRI','Skill Fix','Single tile','Your Task 2 intro in 2 sentences.','statement',
+    {topRight:'WRITING · QUICK FIX',eyebrow:'THE 2-SENTENCE INTRO',big:'Intro in\n**two**\nsentences.',
+     sub:'Sentence 1: paraphrase the question. Sentence 2: state your position. That\'s it — no filler, no “nowadays.”',box:'',url:'',idx:'QUICK FIX'},
+    'Your whole Task 2 intro = 2 sentences. Paraphrase, then position. Save this.'),
+  P(20,'SAT','Deadline','Reminder tile','IELTS / Milliy sertifikat dates.','statement',
+    {topRight:'DEADLINES',eyebrow:'DON\'T MISS THE WINDOW',big:'Mark the\n**dates.**',
+     sub:'Registration windows fill fast. Check the live deadline tracker so the exam date never catches you out.',box:'',url:'flarestamina.com/deadlines/',idx:'TRACKER'},
+    'Add the real upcoming dates. Deadline posts are useful AND drive urgency.'),
+  P(21,'SUN','Story','Founder note','Why I don\'t charge for this.','statement',
+    {topRight:'THE STORY',eyebrow:'STILL FREE',big:'Why I don\'t\n**charge.**',
+     sub:'I could put this behind a paywall. I won\'t. A stressful, expensive exam shouldn\'t be gatekept by budget.',box:'',url:'',idx:'FOUNDER'},
+    'Say it plainly, in Uzbek. Your free-forever stance is your identity — lean into it.'),
+ ]},
+ {label:'Week 4 — Speaking',sub:'',days:[
+  P(22,'MON','Skill Fix','Carousel','5 fillers that lower your Speaking band.','cover',
+    {eyebrow:'IELTS · SPEAKING SKILL',big:'**5** fillers\nkilling your\nSpeaking\nband.',sub:'And what to say instead. Swipe →',idx:'01 / 06'},
+    '“Umm, like, you know, basically…” — the fillers quietly lowering your band, and the fixes. Save this 👇'),
+  P(23,'TUE','Word Lab','Vocab tile','Idioms that sound natural in Part 1.','word',
+    {eyebrow:'SPEAKING · PART 1',killWord:'stiff phrases',
+     pairs:'I like it very much => I\'m really into it\nit is difficult => it\'s a bit of a struggle\nI am tired => I\'m worn out\nI think so => I\'d say so',
+     sub:'Natural phrasing beats textbook phrasing — but only if it fits. Forced idioms sound worse than none.',tag:'PART 1'},
+    'Sound natural in Part 1 — not like a textbook. But don\'t force it. Save these 👇'),
+  P(24,'WED','The Tool','Reel / demo','Practice Part 1–3 with model answers.','statement',
+    {topRight:'SPEAKING LAB',eyebrow:'PART 1–3, ANY TIME',big:'Practise\nspeaking.\n**Alone.**',
+     sub:'The Speaking Lab runs Parts 1–3 with instant model answers — no partner, no pressure, whenever you\'re free.',box:'',url:'flarestamina.com/speaking/',idx:'LAB'},
+    'No speaking partner? Practise Parts 1–3 with instant models 👇'),
+  P(25,'THU','Engage','Challenge tile','Answer this Part 1 question.','dialogue',{},
+    'Your turn — answer this in the comments. Best natural answer gets a shout-out 👇'),
+  P(26,'FRI','Skill Fix','Single tile','The 2-minute Part 2 structure.','statement',
+    {topRight:'SPEAKING · QUICK FIX',eyebrow:'NEVER RUN OUT',big:'Part 2 in\n**four**\nbeats.',
+     sub:'What → When → Why it matters → How you felt. Four beats and you\'ll fill two minutes without freezing.',box:'',url:'',idx:'QUICK FIX'},
+    'Never run out of things to say in Part 2. Four beats: what, when, why, how you felt. Save this.'),
+  P(27,'SAT','Proof','Milestone tile','One month in — thank you.','statement',
+    {topRight:'MILESTONE',eyebrow:'MONTH ONE',big:'**4 weeks.**\nThank\nyou.',
+     sub:'Swap in your real numbers — followers, tests taken. Celebrate the community that showed up.',box:'',url:'',idx:'THANK YOU'},
+    'Fill in your real month-one numbers. Gratitude posts build loyalty.'),
+  P(28,'SUN','Story','Recap','What\'s coming next.','statement',
+    {topRight:'THE STORY',eyebrow:'WHAT\'S NEXT',big:'Month **2**\nis coming.',
+     sub:'Tease what you\'re building next — new tests, new tools. Give people a reason to stay.',box:'',url:'',idx:'NEXT'},
+    'Recap the month and tease what\'s next. Keep them subscribed.'),
+ ]},
+ {label:'Days 29–30 — Universal',sub:'High-share posts that work any time.',days:[
+  P(29,'MON','Skill Fix','Carousel','IELTS exam-day checklist (10 things).','cover',
+    {eyebrow:'IELTS · EXAM DAY',big:'Exam-day\ncheck**list.**',sub:'10 things nobody tells you — screenshot before your test. Swipe →',idx:'01 / 06'},
+    'Screenshot this before exam day. The 10 things nobody warns you about 👇'),
+  P(30,'TUE','The Tool','Round-up tile','Your whole IELTS toolkit, one link.','statement',
+    {topRight:'YOUR FREE TOOLKIT',eyebrow:'EVERYTHING IN ONE LINK',big:'Your whole\nIELTS toolkit.\n**Free.**',
+     sub:'Mock tests, Writing Lab, Speaking Lab, full mocks, a 40-day challenge and a live deadline tracker — all in one place, all free.',box:'',url:'flarestamina.com',idx:'ALL FREE'},
+    'Everything Flarestamina gives you, one link, zero cost. Save + share 👇'),
+ ]}
+];
+
+function buildPlan(){
+  const wk=$('weeks'); wk.innerHTML='';
+  PLAN.forEach(week=>{
+    const sec=document.createElement('div'); sec.className='week';
+    sec.innerHTML=`<h3>${week.label}</h3>${week.sub?`<p class="wk-sub">${week.sub}</p>`:''}`;
+    const grid=document.createElement('div'); grid.className='days';
+    week.days.forEach(day=>{
+      const el=document.createElement('div'); el.className='day';
+      el.innerHTML=`<div class="top"><span class="dn">${pad2(day.d)}</span><span class="dow">${day.dow}</span></div>
+        <span class="pill">${day.pillar}</span>
+        <div class="fmt">${day.fmt}</div>
+        <div class="hook">${day.hook}</div>`;
+      const b=document.createElement('button'); b.className='mk'; b.textContent='Create →';
+      b.onclick=()=>loadDay(day);
+      el.appendChild(b); grid.appendChild(el);
+    });
+    sec.appendChild(grid); wk.appendChild(sec);
+  });
+}
+function loadDay(day){
+  cur=day.tpl;
+  store[cur]={...TPL[cur].def, ...(day.data||{})};
+  $('caption').value=day.cap||'';
+  showView('studio'); buildPicker(); buildForm(); render();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ============================ NAV + ACTIONS ============================ */
+function showView(v){
+  const s=v==='studio';
+  $('studioView').classList.toggle('hidden',!s);
+  $('planView').classList.toggle('hidden',s);
+  $('tabStudio').classList.toggle('on',s);
+  $('tabPlan').classList.toggle('on',!s);
+}
+$('tabStudio').onclick=()=>showView('studio');
+$('tabPlan').onclick=()=>showView('plan');
+$('accent').addEventListener('input',e=>{FLARE=e.target.value;render();});
+$('dl').onclick=()=>{ cv.toBlob(b=>{ const a=document.createElement('a');
+  a.href=URL.createObjectURL(b); a.download=`flarestamina_${cur}_${Date.now()}.png`; a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),1000); }); };
+$('copyCap').onclick=()=>{ const t=$('caption'); t.select();
+  navigator.clipboard?.writeText(t.value); const b=$('copyCap'); b.textContent='Copied'; setTimeout(()=>b.textContent='Copy',1200); };
+
+/* ============================ BOOT ============================ */
+function boot(){ buildPicker(); buildForm(); buildPlan();
+  $('caption').value=PLAN[0].days[0].cap; render(); }
+if(document.fonts&&document.fonts.load){
+  Promise.all([500,600,700,800].map(w=>document.fonts.load(`${w} 100px 'JetBrains Mono'`)))
+    .then(()=>document.fonts.ready).then(boot).catch(boot);
+  setTimeout(render,600); // re-render once fonts settle
+}else{ boot(); }
+</script>
+</body>
+</html>
