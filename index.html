@@ -250,6 +250,17 @@ nav .links a:not(.btn){font-size:.92rem;font-weight:500;color:var(--muted);trans
 nav .links a:not(.btn):hover{color:var(--text)}
 nav .btn{padding:9px 18px;font-size:.88rem}
 @media(max-width:600px){nav .links a:not(.btn){display:none}}
+.nav-toggle{display:none;width:38px;height:38px;border-radius:999px;flex:none;cursor:pointer;padding:0;border:1px solid var(--line);background:var(--surface);color:var(--muted);align-items:center;justify-content:center;transition:border-color .2s,color .2s}
+.nav-toggle:hover{border-color:var(--line-2);color:var(--text)}
+.nav-toggle svg{width:18px;height:18px}
+.mobile-menu{display:none;flex-direction:column;padding:6px clamp(20px,5vw,40px) 14px;border-top:1px solid var(--line)}
+.mobile-menu a{padding:12px 2px;font-size:1rem;font-weight:500;color:var(--muted);border-bottom:1px solid var(--line);transition:color .2s}
+.mobile-menu a:last-child{border-bottom:0}
+.mobile-menu a:hover{color:var(--text)}
+.mobile-menu .m-start{margin-top:12px;padding:13px;text-align:center;border-bottom:0;border-radius:12px;color:#180702;font-weight:700;background:linear-gradient(135deg,#E8501A,#E8501A);box-shadow:0 8px 28px -8px rgba(255,90,31,.55)}
+.mobile-menu .m-start:hover{color:#180702}
+@media(min-width:601px){.mobile-menu{display:none!important}.nav-toggle{display:none!important}}
+@media(max-width:600px){.nav-toggle{display:flex}.mobile-menu.open{display:flex}nav .links .go-hub{display:none}}
 
 /* ============ hero scene ============ */
 .hero{
@@ -647,7 +658,18 @@ html[data-theme="light"] .toast{background:#fff;box-shadow:0 10px 30px -10px rgb
         <span>Sign in</span>
       </a>
       <a class="btn btn-grad go-hub" href="https://flarestamina.com/ielts-hub/">Start free</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
     </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#skills">Skills</a>
+    <a href="#why">Why</a>
+    <a href="/news/">News</a>
+    <a href="/news/#articles">Articllar</a>
+    <a href="/writearticle/">Article yozish</a>
+    <a class="m-start" href="https://flarestamina.com/ielts-hub/">Start free</a>
   </div>
 </nav>
 
@@ -979,6 +1001,19 @@ html[data-theme="light"] .toast{background:#fff;box-shadow:0 10px 30px -10px rgb
       try{ localStorage.setItem('p8-theme', next); }catch(e){}
       var tc = document.querySelector('meta[name="theme-color"]');
       if(tc) tc.setAttribute('content', next === 'light' ? '#f6f8f7' : '#0A0605');
+    });
+  })();
+
+  // ---- mobile menu toggle ----
+  (function(){
+    var nt = document.getElementById('navToggle'), mm = document.getElementById('mobileMenu');
+    if(!nt || !mm) return;
+    nt.addEventListener('click', function(){
+      var open = mm.classList.toggle('open');
+      nt.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    mm.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){ mm.classList.remove('open'); nt.setAttribute('aria-expanded','false'); });
     });
   })();
   renderAuth(null);
