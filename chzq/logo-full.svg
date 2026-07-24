@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="92" viewBox="0 0 360 92">
+  <rect x="8" y="8" width="76" height="76" fill="#0A0A0A"/>
+  <path d="M16 13h30l6 6v21l-6 6h-9l10 10H35L25 46h-9l-6-6V19l6-6Zm4 9-2 2v11l2 2h16l-7-7 8-8H20Zm23 5-4 4 5 5V25l-1 2Z" fill="#FF4D00" transform="translate(10 10) scale(1.125)"/>
+  <text x="104" y="62" font-family="Arial,Helvetica,sans-serif" font-size="62" font-weight="900" letter-spacing="-5.4" fill="#0A0A0A">CHZQ</text>
+  <text x="291" y="31" font-family="Courier New,monospace" font-size="10" font-weight="700" fill="#FF4D00">®</text>
+</svg>
