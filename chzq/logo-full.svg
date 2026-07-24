@@ -1,11 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="360" height="92" viewBox="0 0 360 92">
-  <defs><linearGradient id="g" x1="8" y1="6" x2="58" y2="61" gradientUnits="userSpaceOnUse">
-  <stop stop-color="#70E6FF"/>
-  <stop offset=".48" stop-color="#6C7BFF"/>
-  <stop offset="1" stop-color="#B26DFF"/>
-</linearGradient></defs>
-  <rect x="8" y="8" width="76" height="76" rx="20" fill="#101116"/>
-  <path d="M16 13h30l6 6v21l-6 6h-9l10 10H35L25 46h-9l-6-6V19l6-6Zm4 9-2 2v11l2 2h16l-7-7 8-8H20Zm23 5-4 4 5 5V25l-1 2Z" fill="url(#g)" transform="translate(10 10) scale(1.125)"/>
-  <text x="104" y="61" font-family="Arial,Helvetica,sans-serif" font-size="58" font-weight="800" letter-spacing="-4.8" fill="#101116">CHZQ</text>
-  <text x="105" y="78" font-family="Courier New,monospace" font-size="8" font-weight="700" letter-spacing="2" fill="#777A84">PRODUCT STUDIO</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="430" height="92" viewBox="0 0 430 92">
+  <rect width="430" height="92" fill="#050505"/>
+  <path d="M16 13h30l6 6v21l-6 6h-9l10 10H35L25 46h-9l-6-6V19l6-6Zm4 9-2 2v11l2 2h16l-7-7 8-8H20Zm23 5-4 4 5 5V25l-1 2Z" fill="#F5F5F3" transform="translate(10 10) scale(1.125)"/>
+  <text x="104" y="62" font-family="Arial,Helvetica,sans-serif" font-size="58" font-weight="800" letter-spacing="-4.8" fill="#F5F5F3">CHZQ</text>
+  <line x1="284" y1="27" x2="284" y2="65" stroke="#3B3B3B"/>
+  <text x="304" y="43" font-family="Courier New,monospace" font-size="8" font-weight="700" letter-spacing="2" fill="#A0A0A0">DIGITAL</text>
+  <text x="304" y="58" font-family="Courier New,monospace" font-size="8" font-weight="700" letter-spacing="2" fill="#A0A0A0">STUDIO</text>
 </svg>

@@ -1,39 +1,42 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
   <defs>
-    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#70E6FF"/>
-      <stop offset=".48" stop-color="#6C7BFF"/>
-      <stop offset="1" stop-color="#B26DFF"/>
+    <radialGradient id="halo" cx="0" cy="0" r="1" gradientTransform="translate(600 100) rotate(90) scale(440 700)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2A2A2A" stop-opacity=".72"/>
+      <stop offset="1" stop-color="#050505" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#181818"/>
+      <stop offset="1" stop-color="#0B0B0B"/>
     </linearGradient>
-    <radialGradient id="a" cx="0" cy="0" r="1" gradientTransform="translate(255 120) rotate(35) scale(410 330)" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#456CFF" stop-opacity=".38"/>
-      <stop offset="1" stop-color="#456CFF" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="b" cx="0" cy="0" r="1" gradientTransform="translate(1030 480) rotate(-135) scale(410 330)" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#A64CFF" stop-opacity=".36"/>
-      <stop offset="1" stop-color="#A64CFF" stop-opacity="0"/>
-    </radialGradient>
-    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
-      <path d="M48 0H0V48" fill="none" stroke="#FFFFFF" stroke-opacity=".035"/>
+    <pattern id="grid" width="52" height="52" patternUnits="userSpaceOnUse">
+      <path d="M52 0H0V52" fill="none" stroke="#FFFFFF" stroke-opacity=".035"/>
     </pattern>
   </defs>
-  <rect width="1200" height="630" fill="#060608"/>
-  <rect width="1200" height="630" fill="url(#a)"/>
-  <rect width="1200" height="630" fill="url(#b)"/>
+  <rect width="1200" height="630" fill="#050505"/>
+  <rect width="1200" height="630" fill="url(#halo)"/>
   <rect width="1200" height="630" fill="url(#grid)"/>
-  <rect x="54" y="45" width="60" height="60" rx="16" fill="#101116" stroke="#FFFFFF" stroke-opacity=".12"/>
-  <path d="M16 13h30l6 6v21l-6 6h-9l10 10H35L25 46h-9l-6-6V19l6-6Zm4 9-2 2v11l2 2h16l-7-7 8-8H20Zm23 5-4 4 5 5V25l-1 2Z" fill="url(#brand)" transform="translate(52 43)"/>
-  <text x="132" y="87" font-family="Arial,Helvetica,sans-serif" font-size="32" font-weight="800" letter-spacing="-2" fill="#F8F8FB">CHZQ</text>
-  <rect x="244" y="61" width="116" height="30" rx="15" fill="#FFFFFF" fill-opacity=".06" stroke="#FFFFFF" stroke-opacity=".1"/>
-  <text x="302" y="80" text-anchor="middle" font-family="Courier New,monospace" font-size="8" font-weight="700" letter-spacing="1" fill="#8B8E98">PRODUCT STUDIO</text>
-  <text x="1146" y="82" text-anchor="end" font-family="Courier New,monospace" font-size="10" letter-spacing="2" fill="#8B8E98">TOSHKENT / UZ</text>
-  <text x="600" y="238" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="72" font-weight="650" letter-spacing="-5.5" fill="#F8F8FB">Biznesingiz uchun</text>
-  <text x="600" y="324" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="80" font-weight="680" letter-spacing="-6" fill="url(#brand)">ajralib turadigan</text>
-  <text x="600" y="405" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="72" font-weight="650" letter-spacing="-5.5" fill="#F8F8FB">raqamli mahsulotlar.</text>
-  <text x="600" y="467" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="18" fill="#A0A3AD">Strategiya · Premium dizayn · Kuchli kod · 8+ live loyiha</text>
-  <rect x="392" y="512" width="416" height="70" rx="17" fill="#111319" stroke="#FFFFFF" stroke-opacity=".13"/>
-  <circle cx="435" cy="547" r="16" fill="#77E0B5" fill-opacity=".13"/>
-  <circle cx="435" cy="547" r="5" fill="#77E0B5"/>
-  <text x="466" y="552" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="700" fill="#F8F8FB">1,49 mln so‘mdan · 2–14 kun</text>
-  <text x="776" y="552" text-anchor="end" font-family="Arial,Helvetica,sans-serif" font-size="18" fill="#7C8BFF">↗</text>
+
+  <path d="M16 13h30l6 6v21l-6 6h-9l10 10H35L25 46h-9l-6-6V19l6-6Zm4 9-2 2v11l2 2h16l-7-7 8-8H20Zm23 5-4 4 5 5V25l-1 2Z" fill="#F5F5F3" transform="translate(42 32) scale(.92)"/>
+  <text x="116" y="79" font-family="Arial,Helvetica,sans-serif" font-size="30" font-weight="800" letter-spacing="-2" fill="#F5F5F3">CHZQ</text>
+  <text x="1146" y="76" text-anchor="end" font-family="Courier New,monospace" font-size="10" letter-spacing="2.2" fill="#8E8E8E">TOSHKENT · UZBEKISTAN</text>
+
+  <rect x="484" y="106" width="232" height="40" rx="20" fill="#111111" stroke="#323232"/>
+  <circle cx="514" cy="126" r="4" fill="#F5F5F3"/>
+  <text x="536" y="130" font-family="Arial,Helvetica,sans-serif" font-size="12" font-weight="700" letter-spacing=".6" fill="#C9C9C9">CHZQ DIGITAL STUDIO</text>
+
+  <text x="600" y="245" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="70" font-weight="650" letter-spacing="-5.5" fill="#F5F5F3">Yuqori darajadagi</text>
+  <text x="600" y="326" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="76" font-weight="650" letter-spacing="-6" fill="#F5F5F3">raqamli mahsulotlar</text>
+  <text x="600" y="407" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="70" font-weight="650" letter-spacing="-5.5" fill="#8E8E8E">har bir biznes uchun.</text>
+
+  <rect x="92" y="492" width="492" height="90" rx="22" fill="url(#panel)" stroke="#2F2F2F"/>
+  <circle cx="134" cy="537" r="15" fill="#F5F5F3"/>
+  <path d="m128 537 4 4 8-9" fill="none" stroke="#050505" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="166" y="530" font-family="Courier New,monospace" font-size="10" font-weight="700" letter-spacing="1.6" fill="#777777">SYSTEM 01</text>
+  <text x="166" y="552" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="700" fill="#F5F5F3">Sayt · Telegram bot · Mini App</text>
+
+  <rect x="616" y="492" width="492" height="90" rx="22" fill="url(#panel)" stroke="#2F2F2F"/>
+  <circle cx="658" cy="537" r="15" fill="#171717" stroke="#4A4A4A"/>
+  <circle cx="658" cy="537" r="4" fill="#F5F5F3"/>
+  <text x="690" y="530" font-family="Courier New,monospace" font-size="10" font-weight="700" letter-spacing="1.6" fill="#777777">PROOF 08+</text>
+  <text x="690" y="552" font-family="Arial,Helvetica,sans-serif" font-size="17" font-weight="700" fill="#F5F5F3">Real ishlayotgan loyihalar</text>
 </svg>
