@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="430" height="92" viewBox="0 0 430 92">
-  <rect width="430" height="92" fill="#050505"/>
-  <path d="M16 13h30l6 6v21l-6 6h-9l10 10H35L25 46h-9l-6-6V19l6-6Zm4 9-2 2v11l2 2h16l-7-7 8-8H20Zm23 5-4 4 5 5V25l-1 2Z" fill="#F5F5F3" transform="translate(10 10) scale(1.125)"/>
-  <text x="104" y="62" font-family="Arial,Helvetica,sans-serif" font-size="58" font-weight="800" letter-spacing="-4.8" fill="#F5F5F3">CHZQ</text>
-  <line x1="284" y1="27" x2="284" y2="65" stroke="#3B3B3B"/>
-  <text x="304" y="43" font-family="Courier New,monospace" font-size="8" font-weight="700" letter-spacing="2" fill="#A0A0A0">DIGITAL</text>
-  <text x="304" y="58" font-family="Courier New,monospace" font-size="8" font-weight="700" letter-spacing="2" fill="#A0A0A0">STUDIO</text>
+  <rect width="430" height="92" fill="#F7F7F5"/>
+  <path d="M16 13h30l6 6v21l-6 6h-9l10 10H35L25 46h-9l-6-6V19l6-6Zm4 9-2 2v11l2 2h16l-7-7 8-8H20Zm23 5-4 4 5 5V25l-1 2Z" fill="#111111" transform="translate(10 10) scale(1.125)"/>
+  <text x="104" y="62" font-family="Arial,Helvetica,sans-serif" font-size="58" font-weight="800" letter-spacing="-4.8" fill="#111111">CHZQ</text>
+  <line x1="284" y1="27" x2="284" y2="65" stroke="#D0D0CC"/>
+  <text x="304" y="43" font-family="Courier New,monospace" font-size="8" font-weight="700" letter-spacing="2" fill="#777777">DIGITAL</text>
+  <text x="304" y="58" font-family="Courier New,monospace" font-size="8" font-weight="700" letter-spacing="2" fill="#777777">STUDIO</text>
 </svg>
