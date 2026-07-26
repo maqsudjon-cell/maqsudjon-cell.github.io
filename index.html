@@ -250,6 +250,14 @@ nav .links a:not(.btn){font-size:.92rem;font-weight:500;color:var(--muted);trans
 nav .links a:not(.btn):hover{color:var(--text)}
 nav .btn{padding:9px 18px;font-size:.88rem}
 @media(max-width:600px){nav .links a:not(.btn){display:none}}
+/* keep the whole bar inside the viewport on small phones — "Start free" used to be clipped */
+@media(max-width:430px){
+  nav .bar{padding-left:14px;padding-right:14px;gap:8px}
+  nav .links{gap:8px}
+  nav .btn{padding:8px 13px;font-size:.82rem}
+  .brand{font-size:1rem;gap:7px}
+  .spark{width:18px;height:18px}
+}
 
 /* ============ hero scene ============ */
 .hero{
@@ -1088,26 +1096,40 @@ html[data-theme="light"] .toast{background:#fff;box-shadow:0 10px 30px -10px rgb
     sbUpd();
   }
 
-  /* ---- scramble headline ---- */
+  /* ---- scramble headline ----
+     rAF-driven: setInterval is clamped to ~1s in a background tab, which used to
+     leave the H1 stuck as gibberish. rAF simply pauses instead, and every exit
+     path writes the real text back. */
   var scrEl = document.querySelector('.hero .grad-text');
-  if(scrEl){
+  if(scrEl && !window.matchMedia('(prefers-reduced-motion:reduce)').matches){
     var finalTxt = scrEl.textContent;
     var CH = 'ABCDEFGHJKMNPQRSTUVWXYZ0123456789#%&+';
+    var DUR = 850, running = false;
+    function settle(){ running = false; scrEl.textContent = finalTxt; }
     function scramble(){
-      var total = 28, f = 0;
-      var iv = setInterval(function(){
-        f++;
-        var out = '';
+      if(running || document.hidden) return;
+      running = true;
+      var t0 = performance.now();
+      (function step(now){
+        if(!running) return;                      /* cancelled -> text already restored */
+        if(document.hidden){ settle(); return; }  /* never leave gibberish behind */
+        var p = (now - t0) / DUR;
+        if(p >= 1){ settle(); return; }
+        var out = '', cut = p * finalTxt.length;
         for(var i = 0; i < finalTxt.length; i++){
           var c = finalTxt[i];
-          out += (c === ' ' || i < f / total * finalTxt.length) ? c : CH[(Math.random() * CH.length) | 0];
+          out += (c === ' ' || i < cut) ? c : CH[(Math.random() * CH.length) | 0];
         }
         scrEl.textContent = out;
-        if(f >= total){ clearInterval(iv); scrEl.textContent = finalTxt; }
-      }, 30);
+        requestAnimationFrame(step);
+      })(t0);
     }
+    document.addEventListener('visibilitychange', function(){ if(document.hidden) settle(); });
     setTimeout(scramble, 900);
-    setInterval(scramble, 12000);
+    setInterval(function(){
+      /* only replay when someone can actually see it */
+      if(!document.hidden && scrEl.getBoundingClientRect().bottom > 0) scramble();
+    }, 12000);
   }
 
   /* ---- magnetic buttons (desktop) ---- */
