@@ -26,6 +26,24 @@
 
   var d = document, root = d.documentElement;
 
+  /* ---- analytics opt-out ---------------------------------------------
+     GoatCounter skips a browser when localStorage.skipgc === 't'. At this
+     site's traffic the owner's own testing is a large share of the numbers,
+     so give every device a way to switch itself off: open any page with
+     ?nogc to stop counting, ?gc to start again. The flag is per browser and
+     survives until it is cleared. */
+  try {
+    var q = location.search;
+    if (q.indexOf('nogc') > -1) {
+      localStorage.setItem('skipgc', 't');
+      console.info('[fs] analytics off for this browser — open ?gc to re-enable');
+    } else if (q.indexOf('gc') > -1 && q.indexOf('nogc') === -1) {
+      localStorage.removeItem('skipgc');
+      console.info('[fs] analytics on for this browser');
+    }
+  } catch (e) {}
+
+
   /* ---- theme ------------------------------------------------------------
      Three keys, because pages written at different times read different
      ones. Always write all three or the theme flips as students navigate. */

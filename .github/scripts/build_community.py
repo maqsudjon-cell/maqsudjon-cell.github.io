@@ -296,7 +296,7 @@ FOOTER = '''</main>
  "footDisc": "IELTS, IDP yoki British Council bilan bog‘liq emas."
 }};</script>
 <script src="/assets/paper.js?v=1"></script>
-<script data-goatcounter="https://flarestamina.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script data-goatcounter="https://flarestamina.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 '''
 
 

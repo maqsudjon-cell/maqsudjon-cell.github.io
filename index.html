@@ -664,6 +664,12 @@ footer{border-top:1px solid var(--border);padding:3.5rem 0 2.5rem}
 (function () {
   'use strict';
 
+  try {
+    var _q = location.search;
+    if (_q.indexOf('nogc') > -1) { localStorage.setItem('skipgc', 't'); }
+    else if (_q.indexOf('gc') > -1) { localStorage.removeItem('skipgc'); }
+  } catch (e) {}
+
   var COPY = {
     en: {},
     uz: {
@@ -931,6 +937,6 @@ footer{border-top:1px solid var(--border);padding:3.5rem 0 2.5rem}
   paintWord();
 })();
 </script>
-<script data-goatcounter="https://flarestamina.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+<script data-goatcounter="https://flarestamina.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>

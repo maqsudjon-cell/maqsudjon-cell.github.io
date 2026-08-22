@@ -165,7 +165,7 @@ def footer(uz_json, extra_scripts=''):
 <script src="/assets/fs-auth.js"></script>
 <script>window.FS_UZ = {uz_json};</script>
 <script src="/assets/paper.js?v=1"></script>
-{extra_scripts}<script data-goatcounter="https://flarestamina.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+{extra_scripts}<script data-goatcounter="https://flarestamina.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>
 '''
