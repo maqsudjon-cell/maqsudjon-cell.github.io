@@ -12,6 +12,33 @@
  * Tokens live in :root. Never hard-code a colour in a page — add a token here.
  */
 
+/* Self-hosted, subset to the characters this site actually uses. Serving them
+   ourselves removes a render-blocking third-party stylesheet and two extra
+   connections (fonts.googleapis.com + fonts.gstatic.com) from every page.
+   Regenerate with `bash tools/brand/fonts.sh`. */
+@font-face{
+  font-family:Inter;
+  src:url('/assets/fonts/inter-var.woff2') format('woff2-variations'),
+      url('/assets/fonts/inter-var.woff2') format('woff2');
+  font-weight:400 600;
+  font-style:normal;
+  font-display:swap;
+}
+@font-face{
+  font-family:"IBM Plex Mono";
+  src:url('/assets/fonts/plex-mono-400.woff2') format('woff2');
+  font-weight:400;
+  font-style:normal;
+  font-display:swap;
+}
+@font-face{
+  font-family:"IBM Plex Mono";
+  src:url('/assets/fonts/plex-mono-500.woff2') format('woff2');
+  font-weight:500;
+  font-style:normal;
+  font-display:swap;
+}
+
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
 :root{

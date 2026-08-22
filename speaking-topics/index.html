@@ -37,9 +37,8 @@
   } catch (e) { document.documentElement.dataset.theme = 'light'; }
 })();
 </script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" href="/assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/plex-mono-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/paper.css?v=1">
 <script type="application/ld+json">
 {
@@ -88,7 +87,8 @@
 .rot .r{border-radius:6px;background:var(--surface);box-shadow:var(--card);padding:.9rem 1rem;font-size:.78rem;color:var(--subtle)}
 .rot .r b{display:block;margin:.25rem 0;font-size:1rem;font-weight:500;letter-spacing:-.02em;color:var(--fg)}
 .rot .r.now{box-shadow:0 0 0 1px color-mix(in oklab,var(--fg) 30%,transparent)}
-.rot .tag{font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--fg)}
+.rot .tag{display:inline-flex;align-items:center;gap:.35rem;font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--fg)}
+.rot .tag i{width:.4rem;height:.4rem;border-radius:999px;background:currentColor}
 .honest{margin-top:1.5rem;border-left:2px solid var(--border-strong);padding:.2rem 0 .2rem 1.1rem;font-size:.88rem;line-height:1.75;color:var(--muted);max-width:52rem}
 .honest b{color:var(--fg);font-weight:500}
 .sec h2{font-size:1.4rem;margin-bottom:.6rem}
@@ -151,7 +151,7 @@
   <p>The question pool partially refreshes around <strong>January, May and September</strong>. Here is what stays, what rotates, and how to prepare so the rotation never hurts you.</p>
   <div class="rot">
     <div class="r"><span>previous</span><b>Jan – Apr 2026</b><span>retired</span></div>
-    <div class="r now"><span class="tag">● current</span><b>May – Aug 2026</b><span>bank is stable now</span></div>
+    <div class="r now"><span class="tag"><i></i>current</span><b>May – Aug 2026</b><span>bank is stable now</span></div>
     <div class="r"><span>next swap</span><b>~September 2026</b><span>partial refresh</span></div>
   </div>
   <div class="honest"><b>Honest note:</b> IELTS never publishes its live question bank — every "current topics" list online is reconstructed from test-taker reports. Useful for practice; never a guarantee. That's why this page trains <b>themes</b>, not memorised answers. <span lang="uz">🇺🇿 Rasmiy savollar banki hech qachon e'lon qilinmaydi — shuning uchun mavzu yodlamang, moslashuvchan hikoyalar tayyorlang.</span></div>
