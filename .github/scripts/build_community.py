@@ -453,12 +453,20 @@ def author_page(author, center, link, items, featured=False):
                   '<h2>%s</h2><p class="sum">%s…</p></a>' % (
                       it['slug'], it['a']['date'], escape(it['a']['title']),
                       escape(re.sub(r'\s+', ' ', it['a']['body'])[:150])))
-    ld = {"@context": "https://schema.org", "@type": "ProfilePage",
-          "url": url, "name": author,
-          "mainEntity": {"@type": "Person", "name": author,
-                         **({"url": link} if link else {}),
-                         **({"worksFor": {"@type": "Organization", "name": center}} if center else {}),
-                         "knowsAbout": ["IELTS", "English language teaching"]}}
+    ld = {"@context": "https://schema.org", "@graph": [
+        {"@type": "ProfilePage", "@id": url + "#page",
+         "url": url, "name": author,
+         "inLanguage": "en",
+         "isPartOf": {"@id": SITE + "/#website"},
+         "mainEntity": {"@type": "Person", "@id": url + "#person", "name": author,
+                        **({"url": link} if link else {}),
+                        **({"worksFor": {"@type": "Organization", "name": center}} if center else {}),
+                        "knowsAbout": ["IELTS", "English language teaching"]}},
+        {"@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Flarestamina", "item": SITE + "/"},
+            {"@type": "ListItem", "position": 2, "name": "News", "item": SITE + "/news/"},
+            {"@type": "ListItem", "position": 3, "name": "Articles", "item": SITE + "/news/#articles"},
+            {"@type": "ListItem", "position": 4, "name": author, "item": url}]}]}
     return '''<!DOCTYPE html>
 <html lang="en">
 <head>

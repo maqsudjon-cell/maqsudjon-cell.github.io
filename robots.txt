@@ -1,5 +1,19 @@
+# flarestamina.com
+
 User-agent: *
 Allow: /
+
+# Google needs the stylesheet, the script and the fonts to render a page the
+# way a student sees it. Blocking them makes every page look broken to the
+# crawler, so they are explicitly open.
+Allow: /assets/
+Allow: /news/news.css
+
+# Private area, passcode-gated and unlinked.
 Disallow: /admin/
+
+# /posts/ carries a noindex instead of a Disallow on purpose: a disallowed URL
+# can still be indexed without its content, because the crawler never gets to
+# read the noindex.
 
 Sitemap: https://flarestamina.com/sitemap.xml
