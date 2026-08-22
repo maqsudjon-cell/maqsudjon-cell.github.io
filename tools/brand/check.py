@@ -22,12 +22,21 @@ ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..')
 
 
 def fetch(url, binary=False):
-    """curl rather than urllib: the sandbox this is usually run in blocks the latter."""
-    r = subprocess.run(['curl', '-sSL', '--max-time', '25', url],
-                       capture_output=True)
-    if r.returncode:
-        raise RuntimeError(r.stderr.decode('utf-8', 'replace').strip() or f'curl exit {r.returncode}')
-    return r.stdout if binary else r.stdout.decode('utf-8', 'replace')
+    """curl rather than urllib: the sandbox this is usually run in blocks the latter.
+
+    The timeout is generous and one retry is allowed on purpose. A few of the
+    listening papers are 200 KB of inline HTML and take upwards of 13s from
+    GitHub Pages; a tight timeout reports them as broken and buries the one
+    line that matters.
+    """
+    last = ''
+    for attempt in range(2):
+        r = subprocess.run(['curl', '-sSL', '--max-time', '90', url],
+                           capture_output=True)
+        if not r.returncode:
+            return r.stdout if binary else r.stdout.decode('utf-8', 'replace')
+        last = r.stderr.decode('utf-8', 'replace').strip() or f'curl exit {r.returncode}'
+    raise RuntimeError(last)
 
 
 def canonical():
