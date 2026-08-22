@@ -99,11 +99,27 @@
 .cmt b{color:var(--fg);font-weight:500}
 .adv-comments{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border)}
 
+/* ---------- generated community article ---------- */
+.a-alt-h{font-size:clamp(1.8rem,4.6vw,2.5rem);letter-spacing:-.04em;line-height:1.15;font-weight:500}
+.a-author.big{display:flex;align-items:center;gap:.75rem;margin:1.25rem 0 2rem;font-size:.9rem}
+.a-author.big b{color:var(--fg);font-weight:500}
+.a-author.big i{display:block;font-style:normal;font-size:.8rem;color:var(--subtle)}
+.a-link{margin-left:auto;font-size:.8rem;color:var(--muted);border-bottom:1px solid var(--border)}
+.a-link:hover{color:var(--fg)}
+.a-share{margin-top:2rem}
+.a-lang{display:flex;gap:.4rem;margin-bottom:1.25rem}
+.a-lang button{height:2rem;padding:0 .85rem;border-radius:999px;border:1px solid var(--border);font-size:.8rem;color:var(--muted)}
+.a-lang button.on{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+
 /* ---------- telegram banner + misc ---------- */
 .tg-banner{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;border-radius:6px;background:var(--surface);box-shadow:var(--card);padding:1.25rem 1.35rem;margin:2.5rem 0}
 .tg-banner b{display:block;font-weight:500;letter-spacing:-.02em}
 .tg-banner span{display:block;margin-top:.2rem;font-size:.85rem;color:var(--muted)}
 .write-cta{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;border-radius:6px;background:var(--surface);box-shadow:var(--card);padding:1.25rem 1.35rem;margin:2.5rem 0;transition:box-shadow .2s}
 .write-cta:hover{box-shadow:var(--card-hover)}
+.write-cta .t{display:block;font-weight:500;letter-spacing:-.02em}
+.write-cta .s{display:block;margin-top:.25rem;font-size:.85rem;color:var(--muted)}
+.write-cta .btn{flex:none}
+.tg-banner .btn{flex:none}
 .sources{margin-top:2rem;font-size:.8rem;color:var(--subtle);line-height:1.8}
 .sources a{border-bottom:1px solid var(--border-strong)}

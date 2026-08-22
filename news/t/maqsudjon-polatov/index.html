@@ -2,9 +2,26 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>(function(){{var t="dark";try{{t=localStorage.getItem("p8-theme")||"dark";}}catch(e){{}}document.documentElement.setAttribute("data-theme",t);}})();function fsTheme(){{var d=document.documentElement,n=d.getAttribute("data-theme")==="light"?"dark":"light";d.setAttribute("data-theme",n);try{{localStorage.setItem("p8-theme",n);}}catch(e){{}}}}</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<script>
+(function () {{
+  document.documentElement.classList.add('js');
+  try {{
+    var t = localStorage.getItem('fs-paper-theme') || localStorage.getItem('theme') || localStorage.getItem('p8-theme');
+    if (t === 'dark') {{ document.documentElement.classList.add('dark'); document.documentElement.dataset.theme = 'dark'; }}
+    else {{ document.documentElement.dataset.theme = 'light'; }}
+  }} catch (e) {{ document.documentElement.dataset.theme = 'light'; }}
+}})();
+</script>
+<link rel="icon" href="/favicon.ico?v=2" sizes="48x48">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
 <link rel="alternate" type="application/rss+xml" title="Flarestamina IELTS News" href="/news/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/paper.css?v=1">
 <link rel="stylesheet" href="/news/news.css?v=2">
 <title>Maqsudjon Polatov — IELTS articles | Flarestamina</title>
 <meta name="description" content="IELTS articles by Maqsudjon Polatov (Flarestamina — founder) on Flarestamina — free IELTS practice for students in Uzbekistan.">
@@ -18,24 +35,6 @@
 <meta property="og:image" content="https://flarestamina.com/news/og.png?v=2">
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "ProfilePage", "url": "https://flarestamina.com/news/t/maqsudjon-polatov/", "name": "Maqsudjon Polatov", "mainEntity": {"@type": "Person", "name": "Maqsudjon Polatov", "url": "https://flarestamina.com/mp/", "worksFor": {"@type": "Organization", "name": "Flarestamina — founder"}, "knowsAbout": ["IELTS", "English language teaching"]}}</script>
-<meta name="theme-color" content="#ffffff">
-<link rel="icon" href="/favicon.ico?v=2" sizes="48x48">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
-<script>
-(function () {
-  document.documentElement.classList.add('js');
-  try {
-    var t = localStorage.getItem('fs-paper-theme') || localStorage.getItem('theme') || localStorage.getItem('p8-theme');
-    if (t === 'dark') { document.documentElement.classList.add('dark'); document.documentElement.dataset.theme = 'dark'; }
-    else { document.documentElement.dataset.theme = 'light'; }
-  } catch (e) { document.documentElement.dataset.theme = 'light'; }
-})();
-</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/paper.css?v=1">
 </head>
 <body>
 <a class="skip" href="#content" data-i18n="skip">Skip to content</a>
@@ -75,7 +74,6 @@
 </div>
 
 <main id="content">
-<div class="wrap narrow" style="padding-top:2.5rem">
 <section class="hero wrap">
   <p class="crumbs"><a href="/news/">← news</a> / <a href="/news/#articles">articles</a></p>
   <div class="a-author big" style="border:none;padding-top:6px">
@@ -93,9 +91,6 @@
     </div>
     <span class="btn">Write an article</span>
   </a>
-</div>
-
-<script data-goatcounter="https://flarestamina.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </div>
 </main>
 
@@ -138,7 +133,7 @@
 </footer>
 
 <script src="/assets/fs-auth.js"></script>
-<script>window.FS_UZ = {
+<script>window.FS_UZ = {{
  "skip": "Asosiy kontentga o‘tish",
  "navPractice": "Mashq",
  "navTools": "Vositalar",
@@ -162,8 +157,10 @@
  "footFor": "Talabalar uchun.",
  "footCity": "Toshkent, O‘zbekiston",
  "footDisc": "IELTS, IDP yoki British Council bilan bog‘liq emas."
-};</script>
+}};</script>
 <script src="/assets/paper.js?v=1"></script>
 <script data-goatcounter="https://flarestamina.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
 </body>
 </html>

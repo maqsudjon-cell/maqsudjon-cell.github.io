@@ -2,9 +2,26 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>(function(){{var t="dark";try{{t=localStorage.getItem("p8-theme")||"dark";}}catch(e){{}}document.documentElement.setAttribute("data-theme",t);}})();function fsTheme(){{var d=document.documentElement,n=d.getAttribute("data-theme")==="light"?"dark":"light";d.setAttribute("data-theme",n);try{{localStorage.setItem("p8-theme",n);}}catch(e){{}}}}</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<script>
+(function () {{
+  document.documentElement.classList.add('js');
+  try {{
+    var t = localStorage.getItem('fs-paper-theme') || localStorage.getItem('theme') || localStorage.getItem('p8-theme');
+    if (t === 'dark') {{ document.documentElement.classList.add('dark'); document.documentElement.dataset.theme = 'dark'; }}
+    else {{ document.documentElement.dataset.theme = 'light'; }}
+  }} catch (e) {{ document.documentElement.dataset.theme = 'light'; }}
+}})();
+</script>
+<link rel="icon" href="/favicon.ico?v=2" sizes="48x48">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
 <link rel="alternate" type="application/rss+xml" title="Flarestamina IELTS News" href="/news/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/paper.css?v=1">
 <link rel="stylesheet" href="/news/news.css?v=2">
 <title>10 Common IELTS Writing Mistakes (And How to Avoid Them) | Flarestamina</title>
 <meta name="description" content="If you’ve been preparing for IELTS for a while, you’ve probably noticed something frustrating: your English keeps improving, but your Writing score stays t">
@@ -26,24 +43,6 @@
 <meta name="twitter:description" content="If you’ve been preparing for IELTS for a while, you’ve probably noticed something frustrating: your English keeps improving, but your Writing score stays t">
 <meta name="twitter:image" content="https://flarestamina.com/news/og/10-common-ielts-writing-mistakes-and-how-to-avoid-them.png">
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Article", "@id": "https://flarestamina.com/news/a/10-common-ielts-writing-mistakes-and-how-to-avoid-them/#article", "headline": "10 Common IELTS Writing Mistakes (And How to Avoid Them)", "description": "If you’ve been preparing for IELTS for a while, you’ve probably noticed something frustrating: your English keeps improving, but your Writing score stays t", "datePublished": "2026-07-15", "dateModified": "2026-07-15", "inLanguage": "en", "mainEntityOfPage": "https://flarestamina.com/news/a/10-common-ielts-writing-mistakes-and-how-to-avoid-them/", "image": "https://flarestamina.com/news/og/10-common-ielts-writing-mistakes-and-how-to-avoid-them.png", "author": {"@type": "Person", "name": "Flare", "worksFor": {"@type": "Organization", "name": "Flarestamina team"}}, "publisher": {"@id": "https://flarestamina.com/#org"}, "isPartOf": {"@id": "https://flarestamina.com/news/#page"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Flarestamina", "item": "https://flarestamina.com/"}, {"@type": "ListItem", "position": 2, "name": "News", "item": "https://flarestamina.com/news/"}, {"@type": "ListItem", "position": 3, "name": "Articles", "item": "https://flarestamina.com/news/#articles"}, {"@type": "ListItem", "position": 4, "name": "10 Common IELTS Writing Mistakes (And How to Avoid Them)", "item": "https://flarestamina.com/news/a/10-common-ielts-writing-mistakes-and-how-to-avoid-them/"}]}]}</script>
-<meta name="theme-color" content="#ffffff">
-<link rel="icon" href="/favicon.ico?v=2" sizes="48x48">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
-<script>
-(function () {
-  document.documentElement.classList.add('js');
-  try {
-    var t = localStorage.getItem('fs-paper-theme') || localStorage.getItem('theme') || localStorage.getItem('p8-theme');
-    if (t === 'dark') { document.documentElement.classList.add('dark'); document.documentElement.dataset.theme = 'dark'; }
-    else { document.documentElement.dataset.theme = 'light'; }
-  } catch (e) { document.documentElement.dataset.theme = 'light'; }
-})();
-</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/paper.css?v=1">
 </head>
 <body>
 <a class="skip" href="#content" data-i18n="skip">Skip to content</a>
@@ -87,7 +86,7 @@
 <article class="post">
   <p class="crumbs"><a href="/news/">← news</a> / <a href="/news/#articles">articles</a></p>
   
-  <div class="body" id="body-en">
+  <div id="body-en">
     <h1 class="a-alt-h">10 Common IELTS Writing Mistakes (And How to Avoid Them)</h1>
   </div>
   <div class="post-meta">
@@ -100,7 +99,7 @@
     
   </div>
 
-  <div class="body" id="prose-en"><p>If you’ve been preparing for IELTS for a while, you’ve probably noticed something frustrating: your English keeps improving, but your Writing score stays the same.</p>
+  <div class="prose" id="prose-en"><p>If you’ve been preparing for IELTS for a while, you’ve probably noticed something frustrating: your English keeps improving, but your Writing score stays the same.</p>
 <p>The reason is simple. Most candidates repeat the same mistakes again and again. The good news? Once you identify these mistakes, improving your band score becomes much easier.</p>
 <p>Here are the 10 most common IELTS Writing mistakes and practical ways to avoid them.</p>
 <p>1. Not Answering the Question</p>
@@ -168,30 +167,17 @@
 
   <p class="source">Written by a member of the Flarestamina community · <a href="/news/t/flare/">more from Flare</a></p>
 
-  <a class="cta-card" href="/ielts-hub/"><span><span class="t">Practise what you just read — free</span><span class="s">100+ IELTS mock tests in real exam format, instant band scores</span></span><span class="btn solid">Start practicing</span></a>
+  <a class="cta-card" href="/ielts-hub/">
+    <span><span class="t">Practise what you just read — free</span><span class="s">100+ IELTS mock tests in real exam format, instant band scores</span></span>
+    <span class="btn solid">Start practicing</span>
+  </a>
 
-  <div class="a-share" style="margin-top:22px">
-    <a href="https://t.me/share/url?url=https%3A%2F%2Fflarestamina.com%2Fnews%2Fa%2F10-common-ielts-writing-mistakes-and-how-to-avoid-them%2F&text=%2210%20Common%20IELTS%20Writing%20Mistakes%20%28And%20How%20to%20Avoid%20Them%29%22%20%E2%80%94%20Flare%20%28Flarestamina%29" target="_blank" rel="noopener">↗ share on telegram</a>
+  <div class="a-share">
+    <a class="chip" href="https://t.me/share/url?url=https%3A%2F%2Fflarestamina.com%2Fnews%2Fa%2F10-common-ielts-writing-mistakes-and-how-to-avoid-them%2F&text=%2210%20Common%20IELTS%20Writing%20Mistakes%20%28And%20How%20to%20Avoid%20Them%29%22%20%E2%80%94%20Flare%20%28Flarestamina%29" target="_blank" rel="noopener">↗ Share on Telegram</a>
   </div>
 
-  <div class="post-nav"><a class="chip" href="/news/#articles">← all articles</a><a class="chip" href="/writearticle/">write your own →</a></div>
+  <div class="post-nav"><a class="chip" href="/news/#articles">← All articles</a><a class="chip" href="/writearticle/">Write your own →</a></div>
 </article>
-
-<script data-goatcounter="https://flarestamina.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-<script>
-(function(){
-  var bar=document.getElementById('langbar'); if(!bar) return;
-  var en=[document.getElementById('body-en'),document.getElementById('prose-en')];
-  var uz=document.getElementById('body-uz');
-  bar.addEventListener('click',function(e){
-    var b=e.target.closest('button'); if(!b) return;
-    var l=b.getAttribute('data-l');
-    [].forEach.call(bar.querySelectorAll('button'),function(x){x.classList.toggle('on',x===b)});
-    en.forEach(function(x){if(x)x.hidden=(l!=='en')});
-    if(uz) uz.hidden=(l!=='uz');
-  });
-})();
-</script>
 </div>
 </main>
 
@@ -234,7 +220,7 @@
 </footer>
 
 <script src="/assets/fs-auth.js"></script>
-<script>window.FS_UZ = {
+<script>window.FS_UZ = {{
  "skip": "Asosiy kontentga o‘tish",
  "navPractice": "Mashq",
  "navTools": "Vositalar",
@@ -258,8 +244,24 @@
  "footFor": "Talabalar uchun.",
  "footCity": "Toshkent, O‘zbekiston",
  "footDisc": "IELTS, IDP yoki British Council bilan bog‘liq emas."
-};</script>
+}};</script>
 <script src="/assets/paper.js?v=1"></script>
 <script data-goatcounter="https://flarestamina.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
+<script>
+(function(){
+  var bar=document.getElementById('langbar'); if(!bar) return;
+  var en=[document.getElementById('body-en'),document.getElementById('prose-en')];
+  var uz=document.getElementById('body-uz');
+  bar.addEventListener('click',function(e){
+    var b=e.target.closest('button'); if(!b) return;
+    var l=b.getAttribute('data-l');
+    [].forEach.call(bar.querySelectorAll('button'),function(x){x.classList.toggle('on',x===b)});
+    en.forEach(function(x){if(x)x.hidden=(l!=='en')});
+    if(uz) uz.hidden=(l!=='uz');
+  });
+})();
+</script>
 </body>
 </html>

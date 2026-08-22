@@ -22,8 +22,19 @@ KEY = 'AIzaSyBnmbg7CyLki-M1E4rxPevJ741yTykliDA'
 FS = 'https://firestore.googleapis.com/v1/projects/pangeya-essay/databases/(default)/documents'
 SITE = 'https://flarestamina.com'
 ROOT = os.getcwd()
-FONT_B = os.path.join(ROOT, 'assets/fonts/JetBrainsMono-Bold.ttf')
-FONT_R = os.path.join(ROOT, 'assets/fonts/JetBrainsMono-Regular.ttf')
+FONT_SANS = os.path.join(ROOT, 'assets/fonts/Inter-Variable.ttf')
+FONT_MONO = os.path.join(ROOT, 'assets/fonts/IBMPlexMono-Regular.ttf')
+
+
+def inter(size, weight='Medium'):
+    """Inter at a named weight — the variable file carries every instance."""
+    from PIL import ImageFont
+    f = ImageFont.truetype(FONT_SANS, size)
+    try:
+        f.set_variation_by_name(weight)
+    except Exception:
+        pass
+    return f
 
 # ---------------------------------------------------------------- helpers
 UZ_MAP = {'‘': "'", '’': "'", 'ʻ': "'", 'ʼ': "'", '“': '"', '”': '"', '–': '-', '—': '-'}
@@ -95,85 +106,198 @@ def safe_url(u):
 
 # ---------------------------------------------------------------- OG images
 def og_image(a, path):
+    """Paper-design card: white ground, the spark, a mono kicker, the title in
+    Inter and the gradient rail. Mirrors tools/brand/og.html, which draws the
+    site's own cards — keep the two in step."""
     from PIL import Image, ImageDraw, ImageFont
     W, H = 1200, 630
-    img = Image.new('RGB', (W, H), '#0A0605')
+    FG, MUTED, SUBTLE = '#0a0a0a', '#5c5c5c', '#8a8a8a'
+    img = Image.new('RGB', (W, H), '#ffffff')
     d = ImageDraw.Draw(img)
-    # warm flare glow, top-right
-    for i in range(180, 0, -6):
-        alpha = int(26 * (i / 180))
-        d.ellipse([W - 420 - i, -260 - i, W + 120 + i, 240 + i], fill=(20 + alpha // 3, 8, 4))
-    d.rectangle([0, 0, 14, H], fill='#FF5A1F')          # left flare bar
-    fb = ImageFont.truetype(FONT_B, 54)
-    fr = ImageFont.truetype(FONT_R, 24)
-    fs = ImageFont.truetype(FONT_B, 22)
 
-    d.text((70, 62), 'FLARE', font=fs, fill='#FF5A1F')
-    d.text((70 + d.textlength('FLARE', font=fs), 62), 'STAMINA', font=fs, fill='#EAF2EE')
-    d.text((70, 104), 'ARTICLE', font=ImageFont.truetype(FONT_R, 18), fill='#8FA89E')
+    # four-point spark, same path proportions as favicon.svg, drawn at 56px
+    cx, cy, s_ = 72 + 28, 64 + 28, 28
+    waist = s_ * 0.153           # 2.45 out of the mark's 16-unit radius
+    d.polygon([(cx, cy - s_), (cx + waist, cy - waist), (cx + s_, cy), (cx + waist, cy + waist),
+               (cx, cy + s_), (cx - waist, cy + waist), (cx - s_, cy), (cx - waist, cy - waist)], fill=FG)
 
-    # wrapped title
+    fk = ImageFont.truetype(FONT_MONO, 16)
+    d.text((72, 196), 'A R T I C L E', font=fk, fill=SUBTLE)
+
+    # wrapped title, stepping the size down the way the HTML card does
     title = a['title']
+    size = 64 if len(title) <= 34 else (52 if len(title) <= 52 else 44)
+    ft = inter(size, 'Medium')
     words, lines, cur = title.split(), [], ''
     for w in words:
         t = (cur + ' ' + w).strip()
-        if d.textlength(t, font=fb) > W - 150 and cur:
-            lines.append(cur)
-            cur = w
+        if d.textlength(t, font=ft) > W - 200 and cur:
+            lines.append(cur); cur = w
         else:
             cur = t
     lines.append(cur)
-    lines = lines[:5]
-    y = 190
+    lines = lines[:4]
+    y = 232
     for ln in lines:
-        d.text((70, y), ln, font=fb, fill='#EAF2EE')
-        y += 68
+        d.text((72, y), ln, font=ft, fill=FG)
+        y += int(size * 1.16)
 
-    d.line([(70, H - 130), (W - 70, H - 130)], fill='#2a2320', width=1)
+    # gradient rail: teal -> sky -> indigo -> fuchsia
+    stops = [(0.0, (45, 212, 191)), (0.32, (56, 189, 248)), (0.64, (129, 140, 248)), (1.0, (232, 121, 249))]
+    rail_y, rail_w = min(y + 22, H - 150), 280
+    for i in range(rail_w):
+        t = i / (rail_w - 1)
+        for j in range(len(stops) - 1):
+            a0, c0 = stops[j]; a1, c1 = stops[j + 1]
+            if a0 <= t <= a1:
+                k = (t - a0) / (a1 - a0)
+                col = tuple(int(c0[n] + (c1[n] - c0[n]) * k) for n in range(3))
+                break
+        d.rectangle([72 + i, rail_y, 72 + i, rail_y + 3], fill=col)
+
+    fr = inter(20, 'Regular')
     by = a['author'] + (' · ' + a['center'] if a['center'] else '')
-    d.text((70, H - 104), by[:64], font=fr, fill='#FF7A3D')
-    d.text((70, H - 66), 'flarestamina.com/news', font=fr, fill='#8FA89E')
+    d.text((72, H - 78), by[:64], font=fr, fill=MUTED)
+    url = 'flarestamina.com/news'
+    d.text((W - 72 - d.textlength(url, font=inter(20, 'Medium')), H - 78), url,
+           font=inter(20, 'Medium'), fill=FG)
+
     os.makedirs(os.path.dirname(path), exist_ok=True)
     img.save(path, 'PNG', optimize=True)
 
 
 # ---------------------------------------------------------------- templates
 HEAD_COMMON = '''<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="dark light">
-<script>(function(){{var t="dark";try{{t=localStorage.getItem("p8-theme")||"dark";}}catch(e){{}}document.documentElement.setAttribute("data-theme",t);}})();function fsTheme(){{var d=document.documentElement,n=d.getAttribute("data-theme")==="light"?"dark":"light";d.setAttribute("data-theme",n);try{{localStorage.setItem("p8-theme",n);}}catch(e){{}}}}</script>
-<meta name="theme-color" content="#0A0605">
-<link rel="icon" href="/favicon.ico" sizes="48x48">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<script>
+(function () {{
+  document.documentElement.classList.add('js');
+  try {{
+    var t = localStorage.getItem('fs-paper-theme') || localStorage.getItem('theme') || localStorage.getItem('p8-theme');
+    if (t === 'dark') {{ document.documentElement.classList.add('dark'); document.documentElement.dataset.theme = 'dark'; }}
+    else {{ document.documentElement.dataset.theme = 'light'; }}
+  }} catch (e) {{ document.documentElement.dataset.theme = 'light'; }}
+}})();
+</script>
+<link rel="icon" href="/favicon.ico?v=2" sizes="48x48">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
 <link rel="alternate" type="application/rss+xml" title="Flarestamina IELTS News" href="/news/feed.xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/news/news.css">'''
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/paper.css?v=1">
+<link rel="stylesheet" href="/news/news.css?v=2">'''
 
-HEADER = '''<header class="site">
-  <div class="wrap bar">
-    <a class="brand" href="/">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#FF5A1F" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 9.5V1.5M14.5 12h7M12 14.5V19M9.5 12H4"/></svg>
-      <span><span class="fl">FLARE</span>STAMINA</span>
-    </a>
-    <nav aria-label="Site">
-      <a href="/ielts-hub/">practice</a>
-      <a href="/news/" aria-current="page">news</a>
-      <a href="/founder/">founder</a>
-      <button class="theme-btn" onclick="fsTheme()" aria-label="Toggle theme" title="Light / dark">◐</button>
+HEADER = '''<a class="skip" href="#content" data-i18n="skip">Skip to content</a>
+
+<header class="hdr">
+  <div class="hdr-in">
+    <a class="brand" href="/" aria-label="Flarestamina"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16 1.4 L17.85 13.55 L30.6 16 L17.85 18.45 L16 30.6 L14.15 18.45 L1.4 16 L14.15 13.55 Z"/></svg>Flarestamina</a>
+    <nav class="hdr-nav" aria-label="Primary">
+      <a href="/ielts-hub/" data-i18n="navPractice">Practice</a>
+      <a href="/#tools" data-i18n="navTools">Tools</a>
+      <a href="/news/" aria-current="page" data-i18n="navNews">News</a>
     </nav>
+    <span class="hdr-sp"></span>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-lang="en" class="on">EN</button>
+      <button type="button" data-lang="uz">UZ</button>
+    </div>
+    <button class="icon-btn" id="tgl" aria-label="Theme"><svg id="ico-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg id="ico-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="display:none"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+    <div class="hdr-desk">
+      <a class="btn ghost" id="acct" href="/account/?return=https%3A%2F%2Fflarestamina.com%2Fielts-hub%2F" data-i18n="signin">Sign in</a>
+      <a class="btn solid" href="/ielts-hub/" data-i18n="startFree">Start free</a>
+    </div>
+    <button class="icon-btn burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="sheet">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
   </div>
-</header>'''
+</header>
 
-FOOTER = '''<footer class="site">
-  <div class="wrap row">
-    <span>© 2026 <a href="/">Flarestamina</a> · built by <a href="/founder/">Maqsudjon Polatov</a></span>
-    <span><a href="https://t.me/flarestamina" rel="noopener">telegram</a> · <a href="/news/feed.xml">rss</a></span>
+<div class="sheet" id="sheet">
+  <a href="/ielts-hub/" data-i18n="navPractice">Practice</a>
+      <a href="/#tools" data-i18n="navTools">Tools</a>
+      <a href="/news/" aria-current="page" data-i18n="navNews">News</a>
+  <div class="row">
+    <a class="btn ghost" href="/account/?return=https%3A%2F%2Fflarestamina.com%2Fielts-hub%2F" data-i18n="signin">Sign in</a>
+    <a class="btn solid" href="/ielts-hub/" data-i18n="startFree">Start free</a>
+  </div>
+</div>
+
+<main id="content">'''
+
+FOOTER = '''</main>
+
+<footer class="ftr">
+  <div class="wrap">
+    <div class="f-grid">
+      <div class="f-brand">
+        <span class="brand"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16 1.4 L17.85 13.55 L30.6 16 L17.85 18.45 L16 30.6 L14.15 18.45 L1.4 16 L14.15 13.55 Z"/></svg>Flarestamina</span>
+        <p data-i18n="footBlurb">Free IELTS Academic practice. Built in Tashkent.</p>
+      </div>
+      <div class="f-col">
+        <p data-i18n="footPractice">Practice</p>
+        <a href="/ielts-hub/" data-i18n="tHub">Practice Hub</a>
+        <a href="/ielts-hub/?cat=Listening">Listening</a>
+        <a href="/ielts-hub/?cat=Reading">Reading</a>
+        <a href="/writing/" data-i18n="tWrite">Writing Lab</a>
+        <a href="/pangea8-speaking/" data-i18n="tSpeak">Speaking Lab</a>
+      </div>
+      <div class="f-col">
+        <p data-i18n="footTools">Tools</p>
+        <a href="/convert/" data-i18n="tConvert">Score Converter</a>
+        <a href="/deadlines/" data-i18n="tDeadlines">Deadlines</a>
+        <a href="/plan/" data-i18n="tPlan">Study Plan</a>
+        <a href="/speaking-topics/" data-i18n="tTopics">Speaking Topics</a>
+      </div>
+      <div class="f-col">
+        <p data-i18n="footCompany">Company</p>
+        <a href="/founder/" data-i18n="fFounder">Founder</a>
+        <a href="/teachers/" data-i18n="fTeachers">For teachers</a>
+        <a href="/privacy/" data-i18n="fPrivacy">Privacy</a>
+        <a href="https://t.me/flarestamina" target="_blank" rel="noopener">Telegram</a>
+      </div>
+    </div>
+    <div class="f-base">
+      <span>© <span id="yy"></span> Flarestamina. <span data-i18n="footFor">For students.</span></span>
+      <span data-i18n="footCity">Tashkent, Uzbekistan</span>
+      <span data-i18n="footDisc">Not affiliated with IELTS, IDP or British Council.</span>
+    </div>
   </div>
 </footer>
-<script data-goatcounter="https://flarestamina.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>'''
+
+<script src="/assets/fs-auth.js"></script>
+<script>window.FS_UZ = {{
+ "skip": "Asosiy kontentga o‘tish",
+ "navPractice": "Mashq",
+ "navTools": "Vositalar",
+ "navNews": "Yangiliklar",
+ "signin": "Kirish",
+ "startFree": "Bepul boshlash",
+ "footBlurb": "Bepul IELTS Academic mashq. Toshkentda yaratilgan.",
+ "footPractice": "Mashq",
+ "footTools": "Vositalar",
+ "footCompany": "Kompaniya",
+ "tHub": "Practice Hub",
+ "tWrite": "Writing Lab",
+ "tSpeak": "Speaking Lab",
+ "tConvert": "Ball konverteri",
+ "tDeadlines": "Muddatlar",
+ "tPlan": "O‘quv rejasi",
+ "tTopics": "Speaking mavzular",
+ "fFounder": "Asoschi",
+ "fTeachers": "O‘qituvchilarga",
+ "fPrivacy": "Maxfiylik",
+ "footFor": "Talabalar uchun.",
+ "footCity": "Toshkent, O‘zbekiston",
+ "footDisc": "IELTS, IDP yoki British Council bilan bog‘liq emas."
+}};</script>
+<script src="/assets/paper.js?v=1"></script>
+<script data-goatcounter="https://flarestamina.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>'''
 
 
 def article_page(a, slug, author_slug):
@@ -191,7 +315,7 @@ def article_page(a, slug, author_slug):
                   '<button data-l="uz">Oʻzbekcha</button></div>')
     uz_block = ''
     if both:
-        uz_block = ('<div class="body" id="body-uz" hidden lang="uz">'
+        uz_block = ('<div class="prose" id="body-uz" hidden lang="uz">'
                     '<h1 class="a-alt-h">%s</h1>%s</div>' % (escape(a['title_uz']), paras(a['body_uz'])))
 
     ld = {
@@ -247,10 +371,11 @@ def article_page(a, slug, author_slug):
 </head>
 <body>
 {header}
-<article class="post wrap">
+<div class="wrap narrow" style="padding-top:2.5rem">
+<article class="post">
   <p class="crumbs"><a href="/news/">← news</a> / <a href="/news/#articles">articles</a></p>
   {toggle}
-  <div class="body" id="body-en">
+  <div id="body-en">
     <h1 class="a-alt-h">{title}</h1>
   </div>
   <div class="post-meta">
@@ -263,22 +388,23 @@ def article_page(a, slug, author_slug):
     {authorlink}
   </div>
 
-  <div class="body" id="prose-en">{body}</div>
+  <div class="prose" id="prose-en">{body}</div>
   {uz_block}
 
   <p class="source">Written by a member of the Flarestamina community · <a href="/news/t/{author_slug}/">more from {author}</a></p>
 
-  <a class="cta" href="/ielts-hub/">
-    <div class="t">Practise what you just read — free <span class="fl">→</span></div>
-    <div class="s">100+ IELTS mock tests in real exam format, instant band scores</div>
+  <a class="cta-card" href="/ielts-hub/">
+    <span><span class="t">Practise what you just read — free</span><span class="s">100+ IELTS mock tests in real exam format, instant band scores</span></span>
+    <span class="btn solid">Start practicing</span>
   </a>
 
-  <div class="a-share" style="margin-top:22px">
-    <a href="https://t.me/share/url?url={url_enc}&text={share_enc}" target="_blank" rel="noopener">↗ share on telegram</a>
+  <div class="a-share">
+    <a class="chip" href="https://t.me/share/url?url={url_enc}&text={share_enc}" target="_blank" rel="noopener">↗ Share on Telegram</a>
   </div>
 
-  <p class="more"><a href="/news/#articles">← all articles</a> · <a href="/writearticle/">write your own →</a></p>
+  <div class="post-nav"><a class="chip" href="/news/#articles">← All articles</a><a class="chip" href="/writearticle/">Write your own →</a></div>
 </article>
+</div>
 {footer}
 <script>
 (function(){{
@@ -320,7 +446,7 @@ def author_page(author, center, link, items, featured=False):
     link = safe_url(link)
     desc = 'IELTS articles by %s%s on Flarestamina — free IELTS practice for students in Uzbekistan.' % (
         author, (' (' + center + ')') if center else '')
-    star = ' <span style="font-size:11px;color:#000;background:#FF5A1F;border-radius:5px;padding:2px 8px;vertical-align:middle">★ FEATURED</span>' if featured else ''
+    star = ' <span class="feat-badge">★ Featured</span>' if featured else ''
     cards = ''
     for it in items:
         cards += ('<a class="post-card" href="/news/a/%s/">'
@@ -347,7 +473,7 @@ def author_page(author, center, link, items, featured=False):
 <meta property="og:title" content="{author} — IELTS articles">
 <meta property="og:description" content="{desc}">
 <meta property="og:url" content="{url}">
-<meta property="og:image" content="{site}/og-image.png">
+<meta property="og:image" content="{site}/news/og.png?v=2">
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">{ld}</script>
 </head>

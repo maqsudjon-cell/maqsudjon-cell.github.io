@@ -2,9 +2,26 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>(function(){{var t="dark";try{{t=localStorage.getItem("p8-theme")||"dark";}}catch(e){{}}document.documentElement.setAttribute("data-theme",t);}})();function fsTheme(){{var d=document.documentElement,n=d.getAttribute("data-theme")==="light"?"dark":"light";d.setAttribute("data-theme",n);try{{localStorage.setItem("p8-theme",n);}}catch(e){{}}}}</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<script>
+(function () {{
+  document.documentElement.classList.add('js');
+  try {{
+    var t = localStorage.getItem('fs-paper-theme') || localStorage.getItem('theme') || localStorage.getItem('p8-theme');
+    if (t === 'dark') {{ document.documentElement.classList.add('dark'); document.documentElement.dataset.theme = 'dark'; }}
+    else {{ document.documentElement.dataset.theme = 'light'; }}
+  }} catch (e) {{ document.documentElement.dataset.theme = 'light'; }}
+}})();
+</script>
+<link rel="icon" href="/favicon.ico?v=2" sizes="48x48">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
 <link rel="alternate" type="application/rss+xml" title="Flarestamina IELTS News" href="/news/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/paper.css?v=1">
 <link rel="stylesheet" href="/news/news.css?v=2">
 <title>The Listening drill that breaks the 6.5 plateau | Flarestamina</title>
 <meta name="description" content="Most Listening plateaus have nothing to do with vocabulary. Students stall at 6.0–6.5 because they listen passively: play the audio, tick answers, check th">
@@ -26,24 +43,6 @@
 <meta name="twitter:description" content="Most Listening plateaus have nothing to do with vocabulary. Students stall at 6.0–6.5 because they listen passively: play the audio, tick answers, check th">
 <meta name="twitter:image" content="https://flarestamina.com/news/og/the-listening-drill-that-breaks-the-6-5-plateau.png">
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Article", "@id": "https://flarestamina.com/news/a/the-listening-drill-that-breaks-the-6-5-plateau/#article", "headline": "The Listening drill that breaks the 6.5 plateau", "description": "Most Listening plateaus have nothing to do with vocabulary. Students stall at 6.0–6.5 because they listen passively: play the audio, tick answers, check th", "datePublished": "2026-07-16", "dateModified": "2026-07-16", "inLanguage": "en", "mainEntityOfPage": "https://flarestamina.com/news/a/the-listening-drill-that-breaks-the-6-5-plateau/", "image": "https://flarestamina.com/news/og/the-listening-drill-that-breaks-the-6-5-plateau.png", "author": {"@type": "Person", "name": "Flarestamina Editorial", "url": "https://flarestamina.com/news/", "worksFor": {"@type": "Organization", "name": "Curated by the team"}}, "publisher": {"@id": "https://flarestamina.com/#org"}, "isPartOf": {"@id": "https://flarestamina.com/news/#page"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Flarestamina", "item": "https://flarestamina.com/"}, {"@type": "ListItem", "position": 2, "name": "News", "item": "https://flarestamina.com/news/"}, {"@type": "ListItem", "position": 3, "name": "Articles", "item": "https://flarestamina.com/news/#articles"}, {"@type": "ListItem", "position": 4, "name": "The Listening drill that breaks the 6.5 plateau", "item": "https://flarestamina.com/news/a/the-listening-drill-that-breaks-the-6-5-plateau/"}]}]}</script>
-<meta name="theme-color" content="#ffffff">
-<link rel="icon" href="/favicon.ico?v=2" sizes="48x48">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
-<script>
-(function () {
-  document.documentElement.classList.add('js');
-  try {
-    var t = localStorage.getItem('fs-paper-theme') || localStorage.getItem('theme') || localStorage.getItem('p8-theme');
-    if (t === 'dark') { document.documentElement.classList.add('dark'); document.documentElement.dataset.theme = 'dark'; }
-    else { document.documentElement.dataset.theme = 'light'; }
-  } catch (e) { document.documentElement.dataset.theme = 'light'; }
-})();
-</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/paper.css?v=1">
 </head>
 <body>
 <a class="skip" href="#content" data-i18n="skip">Skip to content</a>
@@ -87,7 +86,7 @@
 <article class="post">
   <p class="crumbs"><a href="/news/">← news</a> / <a href="/news/#articles">articles</a></p>
   <div class="a-lang" id="langbar"><button data-l="en" class="on">English</button><button data-l="uz">Oʻzbekcha</button></div>
-  <div class="body" id="body-en">
+  <div id="body-en">
     <h1 class="a-alt-h">The Listening drill that breaks the 6.5 plateau</h1>
   </div>
   <div class="post-meta">
@@ -100,14 +99,14 @@
     <a class="a-link" href="https://flarestamina.com/news/" target="_blank" rel="noopener nofollow ugc">flarestamina.com/news</a>
   </div>
 
-  <div class="body" id="prose-en"><p>Most Listening plateaus have nothing to do with vocabulary. Students stall at 6.0–6.5 because they listen passively: play the audio, tick answers, check the key, move on. The score never moves because the *reason* for each miss is never found.</p>
+  <div class="prose" id="prose-en"><p>Most Listening plateaus have nothing to do with vocabulary. Students stall at 6.0–6.5 because they listen passively: play the audio, tick answers, check the key, move on. The score never moves because the *reason* for each miss is never found.</p>
 <p>The drill that breaks the plateau is called intensive re-listening, and one section a day is enough.</p>
 <p>Step 1 — do one section under real conditions. One play, no pausing, answers on paper.</p>
 <p>Step 2 — mark it, but do not read the transcript yet. For every wrong or missed answer, replay only that fragment, as many times as needed, until you hear what was actually said. This is the painful part — and the part that trains your ear.</p>
 <p>Step 3 — only now open the transcript. Classify each miss: (a) I didn&#x27;t know the word, (b) I knew the word but didn&#x27;t catch it in connected speech, (c) I lost my place, (d) I fell for a distractor — the speaker corrected themselves and I kept the first answer.</p>
 <p>Step 4 — keep a miss journal. After ten sections a pattern appears, and it is almost never &quot;vocabulary&quot;. It is usually (b) and (d) — connected speech and distractors. Those are trainable in two weeks once you see them.</p>
 <p>Why it works: the exam rewards hearing, not knowledge. One section analysed this deeply is worth five sections done and forgotten. Thirty focused minutes a day, three weeks — that is the honest price of 6.5 → 7.5.</p></div>
-  <div class="body" id="body-uz" hidden lang="uz"><h1 class="a-alt-h">Listening&#x27;da 6.5 to&#x27;sig&#x27;ini buzadigan mashq</h1><p>Listening&#x27;dagi to&#x27;xtab qolishning lug&#x27;atga aloqasi kam. O&#x27;quvchilar 6.0–6.5 da qotib qoladi, chunki passiv tinglashadi: audio qo&#x27;yiladi, javob belgilanadi, kalit tekshiriladi — keyingisiga. Ball o&#x27;smaydi, chunki har bir xatoning *sababi* hech qachon topilmaydi.</p>
+  <div class="prose" id="body-uz" hidden lang="uz"><h1 class="a-alt-h">Listening&#x27;da 6.5 to&#x27;sig&#x27;ini buzadigan mashq</h1><p>Listening&#x27;dagi to&#x27;xtab qolishning lug&#x27;atga aloqasi kam. O&#x27;quvchilar 6.0–6.5 da qotib qoladi, chunki passiv tinglashadi: audio qo&#x27;yiladi, javob belgilanadi, kalit tekshiriladi — keyingisiga. Ball o&#x27;smaydi, chunki har bir xatoning *sababi* hech qachon topilmaydi.</p>
 <p>Bu to&#x27;siqni buzadigan mashq — intensiv qayta tinglash. Kuniga bitta section yetadi.</p>
 <p>1-qadam — bitta sectionni real sharoitda ishlang. Bir marta eshitish, pauzasiz, javoblar qog&#x27;ozda.</p>
 <p>2-qadam — tekshiring, lekin transkriptni hali ochmang. Har xato javob uchun faqat o&#x27;sha parchani qayta eshiting — kerak bo&#x27;lsa o&#x27;n marta — nima deyilganini o&#x27;zingiz eshitguningizcha. Eng og&#x27;riqli qism shu — va quloqni aynan shu o&#x27;stiradi.</p>
@@ -117,30 +116,17 @@
 
   <p class="source">Written by a member of the Flarestamina community · <a href="/news/t/flarestamina-editorial/">more from Flarestamina Editorial</a></p>
 
-  <a class="cta-card" href="/ielts-hub/"><span><span class="t">Practise what you just read — free</span><span class="s">100+ IELTS mock tests in real exam format, instant band scores</span></span><span class="btn solid">Start practicing</span></a>
+  <a class="cta-card" href="/ielts-hub/">
+    <span><span class="t">Practise what you just read — free</span><span class="s">100+ IELTS mock tests in real exam format, instant band scores</span></span>
+    <span class="btn solid">Start practicing</span>
+  </a>
 
-  <div class="a-share" style="margin-top:22px">
-    <a href="https://t.me/share/url?url=https%3A%2F%2Fflarestamina.com%2Fnews%2Fa%2Fthe-listening-drill-that-breaks-the-6-5-plateau%2F&text=%22The%20Listening%20drill%20that%20breaks%20the%206.5%20plateau%22%20%E2%80%94%20Flarestamina%20Editorial%20%28Flarestamina%29" target="_blank" rel="noopener">↗ share on telegram</a>
+  <div class="a-share">
+    <a class="chip" href="https://t.me/share/url?url=https%3A%2F%2Fflarestamina.com%2Fnews%2Fa%2Fthe-listening-drill-that-breaks-the-6-5-plateau%2F&text=%22The%20Listening%20drill%20that%20breaks%20the%206.5%20plateau%22%20%E2%80%94%20Flarestamina%20Editorial%20%28Flarestamina%29" target="_blank" rel="noopener">↗ Share on Telegram</a>
   </div>
 
-  <div class="post-nav"><a class="chip" href="/news/#articles">← all articles</a><a class="chip" href="/writearticle/">write your own →</a></div>
+  <div class="post-nav"><a class="chip" href="/news/#articles">← All articles</a><a class="chip" href="/writearticle/">Write your own →</a></div>
 </article>
-
-<script data-goatcounter="https://flarestamina.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-<script>
-(function(){
-  var bar=document.getElementById('langbar'); if(!bar) return;
-  var en=[document.getElementById('body-en'),document.getElementById('prose-en')];
-  var uz=document.getElementById('body-uz');
-  bar.addEventListener('click',function(e){
-    var b=e.target.closest('button'); if(!b) return;
-    var l=b.getAttribute('data-l');
-    [].forEach.call(bar.querySelectorAll('button'),function(x){x.classList.toggle('on',x===b)});
-    en.forEach(function(x){if(x)x.hidden=(l!=='en')});
-    if(uz) uz.hidden=(l!=='uz');
-  });
-})();
-</script>
 </div>
 </main>
 
@@ -183,7 +169,7 @@
 </footer>
 
 <script src="/assets/fs-auth.js"></script>
-<script>window.FS_UZ = {
+<script>window.FS_UZ = {{
  "skip": "Asosiy kontentga o‘tish",
  "navPractice": "Mashq",
  "navTools": "Vositalar",
@@ -207,8 +193,24 @@
  "footFor": "Talabalar uchun.",
  "footCity": "Toshkent, O‘zbekiston",
  "footDisc": "IELTS, IDP yoki British Council bilan bog‘liq emas."
-};</script>
+}};</script>
 <script src="/assets/paper.js?v=1"></script>
 <script data-goatcounter="https://flarestamina.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
+<script>
+(function(){
+  var bar=document.getElementById('langbar'); if(!bar) return;
+  var en=[document.getElementById('body-en'),document.getElementById('prose-en')];
+  var uz=document.getElementById('body-uz');
+  bar.addEventListener('click',function(e){
+    var b=e.target.closest('button'); if(!b) return;
+    var l=b.getAttribute('data-l');
+    [].forEach.call(bar.querySelectorAll('button'),function(x){x.classList.toggle('on',x===b)});
+    en.forEach(function(x){if(x)x.hidden=(l!=='en')});
+    if(uz) uz.hidden=(l!=='uz');
+  });
+})();
+</script>
 </body>
 </html>

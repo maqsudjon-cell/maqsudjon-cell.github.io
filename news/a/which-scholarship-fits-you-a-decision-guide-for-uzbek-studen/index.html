@@ -2,9 +2,26 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script>(function(){{var t="dark";try{{t=localStorage.getItem("p8-theme")||"dark";}}catch(e){{}}document.documentElement.setAttribute("data-theme",t);}})();function fsTheme(){{var d=document.documentElement,n=d.getAttribute("data-theme")==="light"?"dark":"light";d.setAttribute("data-theme",n);try{{localStorage.setItem("p8-theme",n);}}catch(e){{}}}}</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<script>
+(function () {{
+  document.documentElement.classList.add('js');
+  try {{
+    var t = localStorage.getItem('fs-paper-theme') || localStorage.getItem('theme') || localStorage.getItem('p8-theme');
+    if (t === 'dark') {{ document.documentElement.classList.add('dark'); document.documentElement.dataset.theme = 'dark'; }}
+    else {{ document.documentElement.dataset.theme = 'light'; }}
+  }} catch (e) {{ document.documentElement.dataset.theme = 'light'; }}
+}})();
+</script>
+<link rel="icon" href="/favicon.ico?v=2" sizes="48x48">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
 <link rel="alternate" type="application/rss+xml" title="Flarestamina IELTS News" href="/news/feed.xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/paper.css?v=1">
 <link rel="stylesheet" href="/news/news.css?v=2">
 <title>Which scholarship fits you? A decision guide for Uzbek students | Flarestamina</title>
 <meta name="description" content="Every autumn students burn weeks applying to the wrong scholarship — wrong for their profile, not wrong in general. Here is the decision logic we wish ever">
@@ -26,24 +43,6 @@
 <meta name="twitter:description" content="Every autumn students burn weeks applying to the wrong scholarship — wrong for their profile, not wrong in general. Here is the decision logic we wish ever">
 <meta name="twitter:image" content="https://flarestamina.com/news/og/which-scholarship-fits-you-a-decision-guide-for-uzbek-studen.png">
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Article", "@id": "https://flarestamina.com/news/a/which-scholarship-fits-you-a-decision-guide-for-uzbek-studen/#article", "headline": "Which scholarship fits you? A decision guide for Uzbek students", "description": "Every autumn students burn weeks applying to the wrong scholarship — wrong for their profile, not wrong in general. Here is the decision logic we wish ever", "datePublished": "2026-07-16", "dateModified": "2026-07-16", "inLanguage": "en", "mainEntityOfPage": "https://flarestamina.com/news/a/which-scholarship-fits-you-a-decision-guide-for-uzbek-studen/", "image": "https://flarestamina.com/news/og/which-scholarship-fits-you-a-decision-guide-for-uzbek-studen.png", "author": {"@type": "Person", "name": "Flarestamina Editorial", "url": "https://flarestamina.com/news/", "worksFor": {"@type": "Organization", "name": "Curated by the team"}}, "publisher": {"@id": "https://flarestamina.com/#org"}, "isPartOf": {"@id": "https://flarestamina.com/news/#page"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Flarestamina", "item": "https://flarestamina.com/"}, {"@type": "ListItem", "position": 2, "name": "News", "item": "https://flarestamina.com/news/"}, {"@type": "ListItem", "position": 3, "name": "Articles", "item": "https://flarestamina.com/news/#articles"}, {"@type": "ListItem", "position": 4, "name": "Which scholarship fits you? A decision guide for Uzbek students", "item": "https://flarestamina.com/news/a/which-scholarship-fits-you-a-decision-guide-for-uzbek-studen/"}]}]}</script>
-<meta name="theme-color" content="#ffffff">
-<link rel="icon" href="/favicon.ico?v=2" sizes="48x48">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
-<script>
-(function () {
-  document.documentElement.classList.add('js');
-  try {
-    var t = localStorage.getItem('fs-paper-theme') || localStorage.getItem('theme') || localStorage.getItem('p8-theme');
-    if (t === 'dark') { document.documentElement.classList.add('dark'); document.documentElement.dataset.theme = 'dark'; }
-    else { document.documentElement.dataset.theme = 'light'; }
-  } catch (e) { document.documentElement.dataset.theme = 'light'; }
-})();
-</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/paper.css?v=1">
 </head>
 <body>
 <a class="skip" href="#content" data-i18n="skip">Skip to content</a>
@@ -87,7 +86,7 @@
 <article class="post">
   <p class="crumbs"><a href="/news/">← news</a> / <a href="/news/#articles">articles</a></p>
   <div class="a-lang" id="langbar"><button data-l="en" class="on">English</button><button data-l="uz">Oʻzbekcha</button></div>
-  <div class="body" id="body-en">
+  <div id="body-en">
     <h1 class="a-alt-h">Which scholarship fits you? A decision guide for Uzbek students</h1>
   </div>
   <div class="post-meta">
@@ -100,7 +99,7 @@
     <a class="a-link" href="https://flarestamina.com/news/" target="_blank" rel="noopener nofollow ugc">flarestamina.com/news</a>
   </div>
 
-  <div class="body" id="prose-en"><p>Every autumn students burn weeks applying to the wrong scholarship — wrong for their profile, not wrong in general. Here is the decision logic we wish everyone used, across the five programmes Uzbek students apply to most.</p>
+  <div class="prose" id="prose-en"><p>Every autumn students burn weeks applying to the wrong scholarship — wrong for their profile, not wrong in general. Here is the decision logic we wish everyone used, across the five programmes Uzbek students apply to most.</p>
 <p>Start with one question: do you already have work experience?</p>
 <p>Two or more years of work → Chevening (UK) and DAAD (Germany) become realistic. Chevening wants leaders with a career story and gives a one-year UK master&#x27;s; its essays decide everything. DAAD EPOS wants development-related professionals and reads references closely.</p>
 <p>Student or fresh graduate → look at Stipendium Hungaricum (Hungary), Türkiye Bursları, GKS (Korea) and CSC (China). None require work experience; all cover tuition, housing and a stipend.</p>
@@ -108,7 +107,7 @@
 <p>IELTS 7.0+ → aim high: Chevening universities, Erasmus Mundus consortia. 6.0–6.5 → Stipendium Hungaricum and DAAD sit exactly in your range. Below 6.0 → Türkiye Bursları (Turkish-taught, language year included), GKS (Korean year included) and CSC (Chinese year included) let you enter through a language year instead of an IELTS wall.</p>
 <p>Third question: how many can you run at once? More than you think. The windows barely overlap: Chevening closes in early October, Stipendium Hungaricum opens in November, Türkiye Bursları in January, CSC over the winter, GKS in September. One good set of documents — transcript translations, two references, a motivation letter you adapt — serves all of them.</p>
 <p>The only real mistake is applying to one programme and waiting. Treat it like a portfolio, not a lottery ticket.</p></div>
-  <div class="body" id="body-uz" hidden lang="uz"><h1 class="a-alt-h">Qaysi grant sizga mos? O&#x27;zbek talabalar uchun qaror qo&#x27;llanmasi</h1><p>Har kuz o&#x27;quvchilar haftalarni noto&#x27;g&#x27;ri grantga ariza berishga yoqadi — umuman noto&#x27;g&#x27;ri emas, o&#x27;z profiliga noto&#x27;g&#x27;ri. Mana o&#x27;zbek talabalar eng ko&#x27;p topshiradigan besh dastur bo&#x27;yicha qaror mantiqi.</p>
+  <div class="prose" id="body-uz" hidden lang="uz"><h1 class="a-alt-h">Qaysi grant sizga mos? O&#x27;zbek talabalar uchun qaror qo&#x27;llanmasi</h1><p>Har kuz o&#x27;quvchilar haftalarni noto&#x27;g&#x27;ri grantga ariza berishga yoqadi — umuman noto&#x27;g&#x27;ri emas, o&#x27;z profiliga noto&#x27;g&#x27;ri. Mana o&#x27;zbek talabalar eng ko&#x27;p topshiradigan besh dastur bo&#x27;yicha qaror mantiqi.</p>
 <p>Birinchi savol: ish tajribangiz bormi?</p>
 <p>Ikki yil va undan ko&#x27;p ish → Chevening (Buyuk Britaniya) va DAAD (Germaniya) real bo&#x27;ladi. Chevening karyera tarixi bor liderlarni izlaydi — esselar hamma narsani hal qiladi. DAAD EPOS rivojlanish sohasidagi mutaxassislarni oladi va tavsiyanomalarni sinchiklab o&#x27;qiydi.</p>
 <p>Talaba yoki yangi bitiruvchi → Stipendium Hungaricum (Vengriya), Türkiye Bursları, GKS (Koreya) va CSC (Xitoy) ga qarang. Hech biri ish tajribasi talab qilmaydi; hammasi kontrakt, yotoqxona va stipendiyani qoplaydi.</p>
@@ -119,30 +118,17 @@
 
   <p class="source">Written by a member of the Flarestamina community · <a href="/news/t/flarestamina-editorial/">more from Flarestamina Editorial</a></p>
 
-  <a class="cta-card" href="/ielts-hub/"><span><span class="t">Practise what you just read — free</span><span class="s">100+ IELTS mock tests in real exam format, instant band scores</span></span><span class="btn solid">Start practicing</span></a>
+  <a class="cta-card" href="/ielts-hub/">
+    <span><span class="t">Practise what you just read — free</span><span class="s">100+ IELTS mock tests in real exam format, instant band scores</span></span>
+    <span class="btn solid">Start practicing</span>
+  </a>
 
-  <div class="a-share" style="margin-top:22px">
-    <a href="https://t.me/share/url?url=https%3A%2F%2Fflarestamina.com%2Fnews%2Fa%2Fwhich-scholarship-fits-you-a-decision-guide-for-uzbek-studen%2F&text=%22Which%20scholarship%20fits%20you%3F%20A%20decision%20guide%20for%20Uzbek%20students%22%20%E2%80%94%20Flarestamina%20Editorial%20%28Flarestamina%29" target="_blank" rel="noopener">↗ share on telegram</a>
+  <div class="a-share">
+    <a class="chip" href="https://t.me/share/url?url=https%3A%2F%2Fflarestamina.com%2Fnews%2Fa%2Fwhich-scholarship-fits-you-a-decision-guide-for-uzbek-studen%2F&text=%22Which%20scholarship%20fits%20you%3F%20A%20decision%20guide%20for%20Uzbek%20students%22%20%E2%80%94%20Flarestamina%20Editorial%20%28Flarestamina%29" target="_blank" rel="noopener">↗ Share on Telegram</a>
   </div>
 
-  <div class="post-nav"><a class="chip" href="/news/#articles">← all articles</a><a class="chip" href="/writearticle/">write your own →</a></div>
+  <div class="post-nav"><a class="chip" href="/news/#articles">← All articles</a><a class="chip" href="/writearticle/">Write your own →</a></div>
 </article>
-
-<script data-goatcounter="https://flarestamina.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-<script>
-(function(){
-  var bar=document.getElementById('langbar'); if(!bar) return;
-  var en=[document.getElementById('body-en'),document.getElementById('prose-en')];
-  var uz=document.getElementById('body-uz');
-  bar.addEventListener('click',function(e){
-    var b=e.target.closest('button'); if(!b) return;
-    var l=b.getAttribute('data-l');
-    [].forEach.call(bar.querySelectorAll('button'),function(x){x.classList.toggle('on',x===b)});
-    en.forEach(function(x){if(x)x.hidden=(l!=='en')});
-    if(uz) uz.hidden=(l!=='uz');
-  });
-})();
-</script>
 </div>
 </main>
 
@@ -185,7 +171,7 @@
 </footer>
 
 <script src="/assets/fs-auth.js"></script>
-<script>window.FS_UZ = {
+<script>window.FS_UZ = {{
  "skip": "Asosiy kontentga o‘tish",
  "navPractice": "Mashq",
  "navTools": "Vositalar",
@@ -209,8 +195,24 @@
  "footFor": "Talabalar uchun.",
  "footCity": "Toshkent, O‘zbekiston",
  "footDisc": "IELTS, IDP yoki British Council bilan bog‘liq emas."
-};</script>
+}};</script>
 <script src="/assets/paper.js?v=1"></script>
 <script data-goatcounter="https://flarestamina.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
+<script>
+(function(){
+  var bar=document.getElementById('langbar'); if(!bar) return;
+  var en=[document.getElementById('body-en'),document.getElementById('prose-en')];
+  var uz=document.getElementById('body-uz');
+  bar.addEventListener('click',function(e){
+    var b=e.target.closest('button'); if(!b) return;
+    var l=b.getAttribute('data-l');
+    [].forEach.call(bar.querySelectorAll('button'),function(x){x.classList.toggle('on',x===b)});
+    en.forEach(function(x){if(x)x.hidden=(l!=='en')});
+    if(uz) uz.hidden=(l!=='uz');
+  });
+})();
+</script>
 </body>
 </html>
