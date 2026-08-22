@@ -2,6 +2,14 @@
  "note": "Machine-readable index of /news/ posts. The sitemap workflow reads this file — add every new post here. Newest first.",
  "posts": [
   {
+   "slug": "site-redesign-2026",
+   "title": "Flarestamina has a new look — and your results are exactly where you left them",
+   "date": "2026-08-22",
+   "category": "site-update",
+   "summary": "Every page except the practice tests moved to a new design. Your account, scores and saved test links are untouched. What changed, what deliberately did not, and the bugs fixed on the way.",
+   "source": "https://github.com/maqsudjon-cell"
+  },
+  {
    "slug": "multilevel-cefr-2026",
    "title": "Multilevel (CEFR): the national exam that equals IELTS at DTM — and costs far less",
    "date": "2026-07-16",
@@ -23,7 +31,7 @@
    "date": "2026-07-16",
    "category": "exam-update",
    "summary": "The IELTS Speaking question pool partially refreshes roughly every four months — January, May and September. What that means if your exam is in August vs October.",
-   "source": "https://ielts.idp.com/prepare/article-ielts-speaking-test"
+   "source": "https://ielts.org/take-a-test/preparation-resources"
   },
   {
    "slug": "computer-vs-paper-ielts-results",
