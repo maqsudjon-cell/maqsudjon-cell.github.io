@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>OG card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=block" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:1200px;height:630px;overflow:hidden}
+  body{
+    background:#fff;color:#0a0a0a;
+    font-family:Inter,ui-sans-serif,system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    padding:64px 72px;
+    display:flex;flex-direction:column;
+  }
+  body.dark{background:#000;color:#f5f5f5}
+  .mark{width:56px;height:56px}
+  .kicker{
+    margin-top:74px;
+    font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:16px;letter-spacing:4px;color:#8a8a8a;text-transform:uppercase;
+  }
+  .dark .kicker{color:#5c5c5c}
+  h1{
+    margin-top:26px;
+    font-size:64px;font-weight:500;letter-spacing:-.035em;line-height:1.08;
+    max-width:20ch;
+  }
+  h1.small{font-size:52px}
+  h1.xsmall{font-size:44px}
+  .rail{
+    margin-top:30px;width:280px;height:4px;border-radius:2px;
+    background:linear-gradient(90deg,#2dd4bf,#38bdf8 32%,#818cf8 64%,#e879f9 100%);
+  }
+  .foot{
+    margin-top:auto;display:flex;align-items:baseline;justify-content:space-between;gap:40px;
+    font-size:20px;color:#5c5c5c;
+  }
+  .dark .foot{color:#8a8a8a}
+  .foot .url{color:#0a0a0a;font-weight:500}
+  .dark .foot .url{color:#f5f5f5}
+</style>
+</head>
+<body>
+  <svg class="mark" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16 1.4 L17.85 13.55 L30.6 16 L17.85 18.45 L16 30.6 L14.15 18.45 L1.4 16 L14.15 13.55 Z"/></svg>
+  <p class="kicker" id="kicker">Flarestamina</p>
+  <h1 id="title">Practice like it’s exam day.</h1>
+  <div class="rail"></div>
+  <div class="foot">
+    <span id="sub">Free IELTS Academic practice. Tashkent.</span>
+    <span class="url" id="url">flarestamina.com</span>
+  </div>
+
+<script>
+(function () {
+  var p = new URLSearchParams(location.search);
+  function set(id, key) { if (p.has(key)) document.getElementById(id).textContent = p.get(key); }
+  set('kicker', 'kicker');
+  set('title', 'title');
+  set('sub', 'sub');
+  set('url', 'url');
+  if (p.get('theme') === 'dark') document.body.classList.add('dark');
+  var h = document.getElementById('title');
+  var n = h.textContent.length;
+  if (n > 52) h.className = 'xsmall'; else if (n > 34) h.className = 'small';
+})();
+</script>
+</body>
+</html>
