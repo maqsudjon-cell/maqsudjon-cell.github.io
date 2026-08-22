@@ -35,7 +35,7 @@
   body{min-height:100dvh;display:flex;flex-direction:column;align-items:center;padding:1.5rem 1.25rem 2.5rem}
   .top{width:100%;max-width:26rem;display:flex;align-items:center;justify-content:space-between;margin:.5rem 0 2.75rem}
   .auth{width:100%;max-width:26rem;border-radius:10px;background:var(--surface);box-shadow:var(--card);padding:2rem 1.75rem}
-  .auth h1{font-size:1.5rem;margin:.6rem 0 .35rem}
+  .auth h1,.auth .auth-h{font-size:1.5rem;font-weight:500;letter-spacing:-.03em;line-height:1.15;margin:.6rem 0 .35rem}
   .auth .sub{color:var(--muted);font-size:.9rem;line-height:1.65;margin-bottom:1.75rem}
   .auth form{display:flex;flex-direction:column;gap:0}
   .row2{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
@@ -99,7 +99,7 @@
 <!-- ── REGISTER ──────────────────────────────────────── -->
 <div class="auth" id="regCard" hidden>
   <div class="kicker" data-i18n="kicker">FS Account</div>
-  <h1 data-i18n="regH">Sign up</h1>
+  <p class="auth-h" role="heading" aria-level="1" data-i18n="regH">Sign up</p>
   <p class="sub" data-i18n="regSub">Register once — every test and tool will know you.</p>
   <form id="regForm" novalidate>
     <div class="row2">
@@ -134,7 +134,7 @@
 <!-- ── PROFILE (signed in, no ?return) ─────────────────── -->
 <div class="auth" id="profCard" hidden>
   <div class="kicker" data-i18n="kicker">FS Account</div>
-  <h1 id="pName">—</h1>
+  <p class="auth-h" id="pName" role="heading" aria-level="1">—</p>
   <p class="sub" id="pPhone">—</p>
   <a class="btn solid lg block" id="pResults" href="https://flarestamina.com/ielts-hub/results.html" data-i18n="myResults">My results</a>
   <div class="aux" style="margin-top:1.1rem">

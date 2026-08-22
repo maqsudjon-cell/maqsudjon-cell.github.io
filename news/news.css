@@ -100,6 +100,7 @@
 .adv-comments{margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border)}
 
 /* ---------- generated community article ---------- */
+.a-name{font-size:1.3rem;font-weight:500;letter-spacing:-.02em;line-height:1.2}
 .a-alt-h{font-size:clamp(1.8rem,4.6vw,2.5rem);letter-spacing:-.04em;line-height:1.15;font-weight:500}
 .a-author.big{display:flex;align-items:center;gap:.75rem;margin:1.25rem 0 2rem;font-size:.9rem}
 .a-author.big b{color:var(--fg);font-weight:500}

@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Flarestamina — Content Studio</title>
 <meta name="description" content="Create on-brand Flarestamina posts in seconds. Live preview, one-tap download, 30-day content plan.">
+<link rel="canonical" href="https://flarestamina.com/posts/">
 <meta name="robots" content="noindex, nofollow">
 <meta name="theme-color" content="#ffffff">
 <link rel="icon" href="/favicon.ico?v=2" sizes="48x48">
@@ -29,6 +30,7 @@ body{padding-bottom:4rem}
 .hbar{display:flex;align-items:center;justify-content:space-between;gap:1rem;height:4rem}
 .wrap.hbar{max-width:var(--wrap)}
 header{border-bottom:1px solid var(--border);margin-bottom:2rem}
+.brand{font-size:.95rem;font-weight:500;letter-spacing:-.01em;display:flex;align-items:center;gap:.55rem}
 .brand .sq{width:1.1rem;height:1.1rem;border-radius:3px;background:var(--fg);display:inline-block}
 .tabs{display:flex;gap:.4rem}
 .tab{height:2.1rem;padding:0 .95rem;border-radius:999px;border:1px solid var(--border);font-size:.85rem;color:var(--muted);transition:color .15s,border-color .15s,background .15s}
@@ -66,7 +68,7 @@ header{border-bottom:1px solid var(--border);margin-bottom:2rem}
 </head>
 <body>
 <header><div class="wrap hbar">
-  <div class="brand"><span class="sq"></span>FLARESTAMINA</div>
+  <h1 class="brand"><span class="sq"></span>Flarestamina Content Studio</h1>
   <div class="tabs">
     <button class="tab on" id="tabStudio">Studio</button>
     <button class="tab" id="tabPlan">Plan</button>
@@ -80,7 +82,7 @@ header{border-bottom:1px solid var(--border);margin-bottom:2rem}
     <div class="picker" id="picker"></div>
     <div class="panel">
       <div class="settings">
-        <span class="acc">ACCENT <input type="color" id="accent" value="#FF5A1F"></span>
+        <span class="acc">ACCENT <input type="color" id="accent" value="#FF5A1F" aria-label="Accent colour for the generated image"></span>
         <span class="acc">TIP: wrap a word in **stars** to make it orange</span>
       </div>
       <p class="eyebrow" style="margin-bottom:10px">02 — Content</p>
@@ -111,7 +113,7 @@ header{border-bottom:1px solid var(--border);margin-bottom:2rem}
   <p class="eyebrow">30-day content plan</p>
   <p class="lead">A daily presence built from templates — so each post is minutes, not hours. Each week focuses on one skill. Hit <b style="color:var(--flare)">Create</b> on any day to load that post in the Studio, ready to tweak and download.</p>
   <div class="setup">
-    <h4>Day 0 — set up first</h4>
+    <h2>Day 0 — set up first</h2>
     <ul>
       <li>Grab <b>@flarestamina</b> on Instagram, YouTube and X (match your Telegram).</li>
       <li>Bio + link on all four → flarestamina.com.</li>
@@ -524,7 +526,7 @@ function buildPlan(){
   const wk=$('weeks'); wk.innerHTML='';
   PLAN.forEach(week=>{
     const sec=document.createElement('div'); sec.className='week';
-    sec.innerHTML=`<h3>${week.label}</h3>${week.sub?`<p class="wk-sub">${week.sub}</p>`:''}`;
+    sec.innerHTML=`<h2>${week.label}</h2>${week.sub?`<p class="wk-sub">${week.sub}</p>`:''}`;
     const grid=document.createElement('div'); grid.className='days';
     week.days.forEach(day=>{
       const el=document.createElement('div'); el.className='day';

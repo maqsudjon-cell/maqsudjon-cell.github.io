@@ -296,8 +296,7 @@ FOOTER = '''</main>
 }};</script>
 <script src="/assets/paper.js?v=1"></script>
 <script data-goatcounter="https://flarestamina.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-</body>
-</html>'''
+'''
 
 
 def article_page(a, slug, author_slug):
@@ -316,7 +315,7 @@ def article_page(a, slug, author_slug):
     uz_block = ''
     if both:
         uz_block = ('<div class="prose" id="body-uz" hidden lang="uz">'
-                    '<h1 class="a-alt-h">%s</h1>%s</div>' % (escape(a['title_uz']), paras(a['body_uz'])))
+                    '<p class="a-alt-h" role="heading" aria-level="1">%s</p>%s</div>' % (escape(a['title_uz']), paras(a['body_uz'])))
 
     ld = {
         "@context": "https://schema.org",
@@ -483,7 +482,7 @@ def author_page(author, center, link, items, featured=False):
   <p class="crumbs"><a href="/news/">← news</a> / <a href="/news/#articles">articles</a></p>
   <div class="a-author big" style="border:none;padding-top:6px">
     <span class="a-ava" style="width:46px;height:46px;font-size:19px">{ava}</span>
-    <div><b style="font-size:20px">{author}</b>{star}{center}</div>
+    <div><h1 class="a-name">{author}</h1>{star}{center}</div>
   </div>
   <p class="sub">{n} article{s} on Flarestamina.{linkline}</p>
 </section>
