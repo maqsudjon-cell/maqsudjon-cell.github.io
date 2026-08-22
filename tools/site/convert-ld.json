@@ -1,0 +1,39 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://flarestamina.com/convert/#app",
+      "name": "IELTS – CEFR – Multilevel – TOEFL Converter",
+      "url": "https://flarestamina.com/convert/",
+      "applicationCategory": "EducationApplication",
+      "operatingSystem": "Web",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "description": "Convert IELTS bands to CEFR levels, Uzbekistan Multilevel certificate levels, TOEFL iBT and Duolingo English Test scores.",
+      "publisher": { "@id": "https://flarestamina.com/#org" },
+      "inLanguage": ["uz", "en"]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "IELTS 6.5 CEFR bo'yicha qaysi daraja?",
+          "acceptedAnswer": { "@type": "Answer", "text": "IELTS 5.5–6.5 rasmiy ravishda CEFR B2 darajasiga to'g'ri keladi. IELTS 7.0–8.0 esa C1 hisoblanadi." } },
+        { "@type": "Question", "name": "Multilevel B2 sertifikati IELTS nechchiga teng?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Multilevel — CEFR asosidagi milliy imtihon, shuning uchun B2 sertifikati IELTS 5.5–6.5 oralig'iga to'g'ri keladi. C1 sertifikati esa IELTS 7.0–8.0 ga teng." } },
+        { "@type": "Question", "name": "DTM'da maksimal ball uchun qaysi daraja kerak?",
+          "acceptedAnswer": { "@type": "Answer", "text": "OTMga kirishda amaldagi B2 yoki undan yuqori sertifikat (IELTS 5.5+, Multilevel B2+) chet tilidan maksimal ball beradi: birinchi fan bo'lsa 93.0, ikkinchi fan bo'lsa 63.0. 2026-yildan B1 sertifikat maksimalning 75% ini beradi." } },
+        { "@type": "Question", "name": "What TOEFL score equals IELTS 7.0?",
+          "acceptedAnswer": { "@type": "Answer", "text": "According to the official ETS linking study, IELTS 7.0 corresponds to TOEFL iBT 94–101. IELTS 6.5 corresponds to TOEFL 79–93." } },
+        { "@type": "Question", "name": "Is the Duolingo English Test equal to IELTS?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Approximately: DET 115–120 ≈ IELTS 6.5, DET 125–130 ≈ IELTS 7.0. Always check the official Duolingo comparison tool, and note that UK visa routes and most government scholarships still require IELTS." } }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Flarestamina", "item": "https://flarestamina.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Score Converter", "item": "https://flarestamina.com/convert/" }
+      ]
+    }
+  ]
+}

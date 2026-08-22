@@ -1,0 +1,36 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://flarestamina.com/speaking-topics/#article",
+      "headline": "IELTS Speaking Topics 2026 — recurring themes and how the rotation works",
+      "description": "The Part 1 openers that never leave the exam, 16 recurring Part 2 cue-card themes, Part 3 question patterns, and the January/May/September rotation explained.",
+      "datePublished": "2026-07-17",
+      "dateModified": "2026-07-17",
+      "inLanguage": "en",
+      "mainEntityOfPage": "https://flarestamina.com/speaking-topics/",
+      "image": "https://flarestamina.com/og-image.png",
+      "author": { "@type": "Person", "@id": "https://flarestamina.com/founder/#person", "name": "Maqsudjon Polatov", "url": "https://flarestamina.com/founder/" },
+      "publisher": { "@id": "https://flarestamina.com/#org" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "When do IELTS Speaking topics change?",
+          "acceptedAnswer": { "@type": "Answer", "text": "The Speaking question pool partially refreshes roughly every four months — around January, May and September. Part of the topics are retired and new ones enter; the format never changes." } },
+        { "@type": "Question", "name": "Are the 'current Speaking topics' lists official?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. IELTS never publishes its live question bank. Lists circulating online are reconstructed from test-taker reports — useful for practice, but never a guarantee. The reliable strategy is preparing flexible stories that adapt to any cue card." } },
+        { "@type": "Question", "name": "What Part 1 topics always appear?",
+          "acceptedAnswer": { "@type": "Answer", "text": "The opening frame is stable: Work or Study, Home/Accommodation, and Hometown — one of these starts almost every interview. Common rotating Part 1 topics include weather, food, friends, music, sport, books, transport and technology." } }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Flarestamina", "item": "https://flarestamina.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Speaking Topics", "item": "https://flarestamina.com/speaking-topics/" }
+      ]
+    }
+  ]
+}

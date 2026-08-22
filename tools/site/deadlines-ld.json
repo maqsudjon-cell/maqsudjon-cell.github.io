@@ -1,0 +1,35 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://flarestamina.com/deadlines/#page",
+      "url": "https://flarestamina.com/deadlines/",
+      "name": "Scholarship Deadlines 2026–2027 — live countdown",
+      "description": "Every major scholarship deadline for students in Uzbekistan on one page, with live day counters.",
+      "isPartOf": { "@id": "https://flarestamina.com/#website" },
+      "publisher": { "@id": "https://flarestamina.com/#org" },
+      "inLanguage": ["uz", "en"]
+    },
+    {
+      "@type": "ItemList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Chevening 2027/28 — deadline 6 October 2026", "url": "https://flarestamina.com/news/chevening-2027/" },
+        { "@type": "ListItem", "position": 2, "name": "GKS 2027 embassy track — opens ~September 2026", "url": "https://flarestamina.com/news/gks-2027/" },
+        { "@type": "ListItem", "position": 3, "name": "Stipendium Hungaricum 2027/28 — opens ~November 2026", "url": "https://flarestamina.com/news/stipendium-hungaricum-2027/" },
+        { "@type": "ListItem", "position": 4, "name": "Türkiye Bursları 2027 — expected January 2027", "url": "https://flarestamina.com/news/turkiye-burslari-2027/" },
+        { "@type": "ListItem", "position": 5, "name": "DAAD EPOS 2027 — deadlines Aug–Dec 2026", "url": "https://flarestamina.com/news/daad-2027-germany/" },
+        { "@type": "ListItem", "position": 6, "name": "CSC China 2027 — window opens in winter", "url": "https://flarestamina.com/news/csc-china-2027/" },
+        { "@type": "ListItem", "position": 7, "name": "Erasmus Mundus 2027 — portals open in autumn", "url": "https://flarestamina.com/news/erasmus-mundus-2027/" },
+        { "@type": "ListItem", "position": 8, "name": "El-Yurt Umidi — next call watch", "url": "https://flarestamina.com/news/el-yurt-umidi-2026/" }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Flarestamina", "item": "https://flarestamina.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Deadlines", "item": "https://flarestamina.com/deadlines/" }
+      ]
+    }
+  ]
+}

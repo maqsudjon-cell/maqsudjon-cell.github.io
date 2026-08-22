@@ -1,0 +1,33 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://flarestamina.com/plan/#app",
+      "name": "IELTS Study Plan Generator",
+      "url": "https://flarestamina.com/plan/",
+      "applicationCategory": "EducationApplication",
+      "operatingSystem": "Web",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+      "description": "Free personal IELTS study plan generator: pick your current band, target band and weeks until the exam — get an honest week-by-week plan.",
+      "publisher": { "@id": "https://flarestamina.com/#org" },
+      "inLanguage": ["uz", "en"]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "IELTS'da 0.5 ball ko'tarish qancha vaqt oladi?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Har kuni 45–60 daqiqa jiddiy mashq bilan 0.5 band odatda 6–8 hafta oladi. 1.0 band — taxminan 3 oy. Haftada bir marta uzoq o'tirish kunlik odatning o'rnini bosa olmaydi." } },
+        { "@type": "Question", "name": "IELTS'ga necha oy oldin tayyorgarlikni boshlash kerak?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Maqsad hozirgi darajadan 1.0 band yuqori bo'lsa — kamida 3 oy. Imtihonni mock natijalaringiz maqsaddan 0.5 yuqori bo'lganda band qiling: imtihon kuni stress odatda 0.5 ballni yeydi." } }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Flarestamina", "item": "https://flarestamina.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Study Plan", "item": "https://flarestamina.com/plan/" }
+      ]
+    }
+  ]
+}

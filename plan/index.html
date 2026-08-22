@@ -1,28 +1,46 @@
 <!DOCTYPE html>
-<html lang="uz">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="color-scheme" content="dark light">
-<script>(function(){var t="dark";try{t=localStorage.getItem("p8-theme")||"dark";}catch(e){}document.documentElement.setAttribute("data-theme",t);})();function fsTheme(){var d=document.documentElement,n=d.getAttribute("data-theme")==="light"?"dark":"light";d.setAttribute("data-theme",n);try{localStorage.setItem("p8-theme",n);}catch(e){}}</script>
-<meta name="theme-color" content="#0A0605">
-<title>IELTS Study Plan Generator — shaxsiy o'quv reja | Flarestamina</title>
-<meta name="description" content="Bepul IELTS o'quv reja generatori: hozirgi balingiz, maqsadingiz va imtihongacha qolgan vaqtni tanlang — haftama-hafta shaxsiy reja tayyor. Halol baho: vaqt yetadimi yoki yo'qmi. Chop etish va ulashish mumkin.">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>IELTS study plan generator — Flarestamina</title>
+<meta name="description" content="Answer four questions and get a week-by-week IELTS study plan, plus an honest read on whether your timeline is realistic.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#ffffff">
+<meta name="author" content="Maqsudjon Polatov">
 <link rel="canonical" href="https://flarestamina.com/plan/">
 <link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<meta name="robots" content="index, follow, max-image-preview:large">
-<meta name="keywords" content="IELTS study plan, IELTS o'quv reja, IELTS 90 kunlik reja, IELTS preparation plan, IELTS reja tuzish, study plan generator, IELTS tayyorlanish rejasi">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="sitemap" type="application/xml" href="/sitemap.xml">
 <meta property="og:site_name" content="Flarestamina">
 <meta property="og:type" content="website">
-<meta property="og:title" content="IELTS Study Plan Generator — shaxsiy o'quv reja">
-<meta property="og:description" content="Band + maqsad + vaqt → haftama-hafta shaxsiy reja. Halol baho va bepul mock testlar bilan.">
+<meta property="og:title" content="IELTS study plan generator — Flarestamina">
+<meta property="og:description" content="Answer four questions and get a week-by-week IELTS study plan, plus an honest read on whether your timeline is realistic.">
 <meta property="og:url" content="https://flarestamina.com/plan/">
-<meta property="og:image" content="https://flarestamina.com/og-image.png">
+<meta property="og:image" content="https://flarestamina.com/plan/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="IELTS Study Plan Generator">
-<meta name="twitter:image" content="https://flarestamina.com/og-image.png">
+<meta name="twitter:title" content="IELTS study plan generator — Flarestamina">
+<meta name="twitter:description" content="Answer four questions and get a week-by-week IELTS study plan, plus an honest read on whether your timeline is realistic.">
+<meta name="twitter:image" content="https://flarestamina.com/plan/og.png">
+<script>
+(function () {
+  document.documentElement.classList.add('js');
+  try {
+    var t = localStorage.getItem('fs-paper-theme') || localStorage.getItem('theme') || localStorage.getItem('p8-theme');
+    if (t === 'dark') { document.documentElement.classList.add('dark'); document.documentElement.dataset.theme = 'dark'; }
+    else { document.documentElement.dataset.theme = 'light'; }
+  } catch (e) { document.documentElement.dataset.theme = 'light'; }
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/paper.css?v=1">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -58,122 +76,179 @@
   ]
 }
 </script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/news/news.css">
 <style>
-.pl-wrap{max-width:760px;margin:0 auto;padding:0 24px}
-.uilang{display:inline-flex;gap:2px;border:1px solid var(--line);border-radius:8px;padding:2px;background:var(--surface)}
-.uilang button{font-family:var(--mono);font-size:11px;color:var(--muted);background:transparent;border:none;border-radius:6px;padding:5px 9px;cursor:pointer}
-.uilang button.on{color:#000;background:var(--flare)}
-html[data-theme="light"] .uilang button.on{color:#fff}
-.pl-hero{padding:46px 0 8px}
-.pl-hero .kicker{font-size:11px;letter-spacing:2.2px;text-transform:uppercase;color:var(--flare-soft);font-weight:500}
-.pl-hero h1{font-size:clamp(24px,4.6vw,34px);font-weight:700;letter-spacing:-.6px;line-height:1.25;margin-top:10px}
-.pl-hero h1 .fl{color:var(--flare)}
-.pl-hero p{color:var(--muted);font-size:13.5px;margin-top:10px;max-width:60ch}
-.qs{margin-top:26px;display:flex;flex-direction:column;gap:18px}
-.q label{display:block;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:var(--dim);margin-bottom:9px;font-weight:500}
-.opts{display:flex;gap:6px;flex-wrap:wrap}
-.opts button{
-  font-family:var(--mono);font-size:13.5px;font-weight:700;color:var(--muted);
-  background:var(--surface);border:1px solid var(--line);border-radius:11px;
-  min-width:54px;padding:10px 14px;cursor:pointer;transition:all .15s;
-}
-.opts button:hover{border-color:var(--flare);color:var(--text)}
-.opts button.on{color:#000;background:var(--flare);border-color:var(--flare)}
-html[data-theme="light"] .opts button.on{color:#fff}
-.gen{
-  font-family:var(--mono);font-size:15px;font-weight:700;color:#000;background:var(--flare);
-  border:none;border-radius:12px;padding:15px 30px;cursor:pointer;margin-top:8px;width:100%;
-  transition:transform .12s,box-shadow .12s;
-}
-html[data-theme="light"] .gen{color:#fff}
-.gen:hover{transform:translateY(-1px);box-shadow:0 14px 34px -14px rgba(255,90,31,.6)}
-#result{margin-top:34px}
-.verdict{border-radius:var(--r);padding:18px 22px;font-size:13.5px;line-height:1.7;border:1px solid}
-.verdict.ok{border-color:rgba(74,222,128,.45);background:rgba(74,222,128,.08)}
-.verdict.tight{border-color:rgba(255,164,92,.5);background:var(--amber-dim)}
-.verdict.hard{border-color:rgba(215,25,33,.5);background:var(--red-dim)}
-.verdict b{display:block;font-size:15px;margin-bottom:4px}
-.phase{margin-top:18px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);padding:18px 22px}
-.phase h3{font-size:14px;letter-spacing:-.2px}
-.phase .ph-meta{font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--flare-soft);margin-bottom:8px;font-weight:700}
-.phase ul{margin:10px 0 0 18px;font-size:13px;color:var(--prose)}
-.phase li{margin-bottom:7px;line-height:1.6}
-.phase a{color:var(--flare-soft);text-decoration:none}
-.phase a:hover{text-decoration:underline}
-.pr-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
-.pr-actions button,.pr-actions a{
-  font-family:var(--mono);font-size:12.5px;font-weight:700;color:var(--text);text-decoration:none;
-  background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:11px 18px;cursor:pointer;
-}
-.pr-actions button:hover,.pr-actions a:hover{border-color:var(--flare);color:var(--flare)}
+.qs{max-width:44rem}
+.gen{display:inline-flex;align-items:center;justify-content:center;height:2.9rem;padding:0 1.5rem;border-radius:999px;background:var(--fg);color:var(--bg);font-size:.95rem;font-weight:500;transition:box-shadow .18s}
+.gen:hover{box-shadow:0 8px 22px -12px rgb(10 10 10 / .55)}
+#result{margin-top:3rem;max-width:48rem}
+.verdict{border-radius:6px;background:var(--surface);box-shadow:var(--card);padding:1.25rem 1.35rem;margin-bottom:1.5rem;color:var(--muted);line-height:1.7;font-size:.92rem;border-left:3px solid var(--border-strong)}
+.verdict b{display:block;margin-bottom:.4rem;color:var(--fg);font-weight:500;font-size:1.05rem;letter-spacing:-.02em}
+.verdict a{color:var(--fg);border-bottom:1px solid var(--border-strong)}
+.verdict.ok{border-left-color:var(--ok)}
+.verdict.tight{border-left-color:var(--warn)}
+.verdict.hard{border-left-color:var(--bad)}
+.phase{border-radius:6px;background:var(--surface);box-shadow:var(--card);padding:1.25rem 1.35rem;margin-bottom:.7rem}
+.ph-meta{font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--subtle)}
+.phase h3{margin:.5rem 0 .75rem;font-size:1.1rem}
+.phase ul{padding-left:1.1rem;color:var(--muted);font-size:.9rem;line-height:1.7}
+.phase li+li{margin-top:.4rem}
+.pr-actions{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.5rem}
+.pr-actions button,.pr-actions a{display:inline-flex;align-items:center;height:2.4rem;padding:0 1.05rem;border-radius:999px;border:1px solid var(--border-strong);font-size:.85rem;font-weight:500;transition:background .15s}
+.pr-actions button:hover,.pr-actions a:hover{background:color-mix(in oklab,var(--fg) 5%,transparent)}
 @media print{
-  header.site,.pl-hero p,.qs,.gen,.pr-actions,footer.site,.uilang,.theme-btn,.cta,.more{display:none!important}
-  body{background:#fff!important;color:#000!important}
-  .phase,.verdict{border-color:#ccc!important;background:#fff!important;color:#000!important;break-inside:avoid}
-  .phase ul{color:#222!important}
+  .hdr,.sheet,.ftr,.cta-card,.more,.qs,.pr-actions{display:none!important}
+  #result{margin:0;max-width:none}
+  .phase,.verdict{box-shadow:none;border:1px solid #ddd}
 }
 </style>
 </head>
 <body>
-<header class="site">
-  <div class="wrap bar">
-    <a class="brand" href="/">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#FF5A1F" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 9.5V1.5M14.5 12h7M12 14.5V19M9.5 12H4"/></svg>
-      <span><span class="fl">FLARE</span>STAMINA</span>
-    </a>
-    <nav aria-label="Site">
-      <a href="/ielts-hub/">practice</a>
-      <a href="/news/">news</a>
-      <div class="uilang" role="tablist" aria-label="Language"><button data-ui="uz" class="on">UZ</button><button data-ui="en">EN</button></div>
-      <button class="theme-btn" onclick="fsTheme()" aria-label="Toggle theme" title="Light / dark">◐</button>
+<a class="skip" href="#content" data-i18n="skip">Skip to content</a>
+
+<header class="hdr">
+  <div class="hdr-in">
+    <a class="brand" href="/" aria-label="Flarestamina"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16 1.4 L17.85 13.55 L30.6 16 L17.85 18.45 L16 30.6 L14.15 18.45 L1.4 16 L14.15 13.55 Z"/></svg>Flarestamina</a>
+    <nav class="hdr-nav" aria-label="Primary">
+      <a href="/ielts-hub/" data-i18n="navPractice">Practice</a>
+      <a href="/#tools" data-i18n="navTools">Tools</a>
+      <a href="/news/" data-i18n="navNews">News</a>
     </nav>
+    <span class="hdr-sp"></span>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-lang="en" class="on">EN</button>
+      <button type="button" data-lang="uz">UZ</button>
+    </div>
+    <button class="icon-btn" id="tgl" aria-label="Theme"><svg id="ico-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg id="ico-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="display:none"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+    <div class="hdr-desk">
+      <a class="btn ghost" id="acct" href="/account/?return=https%3A%2F%2Fflarestamina.com%2Fielts-hub%2F" data-i18n="signin">Sign in</a>
+      <a class="btn solid" href="/ielts-hub/" data-i18n="startFree">Start free</a>
+    </div>
+    <button class="icon-btn burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="sheet">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
   </div>
 </header>
 
-<section class="pl-hero pl-wrap">
-  <p class="kicker" data-k="kicker">Bepul · 30 soniya · Chop etsa bo'ladi</p>
-  <h1 data-k="h1">Shaxsiy IELTS <span class="fl">o'quv reja</span> generatori</h1>
-  <p data-k="lead">Uchta savolga javob bering — haftama-hafta reja va halol baho oling: vaqtingiz yetadimi yoki imtihonni surish kerakmi.</p>
-</section>
-
-<div class="pl-wrap">
-  <div class="qs">
-    <div class="q"><label data-k="q1">1 · Hozirgi balingiz (mock natijasi)</label>
-      <div class="opts" id="qCur"></div></div>
-    <div class="q"><label data-k="q2">2 · Maqsad band</label>
-      <div class="opts" id="qTgt"></div></div>
-    <div class="q"><label data-k="q3">3 · Imtihongacha necha hafta bor?</label>
-      <div class="opts" id="qWk">
-        <button data-v="4">4</button><button data-v="8" class="on">8</button><button data-v="12">12</button><button data-v="16">16</button><button data-v="24">24+</button>
-      </div></div>
-    <div class="q"><label data-k="q4">4 · Eng kuchsiz bo'limingiz</label>
-      <div class="opts" id="qWeak">
-        <button data-v="listening">Listening</button><button data-v="reading">Reading</button>
-        <button data-v="writing" class="on">Writing</button><button data-v="speaking">Speaking</button>
-      </div></div>
-    <button class="gen" id="go" data-k="gen">Rejani tuzish →</button>
+<div class="sheet" id="sheet">
+  <a href="/ielts-hub/" data-i18n="navPractice">Practice</a>
+      <a href="/#tools" data-i18n="navTools">Tools</a>
+      <a href="/news/" data-i18n="navNews">News</a>
+  <div class="row">
+    <a class="btn ghost" href="/account/?return=https%3A%2F%2Fflarestamina.com%2Fielts-hub%2F" data-i18n="signin">Sign in</a>
+    <a class="btn solid" href="/ielts-hub/" data-i18n="startFree">Start free</a>
   </div>
-
-  <div id="result" hidden></div>
-
-  <a class="cta" href="/ielts-hub/" style="margin-top:34px">
-    <div class="t" data-k="ctaT">Reja mock testsiz ishlamaydi <span class="fl">→</span></div>
-    <div class="s" data-k="ctaS">100+ bepul IELTS mock — real formatda, bir zumda band ball</div>
-  </a>
-  <p class="more" style="margin:26px 0 0"><a href="/deadlines/" data-k="l1">Grant muddatlari →</a> · <a href="/convert/" data-k="l2">Ball konvertori →</a> · <a href="/speaking-topics/" data-k="l3">Speaking mavzular →</a></p>
 </div>
 
-<footer class="site" style="margin-top:56px">
-  <div class="wrap row">
-    <span>© 2026 <a href="/">Flarestamina</a> · built by <a href="/founder/">Maqsudjon Polatov</a></span>
-    <span><a href="https://t.me/flarestamina" rel="noopener">telegram</a></span>
+<main id="content">
+
+<section class="page-head">
+  <div class="wrap">
+    <p class="kicker" data-k="kicker">Free · 30 seconds · Printable</p>
+    <h1 data-k="h1">IELTS study plan generator</h1>
+    <p class="lede" data-k="lead">Answer four questions and get a week-by-week plan plus an honest verdict: is there enough time, or should you move the exam?</p>
+    <div class="rail"></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="qs">
+      <div class="q"><label data-k="q1">1 · Your current band (from a mock)</label><div class="opts" id="qCur"></div></div>
+      <div class="q"><label data-k="q2">2 · Target band</label><div class="opts" id="qTgt"></div></div>
+      <div class="q"><label data-k="q3">3 · Weeks until the exam</label>
+        <div class="opts" id="qWk">
+          <button data-v="4">4</button><button data-v="8" class="on">8</button><button data-v="12">12</button><button data-v="16">16</button><button data-v="24">24+</button>
+        </div></div>
+      <div class="q"><label data-k="q4">4 · Your weakest section</label>
+        <div class="opts" id="qWeak">
+          <button data-v="listening">Listening</button><button data-v="reading">Reading</button>
+          <button data-v="writing" class="on">Writing</button><button data-v="speaking">Speaking</button>
+        </div></div>
+      <button class="gen" id="go" data-k="gen">Build the plan →</button>
+    </div>
+
+    <div id="result" hidden></div>
+
+    <a class="cta-card" href="/ielts-hub/">
+      <span><span class="t" data-k="ctaT">A plan does not work without mock tests</span><span class="s" data-k="ctaS">100+ free IELTS mocks — real format, instant band scores</span></span>
+      <span class="btn solid" data-i18n="ctaBtn">Start practicing</span>
+    </a>
+
+    <div class="more">
+      <a class="chip" href="/deadlines/" data-k="l1">Scholarship deadlines →</a>
+      <a class="chip" href="/convert/" data-k="l2">Score converter →</a>
+      <a class="chip" href="/speaking-topics/" data-k="l3">Speaking topics →</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="ftr">
+  <div class="wrap">
+    <div class="f-grid">
+      <div class="f-brand">
+        <span class="brand"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16 1.4 L17.85 13.55 L30.6 16 L17.85 18.45 L16 30.6 L14.15 18.45 L1.4 16 L14.15 13.55 Z"/></svg>Flarestamina</span>
+        <p data-i18n="footBlurb">Free IELTS Academic practice. Built in Tashkent.</p>
+      </div>
+      <div class="f-col">
+        <p data-i18n="footPractice">Practice</p>
+        <a href="/ielts-hub/" data-i18n="tHub">Practice Hub</a>
+        <a href="/ielts-hub/?cat=Listening">Listening</a>
+        <a href="/ielts-hub/?cat=Reading">Reading</a>
+        <a href="/writing/" data-i18n="tWrite">Writing Lab</a>
+        <a href="/pangea8-speaking/" data-i18n="tSpeak">Speaking Lab</a>
+      </div>
+      <div class="f-col">
+        <p data-i18n="footTools">Tools</p>
+        <a href="/convert/" data-i18n="tConvert">Score Converter</a>
+        <a href="/deadlines/" data-i18n="tDeadlines">Deadlines</a>
+        <a href="/plan/" data-i18n="tPlan">Study Plan</a>
+        <a href="/speaking-topics/" data-i18n="tTopics">Speaking Topics</a>
+      </div>
+      <div class="f-col">
+        <p data-i18n="footCompany">Company</p>
+        <a href="/founder/" data-i18n="fFounder">Founder</a>
+        <a href="/teachers/" data-i18n="fTeachers">For teachers</a>
+        <a href="/privacy/" data-i18n="fPrivacy">Privacy</a>
+        <a href="https://t.me/flarestamina" target="_blank" rel="noopener">Telegram</a>
+      </div>
+    </div>
+    <div class="f-base">
+      <span>© <span id="yy"></span> Flarestamina. <span data-i18n="footFor">For students.</span></span>
+      <span data-i18n="footCity">Tashkent, Uzbekistan</span>
+      <span data-i18n="footDisc">Not affiliated with IELTS, IDP or British Council.</span>
+    </div>
   </div>
 </footer>
 
+<script src="/assets/fs-auth.js"></script>
+<script>window.FS_UZ = {
+ "skip": "Asosiy kontentga o‘tish",
+ "navPractice": "Mashq",
+ "navTools": "Vositalar",
+ "navNews": "Yangiliklar",
+ "signin": "Kirish",
+ "startFree": "Bepul boshlash",
+ "footBlurb": "Bepul IELTS Academic mashq. Toshkentda yaratilgan.",
+ "footPractice": "Mashq",
+ "footTools": "Vositalar",
+ "footCompany": "Kompaniya",
+ "tHub": "Practice Hub",
+ "tWrite": "Writing Lab",
+ "tSpeak": "Speaking Lab",
+ "tConvert": "Ball konverteri",
+ "tDeadlines": "Muddatlar",
+ "tPlan": "O‘quv rejasi",
+ "tTopics": "Speaking mavzular",
+ "fFounder": "Asoschi",
+ "fTeachers": "O‘qituvchilarga",
+ "fPrivacy": "Maxfiylik",
+ "footFor": "Talabalar uchun.",
+ "footCity": "Toshkent, O‘zbekiston",
+ "footDisc": "IELTS, IDP yoki British Council bilan bog‘liq emas.",
+ "ctaBtn": "Mashqni boshlash"
+};</script>
+<script src="/assets/paper.js?v=1"></script>
 <script>
 (function(){
 'use strict';
@@ -229,7 +304,7 @@ var T={
       "When mocks sit steadily at target+0.5 — you're ready. Verify with the <a href='/band-calculator/'>band calculator</a>.",
       "Final 3 days: light review, sleep, and check <a href='/news/computer-vs-paper-ielts-results/'>result timelines</a>."]}
 };
-var ui='uz'; try{ui=localStorage.getItem('fs_lang')||'uz';}catch(e){}
+var ui=(window.FSPaper&&FSPaper.locale())||'en';
 var $=function(s){return document.querySelector(s)};
 var BANDS=['4.0','4.5','5.0','5.5','6.0','6.5','7.0','7.5'];
 var TGT=['5.5','6.0','6.5','7.0','7.5','8.0'];
@@ -248,13 +323,9 @@ function val(id){var b=document.querySelector(id+' button.on');return b?b.getAtt
 function applyUI(){
   var d=T[ui];
   document.querySelectorAll('[data-k]').forEach(function(el){var k=el.getAttribute('data-k');if(d[k]!=null)el.innerHTML=d[k]});
-  document.querySelectorAll('.uilang button').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-ui')===ui)});
-  document.documentElement.setAttribute('lang',ui);
   if(!$('#result').hidden) build();
 }
-document.querySelectorAll('.uilang button').forEach(function(b){
-  b.addEventListener('click',function(){ui=b.getAttribute('data-ui');try{localStorage.setItem('fs_lang',ui)}catch(e){}applyUI();});
-});
+document.addEventListener('fs:lang',function(e){ui=e.detail.locale;applyUI();});
 function build(){
   var d=T[ui];
   var cur=parseFloat(val('#qCur')), tgt=parseFloat(val('#qTgt'));

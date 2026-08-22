@@ -22,7 +22,7 @@
   --card:0 0 0 1px rgb(10 10 10 / .08), 0 1px 2px rgb(10 10 10 / .04);
   --card-hover:0 0 0 1px rgb(10 10 10 / .14), 0 8px 24px -16px rgb(10 10 10 / .18);
   --rail:linear-gradient(90deg,#2dd4bf,#38bdf8 32%,#818cf8 64%,#e879f9 100%);
-  --ok:#15803d; --warn:#b45309; --bad:#b91c1c;
+  --ok:#15803d; --warn:#b45309; --bad:#b91c1c; --dim:#8a8a8a;
   --sans:Inter,ui-sans-serif,system-ui,-apple-system,sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
   --wrap:72rem; --narrow:44rem;
@@ -34,7 +34,7 @@ html.dark,html[data-theme="dark"]{
   --border-strong:color-mix(in oklab,#f5f5f5 22%,transparent);
   --card:0 0 0 1px rgb(255 255 255 / .1);
   --card-hover:0 0 0 1px rgb(255 255 255 / .18);
-  --ok:#4ade80; --warn:#fbbf24; --bad:#f87171;
+  --ok:#4ade80; --warn:#fbbf24; --bad:#f87171; --dim:#5c5c5c;
   color-scheme:dark;
 }
 
@@ -141,6 +141,19 @@ tr:last-child td{border-bottom:0}
 .badge.warn{color:var(--warn);border-color:color-mix(in oklab,var(--warn) 40%,transparent)}
 .badge.bad{color:var(--bad);border-color:color-mix(in oklab,var(--bad) 40%,transparent)}
 
+.fl{color:inherit}  /* legacy accent span from the orange design — now inherits */
+.opts{display:flex;flex-wrap:wrap;gap:.45rem}
+.opts button{display:inline-flex;align-items:center;justify-content:center;min-width:3.2rem;height:2.4rem;padding:0 .85rem;border-radius:999px;border:1px solid var(--border);font-size:.85rem;color:var(--muted);transition:color .15s,border-color .15s,background .15s}
+.opts button:hover{color:var(--fg);border-color:var(--border-strong)}
+.opts button.on{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.q{margin-bottom:1.6rem}
+.q>label{display:block;font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--subtle);margin-bottom:.6rem}
+.cta-card{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;margin-top:3rem;border-radius:6px;background:var(--surface);box-shadow:var(--card);padding:1.35rem 1.4rem}
+.cta-card .t{display:block;font-weight:500;letter-spacing:-.02em}
+.cta-card .s{display:block;margin-top:.25rem;font-size:.85rem;color:var(--muted)}
+.more{margin-top:1.5rem;display:flex;flex-wrap:wrap;gap:.5rem}
+.sec{margin-top:3.5rem}
+.sec h2{font-size:1.4rem;margin-bottom:1rem}
 .note{border-left:2px solid var(--border-strong);padding:.15rem 0 .15rem 1rem;color:var(--muted);font-size:.9rem;line-height:1.7}
 
 /* ---------- forms ---------- */

@@ -65,7 +65,7 @@ page('founder/index.html',
     <p class="kicker" style="margin-bottom:.5rem" data-i18n="projects">Projects</p>
     <div class="rows">
       <a href="/ielts-hub/"><span><b>Flarestamina</b><small class="muted" data-i18n="p1d">100+ free IELTS mock tests</small></span>''' + shell.ARROW_UR + '''</a>
-      <a href="/writearticle/"><span><b>Writing Lab</b><small class="muted" data-i18n="p2d">Essay checker, band feedback</small></span>''' + shell.ARROW_UR + '''</a>
+      <a href="/writing/"><span><b>Writing Lab</b><small class="muted" data-i18n="p2d">Essay checker, band feedback</small></span>''' + shell.ARROW_UR + '''</a>
       <a href="/pangea8-speaking/"><span><b>Speaking Lab</b><small class="muted" data-i18n="p3d">Part 1–3 practice</small></span>''' + shell.ARROW_UR + '''</a>
       <a href="/full-mock/"><span><b>Full Mock</b><small class="muted" data-i18n="p4d">Real exam simulation</small></span>''' + shell.ARROW_UR + '''</a>
       <a href="/challenge/"><span><b>40-day challenge</b><small class="muted" data-i18n="p5d">Daily study streak</small></span>''' + shell.ARROW_UR + '''</a>
