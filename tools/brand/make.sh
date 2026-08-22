@@ -38,6 +38,34 @@ png "$DIR/spark.svg" 192 "$ROOT/icon-192.png"
 png "$DIR/spark.svg" 512 "$ROOT/icon-512.png"
 cp "$DIR/spark.svg" "$ROOT/favicon.svg"
 
+# flarestamina.com is one host assembled from several GitHub Pages repos, and
+# the four below keep their OWN copy of the icons because their pages link to
+# them relatively. Rebuilding only this repo leaves them on the previous mark:
+# in August 2026 the hub went on serving the July orange cross for a month, and
+# the two labs still drew a red mark as an inline data: URI — which Google
+# cannot use as a favicon at all, so those pages had no icon in search results.
+# Each entry is "<path> <files it actually references>"; nothing is written to a
+# repo that isn't checked out next to this one.
+echo "→ sub-app icons"
+sync_icons () { # sync_icons <repo-dir> <file>...
+  d="$ROOT/../$1"; shift
+  [ -d "$d" ] || { echo "  – ${d##*/} not checked out, skipped"; return; }
+  for f in "$@"; do
+    case "$f" in
+      favicon.ico)         cp "$ROOT/favicon.ico"         "$d/$f" ;;
+      favicon.svg)         cp "$ROOT/favicon.svg"         "$d/$f" ;;
+      apple-touch-icon.png) cp "$ROOT/apple-touch-icon.png" "$d/$f" ;;
+      icon-512.png)        cp "$ROOT/icon-512.png"        "$d/$f" ;;
+      *) echo "  ! unknown icon $f" >&2; return 1 ;;
+    esac
+  done
+  echo "  ✓ ${d##*/} ($*)"
+}
+sync_icons ielts-hub               favicon.ico favicon.svg apple-touch-icon.png icon-512.png
+sync_icons flarestamina            favicon.ico favicon.svg
+sync_icons pangea8-speaking        favicon.ico favicon.svg apple-touch-icon.png
+sync_icons pangeya-essay-platform- favicon.ico favicon.svg apple-touch-icon.png
+
 echo "→ og cards"
 card () { # card <out.png> <kicker> <title> <sub> [url]
   out="$1"; k="$2"; t="$3"; s="$4"; u="${5:-flarestamina.com}"
