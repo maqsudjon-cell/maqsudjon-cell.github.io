@@ -240,6 +240,7 @@ FOOTER = '''</main>
       <div class="f-col">
         <p data-i18n="footPractice">Practice</p>
         <a href="/ielts-hub/" data-i18n="tHub">Practice Hub</a>
+        <a href="/tests/" data-i18n="tAll">All tests</a>
         <a href="/ielts-hub/?cat=Listening">Listening</a>
         <a href="/ielts-hub/?cat=Reading">Reading</a>
         <a href="/writing/" data-i18n="tWrite">Writing Lab</a>
@@ -280,7 +281,7 @@ FOOTER = '''</main>
  "footPractice": "Mashq",
  "footTools": "Vositalar",
  "footCompany": "Kompaniya",
- "tHub": "Practice Hub",
+ "tHub": "Practice Hub",\n "tAll": "Barcha testlar",
  "tWrite": "Writing Lab",
  "tSpeak": "Speaking Lab",
  "tConvert": "Ball konverteri",

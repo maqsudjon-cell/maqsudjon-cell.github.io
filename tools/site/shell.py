@@ -133,6 +133,7 @@ def footer(uz_json, extra_scripts=''):
       <div class="f-col">
         <p data-i18n="footPractice">Practice</p>
         <a href="/ielts-hub/" data-i18n="tHub">Practice Hub</a>
+        <a href="/tests/" data-i18n="tAll">All tests</a>
         <a href="/ielts-hub/?cat=Listening">Listening</a>
         <a href="/ielts-hub/?cat=Reading">Reading</a>
         <a href="/writing/" data-i18n="tWrite">Writing Lab</a>
@@ -177,7 +178,7 @@ CHROME_UZ = {
     "signin": "Kirish", "startFree": "Bepul boshlash",
     "footBlurb": "Bepul IELTS Academic mashq. Toshkentda yaratilgan.",
     "footPractice": "Mashq", "footTools": "Vositalar", "footCompany": "Kompaniya",
-    "tHub": "Practice Hub", "tWrite": "Writing Lab", "tSpeak": "Speaking Lab",
+    "tHub": "Practice Hub", "tAll": "Barcha testlar", "tWrite": "Writing Lab", "tSpeak": "Speaking Lab",
     "tConvert": "Ball konverteri", "tDeadlines": "Muddatlar", "tPlan": "O‘quv rejasi",
     "tTopics": "Speaking mavzular",
     "fFounder": "Asoschi", "fTeachers": "O‘qituvchilarga", "fPrivacy": "Maxfiylik",

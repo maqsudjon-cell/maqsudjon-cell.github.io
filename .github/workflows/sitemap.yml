@@ -40,6 +40,7 @@ jobs:
           urls = [
               ('https://flarestamina.com/', today, 'weekly', '1.0'),
               ('https://flarestamina.com/ielts-hub/', today, 'daily', '0.9'),
+              ('https://flarestamina.com/tests/', today, 'daily', '0.9'),
               ('https://flarestamina.com/news/', news_mod, 'daily', '0.9'),
               ('https://flarestamina.com/founder/', '2026-07-15', 'monthly', '0.6'),
               ('https://flarestamina.com/writearticle/', '2026-07-15', 'monthly', '0.6'),
