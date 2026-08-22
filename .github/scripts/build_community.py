@@ -348,7 +348,7 @@ def article_page(a, slug, author_slug):
 <html lang="{lang}">
 <head>
 {head}
-<title>{title} | Flarestamina</title>
+<title>{seo_title}</title>
 <meta name="description" content="{desc}">
 <link rel="canonical" href="{url}">
 <meta name="author" content="{author}">
@@ -423,6 +423,7 @@ def article_page(a, slug, author_slug):
 </body>
 </html>
 '''.format(lang=('uz' if a['lang'] == 'uz' else 'en'), head=HEAD_COMMON, title=escape(a['title']),
+           seo_title=escape(a['title'] if len(a['title']) > 50 else a['title'] + ' | Flarestamina'),
            desc=escape(desc), url=url, og=og, date=a['date'], author=escape(a['author']),
            ld=json.dumps(ld, ensure_ascii=False), header=HEADER, footer=FOOTER, toggle=toggle,
            ava=ava, center=('<i>%s</i>' % escape(a['center'])) if a['center'] else '',
