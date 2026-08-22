@@ -1,14 +1,39 @@
-<!DOCTYPE html>
+"""Shared page shell for the paper design.
+
+Every migrated page is assembled from here so the header, footer and head
+metadata cannot drift between pages. Import it from a build script; do not
+hand-edit the header or footer inside a page.
+"""
+
+SPARK = ('<svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true">'
+         '<path d="M16 1.4 L17.85 13.55 L30.6 16 L17.85 18.45 L16 30.6 '
+         'L14.15 18.45 L1.4 16 L14.15 13.55 Z"/></svg>')
+
+MOON = ('<svg id="ico-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" '
+        'stroke="currentColor" stroke-width="1.8"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>')
+SUN = ('<svg id="ico-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" '
+       'stroke="currentColor" stroke-width="1.8" style="display:none"><circle cx="12" cy="12" r="4"/>'
+       '<path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>')
+
+ARROW_UR = ('<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
+            'stroke-width="2" aria-hidden="true"><path d="M7 7h10v10M7 17 17 7"/></svg>')
+
+RETURN_HUB = 'https://%3A%2F%2F'  # placeholder guard, unused
+
+
+def head(title, desc, canonical, og_image='https://flarestamina.com/og-image.png',
+         robots='index, follow, max-image-preview:large', extra_head='', og_type='website'):
+    return f'''<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Page not found — Flarestamina</title>
-<meta name="description" content="That page does not exist. Head back to the practice hub.">
-<meta name="robots" content="noindex, follow">
+<title>{title}</title>
+<meta name="description" content="{desc}">
+<meta name="robots" content="{robots}">
 <meta name="theme-color" content="#ffffff">
 <meta name="author" content="Maqsudjon Polatov">
-<link rel="canonical" href="https://flarestamina.com/404.html">
+<link rel="canonical" href="{canonical}">
 <link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png">
@@ -16,49 +41,63 @@
 <link rel="manifest" href="/site.webmanifest">
 <link rel="sitemap" type="application/xml" href="/sitemap.xml">
 <meta property="og:site_name" content="Flarestamina">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Page not found — Flarestamina">
-<meta property="og:description" content="That page does not exist. Head back to the practice hub.">
-<meta property="og:url" content="https://flarestamina.com/404.html">
-<meta property="og:image" content="https://flarestamina.com/og-image.png">
+<meta property="og:type" content="{og_type}">
+<meta property="og:title" content="{title}">
+<meta property="og:description" content="{desc}">
+<meta property="og:url" content="{canonical}">
+<meta property="og:image" content="{og_image}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Page not found — Flarestamina">
-<meta name="twitter:description" content="That page does not exist. Head back to the practice hub.">
-<meta name="twitter:image" content="https://flarestamina.com/og-image.png">
+<meta name="twitter:title" content="{title}">
+<meta name="twitter:description" content="{desc}">
+<meta name="twitter:image" content="{og_image}">
 <script>
-(function () {
+(function () {{
   document.documentElement.classList.add('js');
-  try {
+  try {{
     var t = localStorage.getItem('fs-paper-theme') || localStorage.getItem('theme') || localStorage.getItem('p8-theme');
-    if (t === 'dark') { document.documentElement.classList.add('dark'); document.documentElement.dataset.theme = 'dark'; }
-    else { document.documentElement.dataset.theme = 'light'; }
-  } catch (e) { document.documentElement.dataset.theme = 'light'; }
-})();
+    if (t === 'dark') {{ document.documentElement.classList.add('dark'); document.documentElement.dataset.theme = 'dark'; }}
+    else {{ document.documentElement.dataset.theme = 'light'; }}
+  }} catch (e) {{ document.documentElement.dataset.theme = 'light'; }}
+}})();
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/paper.css?v=1">
-</head>
-<body>
+{extra_head}</head>
+'''
+
+
+NAV = [('/ielts-hub/', 'navPractice', 'Practice'),
+       ('/#tools', 'navTools', 'Tools'),
+       ('/news/', 'navNews', 'News')]
+
+
+def header(current=''):
+    def links(cls=''):
+        out = []
+        for href, key, label in NAV:
+            cur = ' aria-current="page"' if href == current else ''
+            out.append(f'<a href="{href}"{cur} data-i18n="{key}">{label}</a>')
+        return '\n      '.join(out)
+
+    return f'''<body>
 <a class="skip" href="#content" data-i18n="skip">Skip to content</a>
 
 <header class="hdr">
   <div class="hdr-in">
-    <a class="brand" href="/" aria-label="Flarestamina"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16 1.4 L17.85 13.55 L30.6 16 L17.85 18.45 L16 30.6 L14.15 18.45 L1.4 16 L14.15 13.55 Z"/></svg>Flarestamina</a>
+    <a class="brand" href="/" aria-label="Flarestamina">{SPARK}Flarestamina</a>
     <nav class="hdr-nav" aria-label="Primary">
-      <a href="/ielts-hub/" data-i18n="navPractice">Practice</a>
-      <a href="/#tools" data-i18n="navTools">Tools</a>
-      <a href="/news/" data-i18n="navNews">News</a>
+      {links()}
     </nav>
     <span class="hdr-sp"></span>
     <div class="lang" role="group" aria-label="Language">
       <button type="button" data-lang="en" class="on">EN</button>
       <button type="button" data-lang="uz">UZ</button>
     </div>
-    <button class="icon-btn" id="tgl" aria-label="Theme"><svg id="ico-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg id="ico-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="display:none"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+    <button class="icon-btn" id="tgl" aria-label="Theme">{MOON}{SUN}</button>
     <div class="hdr-desk">
       <a class="btn ghost" id="acct" href="/account/?return=https%3A%2F%2Fflarestamina.com%2Fielts-hub%2F" data-i18n="signin">Sign in</a>
       <a class="btn solid" href="/ielts-hub/" data-i18n="startFree">Start free</a>
@@ -70,9 +109,7 @@
 </header>
 
 <div class="sheet" id="sheet">
-  <a href="/ielts-hub/" data-i18n="navPractice">Practice</a>
-      <a href="/#tools" data-i18n="navTools">Tools</a>
-      <a href="/news/" data-i18n="navNews">News</a>
+  {links()}
   <div class="row">
     <a class="btn ghost" href="/account/?return=https%3A%2F%2Fflarestamina.com%2Fielts-hub%2F" data-i18n="signin">Sign in</a>
     <a class="btn solid" href="/ielts-hub/" data-i18n="startFree">Start free</a>
@@ -80,26 +117,17 @@
 </div>
 
 <main id="content">
+'''
 
-<section class="page-head">
-  <div class="wrap narrow">
-    <p class="kicker" data-i18n="kicker">404</p>
-    <h1 data-i18n="h1">That page isn’t here.</h1>
-    <p class="lede" data-i18n="lede">The link is out of date, or the address has a typo. The practice carries on below.</p>
-    <div class="rail"></div>
-    <div style="display:flex;flex-wrap:wrap;gap:.6rem;margin-top:2rem">
-      <a class="btn solid lg" href="/ielts-hub/" data-i18n="b1">Go to the hub</a>
-      <a class="btn ghost lg" href="/" data-i18n="b2">Home</a>
-    </div>
-  </div>
-</section>
-</main>
+
+def footer(uz_json, extra_scripts=''):
+    return f'''</main>
 
 <footer class="ftr">
   <div class="wrap">
     <div class="f-grid">
       <div class="f-brand">
-        <span class="brand"><svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16 1.4 L17.85 13.55 L30.6 16 L17.85 18.45 L16 30.6 L14.15 18.45 L1.4 16 L14.15 13.55 Z"/></svg>Flarestamina</span>
+        <span class="brand">{SPARK}Flarestamina</span>
         <p data-i18n="footBlurb">Free IELTS Academic practice. Built in Tashkent.</p>
       </div>
       <div class="f-col">
@@ -134,37 +162,25 @@
 </footer>
 
 <script src="/assets/fs-auth.js"></script>
-<script>window.FS_UZ = {
- "skip": "Asosiy kontentga o‘tish",
- "navPractice": "Mashq",
- "navTools": "Vositalar",
- "navNews": "Yangiliklar",
- "signin": "Kirish",
- "startFree": "Bepul boshlash",
- "footBlurb": "Bepul IELTS Academic mashq. Toshkentda yaratilgan.",
- "footPractice": "Mashq",
- "footTools": "Vositalar",
- "footCompany": "Kompaniya",
- "tHub": "Practice Hub",
- "tWrite": "Writing Lab",
- "tSpeak": "Speaking Lab",
- "tConvert": "Ball konverteri",
- "tDeadlines": "Muddatlar",
- "tPlan": "O‘quv rejasi",
- "tTopics": "Speaking mavzular",
- "fFounder": "Asoschi",
- "fTeachers": "O‘qituvchilarga",
- "fPrivacy": "Maxfiylik",
- "footFor": "Talabalar uchun.",
- "footCity": "Toshkent, O‘zbekiston",
- "footDisc": "IELTS, IDP yoki British Council bilan bog‘liq emas.",
- "kicker": "404",
- "h1": "Bu sahifa yo‘q.",
- "lede": "Havola eskirgan yoki manzilda xato bor. Mashq quyidan davom etadi.",
- "b1": "Mashqqa o‘tish",
- "b2": "Bosh sahifa"
-};</script>
+<script>window.FS_UZ = {uz_json};</script>
 <script src="/assets/paper.js?v=1"></script>
-<script data-goatcounter="https://flarestamina.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+{extra_scripts}<script data-goatcounter="https://flarestamina.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
+'''
+
+
+# Chrome strings every page shares. Page-specific keys get merged on top.
+CHROME_UZ = {
+    "skip": "Asosiy kontentga o‘tish",
+    "navPractice": "Mashq", "navTools": "Vositalar", "navNews": "Yangiliklar",
+    "signin": "Kirish", "startFree": "Bepul boshlash",
+    "footBlurb": "Bepul IELTS Academic mashq. Toshkentda yaratilgan.",
+    "footPractice": "Mashq", "footTools": "Vositalar", "footCompany": "Kompaniya",
+    "tHub": "Practice Hub", "tWrite": "Writing Lab", "tSpeak": "Speaking Lab",
+    "tConvert": "Ball konverteri", "tDeadlines": "Muddatlar", "tPlan": "O‘quv rejasi",
+    "tTopics": "Speaking mavzular",
+    "fFounder": "Asoschi", "fTeachers": "O‘qituvchilarga", "fPrivacy": "Maxfiylik",
+    "footFor": "Talabalar uchun.", "footCity": "Toshkent, O‘zbekiston",
+    "footDisc": "IELTS, IDP yoki British Council bilan bog‘liq emas.",
+}

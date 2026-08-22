@@ -1,0 +1,38 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://flarestamina.com/founder/#person",
+      "name": "Maqsudjon Polatov",
+      "url": "https://flarestamina.com/founder/",
+      "jobTitle": "Founder",
+      "worksFor": { "@id": "https://flarestamina.com/#org" },
+      "nationality": { "@type": "Country", "name": "Uzbekistan" },
+      "address": { "@type": "PostalAddress", "addressLocality": "Tashkent", "addressCountry": "UZ" },
+      "description": "Builder of Flarestamina — a free IELTS practice ecosystem: 100+ mock tests, Writing Lab, Speaking Lab and progress tracking, engineered in Uzbekistan.",
+      "knowsAbout": ["IELTS", "English language testing", "EdTech", "Web development"],
+      "sameAs": [
+        "https://maqsudjon.com/",
+        "https://github.com/maqsudjon-cell",
+        "https://t.me/flarestamina"
+      ]
+    },
+    {
+      "@type": "ProfilePage",
+      "@id": "https://flarestamina.com/founder/#page",
+      "url": "https://flarestamina.com/founder/",
+      "name": "Maqsudjon Polatov — Founder of Flarestamina",
+      "mainEntity": { "@id": "https://flarestamina.com/founder/#person" },
+      "isPartOf": { "@id": "https://flarestamina.com/#website" },
+      "inLanguage": "en"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Flarestamina", "item": "https://flarestamina.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Founder", "item": "https://flarestamina.com/founder/" }
+      ]
+    }
+  ]
+}
