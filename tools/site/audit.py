@@ -129,11 +129,21 @@ def audit(path):
             add('WARN', f'heading jumps h{lvls[i-1]}→h{lvls[i]}')
             break
 
-    for l in re.findall(r'<script type="application/ld\+json">(.*?)</script>', s, re.S):
+    blocks = re.findall(r'<script type="application/ld\+json">(.*?)</script>', s, re.S)
+    if not blocks:
+        add('ERR', 'no JSON-LD')
+    types = set()
+    for l in blocks:
         try:
-            json.loads(l)
+            ld = json.loads(l)
         except Exception as e:
             add('ERR', f'invalid JSON-LD: {e}')
+            continue
+        for it in (ld.get('@graph', [ld]) if isinstance(ld, dict) else ld):
+            t = it.get('@type') if isinstance(it, dict) else None
+            types.add(t[0] if isinstance(t, list) else t)
+    if blocks and 'BreadcrumbList' not in types and path != 'index.html':
+        add('INFO', 'no BreadcrumbList')
 
     if d.imgs_no_alt:
         add('WARN', f'{d.imgs_no_alt} img without alt')
