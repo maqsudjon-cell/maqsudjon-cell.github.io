@@ -6,6 +6,11 @@
 #
 # Needs: python3 + cairosvg, ImageMagick (`magick`), Google Chrome.
 set -e
+# ASSET VERSION — bump this and the ?v= in tools/site/shell.py + the HTML together
+# whenever the mark or the cards change. Browsers cache favicons by URL and
+# Telegram/Facebook cache OG cards by image URL; without a new URL they keep
+# serving the old art for weeks.
+ASSET_V=2
 DIR="$(cd "$(dirname "$0")" && pwd)"
 ROOT="$(cd "$DIR/../.." && pwd)"
 CHROME="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"

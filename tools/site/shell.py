@@ -21,7 +21,7 @@ ARROW_UR = ('<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke=
 RETURN_HUB = 'https://%3A%2F%2F'  # placeholder guard, unused
 
 
-def head(title, desc, canonical, og_image='https://flarestamina.com/og-image.png',
+def head(title, desc, canonical, og_image='https://flarestamina.com/og-image.png?v=2',
          robots='index, follow, max-image-preview:large', extra_head='', og_type='website'):
     return f'''<!DOCTYPE html>
 <html lang="en">
@@ -34,11 +34,11 @@ def head(title, desc, canonical, og_image='https://flarestamina.com/og-image.png
 <meta name="theme-color" content="#ffffff">
 <meta name="author" content="Maqsudjon Polatov">
 <link rel="canonical" href="{canonical}">
-<link rel="icon" href="/favicon.ico" sizes="48x48">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="manifest" href="/site.webmanifest">
+<link rel="icon" href="/favicon.ico?v=2" sizes="48x48">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png?v=2">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
+<link rel="manifest" href="/site.webmanifest?v=2">
 <link rel="sitemap" type="application/xml" href="/sitemap.xml">
 <meta property="og:site_name" content="Flarestamina">
 <meta property="og:type" content="{og_type}">

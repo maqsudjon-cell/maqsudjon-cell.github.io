@@ -23,9 +23,9 @@ HEAD_DROP = [
 ]
 
 PAPER_HEAD = '''<meta name="theme-color" content="#ffffff">
-<link rel="icon" href="/favicon.ico" sizes="48x48">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" href="/favicon.ico?v=2" sizes="48x48">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2">
 <script>
 (function () {
   document.documentElement.classList.add('js');
@@ -55,7 +55,7 @@ def convert(path):
     for pat in HEAD_DROP:
         head = re.sub(pat, '', head, flags=re.S)
     # news pages get the news card rather than the generic one
-    head = head.replace('https://flarestamina.com/og-image.png', 'https://flarestamina.com/news/og.png')
+    head = head.replace('https://flarestamina.com/og-image.png?v=2', 'https://flarestamina.com/news/og.png?v=2')
     head = head.strip() + '\n' + PAPER_HEAD
 
     body = re.sub(r'<header class="site">.*?</header>', '', body, flags=re.S)
