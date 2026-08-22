@@ -125,7 +125,7 @@ def main():
     html = (shell.head('Every IELTS practice test — Flarestamina',
                        f'All {total} free IELTS practice tests and tools on Flarestamina: Listening, Reading, Writing, Speaking, Cambridge and full mock exams.',
                        'https://flarestamina.com/tests/',
-                       'https://flarestamina.com/og-image.png?v=2',
+                       'https://flarestamina.com/tests/og.png?v=2',
                        extra_head='<script type="application/ld+json">\n' + json.dumps(ld, ensure_ascii=False) + '\n</script>\n<style>\n' + style.strip() + '\n</style>\n')
             + shell.header() + body
             + shell.footer(json.dumps(dict(shell.CHROME_UZ), ensure_ascii=False, indent=1)))

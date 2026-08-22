@@ -51,6 +51,7 @@ card () { # card <out.png> <kicker> <title> <sub> [url]
 u () { python3 -c "import urllib.parse,sys;print(urllib.parse.quote(sys.argv[1]))" "$1"; }
 
 card "$ROOT/og-image.png"            "Flarestamina" "Practice like it’s exam day."              "Free IELTS Academic practice. Tashkent."
+card "$ROOT/tests/og.png"             "Catalogue"    "Every IELTS practice test, in one list."   "112 free papers and tools."                  "flarestamina.com/tests"
 card "$ROOT/news/og.png"             "News"         "IELTS news, with the source attached."     "Fees, One Skill Retake, scholarships."       "flarestamina.com/news"
 card "$ROOT/convert/og.png"          "Converter"    "IELTS, CEFR, Multilevel, TOEFL."           "Official conversion tables."                 "flarestamina.com/convert"
 card "$ROOT/deadlines/og.png"        "Deadlines"    "Exam and scholarship dates."               "For students in Uzbekistan."                 "flarestamina.com/deadlines"

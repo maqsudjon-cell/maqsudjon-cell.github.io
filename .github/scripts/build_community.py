@@ -302,7 +302,7 @@ FOOTER = '''</main>
 
 def article_page(a, slug, author_slug):
     url = '%s/news/a/%s/' % (SITE, slug)
-    og = '%s/news/og/%s.png' % (SITE, slug)
+    og = '%s/news/og/%s.png?v=2' % (SITE, slug)
     both = bool(a['title_uz'] and a['body_uz'])
     desc = re.sub(r'\s+', ' ', a['body'])[:155].strip()
     link = safe_url(a['link'])
