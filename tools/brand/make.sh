@@ -60,6 +60,7 @@ card "$ROOT/founder/og.png"          "Founder"      "Built by someone sitting th
 card "$ROOT/teachers/og.png"         "Teachers"     "Set the paper. Read the results."          "Flarestamina for teachers."                  "flarestamina.com/teachers"
 card "$ROOT/speaking-topics/og.png"  "Speaking"     "The current Speaking topic rotation."      "Parts 1–3, updated each season."             "flarestamina.com/speaking-topics"
 card "$ROOT/writearticle/og.png"     "Writing lab"  "Task 1 and Task 2, taken apart."           "Plans, model structures, vocabulary."        "flarestamina.com/writearticle"
+card "$ROOT/../fs-donate/og.png"     "Support"      "Free because nobody pays for it yet."      "113 IELTS tests. No ads, no paywall."        "flarestamina.com/support"
 card "$ROOT/account/og.png"          "FS Account"   "One account for every Flarestamina tool."  "Tests, mocks, speaking and writing."         "flarestamina.com/account"
 
 echo "→ done"
