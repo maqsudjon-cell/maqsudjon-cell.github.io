@@ -158,6 +158,12 @@ def audit(path):
 
     if 'paper.css' not in s and 'fs-paper-theme' not in s:
         add('ERR', 'not on the paper design')
+    # the fonts are self-hosted; a build script re-adding the Google link is a
+    # regression that is otherwise invisible
+    if 'fonts.googleapis.com' in s or 'fonts.gstatic.com' in s:
+        add('ERR', 'still requests Google Fonts')
+    if 'paper.css' in s and 'inter-var.woff2' not in s:
+        add('WARN', 'no font preload')
     if re.search(r'href="[^"]*\.(?:css|js)"(?![^>]*\?)', s):
         pass
     return out
