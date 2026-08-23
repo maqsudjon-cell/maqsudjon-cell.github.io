@@ -41,6 +41,9 @@ jobs:
               ('https://flarestamina.com/', today, 'weekly', '1.0'),
               ('https://flarestamina.com/ielts-hub/', today, 'daily', '0.9'),
               ('https://flarestamina.com/tests/', today, 'daily', '0.9'),
+              ('https://flarestamina.com/ielts-listening-test/', today, 'daily', '0.9'),
+              ('https://flarestamina.com/ielts-reading-test/', today, 'daily', '0.9'),
+              ('https://flarestamina.com/uz/', today, 'weekly', '0.9'),
               ('https://flarestamina.com/news/', news_mod, 'daily', '0.9'),
               ('https://flarestamina.com/founder/', '2026-07-15', 'monthly', '0.6'),
               ('https://flarestamina.com/writearticle/', '2026-07-15', 'monthly', '0.6'),
@@ -94,14 +97,25 @@ jobs:
           EOF
 
       - name: Commit if changed
+        id: commit
         run: |
           # ignore lastmod-only churn on the two dynamic rows: compare URL sets too
           if git diff --quiet sitemap.xml; then
             echo "sitemap unchanged"
+            echo "changed=no" >> "$GITHUB_OUTPUT"
           else
             git config user.name "Flarestamina-bot"
             git config user.email "actions@users.noreply.github.com"
             git add sitemap.xml
             git commit -m "Auto-update sitemap"
             git push
+            echo "changed=yes" >> "$GITHUB_OUTPUT"
           fi
+
+      # Google ignores IndexNow, but Bing and Yandex act on it within minutes.
+      # Yandex is worth the ping here — it has real share among students in
+      # Uzbekistan, and a new post would otherwise sit until the next crawl.
+      - name: Ping IndexNow
+        if: steps.commit.outputs.changed == 'yes'
+        continue-on-error: true
+        run: python3 tools/site/indexnow.py

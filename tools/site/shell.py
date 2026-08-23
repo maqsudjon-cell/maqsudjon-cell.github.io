@@ -22,9 +22,10 @@ RETURN_HUB = 'https://%3A%2F%2F'  # placeholder guard, unused
 
 
 def head(title, desc, canonical, og_image='https://flarestamina.com/og-image.png?v=2',
-         robots='index, follow, max-image-preview:large', extra_head='', og_type='website'):
+         robots='index, follow, max-image-preview:large', extra_head='', og_type='website',
+         lang='en'):
     return f'''<!DOCTYPE html>
-<html lang="en">
+<html lang="{lang}">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -133,8 +134,8 @@ def footer(uz_json, extra_scripts=''):
         <p data-i18n="footPractice">Practice</p>
         <a href="/ielts-hub/" data-i18n="tHub">Practice Hub</a>
         <a href="/tests/" data-i18n="tAll">All tests</a>
-        <a href="/ielts-hub/?cat=Listening">Listening</a>
-        <a href="/ielts-hub/?cat=Reading">Reading</a>
+        <a href="/ielts-listening-test/" data-i18n="tListening">Listening tests</a>
+        <a href="/ielts-reading-test/" data-i18n="tReading">Reading tests</a>
         <a href="/writing/" data-i18n="tWrite">Writing Lab</a>
         <a href="/pangea8-speaking/" data-i18n="tSpeak">Speaking Lab</a>
       </div>
@@ -150,6 +151,7 @@ def footer(uz_json, extra_scripts=''):
         <a href="/founder/" data-i18n="fFounder">Founder</a>
         <a href="/teachers/" data-i18n="fTeachers">For teachers</a>
         <a href="/privacy/" data-i18n="fPrivacy">Privacy</a>
+        <a href="/uz/" hreflang="uz" lang="uz">O‘zbekcha</a>
         <a href="https://t.me/flarestamina" target="_blank" rel="noopener">Telegram</a>
       </div>
     </div>
@@ -163,7 +165,7 @@ def footer(uz_json, extra_scripts=''):
 
 <script src="/assets/fs-auth.js"></script>
 <script>window.FS_UZ = {uz_json};</script>
-<script src="/assets/paper.js?v=1"></script>
+<script src="/assets/paper.js?v=2"></script>
 {extra_scripts}<script data-goatcounter="https://flarestamina.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>
@@ -180,6 +182,7 @@ CHROME_UZ = {
     "tHub": "Practice Hub", "tAll": "Barcha testlar", "tWrite": "Writing Lab", "tSpeak": "Speaking Lab",
     "tConvert": "Ball konverteri", "tDeadlines": "Muddatlar", "tPlan": "O‘quv rejasi",
     "tTopics": "Speaking mavzular",
+    "tListening": "Listening testlari", "tReading": "Reading testlari",
     "fFounder": "Asoschi", "fTeachers": "O‘qituvchilarga", "fPrivacy": "Maxfiylik",
     "footFor": "Talabalar uchun.", "footCity": "Toshkent, O‘zbekiston",
     "footDisc": "IELTS, IDP yoki British Council bilan bog‘liq emas.",

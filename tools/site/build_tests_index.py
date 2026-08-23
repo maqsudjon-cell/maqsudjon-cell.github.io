@@ -53,7 +53,9 @@ def main():
     groups = {c: newest_first([t for t in tests if t.get('category') == c]) for c in ORDER}
     total = sum(len(v) for v in groups.values())
 
-    sections, nav, listitems, pos = [], [], [], 1
+    sections, listitems, pos = [], [], 1
+    nav = ['<a class="chip" href="/ielts-listening-test/">IELTS Listening tests</a>',
+           '<a class="chip" href="/ielts-reading-test/">IELTS Reading tests</a>']
     for c in ORDER:
         rows = groups.get(c) or []
         if not rows:
