@@ -1,0 +1,23 @@
+{
+ "slug": "ielts-5-5-dan-6-5-ga",
+ "title": "IELTS 5.5 dan 6.5 ga: qaysi ko‘nikmadan boshlash kerak",
+ "description": "0.5 ball ko‘tarish uchun to‘rt ko‘nikmani birdan tortish shart emas. Umumiy ball qanday hisoblanishi va eng arzon 0.5 qayerda yotishi.",
+ "date": "2026-08-23",
+ "category": "guide",
+ "lang": "uz",
+ "read": "5 min",
+ "summary": "Umumiy ball to‘rtta ballning o‘rtachasi va u 0.5 ga yaxlitlanadi. Ya’ni ba’zan bitta ko‘nikmadagi 0.5 butun natijani ko‘taradi — muhimi, qaysi biri ekanini bilish.",
+ "sources": [
+  {
+   "name": "IELTS.org — how IELTS is scored",
+   "url": "https://ielts.org/take-a-test/test-results/how-ielts-is-scored"
+  }
+ ],
+ "cta": {
+  "title": "To‘rt ko‘nikma bo‘yicha alohida ballingizni ko‘ring",
+  "sub": "Bepul to‘liq test — qaysi biri sizni tortayotganini ko‘rsatadi",
+  "href": "/ielts-hub/",
+  "btn": "Testni boshlash"
+ },
+ "body": "\n    <div class=\"facts\">\n      <h2>Avval hisobni tushuning</h2>\n      <ul>\n        <li>Umumiy ball — to‘rtta ballning <strong>o‘rtachasi</strong>.</li>\n        <li>O‘rtacha <strong>0.5 ga yaxlitlanadi</strong>: .25 va undan yuqorisi yuqoriga, .25 dan pastrog‘i pastga.</li>\n        <li>Ya’ni ba’zida <strong>bitta</strong> ko‘nikmadagi 0.5 butun natijani ko‘taradi.</li>\n      </ul>\n    </div>\n\n    <p>Misol. Sizda Listening 6.5, Reading 6.0, Writing 5.5, Speaking 6.0. O‘rtacha = 6.0. Sizga 6.5 kerak.</p>\n\n    <p>Endi qarang: Writing’ni 5.5 dan 6.5 ga ko‘tarsangiz o‘rtacha 6.25 bo‘ladi — bu <strong>6.5 ga yaxlitlanadi</strong>. Bitta ko‘nikma butun natijani hal qildi. Boshqa uchtasiga tegmadingiz ham.</p>\n\n    <h2>Qaysi ko‘nikmadan boshlash kerak</h2>\n\n    <p>Javob “eng zaifidan” emas. Javob — <strong>eng tez ko‘tariladiganidan</strong>. Va bu ikkalasi ko‘pincha bir xil emas.</p>\n\n    <div class=\"tbl-wrap\">\n    <table>\n      <thead><tr><th>Ko‘nikma</th><th>0.5 ko‘tarish qiyinligi</th><th>Nega</th></tr></thead>\n      <tbody>\n        <tr><td>Reading</td><td>Eng oson</td><td>Texnika masalasi: vaqt taqsimoti va savol turlarini tanish</td></tr>\n        <tr><td>Listening</td><td>Oson</td><td>Ko‘p mashq + imlo xatolarini yo‘qotish darrov ball beradi</td></tr>\n        <tr><td>Writing</td><td>Qiyin</td><td>Mezonlar ko‘p; feedback bo‘lmasa o‘zingiz ko‘rmaysiz</td></tr>\n        <tr><td>Speaking</td><td>O‘rtacha</td><td>Ravonlik mashq bilan keladi, lekin gapirish sherigi kerak</td></tr>\n      </tbody>\n    </table>\n    </div>\n\n    <p>Shuning uchun tartib odatda shunday: <strong>avval Reading va Listening</strong>ni maksimal darajaga chiqaring — bu eng arzon ballar. Keyin Writing’ga o‘ting, chunki u eng ko‘p vaqt oladi.</p>\n\n    <h2>Eng ko‘p uchraydigan uchta yo‘qotish</h2>\n\n    <ul>\n      <li><strong>Listening’da imlo.</strong> To‘g‘ri eshitib, xato yozsangiz — ball yo‘q. Bu sof tekin yo‘qotish va bir hafta mashq bilan tuzatiladi.</li>\n      <li><strong>Reading’da vaqt.</strong> Uchinchi matnga vaqt qolmasligi — ko‘pchilikning asosiy muammosi. Yechim: har matnga 20 daqiqa, taymer bilan.</li>\n      <li><strong>Writing’da so‘z soni.</strong> Task 2 uchun 250 dan kam yozsangiz ball tushadi. Bu ham tekin yo‘qotish.</li>\n    </ul>\n\n    <h2>Qanday o‘lchash kerak</h2>\n\n    <p>“Menimcha Writing zaif” — bu ma’lumot emas. Kamida <strong>uchta to‘liq test</strong> yozing va to‘rt ko‘nikma bo‘yicha ballni alohida yozib boring. Uch testdan keyin qaysi ko‘nikma barqaror past ekani aniq ko‘rinadi — bitta testda omad yoki omadsizlik bo‘lishi mumkin, uchtada emas.</p>\n\n    <p>Shundan keyingina reja tuzing. Aks holda kuchli ko‘nikmangizga vaqt sarflab, zaifini o‘sha holida qoldirasiz.</p>\n"
+}

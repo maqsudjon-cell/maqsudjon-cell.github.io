@@ -74,7 +74,9 @@
   d.querySelectorAll('[data-i18n-html]').forEach(function (el) { EN[el.getAttribute('data-i18n-html')] = el.innerHTML; });
   d.querySelectorAll('[data-i18n-ph]').forEach(function (el) { EN[el.getAttribute('data-i18n-ph')] = el.placeholder; });
 
-  var locale = 'en';
+  /* The page's own <html lang> is the default, so an Uzbek-language article
+     opens in Uzbek for a first-time reader. A saved choice still wins. */
+  var locale = root.getAttribute('lang') === 'uz' ? 'uz' : 'en';
   try {
     var s = localStorage.getItem('fs-lang') || localStorage.getItem('fs_lang');
     if (s === 'uz' || s === 'en') locale = s;

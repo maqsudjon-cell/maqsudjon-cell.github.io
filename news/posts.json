@@ -2,6 +2,38 @@
   "note": "Machine-readable index of /news/ posts. The sitemap workflow reads this file — add every new post here. Newest first.",
   "posts": [
     {
+      "slug": "ielts-5-5-dan-6-5-ga",
+      "title": "IELTS 5.5 dan 6.5 ga: qaysi ko‘nikmadan boshlash kerak",
+      "date": "2026-08-23",
+      "category": "guide",
+      "summary": "Umumiy ball to‘rtta ballning o‘rtachasi va u 0.5 ga yaxlitlanadi. Ya’ni ba’zan bitta ko‘nikmadagi 0.5 butun natijani ko‘taradi — muhimi, qaysi biri ekanini bilish.",
+      "source": "IELTS.org — how IELTS is scored"
+    },
+    {
+      "slug": "ielts-sertifikat-2-yil",
+      "title": "IELTS sertifikati 2 yil amal qiladi — imtihonni qachon topshirish kerak",
+      "date": "2026-08-23",
+      "category": "guide",
+      "summary": "“Oldindan topshirib qo‘yay” — eng qimmat xato. Sertifikat 2 yil amal qiladi va hujjat topshirgan kuningizda amalda bo‘lishi kerak. To‘g‘ri sana muddatdan ortga hisoblab topiladi.",
+      "source": "IELTS.org — natijalar va amal qilish muddati"
+    },
+    {
+      "slug": "ielts-qayerda-topshiriladi",
+      "title": "IELTS qayerda topshiriladi: O‘zbekistonda 14 ta shahar",
+      "date": "2026-08-23",
+      "category": "exam-update",
+      "summary": "Markazlar 14 ta shaharda ishlaydi — Toshkent, Samarqand, Buxoro, Andijon, Farg‘ona, Namangan, Qo‘qon, Nukus, Urganch, Termiz, Qarshi, Navoiy, Jizzax, Guliston. Lekin sanalar hamma joyda bir xil emas.",
+      "source": "British Council Uzbekistan — sanalar, narxlar, joylar"
+    },
+    {
+      "slug": "one-skill-retake-ozbekiston",
+      "title": "One Skill Retake: bitta ko‘nikmani qayta topshirish — kimga arziydi",
+      "date": "2026-08-23",
+      "category": "exam-update",
+      "summary": "Bitta ko‘nikma cho‘kib qolsa, 2,6 mln so‘mni qaytadan to‘lash shart emas. Lekin uchta shart bor: kompyuterda topshirgan bo‘lishingiz, 60 kun ichida ulgurishingiz va faqat bir marta ishlatishingiz mumkin.",
+      "source": "IELTS.org — One Skill Retake"
+    },
+    {
       "slug": "ielts-narxi-2026",
       "title": "IELTS narxi 2026: kompyuter 2 665 000, qog‘oz 2 639 000 so‘m",
       "date": "2026-08-23",
