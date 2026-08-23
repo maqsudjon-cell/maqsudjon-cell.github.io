@@ -121,15 +121,16 @@
 <section class="hero wrap">
   <p class="kicker">Sourced · Dated · No fluff</p>
   <h1>IELTS news <span class="fl">&amp;</span> deadlines</h1>
-  <p class="sub">Exam updates, deadlines, teacher articles and community advice — for students in Uzbekistan. Every news post cites its official source. New posts land on <a href="https://t.me/flarestamina" rel="noopener">t.me/flarestamina</a> first · <a href="/news/feed.xml">rss ↗</a></p>
+  <p class="sub" data-i18n="newsSub">IELTS exam changes, fees and scholarship deadlines — for students in Uzbekistan. Every post names its source and its date.</p>
+  <p class="sub-meta"><a href="https://t.me/flarestamina" rel="noopener">t.me/flarestamina</a> <span data-i18n="newsFirst">gets each post first</span> · <a href="/news/feed.xml">rss ↗</a></p>
 </section>
 
-<div class="tools-strip wrap">
-  <a href="/deadlines/"><b>⏳ Deadlines</b><span>jonli countdown — grant muddatlari</span></a>
-  <a href="/convert/"><b>🔄 Converter</b><span>IELTS ↔ CEFR ↔ Multilevel ↔ TOEFL</span></a>
-  <a href="/speaking-topics/"><b>🎤 Speaking topics</b><span>Part 1–3 mavzular va rotatsiya</span></a>
-  <a href="/plan/"><b>📋 Study plan</b><span>shaxsiy o'quv reja generatori</span></a>
-</div>
+<nav class="tools-strip wrap" aria-label="Tools">
+  <a href="/deadlines/"><b data-i18n="tsDead">Deadlines</b><span data-i18n="tsDeadB">live countdown to each grant</span></a>
+  <a href="/convert/"><b data-i18n="tsConv">Score converter</b><span data-i18n="tsConvB">IELTS ↔ CEFR ↔ Multilevel ↔ TOEFL</span></a>
+  <a href="/speaking-topics/"><b data-i18n="tsSpk">Speaking topics</b><span data-i18n="tsSpkB">Part 1–3, current rotation</span></a>
+  <a href="/plan/"><b data-i18n="tsPlan">Study plan</b><span data-i18n="tsPlanB">a schedule built for your date</span></a>
+</nav>
 
 <div class="modes wrap" role="tablist" aria-label="Section">
   <button class="active" data-m="news">news</button>
@@ -422,6 +423,12 @@
 
 <script src="/assets/fs-auth.js"></script>
 <script>window.FS_UZ = {
+ "newsSub": "IELTS imtihonidagi o‘zgarishlar, narxlar va grant muddatlari — O‘zbekistondagi talabalar uchun. Har bir post manbasini va sanasini ko‘rsatadi.",
+ "newsFirst": "har bir postni birinchi bo‘lib oladi",
+ "tsDead": "Muddatlar", "tsDeadB": "har bir grantgacha jonli hisob",
+ "tsConv": "Ball konverteri", "tsConvB": "IELTS ↔ CEFR ↔ Multilevel ↔ TOEFL",
+ "tsSpk": "Speaking mavzular", "tsSpkB": "Part 1–3, joriy rotatsiya",
+ "tsPlan": "O‘quv rejasi", "tsPlanB": "imtihon sanangizga moslangan jadval",
  "skip": "Asosiy kontentga o‘tish",
  "navPractice": "Mashq",
  "navTools": "Vositalar",

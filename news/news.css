@@ -8,27 +8,39 @@
  */
 
 /* ---------- hero + tool strip ---------- */
-.hero{padding:3.5rem 0 2rem}
-@media(min-width:640px){.hero{padding:4.5rem 0 2.5rem}}
+.hero{padding:2.25rem 0 1.5rem}
+@media(min-width:640px){.hero{padding:4rem 0 2.25rem}}
 .hero h1{font-size:clamp(1.9rem,5vw,2.75rem);letter-spacing:-.04em;margin-top:.7rem}
-.hero .sub{margin-top:1rem;max-width:44rem;color:var(--muted);line-height:1.7}
+.hero .sub{margin-top:.85rem;max-width:40rem;color:var(--muted);line-height:1.6}
+.hero .sub-meta{margin-top:.5rem;font-family:var(--mono);font-size:.74rem;color:var(--subtle)}
+.hero .sub-meta a{border-bottom:1px solid var(--border-strong)}
 .hero .sub a{border-bottom:1px solid var(--border-strong)}
 
-.tools-strip{display:grid;gap:.6rem;margin-bottom:2rem}
-@media(min-width:640px){.tools-strip{grid-template-columns:1fr 1fr}}
-@media(min-width:1000px){.tools-strip{grid-template-columns:repeat(4,1fr)}}
-.tools-strip a{border-radius:6px;background:var(--surface);box-shadow:var(--card);padding:.9rem 1rem;transition:box-shadow .2s}
+/* Tools: one swipeable row on a phone so the first news post stays in view;
+   a four-up grid once there is width for it. */
+.tools-strip{display:flex;gap:.55rem;margin-bottom:1.75rem;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:20px;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:.15rem}
+.tools-strip::-webkit-scrollbar{display:none}
+.tools-strip>a{flex:0 0 13.5rem;scroll-snap-align:start}
+@media(min-width:760px){
+  .tools-strip{display:grid;grid-template-columns:repeat(4,1fr);overflow:visible}
+  .tools-strip>a{flex:initial}
+}
+.tools-strip a{border-radius:6px;background:var(--surface);box-shadow:var(--card);padding:.75rem .9rem;transition:box-shadow .2s}
 .tools-strip a:hover{box-shadow:var(--card-hover)}
 .tools-strip b{display:block;font-weight:500;font-size:.9rem;letter-spacing:-.01em}
-.tools-strip span{display:block;margin-top:.2rem;font-size:.78rem;color:var(--muted)}
+.tools-strip span{display:block;margin-top:.15rem;font-size:.75rem;color:var(--muted);line-height:1.45}
 
 /* ---------- tabs + filters ---------- */
-.modes{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.5rem;border-bottom:1px solid var(--border);padding-bottom:1rem}
+.modes{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.1rem;border-bottom:1px solid var(--border);padding-bottom:.8rem}
 .modes button{height:2.2rem;padding:0 .95rem;border-radius:999px;border:1px solid var(--border);font-size:.85rem;color:var(--muted);transition:color .15s,border-color .15s,background .15s}
 .modes button:hover{color:var(--fg);border-color:var(--border-strong)}
 .modes button.active{background:var(--fg);color:var(--bg);border-color:var(--fg)}
 
-.filters{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem;margin-bottom:1.25rem}
+/* Filters: a single swipeable row on a phone instead of two wrapped lines. */
+.filters{display:flex;flex-wrap:nowrap;align-items:center;gap:.4rem;margin-bottom:1.25rem;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.filters::-webkit-scrollbar{display:none}
+.filters>button{flex:0 0 auto}
+@media(min-width:760px){.filters{flex-wrap:wrap;overflow:visible}}
 .filters button{height:2rem;padding:0 .8rem;border-radius:999px;border:1px solid var(--border);font-size:.8rem;color:var(--muted);transition:color .15s,border-color .15s,background .15s}
 .filters button:hover{color:var(--fg);border-color:var(--border-strong)}
 .filters button.active{background:var(--fg);color:var(--bg);border-color:var(--fg)}
