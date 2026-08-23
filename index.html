@@ -299,6 +299,18 @@ section.line{border-top:1px solid var(--border)}
 .why p{margin-top:.6rem;font-size:.9rem;line-height:1.7;color:var(--muted)}
 
 .tools{margin-top:3rem;display:grid;gap:.75rem}
+/* --- latest posts row --- */
+.pcards{margin-top:3rem;display:grid;gap:.9rem}
+@media(min-width:700px){.pcards{grid-template-columns:repeat(3,1fr)}}
+.pcard{display:block;border-radius:6px;background:var(--surface);box-shadow:var(--card);overflow:hidden;transition:box-shadow .2s}
+.pcard:hover{box-shadow:var(--card-hover)}
+.pcard img{display:block;width:100%;height:auto;aspect-ratio:1200/630;object-fit:cover;background:var(--elev)}
+.pcard-b{padding:1rem 1.1rem 1.2rem}
+.pcard-m{display:block;font-family:var(--mono);font-size:.68rem;letter-spacing:.05em;text-transform:uppercase;color:var(--subtle)}
+.pcard b{display:block;margin:.5rem 0 .4rem;font-weight:500;font-size:1rem;letter-spacing:-.015em;line-height:1.35}
+.pcard p{color:var(--muted);font-size:.85rem;line-height:1.6;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.more{margin-top:1.6rem}
+.more a{font-size:.9rem;border-bottom:1px solid var(--border-strong)}
 @media(min-width:640px){.tools{grid-template-columns:1fr 1fr}}
 @media(min-width:960px){.tools{grid-template-columns:repeat(4,1fr)}}
 .tool{border-radius:6px;background:var(--surface);padding:1.25rem;box-shadow:var(--card);transition:box-shadow .2s}
@@ -561,6 +573,45 @@ footer{border-top:1px solid var(--border);padding:3.5rem 0 2.5rem}
   </div>
 </section>
 
+<section class="blk line scroll-mt" id="reading">
+  <div class="wrap">
+    <div class="head reveal">
+      <p class="kicker" data-i18n="newsKicker">Worth reading</p>
+      <h2 data-i18n="newsTitle">What changed this month.</h2>
+      <p data-i18n="newsLede">Exam rules, fees and grant deadlines for students in Uzbekistan — each post names its source and its date.</p>
+    </div>
+    <div class="pcards">
+    <!-- HOME-NEWS:START -->
+      <a class="pcard reveal" href="/news/ielts-narxi-2026/">
+        <img src="/news/ielts-narxi-2026/cover.png" alt="IELTS narxi 2026: kompyuter 2 665 000, qog‘oz 2 639 000 so‘m" width="1200" height="630" loading="lazy" decoding="async">
+        <div class="pcard-b">
+          <span class="pcard-m">fees · 23 Aug 2026</span>
+          <b>IELTS narxi 2026: kompyuter 2 665 000, qog‘oz 2 639 000 so‘m</b>
+          <p>IDP Toshkentning bron sahifasida bugun turgan aniq raqamlar: kompyuterda 2 665 000, qog‘ozda 2 639 000 so‘m. Qog‘oz arzonroq, lekin natijani 13 kun kutasiz — va One Skill Retake faqat kompyuterda ishlaydi.</p>
+        </div>
+      </a>
+      <a class="pcard reveal" href="/news/site-redesign-2026/">
+        <img src="/news/site-redesign-2026/cover.png" alt="Flarestamina has a new look — and your results are exactly where you left them" width="1200" height="630" loading="lazy" decoding="async">
+        <div class="pcard-b">
+          <span class="pcard-m">site update · 22 Aug 2026</span>
+          <b>Flarestamina has a new look — and your results are exactly where you left them</b>
+          <p>Every page except the practice tests moved to a new design. Your account, scores and saved test links are untouched. What changed, what deliberately did not, and the bugs fixed on the way.</p>
+        </div>
+      </a>
+      <a class="pcard reveal" href="/news/multilevel-cefr-2026/">
+        <img src="/news/multilevel-cefr-2026/cover.png" alt="Multilevel (CEFR): the national exam that equals IELTS at DTM — and costs far less" width="1200" height="630" loading="lazy" decoding="async">
+        <div class="pcard-b">
+          <span class="pcard-m">exam update · 16 Jul 2026</span>
+          <b>Multilevel (CEFR): the national exam that equals IELTS at DTM — and costs far less</b>
+          <p>Uzbekistan&#x27;s national Multilevel exam issues CEFR-level certificates (B1/B2/C1). At DTM a Multilevel B2 has the same power as IELTS 5.5+: the maximum foreign-language score.</p>
+        </div>
+      </a>
+    <!-- HOME-NEWS:END -->
+    </div>
+    <p class="more reveal"><a href="/news/" data-i18n="newsAll">All posts &amp; articles →</a></p>
+  </div>
+</section>
+
 <section class="blk line">
   <div class="wrap">
     <div class="head reveal">
@@ -703,6 +754,7 @@ footer{border-top:1px solid var(--border);padding:3.5rem 0 2.5rem}
       toolsLede:'Konverter, muddatlar, speaking mavzular, writing lab, 40 kunlik challenge — butun tayyorgarlik bir joyda.',
       tHub:'Practice Hub', tAll:'Barcha testlar', tHubB:'Barcha Listening va Reading testlar bir qidiruvda.',
       tMock:'Full Mock', tMockB:'To‘liq imtihonni bir o‘tirishda yozing.',
+      newsKicker:'O‘qishga arziydi', newsTitle:'Bu oyda nima o‘zgardi.', newsLede:'Imtihon qoidalari, narxlar va grant muddatlari — har bir post manbasini va sanasini ko‘rsatadi.', newsAll:'Barcha postlar va maqolalar →',
       tWrite:'Writing Lab', tWriteB:'Task 1 va 2 yozing, AI\u2019dan darrov band feedback oling. Bepul, ro\u2019yxatsiz.',
       tSpeak:'Speaking Lab', tSpeakB:'1–3 qismlar, namuna javoblar.',
       tConvert:'Ball konverteri', tConvertB:'Xom balldan bandga — rasmiy jadvallar.',

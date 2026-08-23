@@ -68,7 +68,9 @@
 .list{display:grid;gap:.75rem}
 @media(min-width:760px){.list{grid-template-columns:1fr 1fr}}
 .post-card{display:flex;flex-direction:column;border-radius:6px;background:var(--surface);box-shadow:var(--card);padding:1.25rem 1.35rem;transition:box-shadow .2s}
-.post-card .thumb{width:calc(100% + 2.7rem);margin:-1.25rem -1.35rem .9rem;aspect-ratio:1200/630;object-fit:cover;border-radius:6px 6px 0 0;background:var(--elev);display:block}
+/* height:auto is load-bearing — without it the image keeps its natural 630px
+   height, aspect-ratio is ignored and object-fit crops a zoomed slice. */
+.post-card .thumb{display:block;width:calc(100% + 2.7rem);height:auto;aspect-ratio:1200/630;margin:-1.25rem -1.35rem .9rem;object-fit:cover;border-radius:6px 6px 0 0;background:var(--elev)}
 .post-card:hover{box-shadow:var(--card-hover)}
 .post-card.hide{display:none}
 .post-card .meta{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem .6rem;font-size:.75rem;color:var(--muted)}
@@ -150,3 +152,8 @@
 .prose tbody td{padding:.7rem .9rem;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.5}
 .prose tbody tr:last-child td{border-bottom:0}
 .prose tbody td:first-child{color:var(--muted);white-space:nowrap}
+
+/* Tools sit after the posts now: they are a utility, not the reason
+   anyone opened /news/. */
+.tools-after{margin:2.5rem 0 1rem;padding-top:1.75rem;border-top:1px solid var(--border)}
+.tools-after h2{font-size:.78rem;font-family:var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--subtle);font-weight:500;margin-bottom:.9rem}
