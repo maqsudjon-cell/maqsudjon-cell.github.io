@@ -363,6 +363,14 @@ footer{border-top:1px solid var(--border);padding:3.5rem 0 2.5rem}
   .cyc-word,.cyc-rail,.mp-fill{transition:none}
   .caret{animation:none}
 }
+.asked{margin-top:2.2rem;padding-top:1.5rem;border-top:1px solid var(--border)}
+.asked h3{font-family:var(--mono,ui-monospace,monospace);font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--subtle);font-weight:500;margin:0 0 .8rem}
+.asked ul{list-style:none;margin:0;padding:0;display:grid;gap:.15rem}
+.asked li{margin:0}
+.asked a{display:block;padding:.5rem 0;border-bottom:1px solid var(--border);color:var(--text);text-decoration:none;font-size:.95rem;line-height:1.45}
+.asked li:last-child a{border-bottom:0}
+.asked a:hover{color:var(--accent,#2dd4bf)}
+@media(min-width:720px){.asked ul{grid-template-columns:1fr 1fr;gap:0 2rem}}
 </style>
 </head>
 <body>
@@ -612,6 +620,17 @@ footer{border-top:1px solid var(--border);padding:3.5rem 0 2.5rem}
     <!-- HOME-NEWS:END -->
     </div>
     <p class="more reveal"><a href="/news/" data-i18n="newsAll">All posts &amp; articles →</a></p>
+    <div class="asked reveal" id="fs-asked">
+      <h3 data-i18n="askedTitle">Most asked this month</h3>
+      <ul>
+        <li><a href="/news/ielts-narxi-2026/">IELTS narxi 2026 — kompyuter va qog&#8216;oz uchun aniq summa</a></li>
+        <li><a href="/news/ielts-ukvi-vs-academic/">IELTS UKVI vs Academic — which version your visa route needs</a></li>
+        <li><a href="/news/ielts-dtm-maksimal-ball-2026/">IELTS 5.5+ and the maximum DTM foreign-language score</a></li>
+        <li><a href="/news/one-skill-retake-ozbekiston/">One Skill Retake — bitta ko&#8216;nikmani qayta topshirish</a></li>
+        <li><a href="/news/ielts-qayerda-topshiriladi/">IELTS qayerda topshiriladi — 14 ta shahar</a></li>
+        <li><a href="/news/ielts-sertifikat-2-yil/">IELTS sertifikati necha yil amal qiladi</a></li>
+      </ul>
+    </div>
   </div>
 </section>
 
@@ -758,7 +777,7 @@ footer{border-top:1px solid var(--border);padding:3.5rem 0 2.5rem}
       toolsLede:'Konverter, muddatlar, speaking mavzular, writing lab, 40 kunlik challenge — butun tayyorgarlik bir joyda.',
       tHub:'Practice Hub', tAll:'Barcha testlar', tHubB:'Barcha Listening va Reading testlar bir qidiruvda.',
       tMock:'Full Mock', tMockB:'To‘liq imtihonni bir o‘tirishda yozing.',
-      newsKicker:'O‘qishga arziydi', newsTitle:'Bu oyda nima o‘zgardi.', newsLede:'Imtihon qoidalari, narxlar va grant muddatlari — har bir post manbasini va sanasini ko‘rsatadi.', newsAll:'Barcha postlar va maqolalar →',
+      newsKicker:'O‘qishga arziydi', newsTitle:'Bu oyda nima o‘zgardi.', newsLede:'Imtihon qoidalari, narxlar va grant muddatlari — har bir post manbasini va sanasini ko‘rsatadi.', newsAll:'Barcha postlar va maqolalar →', askedTitle:'Eng ko‘p so‘raladiganlar',
       tWrite:'Writing Lab', tWriteB:'Task 1 va 2 yozing, AI\u2019dan darrov band feedback oling. Bepul, ro\u2019yxatsiz.',
       tSpeak:'Speaking Lab', tSpeakB:'1–3 qismlar, namuna javoblar.',
       tConvert:'Ball konverteri', tConvertB:'Xom balldan bandga — rasmiy jadvallar.',
