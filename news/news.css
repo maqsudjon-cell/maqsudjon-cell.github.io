@@ -56,6 +56,7 @@
 .list{display:grid;gap:.75rem}
 @media(min-width:760px){.list{grid-template-columns:1fr 1fr}}
 .post-card{display:flex;flex-direction:column;border-radius:6px;background:var(--surface);box-shadow:var(--card);padding:1.25rem 1.35rem;transition:box-shadow .2s}
+.post-card .thumb{width:calc(100% + 2.7rem);margin:-1.25rem -1.35rem .9rem;aspect-ratio:1200/630;object-fit:cover;border-radius:6px 6px 0 0;background:var(--elev);display:block}
 .post-card:hover{box-shadow:var(--card-hover)}
 .post-card.hide{display:none}
 .post-card .meta{display:flex;flex-wrap:wrap;align-items:center;gap:.4rem .6rem;font-size:.75rem;color:var(--muted)}
@@ -124,3 +125,5 @@
 .tg-banner .btn{flex:none}
 .sources{margin-top:2rem;font-size:.8rem;color:var(--subtle);line-height:1.8}
 .sources a{border-bottom:1px solid var(--border-strong)}
+
+.post .hero{width:100%;aspect-ratio:1200/630;object-fit:cover;border-radius:8px;margin:1.4rem 0 .4rem;box-shadow:var(--card);background:var(--elev);display:block}
