@@ -138,4 +138,15 @@
 .sources{margin-top:2rem;font-size:.8rem;color:var(--subtle);line-height:1.8}
 .sources a{border-bottom:1px solid var(--border-strong)}
 
-.post .hero{width:100%;aspect-ratio:1200/630;object-fit:cover;border-radius:8px;margin:1.4rem 0 .4rem;box-shadow:var(--card);background:var(--elev);display:block}
+/* Named .post-cover, not .hero: the news index already uses .hero for the
+   page header, and that rule’s padding was breaking the image box. */
+.post-cover{display:block;width:100%;height:auto;aspect-ratio:1200/630;object-fit:cover;border-radius:8px;margin:1.4rem 0 .4rem;box-shadow:var(--card);background:var(--elev)}
+
+/* ---------- tables inside a post ---------- */
+/* Wide tables scroll inside their own box so the page itself never does. */
+.prose .tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:1.4rem 0;border-radius:6px;box-shadow:var(--card)}
+.prose table{width:100%;border-collapse:collapse;font-size:.9rem;background:var(--surface);min-width:26rem}
+.prose thead th{text-align:left;font-family:var(--mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--subtle);font-weight:500;padding:.7rem .9rem;border-bottom:1px solid var(--border)}
+.prose tbody td{padding:.7rem .9rem;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.5}
+.prose tbody tr:last-child td{border-bottom:0}
+.prose tbody td:first-child{color:var(--muted);white-space:nowrap}
