@@ -86,16 +86,22 @@
     MODES.forEach(function (x) {
       var sec = $('#mode-' + x);
       if (sec) sec.hidden = (x !== m);
-      var btn = $('.modes button[data-m="' + x + '"]');
+      var btn = $('.chipbar button[data-m="' + x + '"]');
       if (btn) btn.classList.toggle('active', x === m);
     });
     if (push) { try { history.replaceState(null, '', m === 'news' ? '/news/' : '/news/#' + m); } catch (e) {} }
     if (m === 'articles') loadArticles();
     if (m === 'ideas') loadAdvice();
   }
-  $$('.modes button').forEach(function (b) {
-    b.addEventListener('click', function () { setMode(b.getAttribute('data-m'), true); });
+  $$('.chipbar button[data-m]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      $$('.chipbar button').forEach(function (x) { x.classList.remove('active'); });
+      b.classList.add('active');
+      setMode(b.getAttribute('data-m'), true);
+    });
   });
+  window.FSNews = window.FSNews || {};
+  window.FSNews.setMode = function (m) { setMode(m, false); };
 
   /* ---------- ARTICLES ---------- */
   var articlesLoaded = false;

@@ -119,30 +119,47 @@
 
 <main id="content">
 <section class="hero wrap">
-  <p class="kicker">Sourced · Dated · No fluff</p>
-  <h1>IELTS news <span class="fl">&amp;</span> deadlines</h1>
-  <p class="sub" data-i18n="newsSub">IELTS exam changes, fees and scholarship deadlines — for students in Uzbekistan. Every post names its source and its date.</p>
-  <p class="sub-meta"><a href="https://t.me/flarestamina" rel="noopener">t.me/flarestamina</a> <span data-i18n="newsFirst">gets each post first</span> · <a href="/news/feed.xml">rss ↗</a></p>
+  <p class="kicker">Sourced &middot; Dated &middot; No fluff</p>
+  <h1 data-i18n="newsH1">News</h1>
+  <p class="sub" data-i18n="newsSub">Exam changes, fees and grant deadlines for students in Uzbekistan.</p>
 </section>
 
+<div class="wrap">
+  <label class="nsearch">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.2-3.2"/></svg>
+    <input id="nq" type="search" autocomplete="off" placeholder="Search news, fees, grants" data-i18n-ph="searchPh" aria-label="Search posts">
+  </label>
+</div>
 
-<div class="modes wrap" role="tablist" aria-label="Section">
-  <button class="active" data-m="news">news</button>
-  <button data-m="articles">articles</button>
-  <button data-m="ideas">ideas &amp; advice</button>
+<div class="chipbar wrap" role="tablist" aria-label="Filter posts">
+  <button class="active" data-f="all"><span data-i18n="fAll">All</span><i data-c="all"></i></button>
+  <button data-f="exam-update"><span data-i18n="fExam">Exam</span><i data-c="exam-update"></i></button>
+  <button data-f="fees"><span data-i18n="fFees">Fees</span><i data-c="fees"></i></button>
+  <button data-f="deadline"><span data-i18n="fDead">Deadlines</span><i data-c="deadline"></i></button>
+  <button data-f="guide"><span data-i18n="fGuides">Guides</span><i data-c="guide"></i></button>
+  <button data-f="site-update"><span data-i18n="fSite">Site</span><i data-c="site-update"></i></button>
+  <span class="chip-sep" aria-hidden="true"></span>
+  <button data-m="articles" data-i18n="mArticles">Articles</button>
+  <button data-m="ideas" data-i18n="mIdeas">Ideas</button>
+</div>
+
+<div class="infocards wrap">
+  <a class="ic" href="/deadlines/">
+    <span class="ic-h"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/></svg><span data-i18n="icNext">Upcoming</span></span>
+    <b id="ic-next">&mdash;</b>
+  </a>
+  <a class="ic" href="/convert/">
+    <span class="ic-h"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13l-3-3M20 16H7l3 3"/></svg><span data-i18n="icConv">Score converter</span></span>
+    <b>IELTS 6.0 = B2</b>
+  </a>
+  <a class="ic" href="https://t.me/flarestamina" target="_blank" rel="noopener">
+    <span class="ic-h"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4 3 11l6 2 2 6z"/><path d="M9 13l12-9"/></svg> Telegram</span>
+    <b data-i18n="icTg">Each post lands here first</b>
+  </a>
 </div>
 
 <section id="mode-news">
-<div class="filters wrap" role="tablist" aria-label="Filter by category">
-  <button class="active" data-f="all">all</button>
-  <button data-f="deadline">deadlines</button>
-  <button data-f="exam-update">exam updates</button>
-  <button data-f="fees">fees</button>
-  <button data-f="guide" data-i18n="fGuide">guides</button>
-  <button data-f="site-update">site updates</button>
-  <span class="count" id="count">26 posts</span>
-</div>
-
+<p class="nresult" id="nresult" hidden></p>
 <div class="wrap">
   <a class="featured" href="/news/ielts-dtm-maksimal-ball-2026/" data-cat="exam-update">
     <div class="tag-row">
@@ -467,11 +484,19 @@
   </div>
 </footer>
 
+<!-- NEXT-DEADLINE:START -->
+<script>window.FS_NEXT_DEADLINES = [{"name": "DAAD EPOS 2027", "date": "2026-08-31"}, {"name": "IELTS Speaking topics rotati", "date": "2026-09-01"}, {"name": "GKS 2027", "date": "2026-09-15"}, {"name": "Chevening 2027/28", "date": "2026-10-06"}, {"name": "Erasmus Mundus 2027", "date": "2026-10-15"}];</script>
+<!-- NEXT-DEADLINE:END -->
 <script src="/assets/fs-auth.js"></script>
 <script>window.FS_UZ = {
- "fGuide": "qo‘llanmalar",
+ "newsH1": "Yangiliklar",
+ "searchPh": "Yangilik, narx, grant bo‘yicha qidiring",
+ "fAll": "Hammasi", "fExam": "Imtihon", "fFees": "Narxlar", "fDead": "Muddatlar", "fSite": "Sayt",
+ "mArticles": "Maqolalar", "mIdeas": "G‘oyalar",
+ "icNext": "Yaqinlashmoqda", "icConv": "Ball konverteri", "icTg": "Har bir post birinchi shu yerda",
+ "fGuides": "Qo‘llanmalar",
  "toolsH": "Shu postlar bilan ishlaydigan vositalar",
- "newsSub": "IELTS imtihonidagi o‘zgarishlar, narxlar va grant muddatlari — O‘zbekistondagi talabalar uchun. Har bir post manbasini va sanasini ko‘rsatadi.",
+ "newsSub": "Imtihon o‘zgarishlari, narxlar va grant muddatlari — O‘zbekistondagi talabalar uchun.",
  "newsFirst": "har bir postni birinchi bo‘lib oladi",
  "tsDead": "Muddatlar", "tsDeadB": "har bir grantgacha jonli hisob",
  "tsConv": "Ball konverteri", "tsConvB": "IELTS ↔ CEFR ↔ Multilevel ↔ TOEFL",
@@ -505,21 +530,92 @@
 <script src="/assets/paper.js?v=2"></script>
 <script>
 (function(){
-  var btns=document.querySelectorAll('.filters button');
-  var cards=document.querySelectorAll('[data-cat]');
-  var count=document.getElementById('count');
-  btns.forEach(function(b){
-    b.addEventListener('click',function(){
-      btns.forEach(function(x){x.classList.remove('active')});
-      b.classList.add('active');
-      var f=b.getAttribute('data-f'),n=0;
-      cards.forEach(function(c){
-        var show=(f==='all'||c.getAttribute('data-cat')===f);
-        c.classList.toggle('hide',!show);
-        if(show)n++;
-      });
-      if(count)count.textContent=n+(n===1?' post':' posts');
+  var bar    = document.querySelector('.chipbar');
+  if(!bar) return;
+  var fBtns  = bar.querySelectorAll('button[data-f]');
+  var cards  = document.querySelectorAll('#mode-news [data-cat]');
+  var input  = document.getElementById('nq');
+  var result = document.getElementById('nresult');
+  var filter = 'all', query = '';
+
+  /* counts come from the cards themselves, so they can never drift from the list */
+  (function(){
+    var n = {all:0};
+    cards.forEach(function(c){
+      var k = c.getAttribute('data-cat');
+      n[k] = (n[k]||0) + 1; n.all++;
     });
+    bar.querySelectorAll('i[data-c]').forEach(function(i){
+      var v = n[i.getAttribute('data-c')] || 0;
+      i.textContent = v || '';
+      if(!v){ var b = i.closest('button'); if(b) b.hidden = true; }
+    });
+  })();
+
+  function text(c){ return (c.textContent||'').toLowerCase(); }
+
+  function apply(){
+    var q = query.trim().toLowerCase(), n = 0;
+    cards.forEach(function(c){
+      var okCat = (filter === 'all' || c.getAttribute('data-cat') === filter);
+      var okQ   = (!q || text(c).indexOf(q) > -1);
+      var show  = okCat && okQ;
+      c.classList.toggle('hide', !show);
+      if(show) n++;
+    });
+    if(result){
+      if(q){
+        result.hidden = false;
+        result.textContent = n + (n === 1 ? ' post' : ' posts') + ' \u2014 \u201c' + query.trim() + '\u201d';
+      } else {
+        result.hidden = true;
+      }
+    }
+  }
+
+  fBtns.forEach(function(b){
+    b.addEventListener('click', function(){
+      bar.querySelectorAll('button').forEach(function(x){ x.classList.remove('active'); });
+      b.classList.add('active');
+      filter = b.getAttribute('data-f');
+      var news = document.getElementById('mode-news');
+      if(news && news.hidden && window.FSNews && window.FSNews.setMode) window.FSNews.setMode('news');
+      apply();
+    });
+  });
+
+  if(input){
+    var t;
+    input.addEventListener('input', function(){
+      clearTimeout(t);
+      t = setTimeout(function(){ query = input.value; apply(); }, 120);
+    });
+  }
+
+  /* next upcoming deadline, counted live from the date so it never goes stale */
+  var LIST = window.FS_NEXT_DEADLINES || [];
+  var el = document.getElementById('ic-next');
+  function pick(){
+    var now = new Date(); now.setHours(0,0,0,0);
+    for(var i=0;i<LIST.length;i++){
+      if(new Date(LIST[i].date + 'T00:00:00') >= now) return LIST[i];
+    }
+    return null;
+  }
+  function paintNext(){
+    var NEXT = pick();
+    if(!(el && NEXT)){ if(el) el.closest('.ic').hidden = true; return; }
+    var uz = document.documentElement.lang === 'uz';
+    var days = Math.ceil((new Date(NEXT.date + 'T00:00:00') - new Date()) / 86400000);
+    if(days < 0){ el.textContent = NEXT.name; return; }
+    var when = days === 0 ? (uz ? 'bugun' : 'today')
+             : days + (uz ? ' kun' : (days === 1 ? ' day' : ' days'));
+    el.textContent = NEXT.name + ' \u00b7 ' + when;
+  }
+  paintNext();
+  /* the language toggle rewrites the page, so repaint after it runs */
+  document.querySelectorAll('[data-lang]').forEach(function(b){
+    b.addEventListener('click', function(){ setTimeout(paintNext, 0); });
   });
 })();
 </script><script src="/assets/fs-auth.js"></script><script src="/news/community.js" defer></script><script data-goatcounter="https://flarestamina.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>

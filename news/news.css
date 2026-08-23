@@ -30,21 +30,43 @@
 .tools-strip b{display:block;font-weight:500;font-size:.9rem;letter-spacing:-.01em}
 .tools-strip span{display:block;margin-top:.15rem;font-size:.75rem;color:var(--muted);line-height:1.45}
 
-/* ---------- tabs + filters ---------- */
-.modes{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.1rem;border-bottom:1px solid var(--border);padding-bottom:.8rem}
-.modes button{height:2.2rem;padding:0 .95rem;border-radius:999px;border:1px solid var(--border);font-size:.85rem;color:var(--muted);transition:color .15s,border-color .15s,background .15s}
-.modes button:hover{color:var(--fg);border-color:var(--border-strong)}
-.modes button.active{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+/* ---------- search + chip bar ---------- */
+/* One control row instead of two: category chips carry their own count, and
+   the two content modes sit after a divider in the same row. */
+.nsearch{display:flex;align-items:center;gap:.6rem;margin:1.25rem 0 1rem;padding:0 1rem;height:3rem;
+  border-radius:999px;background:var(--surface);box-shadow:var(--card);color:var(--subtle)}
+.nsearch:focus-within{box-shadow:var(--card-hover)}
+.nsearch svg{flex:none}
+.nsearch input{flex:1;min-width:0;border:0;background:none;font:inherit;font-size:.95rem;color:var(--fg);outline:none}
+.nsearch input::placeholder{color:var(--subtle)}
+.nsearch input::-webkit-search-cancel-button{-webkit-appearance:none;appearance:none}
 
-/* Filters: a single swipeable row on a phone instead of two wrapped lines. */
-.filters{display:flex;flex-wrap:nowrap;align-items:center;gap:.4rem;margin-bottom:1.25rem;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
-.filters::-webkit-scrollbar{display:none}
-.filters>button{flex:0 0 auto}
-@media(min-width:760px){.filters{flex-wrap:wrap;overflow:visible}}
-.filters button{height:2rem;padding:0 .8rem;border-radius:999px;border:1px solid var(--border);font-size:.8rem;color:var(--muted);transition:color .15s,border-color .15s,background .15s}
-.filters button:hover{color:var(--fg);border-color:var(--border-strong)}
-.filters button.active{background:var(--fg);color:var(--bg);border-color:var(--fg)}
-.filters .count{margin-left:auto;font-family:var(--mono);font-size:.72rem;color:var(--subtle)}
+.chipbar{display:flex;flex-wrap:nowrap;align-items:center;gap:.45rem;margin-bottom:1.1rem;
+  overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.chipbar::-webkit-scrollbar{display:none}
+.chipbar>button{flex:0 0 auto;display:inline-flex;align-items:center;gap:.4rem;height:2.35rem;padding:0 .95rem;
+  border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--fg);
+  font-size:.88rem;line-height:1;transition:border-color .15s,background .15s}
+.chipbar>button:hover{border-color:var(--border-strong)}
+.chipbar>button.active{background:var(--fg);border-color:var(--fg);color:var(--bg)}
+.chipbar>button i{font-style:normal;font-family:var(--mono);font-size:.72rem;color:var(--subtle)}
+.chipbar>button.active i{color:var(--bg);opacity:.6}
+.chipbar>button i:empty{display:none}
+.chip-sep{flex:0 0 auto;width:1px;height:1.4rem;background:var(--border);margin:0 .3rem}
+@media(min-width:860px){.chipbar{flex-wrap:wrap;overflow:visible}}
+
+/* ---------- info cards ---------- */
+/* Two up even on a narrow phone; the third card takes the full width below,
+   so the row costs two lines instead of three. */
+.infocards{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:1.9rem}
+.infocards>.ic:nth-child(3){grid-column:1/-1}
+@media(min-width:860px){.infocards{grid-template-columns:repeat(3,1fr)}
+  .infocards>.ic:nth-child(3){grid-column:auto}}
+.ic{display:block;border-radius:8px;background:var(--surface);box-shadow:var(--card);padding:.85rem 1rem;transition:box-shadow .2s}
+.ic:hover{box-shadow:var(--card-hover)}
+.ic-h{display:flex;align-items:center;gap:.4rem;font-family:var(--mono);font-size:.72rem;letter-spacing:.04em;color:var(--subtle)}
+.ic b{display:block;margin-top:.45rem;font-weight:500;font-size:.95rem;letter-spacing:-.01em;color:var(--fg)}
+.nresult{margin:-.4rem 0 1.1rem;font-family:var(--mono);font-size:.78rem;color:var(--subtle)}
 
 /* ---------- category chips ---------- */
 .chip{display:inline-flex;align-items:center;height:1.7rem;padding:0 .6rem;border-radius:999px;border:1px solid var(--border);
