@@ -482,7 +482,10 @@ def author_page(author, center, link, items, featured=False):
 <meta property="og:description" content="{desc}">
 <meta property="og:url" content="{url}">
 <meta property="og:image" content="{site}/news/og.png?v=2">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{site}/news/og.png?v=2">
 <script type="application/ld+json">{ld}</script>
 </head>
 <body>

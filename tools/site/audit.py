@@ -129,6 +129,32 @@ def audit(path):
             add('WARN', f'heading jumps h{lvls[i-1]}→h{lvls[i]}')
             break
 
+    # /admin/ is passcode-gated and disallowed in robots.txt; /posts/ carries a
+    # noindex. Neither is ever shared or measured, so the two checks below would
+    # only ever produce noise there.
+    private = 'noindex' in (meta(s, 'robots') or '') or path.startswith('admin/')
+
+    # A second GoatCounter tag. count.js has no guard against being loaded twice,
+    # so every duplicate sends a second beacon and the page view is counted
+    # twice — that is what happened to all 26 news pages, where the article
+    # skeleton carried its own tag and shell.py added the footer one on top.
+    gc = s.count('gc.zgo.at/count.js')
+    if gc > 1:
+        add('ERR', f'GoatCounter loaded {gc}x — page views are double-counted')
+    elif gc == 0 and not private:
+        add('WARN', 'no GoatCounter tag')
+
+    # Social cards. Telegram is the site's biggest referrer and a link with no
+    # og:image renders there as bare text nobody taps. Width and height let it
+    # lay the card out before the image arrives; /writing/ had a 180x180 app
+    # icon standing in for a 1200x630 card.
+    if 'og:image' not in s and not private:
+        add('WARN', 'no og:image — shares as bare text')
+    elif 'og:image:width' not in s:
+        add('INFO', 'og:image with no declared width/height')
+    if 'og:image' in s and 'twitter:image' not in s:
+        add('INFO', 'no twitter:image')
+
     blocks = re.findall(r'<script type="application/ld\+json">(.*?)</script>', s, re.S)
     if not blocks:
         add('ERR', 'no JSON-LD')
