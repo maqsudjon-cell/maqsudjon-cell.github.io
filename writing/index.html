@@ -1441,54 +1441,82 @@ function makePDF(name,essay,feedback,taskLabel,qr,topic,image){
   d.line(M, y, PW-M, y);
   y+=30;
 
-  // ---- measure the response first: how the question block is sized, and whether
-  //      the sheet stays on one page, both depend on how long the essay is.
-  const FS=10.6, LH=15.6, PGAP=8;
-  d.setFont('helvetica','normal'); d.setFontSize(FS);
+  // ---- fit the whole sheet on one page.
+  //
+  // A student shows this to a teacher, prints it, or sends it on; one page is
+  // what it should be. So the layout is solved rather than assumed: measure the
+  // response, work out what is left for the chart, and step the body type down
+  // a little only if that is what it takes. It gives up and paginates only when
+  // even the tightest setting cannot hold — a 700-word essay genuinely needs
+  // two pages, and cramming it would be worse than turning the page.
+  const STEPS=[[10.6,15.6],[10.2,15.0],[9.8,14.4],[9.4,13.8]];
+  const PGAP=8, QLH=13.2, PAD=15, GAP_AFTER_Q=28, RESP_HEAD=20;
+  const innerW=CW-PAD*2;
   const paras=paragraphs(clean);
   const body=paras.length?paras:[clean.trim()];
-  const bodyLines=body.map(p=>d.splitTextToSize(p, CW));
-  const essayH=bodyLines.reduce((a,l)=>a+l.length*LH,0)+Math.max(0,body.length-1)*PGAP;
 
-  // ---- question block, full width: text first, then the chart at full width.
+  let qLines=[];
+  if(topicText){
+    d.setFont('helvetica','normal'); d.setFontSize(9.8);
+    qLines=d.splitTextToSize(topicText, innerW);
+  }
+  const textH=qLines.length?qLines.length*QLH:0;
+  let props=null;
+  if(image){ try{ props=d.getImageProperties(image); }catch(e){ props=null; } }
+
+  // When the question text is already on the page the picture repeats or
+  // supports it, so it may go small. When the picture IS the question — a Task 1
+  // chart with no typed prompt — it needs to stay readable.
+  const MIN_IMG = qLines.length ? 68 : 120;
+  const qTop = y + 8;
+
+  function layout(fs, lh){
+    d.setFont('helvetica','normal'); d.setFontSize(fs);
+    const lines=body.map(t=>d.splitTextToSize(t, CW));
+    const essayH=lines.reduce((a,l)=>a+l.length*lh,0)+Math.max(0,body.length-1)*PGAP;
+    const hasQ=!!(qLines.length||props);
+    const afterQ=hasQ ? qTop+PAD*2+textH+(props&&textH?12:0)+GAP_AFTER_Q : y;
+    const free=BOTTOM-afterQ-RESP_HEAD-essayH;
+    if(!props) return {fs,lh,lines,essayH,imgH:0,imgW:0,fits:free>=0};
+    const natural=Math.min(innerW/props.width, 1)*props.height;
+    const floor=Math.min(MIN_IMG, natural);
+    const want=Math.min(natural, free, PH*0.62);
+    // Never negative and never below the floor: `free` goes negative on a very
+    // long essay, and an unclamped height silently dropped the image from the
+    // PDF altogether.
+    const imgH=Math.max(want, floor);
+    return {fs,lh,lines,essayH,imgH,
+            imgW:props.width*(imgH/props.height),
+            fits:want>=floor};
+  }
+
+  let L=null;
+  for(const [fs,lh] of STEPS){ L=layout(fs,lh); if(L.fits) break; }
+  if(!L.fits && props){
+    // Nothing fits on one page, so the question gets a sheet of its own — and
+    // with a whole page to itself the chart should be large, not squeezed for
+    // a page break that is happening anyway.
+    const natural=Math.min(innerW/props.width, 1)*props.height;
+    L.imgH=Math.min(natural, PH*0.62, BOTTOM-(qTop+PAD*2+textH));
+    L.imgW=props.width*(L.imgH/props.height);
+  }
+  const FS=L.fs, LH=L.lh, bodyLines=L.lines;
+
+  // ---- question block, full width: text first, then the chart beneath it.
   //      The old export squeezed the chart into a 198pt column, which made every
   //      Task 1 table unreadable; here it gets the whole measure.
   if(topicText || image){
-    const pad=15, innerW=CW-pad*2;
-    let qLines=[];
-    if(topicText){
-      d.setFont('helvetica','normal'); d.setFontSize(9.8);
-      qLines=d.splitTextToSize(topicText, innerW);
-    }
-    const textH=qLines.length?qLines.length*13.2:0;
-    // Room the image may take: as much as is free once the eyebrow, the question
-    // text and the response heading are accounted for, capped at half the page
-    // and floored so a chart is never shrunk below legibility.
-    const blockTop=y+8+pad*2+textH;
-    const freeH=BOTTOM-(blockTop+28+20)-essayH;   // room left if the essay shares page 1
-    const roomyH=Math.min(PH*0.62, BOTTOM-blockTop);  // room if the question paper gets page 1 alone
-    let imgW=0, imgH=0, imgOK=false;
-    if(image){
-      try{
-        const props=d.getImageProperties(image);
-        // Shrink the chart only when shrinking actually keeps the sheet on one
-        // page. Once the essay is long enough to spill regardless, page 1 is the
-        // question paper — so the chart gets the room instead of being squeezed
-        // for a page break that happens anyway.
-        const capH=freeH>=200 ? Math.min(roomyH, freeH) : roomyH;
-        const sc=Math.min(innerW/props.width, capH/props.height);
-        imgW=props.width*sc; imgH=props.height*sc; imgOK=true;
-      }catch(e){ imgOK=false; }
-    }
-    const boxH=pad+textH+(imgOK?(textH?12:0)+imgH:0)+pad;
+    const imgOK = !!props && L.imgH > 0;
+    const imgW=L.imgW, imgH=L.imgH;
+    const boxH=PAD+textH+(imgOK?(textH?12:0)+imgH:0)+PAD;
     label(d, (taskName+' · QUESTION').toUpperCase(), M, y, 7.2, DIM);
     y+=8;
     d.setFillColor(250,250,249); d.setDrawColor(HAIR[0],HAIR[1],HAIR[2]); d.setLineWidth(0.7);
     d.rect(M, y, CW, boxH, 'FD');
-    let qy=y+pad+9;
+    let qy=y+PAD+9;
     if(qLines.length){
       d.setFont('helvetica','normal'); d.setFontSize(9.8); d.setTextColor(40,40,40);
-      qLines.forEach(l=>{ d.text(l, M+pad, qy); qy+=13.2; });
+      qLines.forEach(l=>{ d.text(l, M+PAD, qy); qy+=QLH; });
       qy+=imgOK?4:0;
     }
     if(imgOK){
@@ -1499,17 +1527,16 @@ function makePDF(name,essay,feedback,taskLabel,qr,topic,image){
         d.addImage(image,'JPEG',ix,qy,imgW,imgH);
       }catch(e){ /* unreadable image data — the question text still stands */ }
     }
-    y+=boxH+28;
-    // A chart tall enough to push the essay off the page turns the sheet into a
-    // real exam pair: question paper on page 1, answer booklet on page 2 —
-    // rather than orphaning two paragraphs under the table.
-    if(imgOK && y+20+essayH>BOTTOM && essayH>LH*6) y=newPage();
+    y+=boxH+GAP_AFTER_Q;
+    // Only when the solver could not make it fit: give the question its own
+    // sheet rather than orphaning two paragraphs under the chart.
+    if(!L.fits && y+RESP_HEAD+L.essayH>BOTTOM && L.essayH>LH*6) y=newPage();
   }
 
-  // ---- response, full width, one readable size, flowing over as many pages as
-  //      it needs. Nothing is auto-shrunk and nothing is cut.
+  // ---- response, full width, at the size the solver settled on. Nothing is
+  //      cut and nothing drops below 9.4pt.
   label(d,'YOUR RESPONSE', M, y, 7.2, DIM);
-  y+=20;
+  y+=RESP_HEAD;
   d.setFont('helvetica','normal'); d.setFontSize(FS); d.setTextColor(26,26,26);
   bodyLines.forEach((lines,pi)=>{
     lines.forEach(ln=>{
