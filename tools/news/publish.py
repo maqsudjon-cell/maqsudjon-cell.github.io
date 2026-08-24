@@ -66,8 +66,12 @@ def build_article(spec):
     s = re.sub(r'("isBasedOn"\s*:\s*")[^"]*(")', lambda m: m.group(1)+src0+m.group(2), s, count=1)
     s = re.sub(r'("citation"\s*:\s*")[^"]*(")', lambda m: m.group(1)+src0+m.group(2), s, count=1)
     s = re.sub(r'("image"\s*:\s*")[^"]*(")', lambda m: m.group(1)+cover+m.group(2), s, count=1)
+    # Truncate the RAW title, then escape. Slicing the escaped string cut a
+    # \uXXXX sequence in half once ("ko\u2018nikmani" -> "ko\u2"), which made the
+    # whole JSON-LD block unparseable and cost that article its structured data.
+    crumb = json.dumps(title if len(title) <= 60 else title[:59].rstrip()+'\u2026')[1:-1]
     s = re.sub(r'(\{ "@type": "ListItem", "position": 3, "name": ")[^"]*(")',
-               lambda m: m.group(1)+jt[:60]+m.group(2), s, count=1)
+               lambda m: m.group(1)+crumb+m.group(2), s, count=1)
 
     # visible article
     s = re.sub(r'<h1>.*?</h1>', '<h1>%s</h1>' % html.escape(title), s, count=1, flags=re.S)
@@ -90,8 +94,11 @@ def build_article(spec):
         cta.get('href', '/ielts-hub/'), html.escape(cta.get('title', 'Bepul mock test bilan bandingizni o‘lchang')),
         html.escape(cta.get('sub', 'Real imtihon formatida, natija darrov')), html.escape(cta.get('btn', 'Mashqni boshlash')))
     i = s.index('<div class="prose">') + len('<div class="prose">')
+    # j must land on the </div> that closes .prose, not on the one that closes
+    # the post-nav row just above it: body already emits its own post-nav, so
+    # walking back one more </div> left a stray closer in every generated
+    # article (five pages shipped with 19 </div> against 18 <div>).
     j = s.index('</div>\n</article>') if '</div>\n</article>' in s else s.index('</article>')
-    j = s.rindex('</div>', i, j)
     s = s[:i] + '\n    ' + body + s[j:]
     return s
 
