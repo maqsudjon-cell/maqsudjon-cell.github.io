@@ -179,3 +179,20 @@
    anyone opened /news/. */
 .tools-after{margin:2.5rem 0 1rem;padding-top:1.75rem;border-top:1px solid var(--border)}
 .tools-after h2{font-size:.78rem;font-family:var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--subtle);font-weight:500;margin-bottom:.9rem}
+
+/* Related articles. Every post used to be reachable only from the /news/ index
+   — 23 of 35 had exactly one internal link pointing at them, and none pointed
+   at each other, even though the topics run in obvious chains.
+
+   The block sits inside .prose, and paper.css loads after this sheet, so its
+   `.prose h2` (1.5rem) beat a plain `.related h2` at equal specificity. Every
+   selector here is tag-qualified and child-scoped: enough weight to win, and
+   no bare descendant rule that could reach into a nested component. */
+nav.related{margin:38px 0 26px;padding-top:22px;border-top:1px solid var(--border)}
+nav.related > h2{font-size:.78rem;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--subtle);margin:0 0 12px;line-height:1.4}
+nav.related > ul{list-style:none;margin:0;padding:0;display:grid;gap:0}
+nav.related > ul > li{margin:0}
+nav.related > ul > li > a{display:block;padding:10px 0;color:var(--fg);text-decoration:none;font-size:.95rem;line-height:1.45;border-bottom:1px solid var(--border)}
+nav.related > ul > li:last-child > a{border-bottom:0}
+nav.related > ul > li > a:hover{color:var(--muted)}
+nav.related > ul > li > a:focus-visible{outline:2px solid currentColor;outline-offset:2px;border-radius:3px}

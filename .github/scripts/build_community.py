@@ -187,7 +187,7 @@ HEAD_COMMON = '''<meta charset="UTF-8">
 <link rel="preload" href="/assets/fonts/inter-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/plex-mono-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/paper.css?v=1">
-<link rel="stylesheet" href="/news/news.css?v=2">'''
+<link rel="stylesheet" href="/news/news.css?v=3">'''
 
 HEADER = '''<a class="skip" href="#content" data-i18n="skip">Skip to content</a>
 
