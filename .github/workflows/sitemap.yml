@@ -34,8 +34,15 @@ jobs:
           except Exception:
               arts, authors = {}, []
 
+          # A site-wide pass over the practice pages does not change tests.json, so
+          # lastmod would still claim May while the page had been rewritten that
+          # morning — and lastmod is the main hint Google has that a page is worth
+          # re-crawling. Bump REWRITE whenever a pass touches the test pages
+          # themselves (titles, H1s, markup); leave it alone for ordinary edits.
+          REWRITE = '2026-08-24'   # titles, H1s and answer-box labels across 89 pages
+
           # stable lastmod (newest test date) so the file only changes when tests change
-          today = max([t.get('date') or '' for t in tests] + ['2026-07-03'])
+          today = max([t.get('date') or '' for t in tests] + ['2026-07-03', REWRITE])
           news_mod = max([p['date'] for p in posts] + ['2026-07-15'])
           urls = [
               ('https://flarestamina.com/', today, 'weekly', '1.0'),
@@ -51,7 +58,7 @@ jobs:
               ('https://flarestamina.com/deadlines/', '2026-07-17', 'weekly', '0.8'),
               ('https://flarestamina.com/plan/', '2026-07-18', 'monthly', '0.8'),
               ('https://flarestamina.com/speaking-topics/', '2026-07-17', 'monthly', '0.8'),
-              ('https://flarestamina.com/writing/', '2026-08-23', 'monthly', '0.9'),
+              ('https://flarestamina.com/writing/', REWRITE, 'monthly', '0.9'),
               ('https://flarestamina.com/teachers/', today, 'monthly', '0.8'),
               ('https://flarestamina.com/privacy/', today, 'yearly', '0.3'),
               ('https://flarestamina.com/wedding/', '2026-07-16', 'monthly', '0.7'),
@@ -84,7 +91,8 @@ jobs:
               if not u.startswith('https://flarestamina.com'):
                   continue  # skip external tools (e.g. pierics.com) — not our sitemap
               seen.add(u)
-              urls.append((u, t.get('date') or today, 'monthly', '0.7'))
+              # the page was rewritten on REWRITE even though its test date is older
+              urls.append((u, max(t.get('date') or '', REWRITE), 'monthly', '0.7'))
 
           out = ['<?xml version="1.0" encoding="UTF-8"?>',
                  '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
