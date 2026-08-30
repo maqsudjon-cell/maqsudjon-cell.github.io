@@ -343,7 +343,12 @@
     .pane.right { width:100%; height:54%; flex:1 1 auto; }
     .splitter { display:none; }
 
-    .footer { height:56px; padding:0 10px; }
+    /* three part blocks will not share 375px: scroll them instead of colliding */
+    .footer { height:56px; padding:0 10px; gap:18px; overflow-x:auto; scrollbar-width:none; }
+    .footer::-webkit-scrollbar { display:none; }
+    .fspacer { display:none; }
+    .part-block { flex:0 0 auto; gap:8px; }
+    .part-block.active { overflow:visible; }
     .part-block .plabel { font-size:12.5px; }
     .fnum { min-width:19px; font-size:12.5px; padding:0 3px; }
     .navarrows { right:12px; bottom:66px; gap:6px; }
