@@ -364,10 +364,13 @@ footer{border-top:1px solid var(--border);padding:3.5rem 0 2.5rem}
       <svg class="spark" viewBox="-13 -13 58 58" fill="currentColor" aria-hidden="true"><path d="M16 1.4 L17.85 13.55 L30.6 16 L17.85 18.45 L16 30.6 L14.15 18.45 L1.4 16 L14.15 13.55 Z"/></svg>
     </div>
     <p class="proof">
-      <!-- 121 = 72 Listening + 49 Reading individual test pages on flarestamina.com,
-           every one checked live on 2026-08-31. NOT the hub's 113, which counts 10
-           tools and 5 hub/lab pages as "tests". Re-check before changing it. -->
-      <span><b>121</b> <span data-i18n="proofRest">practice tests · Free · Tashkent</span></span>
+      <!-- 129 = 76 Listening + 53 Reading individual test pages, taken from the LIVE
+           flarestamina.com/ielts-hub/tests.json (145 rows) and every one requested
+           and confirmed 200 on 2026-08-31. Excludes the 10 Tools rows, the 5 hub and
+           lab rows, and /ctn/1listening-test.html, which 301s off-domain to ctnlc.uz.
+           Do not read the local ~/Downloads/ielts-hub/tests.json — it is stale.
+           Re-derive before changing this number. -->
+      <span><b>129</b> <span data-i18n="proofRest">practice tests · Free · Tashkent</span></span>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
     </p>
     <h1>
