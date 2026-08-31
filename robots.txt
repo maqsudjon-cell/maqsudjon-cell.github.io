@@ -12,6 +12,10 @@ Allow: /news/news.css
 # Private area, passcode-gated and unlinked.
 Disallow: /admin/
 
+# Homepage v2 work in progress. The page also carries a noindex meta tag, so
+# this line is belt-and-braces: it keeps the crawler from spending budget here.
+Disallow: /staging/
+
 # /posts/ carries a noindex instead of a Disallow on purpose: a disallowed URL
 # can still be indexed without its content, because the crawler never gets to
 # read the noindex.
