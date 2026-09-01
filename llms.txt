@@ -1,0 +1,69 @@
+# Flarestamina
+
+> Free IELTS practice for Uzbek and international students: 144 practice papers in real exam format — 78 Listening, 53 Reading (30 full three-passage papers and 23 single-passage drills), plus Writing and Speaking labs. Built and run in Tashkent by Maqsudjon Polatov. No sign-up, no ads, no paywall — the one paid thing is the full mock exam.
+
+## What the tests do
+
+- Listening papers run four sections and 40 questions with the audio played once, as in the exam. The answer key, the audio and the full transcript open on submit.
+- Reading papers run three passages and 40 questions in 60 minutes with no transfer time. The key and a question-by-question review open on submit.
+- Raw scores out of 40 convert to bands using the published tables; the same tables drive https://flarestamina.com/band-calculator/.
+- Writing Lab marks Task 1 and Task 2 against the four official criteria.
+- Speaking Lab holds the question bank with recording and feedback.
+
+## Start here
+
+- [Practice hub](https://flarestamina.com/ielts-hub/): every test, filterable.
+- [All tests](https://flarestamina.com/tests/): the full catalogue as plain links.
+- [Listening tests](https://flarestamina.com/ielts-listening-test/)
+- [Reading tests](https://flarestamina.com/ielts-reading-test/)
+- [Writing Lab](https://flarestamina.com/writing/)
+- [Speaking Lab](https://flarestamina.com/pangea8-speaking/)
+- [Cambridge IELTS 21](https://flarestamina.com/cambridge-21/): all four tests, all four papers.
+
+## In Uzbek
+
+- [Bosh sahifa](https://flarestamina.com/uz/)
+- [Listening — format, savol turlari, band jadvali](https://flarestamina.com/uz/listening/)
+- [Reading — savol turlari va vaqt taqsimoti](https://flarestamina.com/uz/reading/)
+- [Writing — Task 1 va Task 2](https://flarestamina.com/uz/writing/)
+- [Speaking — Part 1, 2, 3](https://flarestamina.com/uz/speaking/)
+
+## Tools
+
+- [Score converter](https://flarestamina.com/convert/): IELTS, CEFR, Uzbekistan Multilevel, TOEFL iBT, Duolingo.
+- [Band calculator](https://flarestamina.com/band-calculator/): raw score out of 40 to band.
+- [Study plan](https://flarestamina.com/plan/): weeks needed from your band to your target.
+- [Scholarship deadlines](https://flarestamina.com/deadlines/)
+- [Speaking topics](https://flarestamina.com/speaking-topics/)
+
+## Uzbekistan specifics
+
+Prices, test centres, One Skill Retake and certificate validity are covered in the news section, each figure carrying a link to the source it was read from. Prices change; the articles say when they were checked.
+
+- [News and deadlines](https://flarestamina.com/news/)
+
+## Cambridge IELTS 21
+
+- [Cambridge 21 Academic](https://flarestamina.com/cambridge-21/)
+- [Cambridge IELTS 21 Test 1 Listening](https://flarestamina.com/cambridge-21/t1-listening.html)
+- [Cambridge IELTS 21 Test 1 Reading](https://flarestamina.com/cambridge-21/t1-reading.html)
+- [Cambridge IELTS 21 Test 1 Speaking](https://flarestamina.com/cambridge-21/t1-speaking.html)
+- [Cambridge IELTS 21 Test 1 Writing](https://flarestamina.com/cambridge-21/t1-writing.html)
+- [Cambridge IELTS 21 Test 2 Listening](https://flarestamina.com/cambridge-21/t2-listening.html)
+- [Cambridge IELTS 21 Test 2 Reading](https://flarestamina.com/cambridge-21/t2-reading.html)
+- [Cambridge IELTS 21 Test 2 Speaking](https://flarestamina.com/cambridge-21/t2-speaking.html)
+- [Cambridge IELTS 21 Test 2 Writing](https://flarestamina.com/cambridge-21/t2-writing.html)
+- [Cambridge IELTS 21 Test 3 Listening](https://flarestamina.com/cambridge-21/t3-listening.html)
+- [Cambridge IELTS 21 Test 3 Reading](https://flarestamina.com/cambridge-21/t3-reading.html)
+- [Cambridge IELTS 21 Test 3 Speaking](https://flarestamina.com/cambridge-21/t3-speaking.html)
+- [Cambridge IELTS 21 Test 3 Writing](https://flarestamina.com/cambridge-21/t3-writing.html)
+- [Cambridge IELTS 21 Test 4 Listening](https://flarestamina.com/cambridge-21/t4-listening.html)
+- [Cambridge IELTS 21 Test 4 Reading](https://flarestamina.com/cambridge-21/t4-reading.html)
+- [Cambridge IELTS 21 Test 4 Speaking](https://flarestamina.com/cambridge-21/t4-speaking.html)
+- [Cambridge IELTS 21 Test 4 Writing](https://flarestamina.com/cambridge-21/t4-writing.html)
+
+## Optional
+
+- [Full mock exam](https://flarestamina.com/full-mock/): Listening, Reading and Writing in one sitting. This is the only paid part of the site.
+- [About the founder](https://flarestamina.com/founder/)
+- [Privacy](https://flarestamina.com/privacy/)

@@ -20,4 +20,8 @@ Disallow: /staging/
 # can still be indexed without its content, because the crawler never gets to
 # read the noindex.
 
+# A plain-language map of the site for assistants that read one.
+# chatgpt.com is the second referrer this week, level with Google.
+# https://flarestamina.com/llms.txt
+
 Sitemap: https://flarestamina.com/sitemap.xml
