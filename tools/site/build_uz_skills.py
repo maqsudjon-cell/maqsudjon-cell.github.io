@@ -269,10 +269,16 @@ def build(key, tests):
             {"@type": "ListItem", "position": 2, "name": "O‘zbekcha", "item": BASE + '/uz/'},
             {"@type": "ListItem", "position": 3, "name": p['h1'], "item": url}]}]}
 
-    alt = (f'<link rel="alternate" hreflang="uz" href="{url}">\n'
-           f'<link rel="alternate" hreflang="en" href="{BASE}/ielts-{p["slug"]}-test/">\n'
-           if key in ('listening', 'reading') else
-           f'<link rel="alternate" hreflang="uz" href="{url}">\n')
+    # Only Listening and Reading have a true English counterpart. /uz/writing/
+    # and /uz/speaking/ are guides; /writing/ and /pangea8-speaking/ are the
+    # tools themselves — not the same page in another language, so no pair.
+    if key in ('listening', 'reading'):
+        en = f'{BASE}/ielts-{p["slug"]}-test/'
+        alt = (f'<link rel="alternate" hreflang="uz" href="{url}">\n'
+               f'<link rel="alternate" hreflang="en" href="{en}">\n'
+               f'<link rel="alternate" hreflang="x-default" href="{en}">\n')
+    else:
+        alt = f'<link rel="alternate" hreflang="uz" href="{url}">\n'
 
     sib = [(f'/uz/{k}/', PAGES[k]['h1'].split(' — ')[0]) for k in PAGES if k != key]
     tools = [('/convert/', 'Ball konverteri'), ('/band-calculator/', 'Band kalkulyatori'),

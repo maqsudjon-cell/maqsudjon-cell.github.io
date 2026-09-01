@@ -181,8 +181,18 @@ def build(cat, cfg, tests):
 
     uz = dict(shell.CHROME_UZ)
     uz.update(UZ[cat])
+    # hreflang only counts when both sides declare it. /uz/listening/ and
+    # /uz/reading/ name these pages as their English counterpart, so these
+    # pages have to name them back or Google drops the pair entirely.
+    uz = {'Listening': 'listening', 'Reading': 'reading'}.get(cat)
+    alt = ''
+    if uz:
+        alt = (f'<link rel="alternate" hreflang="en" href="{url}">\n'
+               f'<link rel="alternate" hreflang="uz" href="https://flarestamina.com/uz/{uz}/">\n'
+               f'<link rel="alternate" hreflang="x-default" href="{url}">\n')
+
     html = (shell.head(title, desc, url, 'https://flarestamina.com/og-image.png?v=2',
-                       extra_head='<script type="application/ld+json">\n'
+                       extra_head=alt + '<script type="application/ld+json">\n'
                        + json.dumps(ld, ensure_ascii=False) + '\n</script>\n<style>\n'
                        + STYLE.strip() + '\n</style>\n')
             + shell.header() + body
