@@ -108,18 +108,26 @@ jobs:
           print('URLs:', len(urls))
           EOF
 
+      - name: Sync the hardcoded counts on the homepage
+        continue-on-error: true
+        run: python3 tools/site/sync_counts.py
+
+      - name: Rebuild /llms.txt
+        continue-on-error: true
+        run: python3 tools/site/build_llms.py
+
       - name: Commit if changed
         id: commit
         run: |
           # ignore lastmod-only churn on the two dynamic rows: compare URL sets too
-          if git diff --quiet sitemap.xml; then
+          if git diff --quiet sitemap.xml index.html llms.txt; then
             echo "sitemap unchanged"
             echo "changed=no" >> "$GITHUB_OUTPUT"
           else
             git config user.name "Flarestamina-bot"
             git config user.email "actions@users.noreply.github.com"
-            git add sitemap.xml
-            git commit -m "Auto-update sitemap"
+            git add sitemap.xml index.html llms.txt
+            git commit -m "Auto-update sitemap, counts and llms.txt"
             git push
             echo "changed=yes" >> "$GITHUB_OUTPUT"
           fi
