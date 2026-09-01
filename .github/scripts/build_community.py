@@ -422,7 +422,7 @@ def article_page(a, slug, author_slug):
 </body>
 </html>
 '''.format(lang=('uz' if a['lang'] == 'uz' else 'en'), head=HEAD_COMMON, title=escape(a['title']),
-           seo_title=escape(a['title'] if len(a['title']) > 50 else a['title'] + ' | Flarestamina'),
+           seo_title=escape(a['title']),
            desc=escape(desc), url=url, og=og, date=a['date'], author=escape(a['author']),
            ld=json.dumps(ld, ensure_ascii=False), header=HEADER, footer=FOOTER, toggle=toggle,
            ava=ava, center=('<i>%s</i>' % escape(a['center'])) if a['center'] else '',
@@ -472,7 +472,7 @@ def author_page(author, center, link, items, featured=False):
 <html lang="en">
 <head>
 {head}
-<title>{author} — IELTS articles | Flarestamina</title>
+<title>{author} — IELTS articles</title>
 <meta name="description" content="{desc}">
 <link rel="canonical" href="{url}">
 <meta name="robots" content="index, follow, max-image-preview:large">
