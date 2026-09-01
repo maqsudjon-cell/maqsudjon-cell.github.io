@@ -69,26 +69,34 @@ def main():
     tests = [t for t in load() if (t.get('url') or '').startswith('https://flarestamina.com')]
     n_lis = sum(1 for t in tests if t.get('category') == 'Listening')
     n_read = sum(1 for t in tests if t.get('category') == 'Reading')
-    n_all = len(tests)
+    # 'mashq testi' has to mean a practice test: the catalogue also carries
+    # converters and calculators, and counting those inflates the headline.
+    n_all = sum(1 for t in tests if t.get('category') != 'Tools')
+    n_cat = len(tests)
 
     title = f'Bepul IELTS testlari onlayn — {n_all} ta mashq testi | Flarestamina'
     desc = (f'{n_lis} ta Listening va {n_read} ta Reading mashq testi, Writing va Speaking Lab — '
             'bepul, ro‘yxatdan o‘tmasdan. Haqiqiy imtihon formati, darhol band ball va javob tahlili.')
 
     cards = [
-        ('/ielts-listening-test/', 'IELTS Listening testlari', str(n_lis),
+        ('/uz/listening/', 'IELTS Listening testlari', str(n_lis),
          'To‘rt bo‘lim, 40 ta savol, audio bir marta yangraydi — xuddi imtihondagidek. Tugatishingiz bilan band ball chiqadi.'),
-        ('/ielts-reading-test/', 'IELTS Reading testlari', str(n_read),
+        ('/uz/reading/', 'IELTS Reading testlari', str(n_read),
          'Academic Reading: uchta matn, 40 ta savol, 60 daqiqa. Oxirida qo‘shimcha vaqt yo‘q, xuddi haqiqiy imtihondagidek.'),
-        ('/writing/', 'IELTS Writing Lab', 'Task 1 + 2',
+        ('/uz/writing/', 'IELTS Writing Lab', 'Task 1 + 2',
          'Task 1 va Task 2 uchun yozib, tuzilma va til bo‘yicha band bahosini olasiz. Rejalar va namunaviy tuzilmalar bilan.'),
-        ('/pangea8-speaking/', 'IELTS Speaking Lab', '166 mavzu',
+        ('/uz/speaking/', 'IELTS Speaking Lab', '166 mavzu',
          'Part 1–3 savollari, ovozingizni yozib olish va band bo‘yicha izoh. Speaking mavzular rotatsiyasi alohida sahifada.'),
         ('/full-mock/', 'To‘liq mock imtihon', '3 bo‘lim',
          'Listening, Reading va Writing bir o‘tirishda — imtihon kuni qanday bo‘lsa shunday. Yagona pullik xizmat.'),
-        ('/tests/', 'Barcha testlar ro‘yxati', str(n_all),
+        ('/tests/', 'Barcha testlar ro‘yxati', str(n_cat),
          'Saytdagi har bir test va vosita bitta sahifada, bo‘limlarga ajratilgan holda.'),
     ]
+
+    skills = [('/uz/listening/', 'Listening — format va savol turlari'),
+              ('/uz/reading/', 'Reading — savol turlari va vaqt'),
+              ('/uz/writing/', 'Writing — Task 1 va Task 2'),
+              ('/uz/speaking/', 'Speaking — Part 1, 2, 3')]
 
     tools = [('/convert/', 'Ball konverteri'), ('/band-calculator/', 'Band kalkulyatori'),
              ('/plan/', 'O‘quv rejasi'), ('/deadlines/', 'Grant muddatlari'),
@@ -143,6 +151,14 @@ def main():
       <h2>Nima bor</h2>
       <div class="cards">
 {chr(10).join(f'        <a class="card" href="{h}"><h3>{escape(t)} <span>{escape(c)}</span></h3><p>{escape(d)}</p></a>' for h, t, c, d in cards)}
+      </div>
+    </section>
+
+    <section class="sec">
+      <h2>Bo‘limlar bo‘yicha qo‘llanma</h2>
+      <p>Har bir bo‘limning formati, savol turlari, xom balldan bandga o‘tish jadvali va ko‘p uchraydigan xatolar — o‘zbek tilida.</p>
+      <div class="linkrow">
+{chr(10).join(f'        <a class="chip" href="{h}">{escape(t)}</a>' for h, t in skills)}
       </div>
     </section>
 

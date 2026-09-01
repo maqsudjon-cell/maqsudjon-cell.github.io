@@ -68,10 +68,10 @@ PAGES = {
     'Reading': dict(
         slug='ielts-reading-test',
         title='IELTS Reading Practice Test — {n} Free Papers with Answers',
-        desc='{n} free IELTS Academic Reading practice tests with answers and instant band scores. Three passages, 40 questions, 60 minutes — no sign-up needed.',
+        desc='{full} full IELTS Academic Reading papers and {single} single-passage drills, free, with answers and instant band scores. Three passages, 40 questions, 60 minutes — no sign-up.',
         h1='IELTS Academic Reading practice tests',
         kicker='Reading',
-        lede='{n} Academic Reading papers, free and timed like the real thing: three passages, 40 questions, 60 minutes with no extra time at the end. Instant marking and a full answer review.',
+        lede='{full} full Academic Reading papers — three passages, 40 questions, 60 minutes, no extra time at the end — plus {single} shorter single-passage drills for when you have twenty minutes rather than an hour. Instant marking and a full answer review.',
         facts=[('Passages', 'Three, getting harder as you go, taken from the kind of books, journals and newspapers the real exam uses.'),
                ('Questions', '40 in total, spread across the three passages.'),
                ('Timing', '60 minutes for everything. Unlike Listening there is no extra transfer time, so answers go straight onto the sheet.'),
@@ -95,9 +95,16 @@ PAGES = {
 def build(cat, cfg, tests):
     rows = newest_first([t for t in tests if t.get('category') == cat])
     n = len(rows)
+    # Reading mixes full 40-question papers with single-passage drills. Calling
+    # all 53 of them "practice tests" overstates what a reader gets, so the
+    # copy carries the split.
+    part = sum(1 for t in rows
+               if '1 passage' in (t.get('difficulty') or '')
+               or '2 passages' in (t.get('difficulty') or ''))
+    counts = {'n': n, 'single': part, 'full': n - part}
     url = f'https://flarestamina.com/{cfg["slug"]}/'
-    title = cfg['title'].format(n=n)
-    desc = cfg['desc'].format(n=n)
+    title = cfg['title'].format(**counts)
+    desc = cfg['desc'].format(**counts)
 
     items, listitems = [], []
     for i, t in enumerate(rows, 1):
@@ -132,7 +139,7 @@ def build(cat, cfg, tests):
   <div class="wrap">
     <p class="kicker" data-i18n="kicker">{escape(cfg['kicker'])}</p>
     <h1 data-i18n="h1">{escape(cfg['h1'])}</h1>
-    <p class="lede" data-i18n="lede">{escape(cfg['lede'].format(n=n))}</p>
+    <p class="lede" data-i18n="lede">{escape(cfg['lede'].format(**counts))}</p>
     <div class="cta-row">
       <a class="btn solid" href="{escape(rows[0]['url']) if rows else '/ielts-hub/'}" data-i18n="ctaStart">Start the newest paper</a>
       <a class="btn ghost" href="/tests/" data-i18n="ctaAll">Every test</a>
