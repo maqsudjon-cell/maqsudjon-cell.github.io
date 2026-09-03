@@ -45,6 +45,10 @@
 .theme-btn{display:grid;place-items:center;width:2.2rem;padding:0}
 .theme-btn,.logout{height:2.2rem;padding:0 .9rem;border-radius:999px;border:1px solid var(--border);font-size:.82rem;color:var(--muted)}
 .theme-btn:hover,.logout:hover{color:var(--fg);border-color:var(--border-strong)}
+.moved{display:block;border-radius:8px;background:var(--surface);box-shadow:var(--card);padding:.9rem 1.1rem;margin-bottom:1.25rem;transition:box-shadow .2s}
+.moved:hover{box-shadow:var(--card-hover)}
+.moved b{display:block;font-size:.9rem;font-weight:500}
+.moved span{display:block;font-size:.8rem;color:var(--muted);margin-top:.15rem}
 .tabs{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.75rem;border-bottom:1px solid var(--border);padding-bottom:1rem}
 .tabs button{height:2.2rem;padding:0 .95rem;border-radius:999px;border:1px solid var(--border);font-size:.85rem;color:var(--muted);transition:color .15s,border-color .15s,background .15s}
 .tabs button:hover{color:var(--fg);border-color:var(--border-strong)}
@@ -97,6 +101,13 @@ h2.sec{font-size:.7rem;font-family:var(--mono);letter-spacing:.16em;text-transfo
   </header>
 
   <div class="wrap">
+    <!-- Bu panel Flarestamina bilan cheklangan. Barcha loyihalarning
+         statistikasi, grafiklari va admin havolalari /stats/ da — o'sha yerda
+         quyidagi Articles / Ideas / Promote bo'limlari ham bor, bitta parol. -->
+    <a class="moved" href="/stats/">
+      <b>Barcha loyihalar uchun to'liq panel → /stats/</b>
+      <span>Statistika, grafiklar va hamma admin havolalari bitta joyda. Shu bo'limlar ham o'sha yerda.</span>
+    </a>
     <nav class="tabs">
       <button class="active" data-tab="overview">Overview</button>
       <button data-tab="articles">Articles</button>
