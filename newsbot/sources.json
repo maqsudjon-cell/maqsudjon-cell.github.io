@@ -102,6 +102,14 @@
       "cap": 50
     },
     {
+      "id": "zamin-en",
+      "name": "Zamin.uz",
+      "url": "https://zamin.uz/en/rss.xml",
+      "weight": 2,
+      "local": true,
+      "cap": 50
+    },
+    {
       "id": "aniq",
       "name": "Aniq.uz",
       "url": "https://aniq.uz/rss",
