@@ -1,0 +1,4 @@
+Avtomat lenta xabarlari shu papkaga chiqadi (newsbot/src/build.mjs).
+Bu fayl papka git'da doim mavjud bo'lishi uchun turibdi: ish oqimidagi
+`git add news/x` bo'sh papkada "pathspec did not match any files" deb
+yiqilardi (2026-09-04 dagi birinchi yugurish shundan qulagan).
