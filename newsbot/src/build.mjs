@@ -16,6 +16,13 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const REPO = join(ROOT, "..");
 const OUT = join(REPO, "news");
 
+// Chiqishdagi VAQT MUHRLARI kontentdan kelib chiqishi shart, joriy vaqtdan
+// emas. Ilgari lenta.json ichida `generated: new Date()` turardi va shu
+// tufayli har yugurish — yangi xabar bo'lmasa ham — fayllarni o'zgartirib,
+// commit qilar edi: git tarixi shishardi, GitHub Pages bekorga qayta
+// qurilardi va bir vaqtda ishlagan ish oqimlari to'qnashardi.
+const FALLBACK = "2026-09-04T00:00:00.000Z";   // lenta bo'sh bo'lgandagi sana
+
 const KEEP = 120;          // lentada saqlanadigan xabarlar soni
 const ON_NEWS_INDEX = 4;   // /news/ bosh sahifasiga chiqadigan soni
 
@@ -233,7 +240,7 @@ function feed(posts) {
     <atom:link href="${SITE}/news/lenta/feed.xml" rel="self" type="application/rss+xml"/>
     <description>IELTS, til imtihonlari, viza va grant xabarlari o'zbek tilida.</description>
     <language>uz</language>
-    <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
+    <lastBuildDate>${new Date(posts[0]?.published || FALLBACK).toUTCString()}</lastBuildDate>
 ${items}
   </channel>
 </rss>
@@ -299,7 +306,7 @@ async function main() {
   // sitemap.yml shu fayldan o'qiydi.
   await writeFile(join(OUT, "lenta.json"), JSON.stringify({
     note: "Avtomat lenta indeksi. newsbot/src/build.mjs yozadi — qo'lda tahrirlamang.",
-    generated: new Date().toISOString(),
+    updated: (posts[0]?.published || FALLBACK).slice(0, 10),
     posts: posts.map((p) => ({
       slug: p.slug, title: p.title, date: isoDay(p.published), category: p.category,
     })),
