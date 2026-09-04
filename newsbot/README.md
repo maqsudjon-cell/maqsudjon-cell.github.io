@@ -7,7 +7,7 @@ qisqartiradi va statik sahifa qilib chiqaradi.
 Ish oqimi: `.github/workflows/newsbot.yml` (har 3 va 6 soatda + qo'lda).
 
 ```
-collect → filter → enrich → write → build → covers → push → telegram
+collect → filter → enrich → write → build → covers → sitemap → audit → push → indexnow
 ```
 
 | Qadam | Fayl | Nima qiladi |
@@ -18,7 +18,10 @@ collect → filter → enrich → write → build → covers → push → telegr
 | write | `src/write.mjs` | Gemini bilan o'zbekcha xabar yozadi → `data/posts.json` |
 | build | `src/build.mjs` | `news/x/<slug>/`, `news/lenta/`, RSS, `news/lenta.json` |
 | covers | `covers.py` | har xabarga muqova rasmi (Pillow, paper uslubi) |
-| telegram | `src/telegram.mjs` | yangi xabarni @flarestamina kanaliga |
+| sitemap | `.github/scripts/build_sitemap.py` | `sitemap.xml` + `news-sitemap.xml` |
+| audit | `src/audit.mjs` | SEO tekshiruvi (sarlavha, tavsif, canonical, JSON-LD, h1) |
+| indexnow | `tools/site/indexnow.py` | Bing va Yandex'ga yangi manzillar |
+| telegram | `src/telegram.mjs` | **hozircha o'chirilgan** — ish oqimida izohga olingan |
 
 ## Sozlash
 
@@ -79,6 +82,42 @@ GEMINI_API_KEY=... node newsbot/src/write.mjs
 node newsbot/src/build.mjs
 python3 newsbot/covers.py
 ```
+
+## SEO — nima avtomat, nima yo'q
+
+**Avtomat:**
+- `sitemap.xml` har nashrdan keyin qayta quriladi (ilgari kuniga bir marta edi).
+- `news-sitemap.xml` — Google News formati, faqat oxirgi 48 soatdagi xabarlar.
+  Bo'sh bo'lishi normal. `robots.txt` da ikkala sitemap ham ko'rsatilgan.
+- IndexNow — Bing, Yandex, Seznam, Naver bir necha daqiqada oladi.
+  Kalit fayli `/25435284112beaba0983abf75c9f8164.txt` — **o'chirmang**.
+- RSS: `/news/lenta/feed.xml`, `/news/` sahifasining `<head>` idan topiladi.
+- JSON-LD: har xabarda `NewsArticle` + `BreadcrumbList`, lenta sahifasida
+  `CollectionPage` + `ItemList`.
+- `src/audit.mjs` har yugurishda sarlavha va tavsif uzunligini, canonical'ni,
+  JSON-LD'ni, h1 sonini va ichki havolalarni tekshiradi.
+
+**Avtomat EMAS (va bo'lmaydi):**
+- Google Search Console'da "indekslashni so'rash" tugmasi. Uni dastur bilan
+  bosish Google qoidasiga zid, Indexing API esa faqat ish e'lonlari va
+  translyatsiyalar uchun. To'g'ri yo'l — sitemap (Google o'zi qayta o'qiydi)
+  va IndexNow. Sitemap bir marta yuborilsa yetadi.
+- Google Publisher Center: o'zbek tili ro'yxatda yo'q.
+
+## GoatCounter
+
+Kod `flarestamina`, har sahifada BITTA skript (dublikat pageview'ni
+ikkilantiradi — bu xato ilgari bo'lgan). Hodisalar:
+
+| Hodisa | Qachon |
+|---|---|
+| `lenta-manba` | o'quvchi asl manbaga o'tdi |
+| `lenta-cta` | mashq sahifasiga o'tdi |
+| `lenta-rss` | RSS ga o'tdi |
+| `lenta-filtr-<kat>` | lentada filtr bosildi |
+
+Sahifa ko'rish lentaning ishlayotganini ko'rsatmaydi — o'quvchi manbaga yoki
+mashqqa o'tdimi, muhimi shu.
 
 ## Bog'liq joylar
 

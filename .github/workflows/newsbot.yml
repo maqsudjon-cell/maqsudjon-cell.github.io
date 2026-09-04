@@ -73,13 +73,23 @@ jobs:
         continue-on-error: true
         run: python3 newsbot/covers.py
 
+      # Sitemap'ni shu yerda qayta quramiz, kunlik ish oqimini kutmasdan:
+      # yangi xabar sitemap'ga va Google News sitemap'iga darhol tushsin.
+      - name: Sitemap va news-sitemap
+        continue-on-error: true
+        run: python3 .github/scripts/build_sitemap.py
+
+      - name: SEO tekshiruvi
+        continue-on-error: true
+        run: node newsbot/src/audit.mjs
+
       # Push rad etilishi mumkin: yugurish davomida boshqa ish oqimi
       # (community.yml, sitemap.yml) repozitoriyaga yozsa asosimiz eskiradi.
       - name: Nashr qilish
         run: |
           git config user.name "Flarestamina-bot"
           git config user.email "actions@users.noreply.github.com"
-          git add newsbot/data news/x news/lenta news/lenta.json news/index.html
+          git add newsbot/data news/x news/lenta news/lenta.json news/index.html sitemap.xml news-sitemap.xml
           if git diff --staged --quiet; then
             echo "Yangi xabar yo'q — commit qilinmadi."
             exit 0
@@ -93,16 +103,37 @@ jobs:
             # dan qayta quramiz, aks holda sahifasi bor, lekin ro'yxatda yo'q
             # xabarlar paydo bo'ladi.
             node newsbot/src/build.mjs
-            git add newsbot/data news/x news/lenta news/lenta.json news/index.html
+            git add newsbot/data news/x news/lenta news/lenta.json news/index.html sitemap.xml news-sitemap.xml
             git diff --staged --quiet || git commit --amend --no-edit
             sleep 5
           done
           echo "Uch urinishdan keyin ham push o'tmadi."
           exit 1
 
-      - name: Telegram kanalga yuborish
+      # Google IndexNow'da qatnashmaydi, lekin Bing va Yandex bir necha
+      # daqiqada javob beradi. Yandex O'zbekistondagi talabalar orasida
+      # haqiqiy ulushga ega, shuning uchun bu ping arziydi.
+      - name: Qidiruv tizimlariga bildirish (IndexNow)
         continue-on-error: true
-        env:
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: node newsbot/src/telegram.mjs
+        run: |
+          URLS=$(node -e "
+            const fs = require('fs');
+            let r = { slugs: [] };
+            try { r = JSON.parse(fs.readFileSync('newsbot/data/last-run.json', 'utf8')); } catch {}
+            const u = (r.slugs || []).map(s => 'https://flarestamina.com/news/x/' + s + '/');
+            if (u.length) u.push('https://flarestamina.com/news/lenta/', 'https://flarestamina.com/news/');
+            console.log(u.join(' '));
+          ")
+          if [ -z "$URLS" ]; then echo "Yangi manzil yo'q — bildirilmadi."; exit 0; fi
+          python3 tools/site/indexnow.py $URLS
+
+      # Telegramga yuborish hozircha o'chirilgan (foydalanuvchi so'radi:
+      # avval sayt ishlab tursin). Yoqish uchun quyidagi izohni oching —
+      # newsbot/src/telegram.mjs va repo sekretlari tayyor turibdi.
+      #
+      # - name: Telegram kanalga yuborish
+      #   continue-on-error: true
+      #   env:
+      #     TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      #     TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      #   run: node newsbot/src/telegram.mjs

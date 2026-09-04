@@ -25,3 +25,8 @@ Disallow: /staging/
 # https://flarestamina.com/llms.txt
 
 Sitemap: https://flarestamina.com/sitemap.xml
+
+# Google News sahifalari uchun alohida sitemap. Faqat oxirgi 48 soatdagi
+# xabarlar turadi va har nashrdan keyin qayta quriladi — ko'pincha bo'sh
+# bo'lishi normal holat.
+Sitemap: https://flarestamina.com/news-sitemap.xml

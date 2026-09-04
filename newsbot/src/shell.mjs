@@ -154,6 +154,32 @@ export function footer() {
 
 <script src="/assets/paper.js?v=2"></script>
 <script data-goatcounter="https://flarestamina.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+<script>
+/* Lenta hodisalari. Sahifa ko'rishning o'zi lentaning ISHLAYOTGANINI
+   ko'rsatmaydi — o'quvchi manbaga o'tdimi yoki mashqqa o'tdimi, muhimi shu.
+   news/community.js dagi bilan bir xil shakl: path 'event/...', event: true. */
+(function () {
+  function ev(name) {
+    try {
+      if (window.goatcounter && goatcounter.count) {
+        goatcounter.count({ path: 'event/' + name, event: true });
+      }
+    } catch (e) { /* hisoblagich yo'q bo'lsa sahifa baribir ishlayveradi */ }
+  }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest('a');
+    if (!a) return;
+    if (a.closest('.source') || a.closest('.also-list')) return ev('lenta-manba');
+    if (a.classList.contains('cta-card')) return ev('lenta-cta');
+    if (a.getAttribute('href') === '/news/lenta/feed.xml') return ev('lenta-rss');
+  });
+  var bar = document.querySelector('.chipbar');
+  if (bar) bar.addEventListener('click', function (e) {
+    var b = e.target.closest('button[data-f]');
+    if (b) ev('lenta-filtr-' + b.dataset.f);
+  });
+})();
+</script>
 </body>
 </html>
 `;
