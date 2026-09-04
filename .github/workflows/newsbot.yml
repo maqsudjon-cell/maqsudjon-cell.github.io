@@ -19,6 +19,11 @@ on:
         description: "Bir yugurishda ko'pi bilan nechta xabar."
         required: false
         default: "5"
+      dry_run:
+        description: "Sinov rejimi: yozadi va quradi, lekin NASHR QILMAYDI."
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: write
@@ -86,6 +91,7 @@ jobs:
       # Push rad etilishi mumkin: yugurish davomida boshqa ish oqimi
       # (community.yml, sitemap.yml) repozitoriyaga yozsa asosimiz eskiradi.
       - name: Nashr qilish
+        if: github.event.inputs.dry_run != 'true'
         run: |
           git config user.name "Flarestamina-bot"
           git config user.email "actions@users.noreply.github.com"
@@ -127,10 +133,32 @@ jobs:
           echo "Uch urinishdan keyin ham push o'tmadi."
           exit 1
 
+      # Sinov rejimida hech narsa nashr etilmaydi, shuning uchun natijani
+      # faqat logdan ko'rish mumkin.
+      - name: Sinov natijasi
+        if: github.event.inputs.dry_run == 'true'
+        run: |
+          echo "SINOV REJIMI — nashr qilinmadi."
+          if [ -s newsbot/data/posts.json ]; then
+            node -e "
+              const p = require('./newsbot/data/posts.json');
+              console.log('Yozilgan xabarlar:', p.length);
+              for (const x of p.slice(0, 5)) {
+                console.log('---');
+                console.log('sarlavha:', x.title, '(' + x.title.length + ' belgi)');
+                console.log('kategoriya:', x.category, '| muhimlik:', x.importance, '| ball:', x.score);
+                console.log('xulosa:', x.summary);
+                for (const pt of x.points || []) console.log('  •', pt);
+                console.log('manba:', x.source.name, x.source.url);
+              }
+            "
+          fi
+
       # Google IndexNow'da qatnashmaydi, lekin Bing va Yandex bir necha
       # daqiqada javob beradi. Yandex O'zbekistondagi talabalar orasida
       # haqiqiy ulushga ega, shuning uchun bu ping arziydi.
       - name: Qidiruv tizimlariga bildirish (IndexNow)
+        if: github.event.inputs.dry_run != 'true'
         continue-on-error: true
         run: |
           URLS=$(node -e "
