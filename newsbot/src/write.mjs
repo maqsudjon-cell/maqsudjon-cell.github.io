@@ -99,8 +99,13 @@ async function geminiOnce(model, key, prompt) {
     }
   );
   if (res.status === 429) {
-    const err = new Error(`${model}: kunlik chegara tugadi`);
+    // Xabarni saqlab qolamiz: Gemini 429 ni ham DAQIQALIK, ham KUNLIK
+    // chegara uchun qaytaradi va ikkalasiga munosabat boshqacha —
+    // daqiqalikda kutish yordam beradi, kunlikda yo'q.
+    const body = (await res.text()).replace(/\s+/g, " ").slice(0, 300);
+    const err = new Error(`${model}: 429 — ${body}`);
     err.quota = true;
+    err.perMinute = /per\s*minute|PerMinute|GenerateRequestsPerMinute/i.test(body);
     throw err;
   }
   if (!res.ok) throw new Error(`${model} ${res.status}: ${(await res.text()).slice(0, 160)}`);
@@ -117,7 +122,12 @@ async function callGemini(prompt) {
       try { return await geminiOnce(model, key, prompt); }
       catch (e) {
         last = e;
-        if (e.quota) break;
+        if (e.quota) {
+          // Daqiqalik chegara — kutib, xuddi shu modelda bir marta qayta
+          // urinamiz. Kunlik chegarada kutish befoyda, keyingi modelga o'tamiz.
+          if (e.perMinute && attempt === 0) { await sleep(65_000); continue; }
+          break;
+        }
         if (attempt === 0) await sleep(3000);
       }
     }
