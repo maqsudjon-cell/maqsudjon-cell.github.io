@@ -121,19 +121,31 @@ async function geminiOnce(model, key, prompt) {
 async function callGemini(prompt) {
   const key = process.env.GEMINI_API_KEY;
   if (!key) throw new Error("GEMINI_API_KEY yo'q");
+
   let last;
+  // Kutib ko'rishga bir marta haqimiz bor. Kutgandan keyin ham 429 kelsa
+  // bu kunlik chegara: qolgan modellarni sinash ham befoyda, chunki bepul
+  // tarifda kvota LOYIHA bo'yicha hisoblanadi, model bo'yicha emas.
+  // (Ilgari har model uchun alohida kutilardi va yugurish bekorga uch
+  // daqiqa cho'zilardi.)
+  let waited = false;
+
   for (const model of GEMINI_MODELS) {
     for (let attempt = 0; attempt < 2; attempt++) {
       try { return await geminiOnce(model, key, prompt); }
       catch (e) {
         last = e;
         if (e.quota) {
-          // Daqiqalik chegara — kutib, xuddi shu modelda bir marta qayta
-          // urinamiz. Kunlik chegarada kutish befoyda, keyingi modelga o'tamiz.
-          if (e.perMinute && attempt === 0) {
-            console.error(`  . ${model}: daqiqalik chegara, 65 soniya kutamiz`);
+          if (e.perMinute && !waited && attempt === 0) {
+            console.error(`  . ${model}: chegara, 65 soniya kutamiz`);
+            waited = true;
             await sleep(65_000);
             continue;
+          }
+          if (waited) {
+            // Kutish yordam bermadi — kunlik chegara.
+            console.error(`  . ${last.message}`);
+            throw last;
           }
           break;
         }
