@@ -349,13 +349,16 @@ function scoreCluster(c) {
   s += Math.min(c.rel.act, 3) * 4;             // biror narsa o'zgargani
 
   s += Math.min(lead.weight, 5) * 2;           // manba ishonchi — kichik ulush
-  s += Math.min(c.items.length - 1, 4) * 7;    // nechta nashr yozgan
+  s += Math.min(c.items.length - 1, 3) * 7;    // nechta nashr yozgan
   if (c.items.some((i) => i.primary)) s += 6;
   if (c.items.some((i) => i.official)) s += 12; // rasmiy manba (GOV.UK, UzA)
   if (c.items.some((i) => i.local)) s += 16;    // o'zbek nashri yozgan
 
   if (UZ_GEO.test(text)) s += 26;               // matnda O'zbekiston bor
-  else if (FAR_GEO.test(text)) s -= 22;         // boshqa mamlakatga bog'langan
+  // Jarima qamrovdan KUCHLIROQ bo'lishi kerak. Eron sanksiyalari haqidagi
+  // xabarni yetti nashr yozgan va u faqat qamrov hisobiga 40 ball olib,
+  // o'zbek o'quvchisiga tegishli xabarlar bilan bir qatorga chiqib qolgan edi.
+  else if (FAR_GEO.test(text)) s -= 30;         // boshqa mamlakatga bog'langan
 
   if (TRADE.test(text)) s -= 18;
   if (c.rel.grant > 0 && !DEGREE.test(text)) s -= 16;   // o'qish haqida emas
