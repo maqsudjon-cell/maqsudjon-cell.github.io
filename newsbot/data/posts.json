@@ -1,5 +1,35 @@
 [
   {
+    "id": "f61716bb1d26",
+    "slug": "idp-ielts-future-award-2026-uchun-arizalar-ochiq-f61716",
+    "title": "IDP IELTS Future Award 2026 uchun arizalar ochiq",
+    "summary": "IDP IELTS Future Award 2026 uchun arizalar qabuli boshlandi. Ushbu mukofotlar 5,000 AQSH dollari miqdorida beriladi. Bu haqda After School Africa xabar berdi.",
+    "points": [
+      "IDP IELTS Future Award 2026.",
+      "Arizalar qabuli boshlandi.",
+      "Mukofot miqdori 5,000 AQSH dollari."
+    ],
+    "category": "deadline",
+    "importance": 4,
+    "score": 33.3,
+    "published": "2026-08-27T11:09:00.000Z",
+    "created": "2026-09-04T16:36:26.931Z",
+    "coverage": 2,
+    "source": {
+      "name": "After School Africa",
+      "url": "https://www.afterschoolafrica.com/120735/idp-ielts-future-award/",
+      "title": "IDP IELTS Future Award 2026: Applications Are Now Open for Awards of $5,000!",
+      "indirect": false
+    },
+    "also": [
+      {
+        "name": "LEADERSHIP Newspapers",
+        "url": "https://leadership.ng/applications-for-2026-uk-government-chevening-scholarships-now-open-2/"
+      }
+    ],
+    "model": "gemini"
+  },
+  {
     "id": "154e941fcef1",
     "slug": "ozbekistonda-ielts-imtihoni-narxi-oshdi-154e94",
     "title": "O‘zbekistonda IELTS imtihoni narxi oshdi",
