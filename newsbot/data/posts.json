@@ -1,5 +1,30 @@
 [
   {
+    "id": "154e941fcef1",
+    "slug": "ozbekistonda-ielts-imtihoni-narxi-oshdi-154e94",
+    "title": "O‘zbekistonda IELTS imtihoni narxi oshdi",
+    "summary": "O‘zbekistonda IELTS imtihonini topshirish narxi oshirildi. Endilikda Academic va General Training formatlari uchun to‘lov 2 million 798 ming so‘mni tashkil etadi. Avvalgi narxga nisbatan o‘sish 134 ming so‘m yoki qariyb 5 foizni tashkil etdi.",
+    "points": [
+      "Yangi narx 2 million 798 ming so‘mni tashkil etadi.",
+      "Imtihon narxi 134 ming so‘mga yoki 5 foizga oshdi.",
+      "Yangi tarif British Council rasmiy saytida e’lon qilindi."
+    ],
+    "category": "fees",
+    "importance": 5,
+    "score": 68,
+    "published": "2026-09-03T01:10:00.000Z",
+    "created": "2026-09-04T16:20:13.735Z",
+    "coverage": 1,
+    "source": {
+      "name": "Zamin.uz",
+      "url": "https://zamin.uz/en/society/220026-ielts-test-fee-increased-how-much-does-it-cost-now.html",
+      "title": "IELTS test fee increased: how much does it cost now?",
+      "indirect": false
+    },
+    "also": [],
+    "model": "gemini"
+  },
+  {
     "id": "76d89c3589e5",
     "slug": "pearson-pte-imtihoni-uchun-yangi-ai-platformasini-chiqardi-76d89c",
     "title": "Pearson PTE imtihoni uchun yangi AI platformasini chiqardi",

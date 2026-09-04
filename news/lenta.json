@@ -1,7 +1,13 @@
 {
   "note": "Avtomat lenta indeksi. newsbot/src/build.mjs yozadi — qo'lda tahrirlamang.",
-  "updated": "2026-08-27",
+  "updated": "2026-09-03",
   "posts": [
+    {
+      "slug": "ozbekistonda-ielts-imtihoni-narxi-oshdi-154e94",
+      "title": "O‘zbekistonda IELTS imtihoni narxi oshdi",
+      "date": "2026-09-03",
+      "category": "fees"
+    },
     {
       "slug": "pearson-pte-imtihoni-uchun-yangi-ai-platformasini-chiqardi-76d89c",
       "title": "Pearson PTE imtihoni uchun yangi AI platformasini chiqardi",
