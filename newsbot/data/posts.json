@@ -1,1 +1,27 @@
-[]
+[
+  {
+    "id": "76d89c3589e5",
+    "slug": "pearson-pte-imtihoni-uchun-yangi-ai-platformasini-chiqardi-76d89c",
+    "title": "Pearson PTE imtihoni uchun yangi AI platformasini chiqardi",
+    "summary": "Pearson kompaniyasi PTE imtihoniga tayyorlanuvchilar uchun yangi sun'iy intellekt platformasini ishga tushirdi. Ushbu vosita orqali foydalanuvchilar sinov testlarini topshirishlari va AI repetitordan tezkor baho hamda tavsiyalar olishlari mumkin.",
+    "points": [
+      "Yangi vosita PTE Academic va PTE Core imtihonlarini qo'llab-quvvatlaydi.",
+      "Platforma mobil qurilmalarda mustaqil tayyorlanish imkonini beradi.",
+      "Tizim rasmiy savollar va rasmiy baholash mezonlaridan foydalanadi."
+    ],
+    "category": "guide",
+    "importance": 3,
+    "score": 31.9,
+    "published": "2026-08-27T11:55:16.000Z",
+    "created": "2026-09-04T04:23:34.168Z",
+    "coverage": 1,
+    "source": {
+      "name": "MediaBrief",
+      "url": "https://mediabrief.com/pearson-launches-official-pte-ai-practice-for-test-takers/",
+      "title": "Pearson launches Official PTE AI Practice for test takers",
+      "indirect": false
+    },
+    "also": [],
+    "model": "gemini"
+  }
+]
