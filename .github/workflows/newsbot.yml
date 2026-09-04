@@ -1,0 +1,108 @@
+name: News lenta
+
+# IELTS va xorijda ta'lim xabarlarini yig'ib, o'zbekchada /news/lenta/ ga chiqaradi.
+#
+# JADVAL HAQIDA: GitHub cron'i kafolat bermaydi — o'lchandi, kuniga 8 tadan
+# 2-3 tasi ishlaydi. Shuning uchun urinishlar soni oshirilgan. Ortiqcha
+# yugurish arzon: yangi klaster bo'lmasa quvur LLM'ga umuman murojaat qilmaydi.
+on:
+  schedule:
+    - cron: "17 */3 * * *"
+    - cron: "47 */6 * * *"
+  workflow_dispatch:
+    inputs:
+      min_score:
+        description: "Nashr chegarasi (past = ko'proq xabar, past sifat). Standart 30."
+        required: false
+        default: "30"
+      max_per_run:
+        description: "Bir yugurishda ko'pi bilan nechta xabar."
+        required: false
+        default: "5"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: news-lenta
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Pillow (muqova rasmlari uchun)
+        run: pip install --quiet pillow
+
+      - name: Manbalarni yig'ish
+        run: node newsbot/src/collect.mjs
+
+      - name: Saralash va klasterlash
+        env:
+          MIN_SCORE: ${{ github.event.inputs.min_score || '30' }}
+          MAX_PER_RUN: ${{ github.event.inputs.max_per_run || '5' }}
+        run: node newsbot/src/filter.mjs
+
+      # Google News havolasini ochib, asl maqola matnini oladi. Busiz model
+      # sarlavhadan boshqa hech narsa ko'rmaydi.
+      - name: Asl maqolalarni o'qish
+        continue-on-error: true
+        run: node newsbot/src/enrich.mjs
+
+      - name: O'zbekchada yozish
+        env:
+          AI_PROVIDER: ${{ vars.AI_PROVIDER || 'gemini' }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node newsbot/src/write.mjs
+
+      - name: Sahifalarni qurish
+        run: node newsbot/src/build.mjs
+
+      - name: Muqova rasmlari
+        continue-on-error: true
+        run: python3 newsbot/covers.py
+
+      # Push rad etilishi mumkin: yugurish davomida boshqa ish oqimi
+      # (community.yml, sitemap.yml) repozitoriyaga yozsa asosimiz eskiradi.
+      - name: Nashr qilish
+        run: |
+          git config user.name "Flarestamina-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add newsbot/data news/x news/lenta news/lenta.json news/index.html
+          if git diff --staged --quiet; then
+            echo "Yangi xabar yo'q — commit qilinmadi."
+            exit 0
+          fi
+          git commit -m "lenta: $(date -u '+%Y-%m-%d %H:%M') UTC"
+          for i in 1 2 3; do
+            if git push; then echo "Nashr qilindi ($i-urinish)."; exit 0; fi
+            echo "Push rad etildi — asosni yangilab qayta urinamiz ($i/3)."
+            git pull --rebase -X theirs origin main || git rebase --abort
+            # news/ generatsiya qilinadi: rebase'dan keyin yakuniy posts.json
+            # dan qayta quramiz, aks holda sahifasi bor, lekin ro'yxatda yo'q
+            # xabarlar paydo bo'ladi.
+            node newsbot/src/build.mjs
+            git add newsbot/data news/x news/lenta news/lenta.json news/index.html
+            git diff --staged --quiet || git commit --amend --no-edit
+            sleep 5
+          done
+          echo "Uch urinishdan keyin ham push o'tmadi."
+          exit 1
+
+      - name: Telegram kanalga yuborish
+        continue-on-error: true
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: node newsbot/src/telegram.mjs

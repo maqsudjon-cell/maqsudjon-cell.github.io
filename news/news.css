@@ -196,3 +196,25 @@ nav.related > ul > li > a{display:block;padding:10px 0;color:var(--fg);text-deco
 nav.related > ul > li:last-child > a{border-bottom:0}
 nav.related > ul > li > a:hover{color:var(--muted)}
 nav.related > ul > li > a:focus-visible{outline:2px solid currentColor;outline-offset:2px;border-radius:3px}
+
+/* ── Lenta (avtomat xabarlar) ───────────────────────────────────────────
+   Ranglarni qattiq yozmang — faqat paper.css tokenlari. news.css tarixida
+   #d2d2d2 yozilgani uchun yorug' mavzuda matn ko'rinmay qolgan edi. */
+.bot-badge{font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--subtle);border:1px solid var(--border);border-radius:999px;padding:.2rem .45rem;white-space:nowrap}
+.lenta-strip{margin:2.25rem auto 0}
+.lenta-head{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin-bottom:.85rem}
+.lenta-head h2{font-size:1.05rem;display:flex;align-items:center;gap:.55rem}
+.lenta-head a{font-family:var(--mono);font-size:.74rem;color:var(--muted)}
+.lenta-head a:hover{color:var(--fg)}
+.lenta-rows{border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.lenta-row{display:flex;gap:.9rem;align-items:baseline;padding:.7rem .95rem;border-top:1px solid var(--border)}
+.lenta-row:first-child{border-top:0}
+.lenta-row time{flex:0 0 auto;font-family:var(--mono);font-size:.72rem;color:var(--subtle);min-width:5.5rem}
+.lenta-row .t{font-size:.9rem;line-height:1.5}
+.lenta-row:hover{background:var(--surface)}
+.lenta-row:hover .t{text-decoration:underline;text-underline-offset:3px}
+@media (max-width:560px){
+  .lenta-row{flex-direction:column;gap:.2rem}
+  .lenta-row time{min-width:0}
+}

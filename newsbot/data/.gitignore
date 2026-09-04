@@ -1,0 +1,5 @@
+# Har yugurishda qayta yaratiladi — saqlashning hojati yo'q va git tarixini
+# shishiradi (raw.json bir yugurishda ~300 KB).
+raw.json
+clusters.json
+*.tmp

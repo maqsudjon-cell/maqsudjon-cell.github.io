@@ -1,0 +1,198 @@
+{
+  "_note": "IELTS / xorijda ta'lim lentasi uchun manbalar. 2026-09-04 da hammasi tekshirildi: bu yerda faqat javob bergan va item qaytargan feedlar bor. Yangi feed qo'shishdan oldin curl bilan sinang — ielts.org, Cambridge English va British Council'da RSS YO'Q (404).",
+  "maxAgeHours": 336,
+  "feeds": [
+    {
+      "id": "pie",
+      "name": "The PIE News",
+      "url": "https://thepienews.com/feed/",
+      "weight": 3,
+      "primary": true
+    },
+    {
+      "id": "icef",
+      "name": "ICEF Monitor",
+      "url": "https://monitor.icef.com/feed/",
+      "weight": 3,
+      "primary": true
+    },
+    {
+      "id": "sintl",
+      "name": "Study International",
+      "url": "https://www.studyinternational.com/feed/",
+      "weight": 2
+    },
+    {
+      "id": "duolingo",
+      "name": "Duolingo",
+      "url": "https://blog.duolingo.com/rss/",
+      "weight": 3,
+      "primary": true
+    },
+    {
+      "id": "oppdesk",
+      "name": "Opportunity Desk",
+      "url": "https://opportunitydesk.org/feed/",
+      "weight": 2
+    },
+    {
+      "id": "govuk-visa",
+      "name": "GOV.UK",
+      "url": "https://www.gov.uk/search/all.atom?keywords=student+visa",
+      "weight": 5,
+      "official": true
+    },
+    {
+      "id": "govuk-elt",
+      "name": "GOV.UK",
+      "url": "https://www.gov.uk/search/all.atom?keywords=english+language+test",
+      "weight": 5,
+      "official": true
+    },
+    {
+      "id": "kun",
+      "name": "Kun.uz",
+      "url": "https://kun.uz/news/rss",
+      "weight": 3,
+      "local": true
+    },
+    {
+      "id": "gazeta",
+      "name": "Gazeta.uz",
+      "url": "https://www.gazeta.uz/uz/rss/",
+      "weight": 3,
+      "local": true
+    },
+    {
+      "id": "uza",
+      "name": "UzA",
+      "url": "https://uza.uz/uz/rss",
+      "weight": 3,
+      "local": true,
+      "official": true
+    },
+    {
+      "id": "xabar",
+      "name": "Xabar.uz",
+      "url": "https://xabar.uz/rss",
+      "weight": 2,
+      "local": true
+    },
+    {
+      "id": "review",
+      "name": "Review.uz",
+      "url": "https://review.uz/rss",
+      "weight": 2,
+      "local": true
+    },
+    {
+      "id": "sputnikuz",
+      "name": "Sputnik O'zbekiston",
+      "url": "https://uz.sputniknews.ru/export/rss2/archive/index.xml",
+      "weight": 1,
+      "local": true,
+      "cap": 60
+    }
+  ],
+  "googleNews": [
+    {
+      "id": "gn-ielts",
+      "q": "IELTS",
+      "when": "10d"
+    },
+    {
+      "id": "gn-ielts-uz",
+      "q": "IELTS Uzbekistan OR Tashkent",
+      "when": "30d",
+      "local": true
+    },
+    {
+      "id": "gn-providers",
+      "q": "\"British Council\" OR \"IDP Education\" OR \"Cambridge English\" test",
+      "when": "10d"
+    },
+    {
+      "id": "gn-tests",
+      "q": "TOEFL OR \"Duolingo English Test\" OR PTE Academic",
+      "when": "10d"
+    },
+    {
+      "id": "gn-visa",
+      "q": "\"student visa\" english language requirement",
+      "when": "10d"
+    },
+    {
+      "id": "gn-scholar",
+      "q": "Chevening OR \"Erasmus Mundus\" OR \"Stipendium Hungaricum\" OR \"Turkiye Burslari\" scholarship",
+      "when": "14d"
+    },
+    {
+      "id": "gn-scholar-uz",
+      "q": "стипендия OR грант Узбекистан студенты обучение",
+      "when": "14d",
+      "hl": "ru",
+      "gl": "UZ",
+      "local": true
+    },
+    {
+      "id": "gn-edu-uz",
+      "q": "O'zbekiston ta'lim grant xorijda o'qish",
+      "when": "14d",
+      "hl": "ru",
+      "gl": "UZ",
+      "local": true
+    }
+  ],
+  "_publishers": "Google News orqali kelgan xabarga nashrning obro'si beriladi. Ro'yxatda yo'q nashr 1 ball oladi.",
+  "publishers": {
+    "The PIE News": 5,
+    "ICEF Monitor": 5,
+    "Reuters": 5,
+    "BBC": 5,
+    "The Guardian": 4,
+    "Times Higher Education": 4,
+    "StudyTravel Network": 4,
+    "University World News": 4,
+    "The Australian": 3,
+    "ABC News": 3,
+    "CBC": 3,
+    "Study International": 2,
+    "Kun.uz": 3,
+    "Gazeta.uz": 3,
+    "UzA": 3,
+    "Daryo": 2,
+    "Spot.uz": 2,
+    "Xabar.uz": 2
+  },
+  "_blockDomains": "Bular IELTS haqida emas, IELTS so'zi bilan trafik yig'adigan saytlar. Google News 'IELTS' natijalarining chorak qismi shular.",
+  "blockDomains": [
+    "Shiksha",
+    "Careers360",
+    "Collegedunia",
+    "Leverage Edu",
+    "Yocket",
+    "GetMyUni",
+    "Global South Opportunities",
+    "Study Abroad Life",
+    "YouTube",
+    "TradingView",
+    "Simply Wall St",
+    "Zacks",
+    "Insider Monkey",
+    "MarketBeat",
+    "PW",
+    "Testbook",
+    "Jagran Josh",
+    "NDTV Education",
+    "Amber",
+    "AECC",
+    "IDP Live",
+    "fundsforNGOs",
+    "WANA News Agency",
+    "Opportunities For Africans",
+    "Scholarship Region",
+    "Youth Opportunities",
+    "Правда.Ру",
+    "Prospect"
+  ]
+}
