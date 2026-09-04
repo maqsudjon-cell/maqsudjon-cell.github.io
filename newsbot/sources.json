@@ -1,5 +1,5 @@
 {
-  "_note": "IELTS / xorijda ta'lim lentasi uchun manbalar. 2026-09-04 da hammasi tekshirildi: bu yerda faqat javob bergan va item qaytargan feedlar bor. Yangi feed qo'shishdan oldin curl bilan sinang — ielts.org, Cambridge English va British Council'da RSS YO'Q (404).",
+  "_note": "IELTS / xorijda ta'lim lentasi uchun manbalar. Bu yerda faqat javob bergan va item qaytargan feedlar bor — yangi feed qo'shishdan oldin curl bilan sinang. RSS YO'Q: ielts.org (404), Cambridge English, British Council, THE, daryo.uz, qalampir.uz. MUHIM: mahalliy xabarni Google News'ga tashlab qo'ymang — Google natijalarni IP bo'yicha o'zgartiradi va AQSh runner'ida O'zbekiston natijalari chiqmaydi (2026-09-04 da o'lchandi: IELTS narxi haqidagi xabar mahalliy kompyuterda topildi, CI'da topilmadi). Shuning uchun o'zbek nashrlari to'g'ridan-to'g'ri feed bilan olinadi.",
   "maxAgeHours": 336,
   "feeds": [
     {
@@ -92,6 +92,37 @@
       "weight": 1,
       "local": true,
       "cap": 60
+    },
+    {
+      "id": "zamin",
+      "name": "Zamin.uz",
+      "url": "https://zamin.uz/rss",
+      "weight": 2,
+      "local": true,
+      "cap": 50
+    },
+    {
+      "id": "aniq",
+      "name": "Aniq.uz",
+      "url": "https://aniq.uz/rss",
+      "weight": 2,
+      "local": true,
+      "cap": 30
+    },
+    {
+      "id": "uzdaily",
+      "name": "UzDaily",
+      "url": "https://uzdaily.uz/ru/rss",
+      "weight": 2,
+      "local": true
+    },
+    {
+      "id": "podrobno",
+      "name": "Podrobno.uz",
+      "url": "https://podrobno.uz/rss/",
+      "weight": 2,
+      "local": true,
+      "cap": 30
     }
   ],
   "googleNews": [
@@ -102,7 +133,7 @@
     },
     {
       "id": "gn-ielts-uz",
-      "q": "IELTS Uzbekistan OR Tashkent",
+      "q": "IELTS AND (Uzbekistan OR Tashkent OR Toshkent)",
       "when": "30d",
       "local": true
     },
@@ -162,7 +193,10 @@
     "UzA": 3,
     "Daryo": 2,
     "Spot.uz": 2,
-    "Xabar.uz": 2
+    "Xabar.uz": 2,
+    "Zamin.uz": 2,
+    "Aniq.uz": 2,
+    "UzDaily": 2
   },
   "_blockDomains": "Bular IELTS haqida emas, IELTS so'zi bilan trafik yig'adigan saytlar. Google News 'IELTS' natijalarining chorak qismi shular.",
   "blockDomains": [
