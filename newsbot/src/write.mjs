@@ -418,6 +418,15 @@ async function main() {
   seen.urls = seen.urls.slice(-12000);
   seen.titles = seen.titles.slice(-6000);
 
+  // Hech narsa yozilmagan bo'lsa fayllarga TEGMAYMIZ. Ilgari last-run.json
+  // ichiga har safar joriy vaqt yozilardi va bo'sh yugurish ham commit
+  // qilinardi: git tarixi shishardi, Pages bekorga qayta qurilardi va
+  // parallel ish oqimlari rebase to'qnashuvi berardi (shu sessiyada berdi).
+  if (!written.length) {
+    console.log("Yangi xabar yozilmadi — fayllar o'zgartirilmadi.");
+    return;
+  }
+
   posts = [...written, ...posts];
 
   await writeAtomic(join(ROOT, "data/posts.json"), JSON.stringify(posts, null, 2));
