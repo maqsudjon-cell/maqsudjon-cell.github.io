@@ -175,6 +175,24 @@ const TRADE = /\b(commencements?|enrol(l)?ment (forecast|projection|data)|market
 // o'quvchimiz (abituriyent, bakalavr, magistr) ariza bera olmaydi.
 const NOT_FOR_STUDENTS = /\b(postdoc\w*|phd fellowship|researchers? program|early[- ]career|professional fellowship|journalis\w+|entrepreneurs?|civil servants?|mid[- ]career)\b/i;
 
+// Imtihonni O'TKAZADIGAN tashkilotlar. Ular e'lon qilgan o'zgarish —
+// format, narx, vosita, markaz — to'g'ridan-to'g'ri imtihon topshiruvchiga
+// tegadi. Boshqa hech kimning IELTS mahsuloti bizga yangilik emas.
+const PROVIDER = /\b(british council|idp\b|idp education|cambridge (english|assessment)|pearson|ets\b|educational testing service|duolingo|ielts\.org|ofqual)\b/i;
+
+// Kitob, kurs, ilova e'lonlari. Rasmiy tashkilotdan bo'lsa — yangilik
+// ("Pearson launches Official PTE AI Practice"), o'quv markazidan bo'lsa —
+// reklama ("Banglay IELTS Launches Grammar Book").
+const PRODUCT = /\b(launch\w*|releas\w+|unveil\w+|introduc\w+)\b.{0,60}\b(book|course|app|platform|tool|programme|program|practice|service)\b/i;
+
+// Grant xabari faqat O'QISH haqida bo'lsa bizga tegishli.
+//
+// "Frontier Fellowship" AI maslahatchilarini tayyorlaydigan 12 haftalik
+// dastur — grant lug'ati bo'yicha o'tadi, lekin IELTS o'quvchisiga aloqasi
+// yo'q. O'lchandi: u 25 ball olib, haqiqatan foydali PTE xabaridan (20)
+// YUQORI turdi. Diplom/universitet belgisisiz grant xabari jarima oladi.
+const DEGREE = /\b(master'?s?|bachelor'?s?|undergraduate|postgraduate|phd|doctoral|degree|universit\w+|tuition|semester|academic year|study programme|study program|scholarship for students)\b|magistratura|bakalavr|universitet|stipendiya|o'qish/i;
+
 // Aksincha — aynan bizning o'quvchimizga atalgan.
 const FOR_STUDENTS = /\b(master'?s?|undergraduate|bachelor'?s?|graduate stud|school leavers?|abituriyent|talabalar|students? in uzbekistan)\b/i;
 
@@ -340,6 +358,9 @@ function scoreCluster(c) {
   else if (FAR_GEO.test(text)) s -= 22;         // boshqa mamlakatga bog'langan
 
   if (TRADE.test(text)) s -= 18;
+  if (c.rel.grant > 0 && !DEGREE.test(text)) s -= 16;   // o'qish haqida emas
+  if (PROVIDER.test(text)) s += 12;                     // imtihon egasining e'loni
+  else if (PRODUCT.test(text)) s -= 14;                 // begona mahsulot reklamasi
   if (NOT_FOR_STUDENTS.test(text)) s -= 14;
   if (FOR_STUDENTS.test(text)) s += 8;
   if (c.items.every((i) => i.indirect)) s -= 10; // faqat Google News havolasi
