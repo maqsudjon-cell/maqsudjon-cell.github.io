@@ -119,6 +119,20 @@ ikkilantiradi — bu xato ilgari bo'lgan). Hodisalar:
 Sahifa ko'rish lentaning ishlayotganini ko'rsatmaydi — o'quvchi manbaga yoki
 mashqqa o'tdimi, muhimi shu.
 
+## Kalitsiz sinash
+
+`GEMINI_BASE_URL` bilan modelni mahalliy soxta server bilan almashtirsa
+bo'ladi — butun zanjir (JSON tahlili, raqam tekshiruvi, takror to'sig'i,
+sahifa qurilishi) kalitsiz tekshiriladi:
+
+```bash
+GEMINI_BASE_URL=http://localhost:8899 GEMINI_API_KEY=sinov node newsbot/src/write.mjs
+```
+
+2026-09-04 da shu yo'l bilan to'rtta holat tekshirildi va hammasi to'g'ri
+ishladi: to'g'ri javob yozildi, to'qima raqam rad etildi, model "skip"
+degani o'tkazilmadi, takror xabar to'xtatildi.
+
 ## Bog'liq joylar
 
 - `news/index.html` — `<!-- LENTA:START -->` / `<!-- LENTA:END -->` orasini

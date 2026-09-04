@@ -80,9 +80,14 @@ const GEMINI_MODELS = (process.env.GEMINI_MODEL || "gemini-3.5-flash,gemini-2.5-
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
+// Manzilni almashtirish imkoni sinov uchun: kalitsiz ham butun zanjirni
+// (JSON tahlili, raqam tekshiruvi, takror to'sig'i, sahifa qurilishi)
+// mahalliy soxta server bilan tekshirib ko'rish mumkin.
+const GEMINI_BASE = process.env.GEMINI_BASE_URL || "https://generativelanguage.googleapis.com";
+
 async function geminiOnce(model, key, prompt) {
   const res = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`,
+    `${GEMINI_BASE}/v1beta/models/${model}:generateContent`,
     {
       method: "POST",
       headers: { "content-type": "application/json", "x-goog-api-key": key },
@@ -156,10 +161,49 @@ const call = PROVIDER === "anthropic" ? callAnthropic : callGemini;
 const asDecimal = (s) => s.replace(/\s/g, "").replace(/,/g, ".");
 const asDigits = (s) => s.replace(/[\s.,]/g, "");
 
+const SCALE = new Map(Object.entries({
+  thousand: 1e3, thousands: 1e3, ming: 1e3, mingga: 1e3, mingdan: 1e3,
+  "тысяч": 1e3, "тысячи": 1e3, "тысяча": 1e3, "тыс": 1e3,
+  million: 1e6, millions: 1e6, mln: 1e6, "млн": 1e6,
+  "миллион": 1e6, "миллиона": 1e6, "миллионов": 1e6,
+  billion: 1e9, billions: 1e9, milliard: 1e9, mlrd: 1e9,
+  "млрд": 1e9, "миллиард": 1e9, "миллиарда": 1e9,
+}));
+
+// Manbalar sonni so'z bilan yozadi: "2 million 798 thousand soms".
+// Bunday matnda "2798000" raqami UMUMAN uchramaydi va tekshiruv to'g'ri
+// xulosani ham rad etib yuboradi.
+//
+// O'lchandi (2026-09-04): IELTS narxi haqidagi xabar aynan shundan
+// tashlandi — model manbadagi "2 million 664 thousand soms" ni o'zbekchada
+// "2 664 000 so'm" deb to'g'ri yozgan edi, tekshiruv esa uni to'qima deb
+// hisobladi. So'zli shakllarni raqamga yoyamiz.
+export function spelledOutNumbers(text) {
+  const out = new Set();
+  const toks = text.toLowerCase().replace(/,/g, "").split(/[^\p{L}\p{N}.]+/u).filter(Boolean);
+  const isNum = (t) => /^\d+(\.\d+)?$/.test(t || "");
+
+  for (let i = 0; i < toks.length; i++) {
+    if (!isNum(toks[i])) continue;
+    let total = 0, j = i, used = false;
+    while (isNum(toks[j]) && SCALE.has(toks[j + 1])) {
+      total += parseFloat(toks[j]) * SCALE.get(toks[j + 1]);
+      used = true;
+      j += 2;
+    }
+    if (!used) continue;
+    // "2 million 798 thousand 500" kabi qoldiq
+    if (isNum(toks[j]) && !SCALE.has(toks[j + 1])) total += parseFloat(toks[j]);
+    out.add(String(Math.round(total)));
+  }
+  return out;
+}
+
 export function numbersAreGrounded(text, sourceText) {
   const nums = text.match(/\d[\d.,\s]*\d|\d/g) || [];
   const hayDecimal = asDecimal(sourceText);
   const hayDigits = asDigits(sourceText);
+  const spelled = spelledOutNumbers(sourceText);
 
   return nums.every((raw) => {
     const n = raw.replace(/[.,\s]+$/, "");
@@ -167,7 +211,7 @@ export function numbersAreGrounded(text, sourceText) {
     const dig = asDigits(n);
     if (dig.length <= 1) return true;             // "2 ta shahar" kabi mayda sonlar
     if (/^(19|20)\d\d$/.test(dig)) return true;   // yil
-    return hayDecimal.includes(dec) || hayDigits.includes(dig);
+    return hayDecimal.includes(dec) || hayDigits.includes(dig) || spelled.has(dig);
   });
 }
 
