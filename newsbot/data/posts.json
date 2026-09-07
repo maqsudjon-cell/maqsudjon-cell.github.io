@@ -1,5 +1,30 @@
 [
   {
+    "id": "ace02a676c03",
+    "slug": "ozbekistonda-bitiruvchilar-uchun-yangi-stipendiya-ace02a",
+    "title": "O‘zbekistonda bitiruvchilar uchun yangi stipendiya",
+    "summary": "O‘zbekiston Respublikasi Markaziy banki oliy ta’lim muassasalari bitiruvchilari uchun maxsus stipendiya dasturini e’lon qildi. Ushbu tashabbus talabalarni moliyaviy qo‘llab-quvvatlash va ularga amaliyot o‘tash imkoniyatini beradi.",
+    "points": [
+      "Markaziy bank bitiruvchilar uchun stipendiya dasturini e’lon qildi.",
+      "Dastur talabalarga moliyaviy yordam ko‘rsatishni nazarda tutadi.",
+      "G‘oliblar mamlakat bosh moliyaviy regulyatori tizimida amaliyot o‘taydi."
+    ],
+    "category": "guide",
+    "importance": 3,
+    "score": 44,
+    "published": "2026-09-07T03:05:00.000Z",
+    "created": "2026-09-07T12:27:19.770Z",
+    "coverage": 2,
+    "source": {
+      "name": "Zamin.uz",
+      "url": "https://zamin.uz/en/uzbekistan/220459-new-special-scholarship-program-announced-for-graduates-in-uzbekistan.html",
+      "title": "New special scholarship program announced for graduates in Uzbekistan",
+      "indirect": false
+    },
+    "also": [],
+    "model": "gemini"
+  },
+  {
     "id": "f61716bb1d26",
     "slug": "idp-ielts-future-award-2026-uchun-arizalar-ochiq-f61716",
     "title": "IDP IELTS Future Award 2026 uchun arizalar ochiq",
