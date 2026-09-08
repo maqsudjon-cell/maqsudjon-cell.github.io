@@ -1,7 +1,13 @@
 {
   "note": "Avtomat lenta indeksi. newsbot/src/build.mjs yozadi — qo'lda tahrirlamang.",
-  "updated": "2026-09-07",
+  "updated": "2026-09-08",
   "posts": [
+    {
+      "slug": "ozbekistonda-ijtimoiy-xodimlarga-sertifikat-beriladi-4d71d2",
+      "title": "O‘zbekistonda ijtimoiy xodimlarga sertifikat beriladi",
+      "date": "2026-09-08",
+      "category": "guide"
+    },
     {
       "slug": "ozbekistonda-bitiruvchilar-uchun-yangi-stipendiya-ace02a",
       "title": "O‘zbekistonda bitiruvchilar uchun yangi stipendiya",

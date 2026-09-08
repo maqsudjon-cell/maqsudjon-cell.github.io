@@ -1,5 +1,31 @@
 [
   {
+    "id": "4d71d2fbbff4",
+    "slug": "ozbekistonda-ijtimoiy-xodimlarga-sertifikat-beriladi-4d71d2",
+    "title": "O‘zbekistonda ijtimoiy xodimlarga sertifikat beriladi",
+    "summary": "O‘zbekistonda ijtimoiy xodimlarga malaka sertifikatini berish tartibi tasdiqlandi. Sertifikatlar xodimning ish staji va sinov natijalariga ko‘ra uchta toifada 5 yil muddatga beriladi. Sinovda qatnashish uchun kamida 36 akademik soatlik o‘quv kurslarida malaka oshirish zarur.",
+    "points": [
+      "Hukumat qarori 2026-yil 4-sentabrda qabul qilindi.",
+      "Malaka sertifikati 5 yil muddatga amal qiladi.",
+      "Sinovdan o‘tish uchun kamida 70 ball to‘plash lozim.",
+      "III toifa olish uchun kamida 1 yillik staj kerak."
+    ],
+    "category": "guide",
+    "importance": 2,
+    "score": 38,
+    "published": "2026-09-08T08:00:50.000Z",
+    "created": "2026-09-08T11:15:01.015Z",
+    "coverage": 1,
+    "source": {
+      "name": "Kun.uz",
+      "url": "https://kun.uz/news/2026/09/08/ijtimoiy-xodimlarga-5-yillik-malaka-sertifikati-beriladi",
+      "title": "Ijtimoiy xodimlarga 5 yillik malaka sertifikati beriladi.",
+      "indirect": false
+    },
+    "also": [],
+    "model": "gemini"
+  },
+  {
     "id": "ace02a676c03",
     "slug": "ozbekistonda-bitiruvchilar-uchun-yangi-stipendiya-ace02a",
     "title": "O‘zbekistonda bitiruvchilar uchun yangi stipendiya",
