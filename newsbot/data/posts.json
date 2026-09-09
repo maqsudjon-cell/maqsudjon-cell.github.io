@@ -1,5 +1,35 @@
 [
   {
+    "id": "cc989586f4d4",
+    "slug": "commonwealth-magistratura-granti-uchun-arizalar-ochildi-cc9895",
+    "title": "Commonwealth magistratura granti uchun arizalar ochildi",
+    "summary": "Buyuk Britaniya Tashqi ishlar, hamdo'stlik va rivojlanish idorasi (FCDO) tomonidan moliyalashtiriladigan Commonwealth magistratura stipendiyasiga arizalar qabul qilinmoqda. Dastur Buyuk Britaniyada o'qish xarajatlarini qoplay olmaydigan iqtidorli shaxslarga mo'ljallangan.",
+    "points": [
+      "Hujjat topshirish muddati 2026-yil 20-oktabrgacha davom etadi.",
+      "Dastur Buyuk Britaniya hukumati (FCDO) tomonidan to'liq moliyalashtiriladi.",
+      "Grant 2027/2028-o'quv yili magistratura bosqichi uchun beriladi."
+    ],
+    "category": "deadline",
+    "importance": 4,
+    "score": 57,
+    "published": "2026-09-09T11:40:07.000Z",
+    "created": "2026-09-09T11:50:59.000Z",
+    "coverage": 4,
+    "source": {
+      "name": "Opportunity Desk",
+      "url": "https://opportunitydesk.org/2026/09/09/commonwealth-masters-scholarships-2027-2028",
+      "title": "Commonwealth Master’s Scholarships 2027/2028 (Fully-funded)",
+      "indirect": false
+    },
+    "also": [
+      {
+        "name": "TechJuice",
+        "url": "https://www.techjuice.pk/hec-announces-fully-funded-and-merit-scholarships-at-omans-gutech-for-2026-intake/"
+      }
+    ],
+    "model": "gemini"
+  },
+  {
     "id": "4d71d2fbbff4",
     "slug": "ozbekistonda-ijtimoiy-xodimlarga-sertifikat-beriladi-4d71d2",
     "title": "O‘zbekistonda ijtimoiy xodimlarga sertifikat beriladi",
