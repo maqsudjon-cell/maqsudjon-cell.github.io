@@ -1,5 +1,30 @@
 [
   {
+    "id": "9c272a680143",
+    "slug": "xitoyda-magistratura-uchun-toliq-grant-elon-qilindi-9c272a",
+    "title": "Xitoyda magistratura uchun to'liq grant e'lon qilindi",
+    "summary": "Pekindagi Yenching akademiyasi 2027-yilgi magistratura dasturi uchun to'liq grantlarni e'lon qildi. Dasturga Xitoy va xorijdan talabalar qabul qilinadi. Arizalar topshirish muddati 2026-yil 30-noyabrgacha davom etadi.",
+    "points": [
+      "Hujjat topshirish muddati 2026-yil 30-noyabrgacha.",
+      "Akademiya har yili 120 ga yaqin talabalarni qabul qiladi.",
+      "Xalqaro talabalar jami talabalarning taxminan 75 foizini tashkil etadi."
+    ],
+    "category": "deadline",
+    "importance": 4,
+    "score": 36,
+    "published": "2026-09-09T12:38:30.000Z",
+    "created": "2026-09-09T16:36:24.791Z",
+    "coverage": 1,
+    "source": {
+      "name": "Opportunity Desk",
+      "url": "https://opportunitydesk.org/2026/09/09/yenching-academy-at-peking-university-2027-scholarship",
+      "title": "Yenching Academy at Peking University 2027 – Full Scholarship for Master’s Study in China",
+      "indirect": false
+    },
+    "also": [],
+    "model": "gemini"
+  },
+  {
     "id": "cc989586f4d4",
     "slug": "commonwealth-magistratura-granti-uchun-arizalar-ochildi-cc9895",
     "title": "Commonwealth magistratura granti uchun arizalar ochildi",
