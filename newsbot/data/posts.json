@@ -1,5 +1,30 @@
 [
   {
+    "id": "c6a6fff1d22f",
+    "slug": "buyuk-britaniyada-oqish-vizasi-arizalari-16-foizga-kamaydi-c6a6ff",
+    "title": "Buyuk Britaniyada o'qish vizasi arizalari 16 foizga kamaydi",
+    "summary": "Buyuk Britaniya Ichki ishlar vazirligi ma'lumotlariga ko'ra, 2026-yil avgustigacha bo'lgan bir yilda o'qish vizasi uchun arizalar soni 16 foizga kamaygan. Ushbu davrda jami 360,700 ta ariza topshirilgan. Shuningdek, talabalarning qaramog'idagilaridan kelgan arizalar soni ham 22 foizga pasaygan.",
+    "points": [
+      "Buyuk Britaniyada o'qish vizasi arizalari bir yilda 16 foizga kamaydi.",
+      "2026-yil avgustigacha jami 360,700 ta viza arizasi topshirilgan.",
+      "Talabalarning qaramog'idagilaridan kelgan arizalar 22 foizga kamaygan."
+    ],
+    "category": "guide",
+    "importance": 3,
+    "score": 36,
+    "published": "2026-09-10T17:12:53.000Z",
+    "created": "2026-09-10T21:12:33.504Z",
+    "coverage": 1,
+    "source": {
+      "name": "The PIE News",
+      "url": "https://thepienews.com/august-applications-for-uk-study-visas-falls-16-in-just-a-year",
+      "title": "August applications for UK study visas fall 16% in just a year",
+      "indirect": false
+    },
+    "also": [],
+    "model": "gemini"
+  },
+  {
     "id": "9c272a680143",
     "slug": "xitoyda-magistratura-uchun-toliq-grant-elon-qilindi-9c272a",
     "title": "Xitoyda magistratura uchun to'liq grant e'lon qilindi",
