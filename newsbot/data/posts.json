@@ -1,5 +1,30 @@
 [
   {
+    "id": "a12d459b0769",
+    "slug": "ozbekistonda-ajrimda-yarashish-muddati-berilmasligi-taklif-e-a12d45",
+    "title": "O‘zbekistonda ajrimda yarashish muddati berilmasligi taklif etildi",
+    "summary": "O‘zbekistonda oilaviy munosabatlarni tartibga soluvchi qonun loyihasi ishlab chiqildi. Unga ko‘ra, muayyan sabablar tufayli ajrashish jarayonida er-xotinga yarashish muddati berilmasligi taklif qilinmoqda.",
+    "points": [
+      "Loyiha hozirda Prezident Administratsiyasi tomonidan ko‘rib chiqilmoqda.",
+      "Zo‘ravonlik, alkogolizm va OIV yarashish muddati berilmasligiga asos bo‘lishi mumkin.",
+      "2026-yilning dastlabki yetti oyida 29 353 ta ajrim qayd etildi."
+    ],
+    "category": "guide",
+    "importance": 1,
+    "score": 66,
+    "published": "2026-09-11T16:09:00.000Z",
+    "created": "2026-09-11T20:57:33.055Z",
+    "coverage": 1,
+    "source": {
+      "name": "Zamin.uz",
+      "url": "https://zamin.uz/en/uzbekistan/220977-no-reconciliation-period-may-be-granted-in-divorces-new-grounds-are-being-proposed.html",
+      "title": "No reconciliation period may be granted in divorces: new grounds are being proposed",
+      "indirect": false
+    },
+    "also": [],
+    "model": "gemini"
+  },
+  {
     "id": "c6a6fff1d22f",
     "slug": "buyuk-britaniyada-oqish-vizasi-arizalari-16-foizga-kamaydi-c6a6ff",
     "title": "Buyuk Britaniyada o'qish vizasi arizalari 16 foizga kamaydi",

@@ -1,7 +1,13 @@
 {
   "note": "Avtomat lenta indeksi. newsbot/src/build.mjs yozadi — qo'lda tahrirlamang.",
-  "updated": "2026-09-10",
+  "updated": "2026-09-11",
   "posts": [
+    {
+      "slug": "ozbekistonda-ajrimda-yarashish-muddati-berilmasligi-taklif-e-a12d45",
+      "title": "O‘zbekistonda ajrimda yarashish muddati berilmasligi taklif etildi",
+      "date": "2026-09-11",
+      "category": "guide"
+    },
     {
       "slug": "buyuk-britaniyada-oqish-vizasi-arizalari-16-foizga-kamaydi-c6a6ff",
       "title": "Buyuk Britaniyada o'qish vizasi arizalari 16 foizga kamaydi",
