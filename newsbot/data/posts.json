@@ -1,5 +1,30 @@
 [
   {
+    "id": "9d2434d746c3",
+    "slug": "avstraliya-ayrim-davlatlar-uchun-til-talabini-bekor-qildi-9d2434",
+    "title": "Avstraliya ayrim davlatlar uchun til talabini bekor qildi",
+    "summary": "Avstraliya Ichki ishlar vazirligi talaba vizasi uchun ingliz tili imtihoni natijalarini topshirishdan ozod etilgan davlatlarni tasdiqladi. Imtiyoz AQSH, Buyuk Britaniya, Kanada, Yangi Zelandiya va Irlandiya fuqarolariga tegishli. Shuningdek, ayrim kurs talabalari ham ozod qilinadi.",
+    "points": [
+      "Imtiyoz 5 ta ingliz tilli davlat fuqarolariga amal qiladi.",
+      "ELICOS kurslari talabalari ham til hujjati topshirishdan ozod etiladi.",
+      "AASES dasturi ishtirokchilari ham ushbu imtiyozdan foydalanishi mumkin."
+    ],
+    "category": "guide",
+    "importance": 3,
+    "score": 35,
+    "published": "2026-09-12T15:46:21.000Z",
+    "created": "2026-09-14T13:21:09.123Z",
+    "coverage": 2,
+    "source": {
+      "name": "Legit News",
+      "url": "https://www.legit.ng/people/1730425-australia-announces-counries-citizens-skip-english-language-proof-visa/",
+      "title": "Australia Announces 5 Countries Whose Citizens Can Skip English Proof for Student Visa",
+      "indirect": false
+    },
+    "also": [],
+    "model": "gemini"
+  },
+  {
     "id": "a12d459b0769",
     "slug": "ozbekistonda-ajrimda-yarashish-muddati-berilmasligi-taklif-e-a12d45",
     "title": "O‘zbekistonda ajrimda yarashish muddati berilmasligi taklif etildi",
