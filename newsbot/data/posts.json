@@ -1,5 +1,30 @@
 [
   {
+    "id": "dbaf69797dd1",
+    "slug": "hindistonlik-ielts-topshiruvchilar-kanadani-tanlamoqda-dbaf69",
+    "title": "Hindistonlik IELTS topshiruvchilar Kanadani tanlamoqda",
+    "summary": "IELTS Voices 2026 hisobotiga ko'g'ri, Hindistondagi imtihon topshiruvchilar uchun Kanada eng ommabop davlatga aylandi. So'rovnomada jami 8 395 nafar ishtirokchi qatnashgan bo'lib, ular orasida o'zbekistonliklar ham bor.",
+    "points": [
+      "So'rovnomada jami 8 395 nafar IELTS topshiruvchi ishtirok etdi.",
+      "O'zbekistondan 212 nafar respondent tadqiqotda qatnashgan.",
+      "Barcha respondentlarning 18 foizi Avstraliyaga borishni rejalashtirgan."
+    ],
+    "category": "guide",
+    "importance": 2,
+    "score": 53.7,
+    "published": "2026-09-15T08:52:34.000Z",
+    "created": "2026-09-18T11:10:43.248Z",
+    "coverage": 1,
+    "source": {
+      "name": "India Today",
+      "url": "https://www.indiatoday.in/education-today/study-abroad/story/canada-most-preferred-destination-among-indian-ielts-test-takers-says-report-2994943-2026-09-15",
+      "title": "Indian IELTS test takers plan longer stays, Canada emerges top choice: Report",
+      "indirect": false
+    },
+    "also": [],
+    "model": "gemini"
+  },
+  {
     "id": "9d2434d746c3",
     "slug": "avstraliya-ayrim-davlatlar-uchun-til-talabini-bekor-qildi-9d2434",
     "title": "Avstraliya ayrim davlatlar uchun til talabini bekor qildi",
