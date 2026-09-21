@@ -1,5 +1,31 @@
 [
   {
+    "id": "f603dc571e21",
+    "slug": "buyuk-britaniya-biometrik-qoidalariga-rioya-qilmaslik-boyich-f603dc",
+    "title": "Buyuk Britaniya biometrik qoidalariga rioya qilmaslik bo'yicha yo'riqnoma",
+    "summary": "Buyuk Britaniya Viza va Immigratsiya xizmati biometrik ro'yxatdan o'tish qoidalariga rioya qilmaslik bo'yicha yo'riqnoma e'lon qildi. Unda ushbu qoidalarga amal qilmaslik uchun jazo choralari va amaliyot kodeksi bayon etilgan. Bu hujjat 2025-yil mart oyidan kuchga kiradi.",
+    "points": [
+      "Buyuk Britaniya Viza va Immigratsiya yo'riqnomasi.",
+      "Biometrik ro'yxatdan o'tish qoidalariga rioya qilmaslik.",
+      "Jazo choralari bo'yicha amaliyot kodeksi.",
+      "Hujjat 2025-yil mart oyidan kuchga kiradi."
+    ],
+    "category": "guide",
+    "importance": 4,
+    "score": 37,
+    "published": "2026-09-21T11:10:37.000Z",
+    "created": "2026-09-21T13:22:15.473Z",
+    "coverage": 1,
+    "source": {
+      "name": "GOV.UK",
+      "url": "https://gov.uk/government/publications/non-compliance-with-the-biometric-registration-regulations",
+      "title": "Non-compliance with the biometric registration regulations",
+      "indirect": false
+    },
+    "also": [],
+    "model": "gemini"
+  },
+  {
     "id": "dbaf69797dd1",
     "slug": "hindistonlik-ielts-topshiruvchilar-kanadani-tanlamoqda-dbaf69",
     "title": "Hindistonlik IELTS topshiruvchilar Kanadani tanlamoqda",
