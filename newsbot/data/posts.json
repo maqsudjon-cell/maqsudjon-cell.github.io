@@ -1,5 +1,39 @@
 [
   {
+    "id": "4191c8b4cdf7",
+    "slug": "ielts-hammuallifi-idp-blackstone-taklifini-rad-etdi-4191c8",
+    "title": "IELTS hammuallifi IDP Blackstone taklifini rad etdi",
+    "summary": "IELTS imtihonining hammuallifi IDP kompaniyasi Blackstone'ning taklifini rad etdi. Bu haqda Reuters agentligi xabar berdi.",
+    "points": [
+      "IELTS imtihonining hammuallifi IDP.",
+      "IDP Blackstone'ning taklifini rad etdi.",
+      "Voqea haqida Reuters xabar berdi."
+    ],
+    "category": "guide",
+    "importance": 3,
+    "score": 41,
+    "published": "2026-09-22T15:19:19.000Z",
+    "created": "2026-09-22T16:55:25.498Z",
+    "coverage": 3,
+    "source": {
+      "name": "Reuters",
+      "url": "https://www.reuters.com/world/asia-pacific/australias-idp-rejects-blackstones-494-million-takeover-offer-2026-09-22/",
+      "title": "IELTS English-language exam co-owner IDP spurns Blackstone’s sweetened bid",
+      "indirect": false
+    },
+    "also": [
+      {
+        "name": "Investing.com",
+        "url": "https://www.investing.com/news/stock-market-news/australias-idp-rejects-blackstones-494-million-takeover-offer-4910033"
+      },
+      {
+        "name": "wsau.com",
+        "url": "https://wsau.com/2026/09/22/australias-idp-rejects-blackstones-494-million-takeover-offer/"
+      }
+    ],
+    "model": "gemini"
+  },
+  {
     "id": "f603dc571e21",
     "slug": "buyuk-britaniya-biometrik-qoidalariga-rioya-qilmaslik-boyich-f603dc",
     "title": "Buyuk Britaniya biometrik qoidalariga rioya qilmaslik bo'yicha yo'riqnoma",
