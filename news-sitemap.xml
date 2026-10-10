@@ -1,4 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+  <url>
+    <loc>https://flarestamina.com/news/x/metsenat-loyihasi-100-talabaga-grant-ajratdi-b339ea/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Flarestamina</news:name>
+        <news:language>uz</news:language>
+      </news:publication>
+      <news:publication_date>2026-10-09</news:publication_date>
+      <news:title>&quot;Metsenat&quot; loyihasi 100 talabaga grant ajratdi</news:title>
+    </news:news>
+  </url>
+  <url>
+    <loc>https://flarestamina.com/news/x/aqsh-oliygohlari-ice-ustidan-sudga-murojaat-qildi-b2813f/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Flarestamina</news:name>
+        <news:language>uz</news:language>
+      </news:publication>
+      <news:publication_date>2026-10-08</news:publication_date>
+      <news:title>AQSh oliygohlari ICE ustidan sudga murojaat qildi</news:title>
+    </news:news>
+  </url>
 </urlset>

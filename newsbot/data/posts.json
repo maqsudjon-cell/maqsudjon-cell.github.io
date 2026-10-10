@@ -1,5 +1,55 @@
 [
   {
+    "id": "b339ea6c2e4a",
+    "slug": "metsenat-loyihasi-100-talabaga-grant-ajratdi-b339ea",
+    "title": "\"Metsenat\" loyihasi 100 talabaga grant ajratdi",
+    "summary": "\"Metsenat\" xayriya loyihasi doirasida \"Mustaqillik-35\" ta'lim granti natijalari e'lon qilindi. Respublika bo'yicha 100 nafar talabaga kontrakt to'lovini qoplash uchun moliyaviy yordam beriladi.",
+    "points": [
+      "Tanlov natijalariga ko'ra 100 nafar talaba g'olib bo'ldi.",
+      "Har bir talabaga 10 million so'mdan ajratiladi.",
+      "Umumiy ajratilgan mablag' 1 milliard so'mni tashkil etadi."
+    ],
+    "category": "fees",
+    "importance": 3,
+    "score": 44,
+    "published": "2026-10-09T19:57:00.000Z",
+    "created": "2026-10-10T09:47:08.797Z",
+    "coverage": 1,
+    "source": {
+      "name": "Zamin.uz",
+      "url": "https://zamin.uz/en/society/224096-metsenat-project-allocates-10-million-soums-in-grants-to-100-talented-students.html",
+      "title": "“Metsenat” project allocates 10 million soums in grants to 100 talented students",
+      "indirect": false
+    },
+    "also": [],
+    "model": "gemini"
+  },
+  {
+    "id": "b2813fb38c56",
+    "slug": "aqsh-oliygohlari-ice-ustidan-sudga-murojaat-qildi-b2813f",
+    "title": "AQSh oliygohlari ICE ustidan sudga murojaat qildi",
+    "summary": "AQShning to'rtta yirik oliy ta'lim assotsiatsiyasi xalqaro talabalarning amaliyot o'tash qoidalariga kiritilgan o'zgarishlar sababli federal hukumatni sudga berdi. Nizo markazida CPT amaliyot tartibi turibdi.",
+    "points": [
+      "Da'vo arizasi 5-oktabr kuni hukumat idoralariga qarshi topshirildi.",
+      "ICE avgust oyida CPT talablari talqinini to'satdan o'zgartirgan.",
+      "Yangi qoida ixtiyoriy amaliyotlarni taqiqlab qo'yishi mumkin."
+    ],
+    "category": "guide",
+    "importance": 3,
+    "score": 33,
+    "published": "2026-10-08T10:39:58.000Z",
+    "created": "2026-10-10T09:47:08.797Z",
+    "coverage": 1,
+    "source": {
+      "name": "The PIE News",
+      "url": "https://thepienews.com/us-associations-sue-over-ice-changes-to-international-student-internships",
+      "title": "US associations sue over ICE changes to international student internships",
+      "indirect": false
+    },
+    "also": [],
+    "model": "gemini"
+  },
+  {
     "id": "4191c8b4cdf7",
     "slug": "ielts-hammuallifi-idp-blackstone-taklifini-rad-etdi-4191c8",
     "title": "IELTS hammuallifi IDP Blackstone taklifini rad etdi",
