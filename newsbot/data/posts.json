@@ -1,5 +1,55 @@
 [
   {
+    "id": "628c9d5b1b9f",
+    "slug": "toronto-metropolitan-universiteti-granti-2027-2028-628c9d",
+    "title": "Toronto Metropolitan Universiteti granti: 2027-2028",
+    "summary": "Toronto Metropolitan Universiteti Global Migratsiya Instituti 2027-2028 o‘quv yili uchun grantlarga arizalar qabul qilmoqda. Ushbu grantlar magistratura va doktorantura talabalari uchun mo‘ljallangan.",
+    "points": [
+      "Arizalar 2027-yil 1-aprelgacha qabul qilinadi.",
+      "To‘liq kunlik magistr va PhD talabalari uchun.",
+      "Bridging Divides dasturi orqali stipendiyalar beriladi."
+    ],
+    "category": "deadline",
+    "importance": 4,
+    "score": 33,
+    "published": "2026-10-15T14:31:12.000Z",
+    "created": "2026-10-15T16:57:56.561Z",
+    "coverage": 1,
+    "source": {
+      "name": "Opportunity Desk",
+      "url": "https://opportunitydesk.org/2026/10/15/tmu-global-migration-institute-scholarships-2027-2028",
+      "title": "Toronto Metropolitan University Global Migration Institute Scholarships 2027-2028",
+      "indirect": false
+    },
+    "also": [],
+    "model": "gemini"
+  },
+  {
+    "id": "acbb0fff0b5b",
+    "slug": "fransiya-excellence-eiffel-granti-2026-2027-acbb0f",
+    "title": "Fransiya Excellence Eiffel granti: 2026-2027",
+    "summary": "Fransiya Tashqi ishlar vazirligi tomonidan ishlab chiqilgan Excellence Eiffel granti dasturi 2026-2027 o‘quv yili uchun arizalarni qabul qilmoqda. Dastur magistratura va doktorantura darajasidagi xorijlik talabalar uchun mo‘ljallangan.",
+    "points": [
+      "Arizalar qabuli ochiq.",
+      "Magistratura va doktorantura darajalari uchun.",
+      "Kelajakdagi xorijlik qaror qabul qiluvchilarga mo‘ljallangan."
+    ],
+    "category": "deadline",
+    "importance": 4,
+    "score": 33,
+    "published": "2026-10-14T17:21:26.000Z",
+    "created": "2026-10-15T16:57:56.561Z",
+    "coverage": 1,
+    "source": {
+      "name": "Opportunity Desk",
+      "url": "https://opportunitydesk.org/2026/10/14/france-excellence-eiffel-scholarship-program-2026-2027",
+      "title": "France Excellence Eiffel Scholarship Program 2026-2027",
+      "indirect": false
+    },
+    "also": [],
+    "model": "gemini"
+  },
+  {
     "id": "b339ea6c2e4a",
     "slug": "metsenat-loyihasi-100-talabaga-grant-ajratdi-b339ea",
     "title": "\"Metsenat\" loyihasi 100 talabaga grant ajratdi",
