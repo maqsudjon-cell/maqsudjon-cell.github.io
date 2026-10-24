@@ -1,5 +1,31 @@
 [
   {
+    "id": "fcefd2a8e95c",
+    "slug": "aqsh-tibbiyot-maktablari-duolingo-testini-qabul-qilmoqda-fcefd2",
+    "title": "AQSh tibbiyot maktablari Duolingo testini qabul qilmoqda",
+    "summary": "Times Higher Education ma'lumotiga ko'ra, AQShdagi yetakchi tibbiyot va sog'liqni saqlash maktablari Duolingo English Test (DET) natijalarini qabul qilmoqda. Bu xalqaro talabalar uchun sog'liqni saqlash sohasida ta'lim olish imkoniyatini kengaytiradi.",
+    "points": [
+      "AQSh tibbiyot maktablari Duolingo English Testni qabul qiladi.",
+      "Sog'liqni saqlash sohasida mutaxassislarga talab ortmoqda.",
+      "Xalqaro talabalar uchun imkoniyatlar kengaymoqda.",
+      "Times Higher Education reytingi asosida tanlangan."
+    ],
+    "category": "exam-update",
+    "importance": 4,
+    "score": 39.4,
+    "published": "2026-10-20T10:09:53.000Z",
+    "created": "2026-10-24T23:10:18.786Z",
+    "coverage": 2,
+    "source": {
+      "name": "Times Higher Education",
+      "url": "https://www.timeshighereducation.com/student/blogs/top-medical-health-schools-us-accept-duolingo-english-test",
+      "title": "Top US medical and health schools that accept the Duolingo English Test",
+      "indirect": false
+    },
+    "also": [],
+    "model": "gemini"
+  },
+  {
     "id": "628c9d5b1b9f",
     "slug": "toronto-metropolitan-universiteti-granti-2027-2028-628c9d",
     "title": "Toronto Metropolitan Universiteti granti: 2027-2028",

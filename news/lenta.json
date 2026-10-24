@@ -1,7 +1,13 @@
 {
   "note": "Avtomat lenta indeksi. newsbot/src/build.mjs yozadi — qo'lda tahrirlamang.",
-  "updated": "2026-10-15",
+  "updated": "2026-10-20",
   "posts": [
+    {
+      "slug": "aqsh-tibbiyot-maktablari-duolingo-testini-qabul-qilmoqda-fcefd2",
+      "title": "AQSh tibbiyot maktablari Duolingo testini qabul qilmoqda",
+      "date": "2026-10-20",
+      "category": "exam-update"
+    },
     {
       "slug": "toronto-metropolitan-universiteti-granti-2027-2028-628c9d",
       "title": "Toronto Metropolitan Universiteti granti: 2027-2028",
