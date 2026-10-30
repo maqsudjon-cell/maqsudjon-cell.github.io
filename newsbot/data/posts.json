@@ -1,5 +1,31 @@
 [
   {
+    "id": "4ad6d66b66bb",
+    "slug": "british-council-5-4ad6d6",
+    "title": "«Эл-юрт умиди» ва British Council 5 қизга стипендия ажратади",
+    "summary": "«Эл-юрт умиди» жамғармаси ва British Council 5 нафар ўзбекистонлик қизга Буюк Британияда STEM йўналишларида таҳсил олиш учун қўшма стипендия ажратади. Дастур 2027−2028 ўқув йилига мўлжалланган.",
+    "points": [
+      "5 нафар ўзбекистонлик қизга стипендия берилади.",
+      "Буюк Британияда STEM йўналишларида ўқиш мумкин.",
+      "Харажатнинг 40%ини «Эл-юрт умиди» қоплайди.",
+      "Қолган 60%ини British Council тўлайди."
+    ],
+    "category": "deadline",
+    "importance": 4,
+    "score": 91,
+    "published": "2026-10-30T10:12:00.000Z",
+    "created": "2026-10-30T13:34:01.474Z",
+    "coverage": 1,
+    "source": {
+      "name": "Gazeta.uz",
+      "url": "https://gazeta.uz/uz/2026/10/30/girls",
+      "title": "«Эл-юрт умиди» ва British Council 5 нафар ўзбекистонлик қизга стипендия ажратиш бўйича келишув имзолади",
+      "indirect": false
+    },
+    "also": [],
+    "model": "gemini"
+  },
+  {
     "id": "fcefd2a8e95c",
     "slug": "aqsh-tibbiyot-maktablari-duolingo-testini-qabul-qilmoqda-fcefd2",
     "title": "AQSh tibbiyot maktablari Duolingo testini qabul qilmoqda",
