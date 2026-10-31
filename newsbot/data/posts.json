@@ -1,5 +1,30 @@
 [
   {
+    "id": "8e305520e15b",
+    "slug": "mastercard-foundation-scholars-dasturi-sciences-po-fransiya-8e3055",
+    "title": "Mastercard Foundation Scholars dasturi: Sciences Po (Fransiya)",
+    "summary": "Sciences Po universiteti (Fransiya) 2027-yil uchun Mastercard Foundation Scholars dasturiga arizalar qabul qilmoqda. Dastur Afrika qit'asidan bo'lgan talabalar uchun ikki yillik magistratura ta'limini moliyalashtiradi.",
+    "points": [
+      "Arizalar 2026-yil 14-dekabrgacha qabul qilinadi.",
+      "Dastur Afrika qit'asi talabalari uchun mo'ljallangan.",
+      "Sciences Po'da ikki yillik magistratura darajasini olish mumkin."
+    ],
+    "category": "deadline",
+    "importance": 4,
+    "score": 40,
+    "published": "2026-10-31T14:24:45.000Z",
+    "created": "2026-10-31T21:51:44.821Z",
+    "coverage": 2,
+    "source": {
+      "name": "Opportunity Desk",
+      "url": "https://opportunitydesk.org/2026/10/31/mastercard-foundation-scholars-program-at-sciences-po-2027",
+      "title": "Mastercard Foundation Scholars Program at Sciences Po 2027 (Fully-funded)",
+      "indirect": false
+    },
+    "also": [],
+    "model": "gemini"
+  },
+  {
     "id": "4ad6d66b66bb",
     "slug": "british-council-5-4ad6d6",
     "title": "«Эл-юрт умиди» ва British Council 5 қизга стипендия ажратади",

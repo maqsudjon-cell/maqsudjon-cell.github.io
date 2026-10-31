@@ -2,6 +2,17 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
   <url>
+    <loc>https://flarestamina.com/news/x/mastercard-foundation-scholars-dasturi-sciences-po-fransiya-8e3055/</loc>
+    <news:news>
+      <news:publication>
+        <news:name>Flarestamina</news:name>
+        <news:language>uz</news:language>
+      </news:publication>
+      <news:publication_date>2026-10-31</news:publication_date>
+      <news:title>Mastercard Foundation Scholars dasturi: Sciences Po (Fransiya)</news:title>
+    </news:news>
+  </url>
+  <url>
     <loc>https://flarestamina.com/news/x/british-council-5-4ad6d6/</loc>
     <news:news>
       <news:publication>
