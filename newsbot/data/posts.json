@@ -1,5 +1,56 @@
 [
   {
+    "id": "a754350f7ea9",
+    "slug": "stipendium-hungaricum-ozbekiston-uchun-qabul-ochilmadi-a75435",
+    "title": "Stipendium Hungaricum: O‘zbekiston uchun qabul ochilmadi",
+    "summary": "Stipendium Hungaricum dasturiga Qozog‘iston, Qirg‘iziston va O‘zbekiston fuqarolari uchun qabul ochilmagan. Bu haqda Densus.ru xabar berdi.",
+    "points": [
+      "Qabul ochilmagan",
+      "Qozog‘iston, Qirg‘iziston va O‘zbekiston uchun",
+      "Stipendium Hungaricum dasturi"
+    ],
+    "category": "deadline",
+    "importance": 5,
+    "score": 43,
+    "published": "2026-11-06T07:19:42.000Z",
+    "created": "2026-11-07T12:55:54.254Z",
+    "coverage": 1,
+    "source": {
+      "name": "https://densus.ru/",
+      "url": "https://densus.ru/news/stipendium-hungaricum-priem-dlya-kazakhstana-kyrgyzstana-2026-11-06",
+      "title": "Stipendium Hungaricum: прием для Казахстана, Кыргызстана и Узбекистана не открыт",
+      "indirect": false
+    },
+    "also": [],
+    "model": "gemini"
+  },
+  {
+    "id": "30861616e258",
+    "slug": "kanada-xalqaro-talabalar-qabul-qilish-maqsadini-uzaytirdi-308616",
+    "title": "Kanada xalqaro talabalar qabul qilish maqsadini uzaytirdi",
+    "summary": "Kanada 2029-yilgacha har yili 150 000 nafar xalqaro talabani qabul qilish maqsadini saqlab qoladi. Bu o‘tgan yilgi immigratsiya rejasida belgilangan maqsadning uzaytirilishi hisoblanadi.",
+    "points": [
+      "Maqsad 2029-yilgacha uzaytirildi",
+      "Har yili 150 000 talaba qabul qilinadi",
+      "Bu immigratsiya rejasining bir qismi",
+      "Jami 370 000 vaqtinchalik rezident"
+    ],
+    "category": "guide",
+    "importance": 4,
+    "score": 33,
+    "published": "2026-11-06T16:24:40.000Z",
+    "created": "2026-11-07T12:55:54.255Z",
+    "coverage": 1,
+    "source": {
+      "name": "The PIE News",
+      "url": "https://thepienews.com/canada-extends-150000-international-student-arrivals-target-to-2029",
+      "title": "Canada extends 150,000 international student arrivals target to 2029",
+      "indirect": false
+    },
+    "also": [],
+    "model": "gemini"
+  },
+  {
     "id": "8e305520e15b",
     "slug": "mastercard-foundation-scholars-dasturi-sciences-po-fransiya-8e3055",
     "title": "Mastercard Foundation Scholars dasturi: Sciences Po (Fransiya)",
