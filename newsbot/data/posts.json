@@ -1,5 +1,30 @@
 [
   {
+    "id": "80fdc4aad33b",
+    "slug": "shanghai-ocean-universiteti-magistratura-granti-80fdc4",
+    "title": "Shanghai Ocean universiteti magistratura granti",
+    "summary": "Shanghai Ocean universiteti va Afrika taraqqiyot banki guruhi 2027-yilgi magistratura granti uchun arizalar qabul qilmoqda. Dastur tarjimonlarni tayyorlash orqali inson kapitalini rivojlantirishga qaratilgan.",
+    "points": [
+      "Arizalar topshirish muddati 2026-yil 17-noyabrgacha davom etadi.",
+      "Grant 2027-yilgi magistratura dasturi uchun ajratilgan.",
+      "Dastur bankning 2024-2033 yillardagi strategiyasiga mos keladi."
+    ],
+    "category": "deadline",
+    "importance": 3,
+    "score": 33,
+    "published": "2026-11-11T07:35:56.000Z",
+    "created": "2026-11-11T10:51:14.166Z",
+    "coverage": 1,
+    "source": {
+      "name": "Opportunity Desk",
+      "url": "https://opportunitydesk.org/2026/11/11/afdb-group-shou-scholarship-masters-degree-program-2027",
+      "title": "African Development Bank Group Shanghai Ocean University Scholarship Masters Degree Program 2027",
+      "indirect": false
+    },
+    "also": [],
+    "model": "gemini"
+  },
+  {
     "id": "39fd361e6e76",
     "slug": "career-pathways-initiative-fellowship-2027-uchun-arizalar-39fd36",
     "title": "Career Pathways Initiative Fellowship 2027 uchun arizalar",
