@@ -1,5 +1,30 @@
 [
   {
+    "id": "39fd361e6e76",
+    "slug": "career-pathways-initiative-fellowship-2027-uchun-arizalar-39fd36",
+    "title": "Career Pathways Initiative Fellowship 2027 uchun arizalar",
+    "summary": "Career Pathways Initiative Fellowship 2027 dasturiga arizalar qabul qilinmoqda. Ushbu dastur birinchi avlod, kam ta'minlangan bakalavriat talabalari uchun mo'ljallangan.",
+    "points": [
+      "Arizalar 2027-yil 29-yanvargacha qabul qilinadi.",
+      "Dastur bakalavriat talabalari uchun.",
+      "U internatura yoki birinchi ish qidiruvchilarga yordam beradi."
+    ],
+    "category": "deadline",
+    "importance": 3,
+    "score": 33,
+    "published": "2026-11-10T15:05:24.000Z",
+    "created": "2026-11-11T01:16:21.788Z",
+    "coverage": 1,
+    "source": {
+      "name": "Opportunity Desk",
+      "url": "https://opportunitydesk.org/2026/11/10/career-pathways-initiative-fellowship-2027",
+      "title": "Career Pathways Initiative Fellowship 2027",
+      "indirect": false
+    },
+    "also": [],
+    "model": "gemini"
+  },
+  {
     "id": "a754350f7ea9",
     "slug": "stipendium-hungaricum-ozbekiston-uchun-qabul-ochilmadi-a75435",
     "title": "Stipendium Hungaricum: O‘zbekiston uchun qabul ochilmadi",
