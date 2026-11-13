@@ -1,5 +1,30 @@
 [
   {
+    "id": "01f26c5d5ee4",
+    "slug": "yevraziya-filmlar-uchun-grant-tanlovini-elon-qildi-01f26c",
+    "title": "«Yevraziya» filmlar uchun grant tanlovini e'lon qildi",
+    "summary": "«Yevraziya» tashkiloti rus tilidagi xorijiy filmlar uchun xalqaro grant tanloviga arizalar qabul qilmoqda. Dastur ijodkorlarga o'z kartinalarini yaratish uchun moliyaviy yordam beradi. Arizalar 15-dekabrgacha rasmiy saytda qabul qilinadi.",
+    "points": [
+      "Grantlar rus tilida suratga olingan filmlar uchun ajratiladi.",
+      "Tanlovda 18 yoshga to'lgan xorijiy fuqarolar qatnashishi mumkin.",
+      "Arizalarni topshirish 15-dekabrgacha davom etadi."
+    ],
+    "category": "deadline",
+    "importance": 2,
+    "score": 44,
+    "published": "2026-11-12T14:58:00.000Z",
+    "created": "2026-11-13T01:48:22.675Z",
+    "coverage": 1,
+    "source": {
+      "name": "Podrobno.uz",
+      "url": "https://podrobno.uz/cat/calche/ano-evraziya-otkryla-priem-zayavok-na-grantovyy-konkurs-zarubezhnykh-filmov-na-russkom-yazyke",
+      "title": "АНО \"Евразия\" открыла прием заявок на грантовый конкурс зарубежных фильмов на русском языке",
+      "indirect": false
+    },
+    "also": [],
+    "model": "gemini"
+  },
+  {
     "id": "80fdc4aad33b",
     "slug": "shanghai-ocean-universiteti-magistratura-granti-80fdc4",
     "title": "Shanghai Ocean universiteti magistratura granti",
