@@ -1,7 +1,13 @@
 {
   "note": "Avtomat lenta indeksi. newsbot/src/build.mjs yozadi — qo'lda tahrirlamang.",
-  "updated": "2026-11-12",
+  "updated": "2026-11-13",
   "posts": [
+    {
+      "slug": "bayer-foundation-ilmiy-grantlariga-arizalar-qabuli-8e4fac",
+      "title": "Bayer Foundation ilmiy grantlariga arizalar qabuli",
+      "date": "2026-11-13",
+      "category": "deadline"
+    },
     {
       "slug": "yevraziya-filmlar-uchun-grant-tanlovini-elon-qildi-01f26c",
       "title": "«Yevraziya» filmlar uchun grant tanlovini e'lon qildi",
