@@ -59,7 +59,7 @@ Assets in this repo (MAIN): `/assets/logo.svg`, `/assets/mark.svg`, `favicon.svg
 - Brute force: Firebase's native TOO_MANY_ATTEMPTS throttling.
 - **Deprecated, not deployed-to:** `pangeya-ai-/api/auth/*` (the earlier Supabase/JWT implementation) — code left in the repo for reference; safe to delete. No Vercel env vars are needed for auth.
 - **Integration:** `ielts-hub/js/tracker.js` (served to every test page via `test-page-auto.js`) now requires FS Account — the old “enter your name” modal is deleted; results carry `{name, phone, first_name, last_name}` to Apps Script + Firestore. Essay platform (`pangeya-essay-platform-/index-14.html`): name input hidden/auto-filled, FS gate in `<head>`, passcode gate “LIFE KEEPS GOING” untouched. Speaking lab: prompts removed, FS phone is the user id (legacy `pangea8_spk_*` localStorage keys read as fallback). Full-mock: FS gate added in `mock.js`; Google popup kept because the coin wallet is keyed by Firebase UID — records now also carry `fsPhone`.
-- **Forgot password v1:** links to https://t.me/mrbmp13. SMS OTP reset = future task.
+- **Forgot password v1:** links to https://t.me/ferrasium. SMS OTP reset = future task.
 
 ## Pending manual steps
 
