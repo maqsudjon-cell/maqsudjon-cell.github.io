@@ -74,9 +74,8 @@ page('founder/index.html',
     </div>
 
     <p class="kicker" style="margin:2.5rem 0 .75rem" data-i18n="elsewhere">Elsewhere</p>
-    <div style="display:flex;flex-wrap:wrap;gap:.5rem">
-      <a class="chip" href="https://t.me/flarestamina" rel="noopener" target="_blank">Telegram</a>
-      <a class="chip" href="https://github.com/maqsudjon-cell" rel="noopener" target="_blank">GitHub</a>
+    <div class="soc-wrap">
+      <a class="soc soc-telegram soc-chip soc-sm" href="https://t.me/flarestamina" target="_blank" rel="noopener"><span class="soc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="/assets/soc.svg#soc-i-telegram"/></svg></span><span class="soc-txt"><span class="soc-name">FlareStamina on Telegram</span></span></a><a class="soc soc-x soc-chip soc-sm" href="https://x.com/flarestamina" target="_blank" rel="noopener"><span class="soc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="/assets/soc.svg#soc-i-x"/></svg></span><span class="soc-txt"><span class="soc-name">FlareStamina on X</span></span></a><a class="soc soc-telegram soc-chip soc-sm" href="https://t.me/ferrasium" target="_blank" rel="me noopener" title="Telegram"><span class="soc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="/assets/soc.svg#soc-i-telegram"/></svg></span><span class="soc-txt"><span class="soc-name">@ferrasium</span></span></a><a class="soc soc-instagram soc-chip soc-sm" href="https://www.instagram.com/ferrasiums" target="_blank" rel="me noopener" title="Instagram"><span class="soc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="/assets/soc.svg#soc-i-instagram"/></svg></span><span class="soc-txt"><span class="soc-name">@ferrasiums</span></span></a><a class="soc soc-youtube soc-chip soc-sm" href="https://youtube.com/@ferrasium" target="_blank" rel="me noopener" title="YouTube"><span class="soc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="/assets/soc.svg#soc-i-youtube"/></svg></span><span class="soc-txt"><span class="soc-name">@ferrasium</span></span></a><a class="soc soc-x soc-chip soc-sm" href="https://x.com/ferrasium" target="_blank" rel="me noopener" title="X"><span class="soc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="/assets/soc.svg#soc-i-x"/></svg></span><span class="soc-txt"><span class="soc-name">@ferrasium</span></span></a><a class="soc soc-github soc-chip soc-sm" href="https://github.com/maqsudjon-cell" target="_blank" rel="me noopener"><span class="soc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="/assets/soc.svg#soc-i-github"/></svg></span><span class="soc-txt"><span class="soc-name">GitHub</span></span></a>
       <a class="chip" href="https://maqsudjon.com" rel="noopener" target="_blank">maqsudjon.com</a>
       <a class="chip" href="/teachers/" data-i18n="sTeachers">For teachers</a>
     </div>
@@ -164,7 +163,7 @@ page('privacy/index.html',
        'l11': 'Sizning kelganingizni uchinchi tomon ko‘rmaydi. Shriftlar Google Fonts’dan emas, shu saytdan beriladi — ya’ni sahifani ochish IP manzilingizni boshqa hech kimga uzatmaydi.',
        'l12': 'Hisoblagichni o‘z brauzeringiz uchun o‘chirib qo‘yishingiz mumkin: istalgan sahifani oxiriga <code>?nogc</code> qo‘shib oching. <code>?gc</code> qaytaradi.',
        'h2d': 'Ma’lumotlaringizni o‘chirish',
-       'l10': 'Ro‘yxatdan o‘tgan raqamingizdan Telegramda <a href="https://t.me/mrbmp13" target="_blank" rel="noopener">@mrbmp13</a>ga yozing — akkauntingizni va har bir natijani 48 soat ichida o‘chiramiz.',
+       'l10': 'Ro‘yxatdan o‘tgan raqamingizdan Telegramda <a href="https://t.me/ferrasium" target="_blank" rel="noopener">@ferrasium</a>ga yozing — akkauntingizni va har bir natijani 48 soat ichida o‘chiramiz.',
      },
      body='''
 <section class="page-head">
@@ -203,7 +202,7 @@ page('privacy/index.html',
       </ul>
 
       <h2 data-i18n="h2d">Delete your data</h2>
-      <p data-i18n-html="l10">Message <a href="https://t.me/mrbmp13" target="_blank" rel="noopener">@mrbmp13</a> on Telegram from the phone number you registered with — we delete your account and every result within 48 hours.</p>
+      <p data-i18n-html="l10">Message <a href="https://t.me/ferrasium" target="_blank" rel="noopener">@ferrasium</a> on Telegram from the phone number you registered with — we delete your account and every result within 48 hours.</p>
     </div>
   </div>
 </section>
