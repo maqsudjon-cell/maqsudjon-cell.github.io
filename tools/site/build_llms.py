@@ -42,8 +42,9 @@ def main():
         f'papers in real exam format — {c["Listening"]} Listening, {c["Reading"]} Reading '
         f'({c["Reading"] - read_single} full three-passage papers and {read_single} '
         f'single-passage drills), plus Writing and Speaking labs. Built and run in Tashkent '
-        'by Maqsudjon Polatov. No sign-up, no ads, no paywall — the one paid thing is the '
-        'full mock exam.',
+        'by Maqsudjon Polatov. Practice tests and Writing Lab are free without an account — '
+        'no ads, no paywall. Sign in with your phone to save Listening and Reading scores. '
+        'The full mock asks you to sign in; it is the one paid thing.',
         '',
         '## What the tests do',
         '',
