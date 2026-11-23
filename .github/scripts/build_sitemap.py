@@ -70,8 +70,10 @@ urls = [
     ('https://flarestamina.com/writing/', REWRITE, 'monthly', '0.9'),
     ('https://flarestamina.com/teachers/', today, 'monthly', '0.8'),
     ('https://flarestamina.com/privacy/', today, 'yearly', '0.3'),
-    ('https://flarestamina.com/wedding/', '2026-07-16', 'monthly', '0.7'),
 ]
+# /wedding/ is a noindex invitation tool. Drop it (and anything under it)
+# even if a later edit puts the URL back into the list above.
+SITEMAP_SKIP_PREFIXES = ('https://flarestamina.com/wedding',)
 seen = {u[0] for u in urls}
 for p in posts:
     u = f"https://flarestamina.com/news/{p['slug']}/"
@@ -217,6 +219,8 @@ urls = kept
 out = ['<?xml version="1.0" encoding="UTF-8"?>',
        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
 for loc, mod, freq, pri in urls:
+    if loc.startswith(SITEMAP_SKIP_PREFIXES):
+        continue
     out.append(f'  <url><loc>{loc}</loc><lastmod>{mod}</lastmod>'
                f'<changefreq>{freq}</changefreq><priority>{pri}</priority></url>')
 out.append('</urlset>')
