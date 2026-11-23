@@ -1,33 +1,29 @@
-# Flarestamina — Landing Page
+# Flarestamina
 
-Modern landing page for **[flarestamina.com](https://flarestamina.com)** — a free IELTS practice hub with 100+ tests.
+This repository is the live [flarestamina.com](https://flarestamina.com/) site. GitHub Pages serves it from `main` (see `CNAME`).
 
-**Live:** https://flarestamina.com/pangea8-landing/
+**Live:** https://flarestamina.com/
 
-## Features
+Free IELTS practice — Listening, Reading, Writing and Speaking — plus news, score tools, and an account that works across the tools.
 
-- Dark hi-tech design — emerald/teal gradients, aurora glow, animated grid
-- Spotlight hover cards, 3D tilt product mock, count-up stats, band-score gauge
-- Test grid mock mirroring the real Practice Hub (3-column layout)
-- **Google Sign-In** via Firebase Auth — signed-in users jump straight to the hub
-- Single `index.html`, no build step, no frameworks — only Google Fonts + Firebase SDK
-- Fully responsive, `prefers-reduced-motion` support
+## Stack
 
-## Firebase setup (required for sign-in)
+- Static HTML, CSS, and JavaScript.
+- Firebase Auth for FS Account (`/account/`, shared client `/assets/fs-auth.js`, project `ieltshub-e2aa8`). Firestore for the Writing Lab, community articles, and `/admin/` (project `pangeya-essay`).
+- GitHub Pages.
+- Actions:
+  - `.github/workflows/sitemap.yml` — rebuilds `sitemap.xml` and `news-sitemap.xml` with `.github/scripts/build_sitemap.py`
+  - `.github/workflows/community.yml` — writes Firestore articles out to `/news/a/` and author pages under `/news/t/`
+  - `.github/workflows/newsbot.yml` — fills the `/news/lenta/` feed
 
-In [Firebase Console](https://console.firebase.google.com) → project `ieltshub-e2aa8`:
+## Where things live
 
-1. **Authentication → Sign-in method** → enable **Google**
-2. **Authentication → Settings → Authorized domains** → add:
-   - `flarestamina.com`
-   - `flarestamina.com`
-
-Without step 2, the Google popup will be blocked on those domains.
-
-## Deploy
-
-Hosted on **GitHub Pages** (branch `main`, root). Any static host works — it's one file.
-
----
-
-Built with passion for students · [founder](https://maqsudjon.com)
+- `/` — homepage (`index.html`)
+- `/tests/`, `/ielts-listening-test/`, `/ielts-reading-test/`, `/ielts-reading-passage-*` — practice catalogues in this repo. `/ielts-hub/` is the practice hub on the same domain.
+- `/writing/` — Writing Lab
+- `/speaking/` — redirect to the Speaking Lab at `/pangea8-speaking/`
+- `/uz/` — Uzbek guides for the four skills
+- `/news/` — articles, `/news/lenta/`, and community pages
+- `/convert/`, `/deadlines/`, `/plan/`, `/speaking-topics/` — score converter, scholarship deadlines, study plan, speaking topics
+- `/founder/`, `/teachers/`, `/privacy/`, `/writearticle/`, `/account/`, `/admin/`
+- `/pangea8-landing/` — redirect stub to `/`, so the old path keeps working

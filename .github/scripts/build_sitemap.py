@@ -11,7 +11,9 @@ Chiqish:
   news-sitemap.xml  — Google News formati, faqat oxirgi 48 soatdagi xabarlar
 """
 
-import json, urllib.request, datetime
+import json, os, re, urllib.error, urllib.request, datetime
+from concurrent.futures import ThreadPoolExecutor
+from urllib.parse import unquote, urlparse
 
 req = urllib.request.Request(
     'https://flarestamina.com/ielts-hub/tests.json',
@@ -109,6 +111,109 @@ for t in tests:
     # the page was rewritten on REWRITE even though its test date is older
     urls.append((u, max(t.get('date') or '', REWRITE), 'monthly', '0.7'))
 
+# Drop redirect stubs and pages that ask not to be indexed. A meta refresh
+# or robots noindex is read from the HTML in this repo when the file is
+# here (the /pangea8-landing/ stub, /speaking/, /hubielts/, …). Pages that
+# live outside the repo — including /ctn/1listening-test.html, which GitHub
+# answers with a 301 to ctnlc.uz — are checked with one request that does
+# not follow redirects. A failed read keeps the URL; a blip must not wipe
+# the sitemap. /wedding/ is a real page and stays.
+def local_html(url):
+    parts = urlparse(url)
+    if parts.netloc not in ('flarestamina.com', 'www.flarestamina.com'):
+        return None
+    path = unquote(parts.path)
+    segs = [s for s in path.split('/') if s not in ('', '.')]
+    if any(s == '..' for s in segs):
+        return None
+    rel = '/'.join(segs)
+    if path.endswith('/') or rel == '':
+        candidates = ['index.html' if rel == '' else rel + '/index.html']
+    else:
+        candidates = [rel]
+        if not rel.lower().endswith(('.html', '.htm')):
+            candidates.append(rel + '/index.html')
+    for c in candidates:
+        if os.path.isfile(c):
+            with open(c, encoding='utf-8', errors='replace') as f:
+                return f.read()
+    return None
+
+
+def html_reason(html):
+    if not html:
+        return None
+    head_m = re.search(r'<head\b[^>]*>(.*?)</head>', html, re.I | re.S)
+    head = head_m.group(1) if head_m else html[:8000]
+    for tag in re.findall(r'<meta\b[^>]*>', head, re.I):
+        if re.search(r'\bhttp-equiv\s*=\s*["\']refresh["\']', tag, re.I):
+            return 'meta-refresh'
+        if (re.search(r'\bname\s*=\s*["\']robots["\']', tag, re.I)
+                and re.search(r'\bnoindex\b', tag, re.I)):
+            return 'noindex'
+    if re.search(r'<title>\s*\d{3}\s+Moved\s+Permanently\s*</title>', html, re.I):
+        return 'redirect'
+    return None
+
+
+class _NoRedirect(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        return None
+
+
+_opener = urllib.request.build_opener(_NoRedirect)
+
+
+def remote_reason(url):
+    req = urllib.request.Request(url, headers={'User-Agent': 'Flarestamina-sitemap'})
+    try:
+        resp = _opener.open(req, timeout=25)
+        status = getattr(resp, 'status', 200)
+        body = resp.read(32768).decode('utf-8', 'replace')
+        resp.close()
+        loc = None
+    except urllib.error.HTTPError as e:
+        status = e.code
+        loc = e.headers.get('Location') if e.headers else None
+        try:
+            body = e.read(32768).decode('utf-8', 'replace')
+        except Exception:
+            body = ''
+    except Exception as e:
+        print('warn: could not read', url, e)
+        return None
+    if 300 <= status < 400:
+        return 'http-redirect' + (f' -> {loc}' if loc else '')
+    if status != 200:
+        return None
+    return html_reason(body)
+
+
+reasons = {}
+remote_urls = []
+for row in urls:
+    html = local_html(row[0])
+    if html is None:
+        remote_urls.append(row[0])
+    else:
+        reasons[row[0]] = html_reason(html)
+if remote_urls:
+    with ThreadPoolExecutor(max_workers=8) as pool:
+        for u, reason in zip(remote_urls, pool.map(remote_reason, remote_urls)):
+            reasons[u] = reason
+kept, skipped = [], []
+for row in urls:
+    reason = reasons.get(row[0])
+    if reason:
+        skipped.append((row[0], reason))
+    else:
+        kept.append(row)
+if skipped:
+    print('Skipped (redirect or noindex):', len(skipped))
+    for u, reason in skipped:
+        print(' ', reason, u)
+urls = kept
+
 out = ['<?xml version="1.0" encoding="UTF-8"?>',
        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
 for loc, mod, freq, pri in urls:
@@ -141,7 +246,10 @@ for p in lenta:
         continue
     if (now - d).days > 2:
         continue
-    recent.append((f"https://flarestamina.com/news/x/{p['slug']}/", p['title'], p['date']))
+    loc = f"https://flarestamina.com/news/x/{p['slug']}/"
+    if reasons.get(loc):
+        continue
+    recent.append((loc, p['title'], p['date']))
 
 # qo'lda yozilgan postlar ham yangi bo'lsa kiradi
 for p in posts:
@@ -151,7 +259,10 @@ for p in posts:
         continue
     if (now - d).days > 2:
         continue
-    recent.append((f"https://flarestamina.com/news/{p['slug']}/", p['title'], p['date']))
+    loc = f"https://flarestamina.com/news/{p['slug']}/"
+    if reasons.get(loc):
+        continue
+    recent.append((loc, p['title'], p['date']))
 
 nout = ['<?xml version="1.0" encoding="UTF-8"?>',
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"',
