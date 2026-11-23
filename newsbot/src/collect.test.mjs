@@ -105,9 +105,7 @@ test("nameless Google News items without a publisher suffix do not throw", () =>
   assert.equal(short.title, "Short - BBC");
 
   assert.equal(byUrl["https://news.google.com/rss/articles/CBMiBroken"], undefined);
-  const badDate = byUrl["https://news.google.com/rss/articles/CBMiBadDate"];
-  assert.ok(badDate);
-  assert.equal(Number.isNaN(Date.parse(badDate.published)), false);
+  assert.equal(byUrl["https://news.google.com/rss/articles/CBMiBadDate"], undefined);
 });
 
 test("configured googleNews name is used when the title has no publisher", () => {
@@ -165,6 +163,16 @@ test("missing sourceName is still filtered against blockDomains", () => {
   const hostKept = selectItems([kept], { maxAgeHours: 48, blockDomains: BLOCKS }, NOW);
   assert.equal(hostKept.items.length, 1);
   assert.equal(hostKept.items[0].sourceName, "kun.uz");
+
+  const unparsable = selectItems([{
+    title: "Story with a broken date",
+    url: "https://example.com/bad-date",
+    sourceName: "BBC",
+    published: "not-a-real-date",
+    source: "gn-ielts",
+  }], { maxAgeHours: 336, blockDomains: [] }, NOW);
+  assert.equal(unparsable.items.length, 0);
+  assert.equal(unparsable.tooOld, 1);
 });
 
 test("one bad item and one bad feed do not fail the rest", async () => {

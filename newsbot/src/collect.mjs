@@ -89,9 +89,11 @@ function ensureSourceName(it) {
   return it.sourceName;
 }
 
-function isoOrNow(published) {
+// Bo'sh sana avvalgidek hozirga teng. Sana yozilgan, lekin o'qilmasa
+// hozirgi vaqtni qo'ymaymiz: aks holda eskirgan xabar yangidek chiqadi.
+function isoDate(published) {
   const t = Date.parse(published);
-  if (!Number.isFinite(t)) return new Date().toISOString();
+  if (!Number.isFinite(t)) return "";
   return new Date(t).toISOString();
 }
 
@@ -110,6 +112,8 @@ function parseBlock(b, src) {
   if (!/^https?:/i.test(link)) return null;
 
   const published = tag(b, "pubDate") || tag(b, "published") || tag(b, "updated") || tag(b, "dc:date");
+  const publishedIso = published ? isoDate(published) : new Date().toISOString();
+  if (!publishedIso) return null;
   const summary = stripTags(
     tag(b, "description") || tag(b, "summary") || tag(b, "content") || tag(b, "content:encoded")
   ).slice(0, 900);
@@ -121,7 +125,7 @@ function parseBlock(b, src) {
     url,
     source: src?.id ?? "",
     sourceName: sourceLabel(src, url),
-    published: published ? isoOrNow(published) : new Date().toISOString(),
+    published: publishedIso,
     summary,
     weight: src?.weight ?? 1,
     primary: !!src?.primary,
