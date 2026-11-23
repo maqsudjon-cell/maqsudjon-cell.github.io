@@ -65,45 +65,115 @@ export function normalizeUrl(raw) {
   }
 }
 
-function parseFeed(xml, src) {
+function hostOf(raw) {
+  if (typeof raw !== "string" || !raw) return "";
+  try {
+    return new URL(raw).hostname.replace(/^www\./, "");
+  } catch {
+    return "";
+  }
+}
+
+// Nashr nomi bo'sh qolsa (Google News sarlavhasida " - Nashr" yo'q va manbada
+// `name` ham yo'q) keyingi filtr butun yig'ishni yiqitmasin.
+// Tartib: sozlangan nom, feed hosti, maqola hosti, oxirida xavfsiz yorliq.
+export function sourceLabel(src, itemUrl = "") {
+  const configured = typeof src?.name === "string" ? src.name.trim() : "";
+  if (configured) return configured;
+  return hostOf(src?.url) || hostOf(itemUrl) || "Unknown";
+}
+
+function ensureSourceName(it) {
+  const current = typeof it?.sourceName === "string" ? it.sourceName.trim() : "";
+  it.sourceName = current || sourceLabel(null, it?.url);
+  return it.sourceName;
+}
+
+function isoOrNow(published) {
+  const t = Date.parse(published);
+  if (!Number.isFinite(t)) return new Date().toISOString();
+  return new Date(t).toISOString();
+}
+
+function parseBlock(b, src) {
+  const title = stripTags(tag(b, "title"));
+  if (!title) return null;
+
+  // Atom: <link href="..."/>, RSS: <link>...</link>
+  let link = tag(b, "link");
+  if (!link || link.startsWith("<")) {
+    const alt = b.match(/<link[^>]*rel=["']alternate["'][^>]*href=["']([^"']+)["']/i)
+      || b.match(/<link[^>]*href=["']([^"']+)["']/i);
+    link = alt ? decode(alt[1]) : "";
+  }
+  if (!link) link = stripTags(tag(b, "guid"));
+  if (!/^https?:/i.test(link)) return null;
+
+  const published = tag(b, "pubDate") || tag(b, "published") || tag(b, "updated") || tag(b, "dc:date");
+  const summary = stripTags(
+    tag(b, "description") || tag(b, "summary") || tag(b, "content") || tag(b, "content:encoded")
+  ).slice(0, 900);
+
+  const url = normalizeUrl(link);
+  return {
+    id: hash(url),
+    title,
+    url,
+    source: src?.id ?? "",
+    sourceName: sourceLabel(src, url),
+    published: published ? isoOrNow(published) : new Date().toISOString(),
+    summary,
+    weight: src?.weight ?? 1,
+    primary: !!src?.primary,
+    official: !!src?.official,
+    local: !!src?.local,
+  };
+}
+
+export function parseFeed(xml, src) {
   const out = [];
-  const blocks = xml.match(/<(item|entry)(?:\s[^>]*)?>[\s\S]*?<\/\1>/gi) || [];
+  const blocks = String(xml || "").match(/<(item|entry)(?:\s[^>]*)?>[\s\S]*?<\/\1>/gi) || [];
 
   for (const b of blocks) {
-    const title = stripTags(tag(b, "title"));
-    if (!title) continue;
-
-    // Atom: <link href="..."/>, RSS: <link>...</link>
-    let link = tag(b, "link");
-    if (!link || link.startsWith("<")) {
-      const alt = b.match(/<link[^>]*rel=["']alternate["'][^>]*href=["']([^"']+)["']/i)
-        || b.match(/<link[^>]*href=["']([^"']+)["']/i);
-      link = alt ? decode(alt[1]) : "";
+    try {
+      const item = parseBlock(b, src);
+      if (item) out.push(item);
+    } catch (e) {
+      console.error(`  x ${src?.id || "item"}: ${e.message}`);
     }
-    if (!link) link = stripTags(tag(b, "guid"));
-    if (!/^https?:/i.test(link)) continue;
-
-    const published = tag(b, "pubDate") || tag(b, "published") || tag(b, "updated") || tag(b, "dc:date");
-    const summary = stripTags(
-      tag(b, "description") || tag(b, "summary") || tag(b, "content") || tag(b, "content:encoded")
-    ).slice(0, 900);
-
-    const url = normalizeUrl(link);
-    out.push({
-      id: hash(url),
-      title,
-      url,
-      source: src.id,
-      sourceName: src.name,
-      published: published ? new Date(published).toISOString() : new Date().toISOString(),
-      summary,
-      weight: src.weight ?? 1,
-      primary: !!src.primary,
-      official: !!src.official,
-      local: !!src.local,
-    });
   }
-  return src.cap ? out.slice(0, src.cap) : out;
+  return src?.cap ? out.slice(0, src.cap) : out;
+}
+
+// Google News sarlavhasi "Sarlavha - Nashr" ko'rinishida keladi. Nashr
+// nomida ham chiziqcha bo'lishi mumkin, shuning uchun OXIRGI ajratgichdan
+// bo'lamiz. Ajratgich yo'q bo'lsa sozlangan nom (yoki host) qoladi.
+export function withGooglePublisher(it) {
+  const title = typeof it?.title === "string" ? it.title : "";
+  const cut = title.lastIndexOf(" - ");
+  if (cut > 10 && title.length - cut < 45) {
+    const publisher = title.slice(cut + 3).trim();
+    if (publisher) {
+      it.sourceName = publisher;
+      it.title = title.slice(0, cut).trim();
+    }
+  }
+  ensureSourceName(it);
+  return it;
+}
+
+export function itemsFromFeed(xml, src, { google = false } = {}) {
+  const parsed = parseFeed(xml, src);
+  if (!google) return parsed;
+  const out = [];
+  for (const it of parsed) {
+    try {
+      out.push(withGooglePublisher(it));
+    } catch (e) {
+      console.error(`  x ${src?.id || "item"}: ${e.message}`);
+    }
+  }
+  return out;
 }
 
 // Google News. Oyna har so'rov uchun alohida: IELTS xabari kam, "when:2d"
@@ -114,17 +184,59 @@ async function collectGoogleNews(q) {
   const ceid = `${gl}:${hl.split("-")[0]}`;
   const url = `https://news.google.com/rss/search?q=${encodeURIComponent(`${q.q} when:${q.when || "7d"}`)}&hl=${hl}&gl=${gl}&ceid=${ceid}`;
   const xml = await get(url);
-  return parseFeed(xml, q).map((it) => {
-    // Google News sarlavhasi "Sarlavha - Nashr" ko'rinishida keladi. Nashr
-    // nomida ham chiziqcha bo'lishi mumkin, shuning uchun OXIRGI ajratgichdan
-    // bo'lamiz.
-    const cut = it.title.lastIndexOf(" - ");
-    if (cut > 10 && it.title.length - cut < 45) {
-      it.sourceName = it.title.slice(cut + 3).trim();
-      it.title = it.title.slice(0, cut).trim();
+  return itemsFromFeed(xml, q, { google: true });
+}
+
+// Bitta manba (tarmoq, XML, bitta yozuv) butun yig'ishni to'xtatmasin.
+export async function loadSource(label, task) {
+  try {
+    const rows = await task();
+    return Array.isArray(rows) ? rows : [];
+  } catch (e) {
+    console.error(`  x ${label}: ${e.message}`);
+    return [];
+  }
+}
+
+export function selectItems(all, cfg, now = Date.now()) {
+  const cutoff = now - (cfg?.maxAgeHours ?? 336) * 3600_000;
+  const blocked = (cfg?.blockDomains || [])
+    .filter((d) => typeof d === "string")
+    .map((d) => d.toLowerCase());
+
+  let tooOld = 0, spamSource = 0, dropped = 0;
+  const items = [];
+  for (const it of all) {
+    try {
+      if (!it || typeof it !== "object") { dropped++; continue; }
+      ensureSourceName(it);
+      const t = Date.parse(it.published);
+      if (!Number.isFinite(t) || t < cutoff) { tooOld++; continue; }
+      const name = it.sourceName.toLowerCase();
+      if (blocked.some((d) => d && name.includes(d))) { spamSource++; continue; }
+      items.push(it);
+    } catch (e) {
+      dropped++;
+      console.error(`  x item: ${e.message}`);
     }
-    return it;
-  });
+  }
+  return { items, tooOld, spamSource, dropped };
+}
+
+export function applyGoogleWeights(items, cfg) {
+  const publishers = cfg?.publishers || {};
+  for (const it of items) {
+    try {
+      if (typeof it?.source !== "string" || !it.source.startsWith("gn-")) continue;
+      const key = typeof it.sourceName === "string" ? it.sourceName : "";
+      it.weight = publishers[key] ?? 1;
+      if (it.local) it.weight += 2;
+      it.indirect = true;
+    } catch (e) {
+      console.error(`  x item: ${e.message}`);
+    }
+  }
+  return items;
 }
 
 async function main() {
@@ -132,50 +244,35 @@ async function main() {
   const jobs = [];
 
   for (const f of cfg.feeds) {
-    jobs.push(get(f.url).then((xml) => parseFeed(xml, f)).catch((e) => {
-      console.error(`  x ${f.id}: ${e.message}`);
-      return [];
-    }));
+    jobs.push(loadSource(f.id, () => get(f.url).then((xml) => itemsFromFeed(xml, f))));
   }
   for (const q of cfg.googleNews || []) {
-    jobs.push(collectGoogleNews(q).catch((e) => {
-      console.error(`  x ${q.id}: ${e.message}`);
-      return [];
-    }));
+    jobs.push(loadSource(q.id, () => collectGoogleNews(q)));
   }
 
   const all = (await Promise.all(jobs)).flat();
 
   // Feedlar arxivni ham beradi — sana bo'yicha kesamiz.
-  const cutoff = Date.now() - (cfg.maxAgeHours ?? 336) * 3600_000;
-  const blocked = (cfg.blockDomains || []).map((d) => d.toLowerCase());
+  const { items, tooOld, spamSource, dropped } = selectItems(all, cfg);
 
-  let tooOld = 0, spamSource = 0;
-  const items = all.filter((it) => {
-    const t = Date.parse(it.published);
-    if (!Number.isFinite(t) || t < cutoff) { tooOld++; return false; }
-    const name = it.sourceName.toLowerCase();
-    if (blocked.some((d) => name.includes(d))) { spamSource++; return false; }
-    return true;
-  });
-
-  for (const it of items) {
-    if (!it.source.startsWith("gn-")) continue;
-    // So'rovning emas, nashrning obro'si.
-    it.weight = cfg.publishers?.[it.sourceName] ?? 1;
-    if (it.local) it.weight += 2;
-    // Google News havolasi asl maqolaga bormaydi (JS redirect). Bunday xabar
-    // tasdiq uchun yaraydi, lekin saytda manba sifatida ko'rsatilmaydi.
-    it.indirect = true;
-  }
+  // So'rovning emas, nashrning obro'si. Google News havolasi asl maqolaga
+  // bormaydi (JS redirect): bunday xabar tasdiq uchun yaraydi, lekin saytda
+  // manba sifatida ko'rsatilmaydi.
+  applyGoogleWeights(items, cfg);
 
   // Bitta URL bir necha manbadan kelishi mumkin — eng og'irini qoldiramiz.
   const byUrl = new Map();
   for (const it of items) {
-    const cur = byUrl.get(it.url);
-    if (!cur || it.weight > cur.weight) byUrl.set(it.url, it);
+    try {
+      if (typeof it?.url !== "string" || !it.url) continue;
+      const cur = byUrl.get(it.url);
+      if (!cur || it.weight > cur.weight) byUrl.set(it.url, it);
+    } catch (e) {
+      console.error(`  x item: ${e.message}`);
+    }
   }
-  const unique = [...byUrl.values()].sort((a, b) => b.published.localeCompare(a.published));
+  const publishedKey = (it) => (typeof it?.published === "string" ? it.published : "");
+  const unique = [...byUrl.values()].sort((a, b) => publishedKey(b).localeCompare(publishedKey(a)));
 
   await mkdir(join(ROOT, "data"), { recursive: true });
   const tmp = join(ROOT, "data/raw.json.tmp");
@@ -184,7 +281,8 @@ async function main() {
 
   const per = {};
   for (const it of unique) per[it.sourceName] = (per[it.sourceName] || 0) + 1;
-  console.log(`Yig'ildi: ${unique.length} ta (${all.length} xom, ${tooOld} eski, ${spamSource} spam manba)`);
+  const bad = dropped ? `, ${dropped} yaroqsiz` : "";
+  console.log(`Yig'ildi: ${unique.length} ta (${all.length} xom, ${tooOld} eski, ${spamSource} spam manba${bad})`);
   for (const [k, v] of Object.entries(per).sort((a, b) => b[1] - a[1]).slice(0, 15)) {
     console.log(`  ${String(v).padStart(3)}  ${k}`);
   }

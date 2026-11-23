@@ -136,37 +136,44 @@
   "googleNews": [
     {
       "id": "gn-ielts",
+      "name": "Google News: IELTS",
       "q": "IELTS",
       "when": "10d"
     },
     {
       "id": "gn-ielts-uz",
+      "name": "Google News: IELTS Uzbekistan",
       "q": "IELTS AND (Uzbekistan OR Tashkent OR Toshkent)",
       "when": "30d",
       "local": true
     },
     {
       "id": "gn-providers",
+      "name": "Google News: test providers",
       "q": "\"British Council\" OR \"IDP Education\" OR \"Cambridge English\" test",
       "when": "10d"
     },
     {
       "id": "gn-tests",
+      "name": "Google News: English tests",
       "q": "TOEFL OR \"Duolingo English Test\" OR PTE Academic",
       "when": "10d"
     },
     {
       "id": "gn-visa",
+      "name": "Google News: student visa",
       "q": "\"student visa\" english language requirement",
       "when": "10d"
     },
     {
       "id": "gn-scholar",
+      "name": "Google News: scholarships",
       "q": "Chevening OR \"Erasmus Mundus\" OR \"Stipendium Hungaricum\" OR \"Turkiye Burslari\" scholarship",
       "when": "14d"
     },
     {
       "id": "gn-scholar-uz",
+      "name": "Google News: scholarships UZ",
       "q": "стипендия OR грант Узбекистан студенты обучение",
       "when": "14d",
       "hl": "ru",
@@ -175,6 +182,7 @@
     },
     {
       "id": "gn-edu-uz",
+      "name": "Google News: education UZ",
       "q": "O'zbekiston ta'lim grant xorijda o'qish",
       "when": "14d",
       "hl": "ru",
