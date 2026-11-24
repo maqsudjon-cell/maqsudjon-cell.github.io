@@ -1,5 +1,30 @@
 [
   {
+    "id": "a77af11ebdbd",
+    "slug": "passage-kompaniyasi-etsdan-kira-talentni-sotib-oldi-a77af1",
+    "title": "Passage kompaniyasi ETS’dan Kira Talent’ni sotib oldi",
+    "summary": "Kanadaning Passage sun'iy intellekt kompaniyasi ETS tashkilotidan Kira Talent platformasini sotib oldi. Ushbu bitim universitetlarga qabul jarayonini soddalashtirishga qaratilgan.",
+    "points": [
+      "Passage Kanadaning sun'iy intellekt kompaniyasi hisoblanadi.",
+      "Kira Talent platformasi ETS tashkilotidan sotib olindi.",
+      "Ushbu bitim qabul jarayonini avtomatlashtirishga yordam beradi."
+    ],
+    "category": "guide",
+    "importance": 2,
+    "score": 39,
+    "published": "2026-11-23T13:48:18.000Z",
+    "created": "2026-11-24T00:21:57.561Z",
+    "coverage": 1,
+    "source": {
+      "name": "The PIE News",
+      "url": "https://thepienews.com/passage-acquires-kira-talent-from-ets-in-ai-admissions-push",
+      "title": "Passage acquires Kira Talent from ETS in AI admissions push",
+      "indirect": false
+    },
+    "also": [],
+    "model": "gemini"
+  },
+  {
     "id": "8e4face79734",
     "slug": "bayer-foundation-ilmiy-grantlariga-arizalar-qabuli-8e4fac",
     "title": "Bayer Foundation ilmiy grantlariga arizalar qabuli",
