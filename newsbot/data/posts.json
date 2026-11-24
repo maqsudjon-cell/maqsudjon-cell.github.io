@@ -1,5 +1,30 @@
 [
   {
+    "id": "c2ae49b9584e",
+    "slug": "buyuk-britaniya-viza-va-fuqarolik-uchun-selt-testi-c2ae49",
+    "title": "Buyuk Britaniya viza va fuqarolik uchun SELT testi",
+    "summary": "Buyuk Britaniyada viza yoki fuqarolik uchun arizalarda SELT testi talab etilishi mumkin. Immigratsiya yo'nalishiga qarab imtihonning ikkita turi mavjud. Imtihon faqat tasdiqlangan provayderlar orqali topshirilishi kerak.",
+    "points": [
+      "Buyuk Britaniya viza va fuqarolik uchun SELT imtihoni talab qilinishi mumkin.",
+      "Immigratsiya yo'nalishiga qarab imtihonning 2 ta turi mavjud.",
+      "Imtihonlar faqat tasdiqlangan provayderlar orqali topshirilishi shart."
+    ],
+    "category": "guide",
+    "importance": 3,
+    "score": 41,
+    "published": "2026-11-23T16:24:25.000Z",
+    "created": "2026-11-24T02:11:47.394Z",
+    "coverage": 1,
+    "source": {
+      "name": "GOV.UK",
+      "url": "https://gov.uk/guidance/prove-your-english-language-abilities-with-a-secure-english-language-test-selt",
+      "title": "Prove your English language abilities with a secure English language test (SELT)",
+      "indirect": false
+    },
+    "also": [],
+    "model": "gemini"
+  },
+  {
     "id": "a77af11ebdbd",
     "slug": "passage-kompaniyasi-etsdan-kira-talentni-sotib-oldi-a77af1",
     "title": "Passage kompaniyasi ETS’dan Kira Talent’ni sotib oldi",
